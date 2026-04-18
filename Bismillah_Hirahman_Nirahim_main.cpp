@@ -14,13 +14,13 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Note, eg sf::Style is namespace Alhamdulilah! Alhamdulilahi rab al alameen
     sf::VideoMode VidMod=sf::VideoMode::getDesktopMode();//This basically gets thee resolution your screen (ensures the window fits to screen despite resolution change)
-    sf::RenderWindow window(VidMod/* sf::VideoMode(800.f,600.f) */ /*This is for testing*/, "Game Hub Alhamdulilah!!!",sf::Style::Fullscreen);
+    sf::RenderWindow window(VidMod/* sf::VideoMode(800.f,600.f) */ /*This is for testing*/, "Game Hub Alhamdulilah!!!",sf::Style::Default);
     window.setFramerateLimit(60);//I guess this sets max fps, Alhamdulilah!
 
     //May Allah (SWT) keep this code and this device in his amanah, May he protect us all , our work, lives, relegion and ownership items 
     //Allah knows best, Alhamdulilah, Oh Allah please correct and accept this dua for the sake of the prophet (SAW) and all your pious people, Ameen sum ameen ya rab al akameen
-    float ChoosenResolutionX= 800;//actually .......this might cause understadning issuessss....
-    float ChoosenResolutionY= 600;//Ctrl + B opens and closes the left menu in VS code? ALhamdulilah, leaned it in time , Alhamdulilah
+    float ChoosenResolutionX= 500;//actually .......this might cause understadning issuessss....
+    float ChoosenResolutionY= 500;//Ctrl + B opens and closes the left menu in VS code? ALhamdulilah, leaned it in time , Alhamdulilah
 
     //Vector2 is blank contained, tells i can hold two values, Vector2i tells it can hold two integers, similarly 2f and 2u for float and unsigned i think respecteively
     //Alhamdulilah!
