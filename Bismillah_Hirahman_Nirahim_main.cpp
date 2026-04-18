@@ -8,8 +8,8 @@
 
 
 
-int main()// Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen
-{
+int main()// Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen 
+{//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
     cout<<"Bismillah hirahman Nirahim, Log Starts, Testing...."<<endl;
 
     //Note, eg sf::Style is namespace Alhamdulilah! Alhamdulilahi rab al alameen
