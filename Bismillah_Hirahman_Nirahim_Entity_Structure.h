@@ -26,7 +26,7 @@ private:
     float Mass;                                   // for velocity of jump and fall down
     
     //we need to see if we have to change this while aniimating inshallah Alhamdulilah
-    static sf::Texture texture;//each class can only have one texture but for animation it is needed moving Alhamdulilah
+    sf::Texture texture;//each class can only have one texture but for animation it is needed moving Alhamdulilah, changed to nnon static to avoid issue, however constructor will auto load from same file
     sf::Sprite sprite;
     sf::RectangleShape Debug_box;//its size is determined in constructor of respective class Alhamdulilah Rab Al Alameen, The debuf button will work to change color of this bbox from invisible (initilaized in constructor) to another color (different for projectiles, players and enemies) Alhamdulilah Rab Al Alameen (I believe platform are not entities) Alhamdulilah Rab Al Alameen
 
@@ -44,7 +44,7 @@ class Player : public Entity//if issues arrive while calling constructor as is a
 private:
 
     bool jump_state;
-    Snowballs snowballs;
+    //Snowballs snowballs; include throw snow balls function instead that creates a snowball by dma, note all entity disapearing will be managed by deleting dama Alhamdulilah rab al alameen
     float Snow_Ball_Throw_Distance;
     float Snow_Ball_Power;
 
