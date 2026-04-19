@@ -40,6 +40,9 @@ public:
     //sprite, texture and debug box to be set using setters as their calculations are to be inside the comstructors of respective classses themselves, Alhamdulilah Rab Al Alameen
     // Ayan's suggestion for abstract class when he was orignally handling inittial structure before take over virtual void draw()=0;
     //Allah SWT knows best, Alhamdulilah rab al alameen
+
+    void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
+
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
@@ -171,3 +174,24 @@ class Snowballs: public Projectile
 class Knives : public Projectile
 {
 };
+
+
+class Power_Ups: public Entity
+{};
+
+class Speed_Boost : public Power_Ups
+{};
+
+class Snowball_Power : public Power_Ups
+{
+
+};
+
+class Distance_Increase : public Power_Ups
+{
+};
+
+class Balloon_Mode : public Power_Ups
+{
+};
+
