@@ -4,6 +4,8 @@ sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(200.f, 20.f), sf::Vector2f(
 
 int Player::No_of_Spawn_points_present = 2; // unfortunately have to change these two values manually for rescalaing, but it does Allow Reslacinf Alhamdulilah Rab Al Alameen
 
+
+
 void Player::Action_To_Move(Direction d)
 {
     //to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
@@ -19,6 +21,11 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
     // to define soon inshallah
 }
 void Player::Move_Right() // sets to +x
+{
+    // to define soon inshallah
+}
+
+Player::Player():Entity(Spawn_Points[0],0,2)//asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
     // to define soon inshallah
 }

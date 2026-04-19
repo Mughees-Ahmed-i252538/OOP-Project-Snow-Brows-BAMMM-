@@ -1,0 +1,3 @@
+C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/build/CMakeFiles/MyGame.dir
+C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/build/CMakeFiles/edit_cache.dir
+C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/build/CMakeFiles/rebuild_cache.dir

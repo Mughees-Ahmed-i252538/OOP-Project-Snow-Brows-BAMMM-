@@ -15,7 +15,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Note, eg sf::Style is namespace Alhamdulilah! Alhamdulilahi rab al alameen
     sf::VideoMode VidMod=sf::VideoMode::getDesktopMode();//This basically gets thee resolution your screen (ensures the window fits to screen despite resolution change)
-    sf::RenderWindow window(VidMod/* sf::VideoMode(800.f,600.f) */ /*This is for testing*/, "Game Hub Alhamdulilah!!!",sf::Style::Default);
+    sf::RenderWindow window(VidMod/* sf::VideoMode(800.f,600.f) */ /*This is for testing*/, "Bimsillah Hirahman Nirahim, Snow Bros BAMMM!!!!! Alhamdulilah!!!",sf::Style::Default);
     window.setFramerateLimit(60);//I guess this sets max fps, Alhamdulilah!
 
     //May Allah (SWT) keep this code and this device in his amanah, May he protect us all , our work, lives, relegion and ownership items 

@@ -22,7 +22,7 @@ private:
     sf::Vector2f spawnpoint;   // tells us the position, initialize location to here
     float Current_position_x, Current_position_y;//This is used as redundant variable, for ease of calculation, its value is stored after each movement in Move Left and Move Right, It is mainly helpful for ease of understanding while also simulatanously changing position for hitbox (also acting as health box being called as debug box) Alhamdulilah Rab Al Alameen
     float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
-    float Usable_Movement_Speed;                  // similar to max speed only for left and right
+    static float Usable_Movement_Speed;                  // similar to max speed only for left and right
     float Mass;                                   // for velocity of jump and fall down
     
     //we need to see if we have to change this while aniimating inshallah Alhamdulilah
@@ -70,8 +70,6 @@ public:
     void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x
     
-
-public:
     Player();
 
     /* void input_handling_player(char button);
