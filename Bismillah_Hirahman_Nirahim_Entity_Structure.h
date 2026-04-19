@@ -2,20 +2,26 @@
 #include <iostream>
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
+// #include <SFML/System/Vector2.hpp> although including graphics should work Alhamdulilah
 using namespace std;
 
 class Entity
 {
 
-protected:
+private:
     sf::Vector2f spawnpoint;   // tells us the position
     float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
     float Usable_Movement_Speed;                  // similar to max speed only for left and right
     float Mass;                                   // for velocity of jump and fall down
+    
+    //we need to see if we have to change this while aniimating inshallah Alhamdulilah
+    static sf::Texture texture;//each class can only have one texture but for animation it is needed moving Alhamdulilah
+    sf::Sprite sprite;
+
 
 public:
     Entity(sf::Vector2f spawn_at);
-    virtual void draw()=0;
+    //virtual void draw()=0;
 };
 
 class Player : public Entity
@@ -24,6 +30,10 @@ class Player : public Entity
 private:
 
     bool jump_state;
+    Snowballs snowballs;
+    float Snow_Ball_Throw_Distance;
+    float Snow_Ball_Pow;
+
     
 
 public:
@@ -37,7 +47,7 @@ public:
 
 class Enemy: public Entity
 {
-
+    static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah
 };
 
 class Botom: public Enemy

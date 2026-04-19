@@ -1,0 +1,13 @@
+
+
+Phase I: Day 1 to 5
+
+Mughees Ahmed i252538: Game loop skeleton +
+InputManager ,OOP hierarchy design,Player movement + gravity,Abstract class shells +
+EnemyFactory, UML designed, Platform collision + screen
+wrap, Snowball + hit-box system, Snowball hits enemy -
+verified
+
+
+Ayan Ali i253116: Sign interface contract, Login/registration UI +
+AuthManager, DB schema + basic save/load
