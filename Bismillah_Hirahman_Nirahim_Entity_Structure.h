@@ -74,9 +74,9 @@ public:
 public:
     Player();
 
-    void input_handling_player(char button);
+    /* void input_handling_player(char button);
 
-    void draw();
+    void draw();by ayan */
 };
 
 
