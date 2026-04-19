@@ -8,6 +8,69 @@
 
 //Now trying a branch Bismillah hirahman nirahim
 
+
+//Bismillah hirahman Nirahim, remember getLocalBounds() do not count the scalaing applied on it and are orignal picture size, meanwhile getGlobalBounds() account for scaling and change in position applied on the picture Alhamdulilah rab al alameen
+//Note global bounds return Float REct which counts for postion in x (left most of obj by default) position in y(top of obj by default) its width and its height, Alhamdulilah rab al alameen 
+//get Local bounds also returns float rect, 
+//Self unlike before we might have to count for small parts cut out of sprite sheet as for animation, hence local bound position might not be just 0,0 
+//Inshallah we will see this when we come to it, MAy Allah SWT help us Ameen
+
+//Bismillah Hirahman Nirahim, Alhamdulilah Rab Al Alameen, found from assignment 2, these are mashallah amazing for resizing as wanted without having to worry about managing orignal size or multiplier using comparision, Alhamdulilah rab al alameen
+void ForRelativeSizeAndPostionShape(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = shape.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    shape.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    shape.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+// Overloading for text
+void ForRelativeSizeAndPostionText(float NeededWidth, float NeededHeight, sf::Text &text, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = text.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    text.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    text.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    text.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+void ForRelativeSizeAndPostionShape(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = shape.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    shape.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    shape.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
 int main()// // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 

@@ -23,8 +23,10 @@ private:
     float Current_position_x, Current_position_y;//This is used as redundant variable, for ease of calculation, its value is stored after each movement in Move Left and Move Right, It is mainly helpful for ease of understanding while also simulatanously changing position for hitbox (also acting as health box being called as debug box) Alhamdulilah Rab Al Alameen
     float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
     static float Usable_Movement_Speed;                  // similar to max speed only for left and right
-    float Mass;                                   // for velocity of jump and fall down
-    
+    float Mass;                                          // for velocity of jump and fall down
+
+    sf::Vector2f Size_Wanted;//Whats done: Wanted size is obtained by calling a function that changes  actual picture size to wanted using a scaling trick and comparision, Alhamdulilah rab al alameen
+                                       
     //we need to see if we have to change this while aniimating inshallah Alhamdulilah
     sf::Texture texture;//each class can only have one texture but for animation it is needed moving Alhamdulilah, changed to nnon static to avoid issue, however constructor will auto load from same file
     sf::Sprite sprite;
@@ -36,7 +38,8 @@ public:
     Entity(sf::Vector2f spawn_at, float mass); // specific spawnpoint differnt for each class however using initializer list this allows us to set spawn point Alhamdulilah rab al alameen, Note verridden functions in a child class cannot directly access private members of a parent class.
     //Also sets current position of spawn point Alhamdulilah, setting current velocity to zero, also sets mass and default movement speed of obj Alhamdulilah rab al alameen
     //sprite, texture and debug box to be set using setters as their calculations are to be inside the comstructors of respective classses themselves, Alhamdulilah Rab Al Alameen
-    // virtual void draw()=0;
+    // Ayan's suggestion for abstract class when he was orignally handling inittial structure before take over virtual void draw()=0;
+    //Allah SWT knows best, Alhamdulilah rab al alameen
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {

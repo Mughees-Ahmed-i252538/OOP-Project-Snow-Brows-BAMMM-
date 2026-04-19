@@ -8,6 +8,14 @@ float Entity::Usable_Movement_Speed=0;
 Entity::Entity(sf::Vector2f spawn_at, float mass)
 {
     //to define soon inshallah
+
+    spawnpoint=spawn_at;
+    Mass=mass;
+    Current_position_x=spawn_at.x;
+    Current_position_y=spawn_at.y;
+    Current_velocity_x=0;
+    Current_velocity_y=0;//usable speed actually specified in child's constructor, hence can only be suitable to be done using setters, Alhamdulilah Rab Al Alameen
+    //Similarly have to make setters for texture, sprite and debug box, Alhamdulilah Rab Al Alameen, Note whenever constructing sprite dont forget to call the universal size to wanted size (that skips us the issue of managing multiplier of scale by comparing orignal size)Inshallah i will try to recover from assignment 2, May Allah SWT help me, Ameen sum ameen ya rab al alameen ya arham ar rahimeen
 }
 
 
