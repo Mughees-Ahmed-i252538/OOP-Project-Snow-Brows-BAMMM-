@@ -74,7 +74,7 @@ public:
     void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x
     
-    Player();
+    Player(int Which_design_choosen_out_of_given_five); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
     /* void input_handling_player(char button);
 
@@ -84,7 +84,7 @@ public:
 
 class Enemy: public Entity
 {
-    static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah
+    static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
 };
 
 class Botom: public Enemy

@@ -126,7 +126,18 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         No_of_Players = 1;
     }
 
-    Player* Players=new Player [No_of_Players];
+    int First_Persons_Choice=0;
+    int Second_Persons_Choice = 1;
+
+    Player *P1 = new Player(First_Persons_Choice); // have to shift to one by one as new array cant use parameterized constructor, however for rescalability and ease of use(as you see how beneficial array usgae is with loops Alhamdulilah rab al alameen), I use a method that keeps arrays usable although individual working (also deleting array would auto delete orignal space no need for redelete Alhamdulilah rab al alameen)
+    Player *P2 = new Player(Second_Persons_Choice); // 0 loads nick design and i believe 1 loads blue player (the one next to nick.pbg), this will be changed later
+
+    Player** Players = new Player*[No_of_Players];//As array of & wasnt allowed so we make array of ptrs Alhamdulilah rab al alameen
+    Players[0]=P1;
+    Players[1] = P2;// Note as P1 and P2 are just pointing to DMA, now we can just assign those ptrs to array and null ptr p1 and p2
+
+    P1=nullptr;//This way Alhamdulilah Rab Al Alameen, we manage to use array to point at same place but now access must be changed from directly players[] to players[]-> Alhamduliah rab al alameen
+    P2=nullptr;
 
     sf::Keyboard::Key* Players_Left = new sf::Keyboard::Key[No_of_Players];
     sf::Keyboard::Key *Players_Right = new sf::Keyboard::Key[No_of_Players];
@@ -167,16 +178,16 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         for(int i=0;i<No_of_Players;i++)
         {
-            Players[i].Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+            Players[i]->Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
             /* if (is_Multiplayer)
             Players[1].Action_To_Move(Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
 
             if(sf::Keyboard::isKeyPressed(Players_Left[i]))
-                Players[i].Action_To_Move(Direction::Left);
+                Players[i]->Action_To_Move(Direction::Left);
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
-                Players[i].Action_To_Move(Direction::Right);
+                Players[i]->Action_To_Move(Direction::Right);
         }
 
 
