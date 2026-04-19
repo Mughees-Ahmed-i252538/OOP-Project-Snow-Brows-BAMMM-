@@ -15,7 +15,7 @@ enum class Direction//we can also do non class but that way its parts simply wor
 
 };
 
-class Entity
+class Entity//to make this an abstract class soon inshallah, but for now all majour methods taken care of by constructors, when making getter and setters perhaps, as might be using specififc things inshallah
 {
 
 private:
@@ -32,8 +32,11 @@ private:
 
 
 public:
-    Entity(sf::Vector2f spawn_at);
-    //virtual void draw()=0;
+    // you can and often must use the syntax : ParentClass(parameters) in a child class constructor to pass arguments to a base clas (found on slighht search Alhamdulilah rab al alameen)
+    Entity(sf::Vector2f spawn_at, float U_Movement_Speed, float mass); // specific spawnpoint differnt for each class however using initializer list this allows us to set spawn point Alhamdulilah rab al alameen, Note verridden functions in a child class cannot directly access private members of a parent class.
+    //Also sets current position of spawn point Alhamdulilah, setting current velocity to zero, also sets mass and default movement speed of obj Alhamdulilah rab al alameen
+    //sprite, texture and debug box to be set using setters as their calculations are to be inside the comstructors of respective classses themselves, Alhamdulilah Rab Al Alameen
+    // virtual void draw()=0;
 };
 
 class Player : public Entity
@@ -44,7 +47,10 @@ private:
     bool jump_state;
     Snowballs snowballs;
     float Snow_Ball_Throw_Distance;
-    float Snow_Ball_Pow;
+    float Snow_Ball_Power;
+
+    bool Gotten_Hit_Imunity;
+    static double Hit_imunity_duration;
 
     sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;//eg for Walking Alhamdulilah
     float  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
