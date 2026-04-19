@@ -7,7 +7,7 @@ class Levels{
 
 
     static int Total_Levels_For_which_Data_is_Present;//This gives how many levels we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
-    static int Level_count;
+    
 
     //Bismillah Hirahman Nirahim, This will just contain an huge array of stored data, 
     //Initially ten levels so a Levels[10] array on which
@@ -31,4 +31,9 @@ class Levels{
 };
 
 class Level_Data
-{};//It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
+{
+    static int Level_count;
+    int id;
+
+
+};//It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved

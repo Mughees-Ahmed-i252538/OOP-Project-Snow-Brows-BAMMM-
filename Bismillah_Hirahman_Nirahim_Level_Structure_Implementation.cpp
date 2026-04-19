@@ -10,4 +10,4 @@ Levels::Levels()
 Levels::~Levels()
 {
     delete levels_data;
-}
+}//As you know staging commit, makes the commit to your local repo then syncing will push it to orign main, i.e the remote repo, Alhamdulilah Rab Al Alameen
