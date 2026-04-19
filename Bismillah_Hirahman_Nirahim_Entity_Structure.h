@@ -1,5 +1,5 @@
 
-#include <iostream>
+#include <iostream>//if giving linker errors, first define  static vars inshallah
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
 // #include <SFML/System/Vector2.hpp> although including graphics should work Alhamdulilah
@@ -49,7 +49,13 @@ private:
     float Snow_Ball_Power;
 
     bool Gotten_Hit_Imunity;
-    static double Hit_imunity_duration;
+    static double Hit_imunity_duration;//for mobs, every level configration haas such a spawn pt array for them along with their type and numbers (possibly using a class for mobsb spawn pt and adta, inshallah) Alhamdulilah Rab Al Alameen
+
+    static sf::Vector2f Spawn_Points[2];
+
+    static int No_of_Spawn_points_present;//Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
+
+    static int Player_Count;//currently 0, first player, it becomes 1 which is used to get second indice of spawn pt array for p2
 
     sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;//eg for Walking Alhamdulilah
     float  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
