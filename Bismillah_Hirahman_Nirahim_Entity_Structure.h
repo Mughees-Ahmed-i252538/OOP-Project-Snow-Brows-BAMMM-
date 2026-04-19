@@ -53,6 +53,10 @@ private:
 
     static sf::Vector2f Spawn_Points[2];
 
+    static string File_From_Where_To_Load_Resources_names[5];
+
+    int player_id;//which player 0 or 1
+
     static int No_of_Spawn_points_present;//Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
     static int Player_Count;//currently 0, first player, it becomes 1 which is used to get second indice of spawn pt array for p2

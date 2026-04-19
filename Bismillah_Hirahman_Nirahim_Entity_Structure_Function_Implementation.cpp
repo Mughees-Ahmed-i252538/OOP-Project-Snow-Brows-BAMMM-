@@ -1,5 +1,6 @@
 #include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
 
+
 int Enemy::Hits_To_encase=0;//Alhamdulilah Child class doesnt need to define separately
 
 float Entity::Usable_Movement_Speed=0;
@@ -11,6 +12,10 @@ Entity::Entity(sf::Vector2f spawn_at, float mass)
 
 
 sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(200.f, 20.f), sf::Vector2f(300.f, 20.f)}; // have to mention sf::vector2f or else it cant do conversion, Alhamdulilah rab al alameem
+
+//================Player Functions===============================
+
+string Player::File_From_Where_To_Load_Resources_names[5] = {"..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Nick.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Blue.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Green.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Red.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Yellow.png"};
 
 int Player::No_of_Spawn_points_present = 2; // unfortunately have to change these two values manually for rescalaing, but it does Allow Reslacinf Alhamdulilah Rab Al Alameen
 
