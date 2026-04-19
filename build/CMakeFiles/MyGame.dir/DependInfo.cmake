@@ -9,7 +9,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj.d"
-  "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Player_Function.cpp" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj.d"
   "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_main.cpp" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj" "gcc" "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj.d"
   )
 

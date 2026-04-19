@@ -1,8 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj"
   "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj.d"
-  "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj"
-  "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj.d"
   "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj"
   "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj.d"
   "MyGame.exe"

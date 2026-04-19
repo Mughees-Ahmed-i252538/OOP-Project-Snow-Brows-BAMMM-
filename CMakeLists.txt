@@ -7,7 +7,7 @@ project(MySFMLGame)
 # Find SFML
 find_package(SFML 2.5 COMPONENTS graphics window system audio REQUIRED)
 
-add_executable(MyGame Bismillah_Hirahman_Nirahim_main.cpp Bismillah_Hirahman_Nirahim_Common_Header.h Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp Bismillah_Hirahman_Nirahim_Entity_Structure.h Bismillah_Hirahman_Nirahim_Player_Function.cpp)#dont forget you need to add files here or they wont be considered, might give linker error, Alhamdulilah rab al alameen
+add_executable(MyGame Bismillah_Hirahman_Nirahim_main.cpp Bismillah_Hirahman_Nirahim_Common_Header.h Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp Bismillah_Hirahman_Nirahim_Entity_Structure.h)#dont forget you need to add files here or they wont be considered, might give linker error, Alhamdulilah rab al alameen
 
 # Link the libraries
 target_link_libraries(MyGame sfml-graphics sfml-window sfml-system sfml-audio)

@@ -99,32 +99,16 @@ CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Imple
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s"
 	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp" -o CMakeFiles\MyGame.dir\Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s
 
-CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj: CMakeFiles/MyGame.dir/flags.make
-CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj: C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Player_Function.cpp
-CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj: CMakeFiles/MyGame.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir="C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj"
-	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj -MF CMakeFiles\MyGame.dir\Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj.d -o CMakeFiles\MyGame.dir\Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj -c "C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Player_Function.cpp"
-
-CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.i"
-	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Player_Function.cpp" > CMakeFiles\MyGame.dir\Bismillah_Hirahman_Nirahim_Player_Function.cpp.i
-
-CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.s"
-	C:\msys64\ucrt64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Player_Function.cpp" -o CMakeFiles\MyGame.dir\Bismillah_Hirahman_Nirahim_Player_Function.cpp.s
-
 # Object files for target MyGame
 MyGame_OBJECTS = \
 "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj" \
-"CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj" \
-"CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj"
+"CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj"
 
 # External object files for target MyGame
 MyGame_EXTERNAL_OBJECTS =
 
 MyGame.exe: CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj
 MyGame.exe: CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj
-MyGame.exe: CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj
 MyGame.exe: CMakeFiles/MyGame.dir/build.make
 MyGame.exe: C:/msys64/ucrt64/lib/libsfml-graphics.dll.a
 MyGame.exe: C:/msys64/ucrt64/lib/libsfml-window.dll.a
@@ -133,7 +117,7 @@ MyGame.exe: C:/msys64/ucrt64/lib/libsfml-system.dll.a
 MyGame.exe: CMakeFiles/MyGame.dir/linkLibs.rsp
 MyGame.exe: CMakeFiles/MyGame.dir/objects1.rsp
 MyGame.exe: CMakeFiles/MyGame.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable MyGame.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir="C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\build\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable MyGame.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\MyGame.dir\link.txt --verbose=$(VERBOSE)
 	C:\msys64\ucrt64\bin\cmake.exe -E copy_if_different C:/msys64/ucrt64/bin/libsfml-graphics-2.dll C:/msys64/ucrt64/bin/libsfml-window-2.dll C:/msys64/ucrt64/bin/libsfml-audio-2.dll C:/msys64/ucrt64/bin/libsfml-system-2.dll "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/build"
 

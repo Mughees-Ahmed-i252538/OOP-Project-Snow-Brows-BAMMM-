@@ -152,30 +152,6 @@ Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s
 .PHONY : Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s
 
-Bismillah_Hirahman_Nirahim_Player_Function.obj: Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.obj
-
-# target to build an object file
-Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.cpp.obj
-
-Bismillah_Hirahman_Nirahim_Player_Function.i: Bismillah_Hirahman_Nirahim_Player_Function.cpp.i
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.i
-
-# target to preprocess a source file
-Bismillah_Hirahman_Nirahim_Player_Function.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.i
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.cpp.i
-
-Bismillah_Hirahman_Nirahim_Player_Function.s: Bismillah_Hirahman_Nirahim_Player_Function.cpp.s
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.s
-
-# target to generate assembly for a file
-Bismillah_Hirahman_Nirahim_Player_Function.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Player_Function.cpp.s
-.PHONY : Bismillah_Hirahman_Nirahim_Player_Function.cpp.s
-
 Bismillah_Hirahman_Nirahim_main.obj: Bismillah_Hirahman_Nirahim_main.cpp.obj
 .PHONY : Bismillah_Hirahman_Nirahim_main.obj
 
@@ -212,9 +188,6 @@ help:
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.obj
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.i
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.s
-	@echo ... Bismillah_Hirahman_Nirahim_Player_Function.obj
-	@echo ... Bismillah_Hirahman_Nirahim_Player_Function.i
-	@echo ... Bismillah_Hirahman_Nirahim_Player_Function.s
 	@echo ... Bismillah_Hirahman_Nirahim_main.obj
 	@echo ... Bismillah_Hirahman_Nirahim_main.i
 	@echo ... Bismillah_Hirahman_Nirahim_main.s
