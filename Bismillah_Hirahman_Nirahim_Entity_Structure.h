@@ -4,7 +4,7 @@
 #include <SFML/Audio.hpp>
 // #include <SFML/System/Vector2.hpp> although including graphics should work Alhamdulilah
 using namespace std;
-
+//Note have to save file before being able to commit changes
 
 
 enum class Direction//we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
@@ -38,8 +38,7 @@ public:
     //sprite, texture and debug box to be set using setters as their calculations are to be inside the comstructors of respective classses themselves, Alhamdulilah Rab Al Alameen
     // virtual void draw()=0;
 };
-
-class Player : public Entity
+class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
 
 private:

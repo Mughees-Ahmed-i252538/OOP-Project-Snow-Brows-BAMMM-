@@ -115,7 +115,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     int No_of_Players;
 
 
-    //if(is_Multiplayer), ok lets do it this ways if P2 exsists than No of players =2 else if individual vars conditional assignment, then issue Alhamdulilah Rab Al Alameen
+    //if(is_Multiplayer), ok lets do it this ways if P2 exsists than No of Players =2 else if individual vars conditional assignment, then issue Alhamdulilah Rab Al Alameen
 
     if(is_Multiplayer)
     {
@@ -126,7 +126,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         No_of_Players = 1;
     }
 
-    Player* players=new Player [No_of_Players];
+    Player* Players=new Player [No_of_Players];
 
     sf::Keyboard::Key* Players_Left = new sf::Keyboard::Key[No_of_Players];
     sf::Keyboard::Key *Players_Right = new sf::Keyboard::Key[No_of_Players];
@@ -167,16 +167,16 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         for(int i=0;i<No_of_Players;i++)
         {
-            players[i].Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+            Players[i].Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
             /* if (is_Multiplayer)
-            players[1].Action_To_Move(Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of players acts as counter Alhamdulilah
+            Players[1].Action_To_Move(Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
 
             if(sf::Keyboard::isKeyPressed(Players_Left[i]))
-                players[i].Action_To_Move(Direction::Left);
+                Players[i].Action_To_Move(Direction::Left);
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
-                players[i].Action_To_Move(Direction::Right);
+                Players[i].Action_To_Move(Direction::Right);
         }
 
 
@@ -206,6 +206,8 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         // window.draw();//It seems that this line is a must for drawing the given shape, Mashallah
         window.display();//switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
+    delete Players;
+    Players=nullptr;
     cout << "Log Ends, Alhamdulilah!" << endl; // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
     return 0;
 }
