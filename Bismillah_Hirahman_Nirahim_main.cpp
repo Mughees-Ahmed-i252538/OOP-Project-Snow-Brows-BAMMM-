@@ -101,27 +101,56 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Note, to add bindings here for Now, to shift into player class or make their own class as needed
 
-    sf::Keyboard::Key P1_Left= sf::Keyboard::A;
-    sf::Keyboard::Key P1_Right= sf::Keyboard::D;
-    sf::Keyboard::Key P1_Jump=sf::Keyboard::W;
-    sf::Keyboard::Key P1_Hit= sf::Keyboard::Q;
+
+    
+
+    
 
 
-    sf::Keyboard::Key P2_Left= sf::Keyboard::J;
-    sf::Keyboard::Key P2_Right= sf::Keyboard::L;
-    sf::Keyboard::Key P2_Jump=sf::Keyboard::I;
-    sf::Keyboard::Key P2_Hit= sf::Keyboard::U;
+    
 
 
 
+    bool is_Multiplayer= true;
+    int No_of_Players;
 
 
+    //if(is_Multiplayer), ok lets do it this ways if P2 exsists than No of players =2 else if individual vars conditional assignment, then issue Alhamdulilah Rab Al Alameen
 
+    if(is_Multiplayer)
+    {
+        No_of_Players=2;
+    }
+    else
+    {
+        No_of_Players = 1;
+    }
+
+    Player* players=new Player [No_of_Players];
+
+    sf::Keyboard::Key* Players_Left = new sf::Keyboard::Key[No_of_Players];
+    sf::Keyboard::Key *Players_Right = new sf::Keyboard::Key[No_of_Players];
+    sf::Keyboard::Key *Players_Jump = new sf::Keyboard::Key[No_of_Players];
+    sf::Keyboard::Key *Players_Hit = new sf::Keyboard::Key[No_of_Players];
+
+
+    Players_Left[0]=sf::Keyboard::A;
+    Players_Right[0]=sf::Keyboard::D;
+    Players_Jump[0]=sf::Keyboard::W;
+    Players_Hit[0]=sf::Keyboard::Q;
+
+    if( No_of_Players==2)
+    Players_Left[  1] = sf::Keyboard::J;
+    Players_Right[1] = sf::Keyboard::L;
+    Players_Jump[1] = sf::Keyboard::I;
+    Players_Hit[1] = sf::Keyboard::U;
+
+    
 
     while (window.isOpen())
     {
 
-        sf::Event event;
+        sf::Event event;//For Press Type events eg snowball throw Alhamdulilah
         while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
         // pollEvent checks queue and if event queue empty returns 0,
         // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
@@ -131,6 +160,27 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
                                                                                                                                     // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 window.close(); // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
         }
+
+
+        //Now for hold type events Alhamdulilah
+        //Is Key Pressed Is function that returns bool Alhamdulilah Rab Al Alameen
+
+        for(int i=0;i<No_of_Players;i++)
+        {
+            players[i].Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+
+            /* if (is_Multiplayer)
+            players[1].Action_To_Move(Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of players acts as counter Alhamdulilah
+
+
+            if(sf::Keyboard::isKeyPressed(Players_Left[i]))
+                players[i].Action_To_Move(Direction::Left);
+            if (sf::Keyboard::isKeyPressed(Players_Right[i]))
+                players[i].Action_To_Move(Direction::Right);
+        }
+
+
+
 
         // TREATING IT AS BOILER PLATE CODE FOR NOW
 
