@@ -10,7 +10,8 @@
 
 int main()// // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
-    cout<<"Bismillah hirahman Nirahim, Log Starts, Testing...."<<endl;
+
+    cout << "Bismillah hirahman Nirahim, Log Starts, Testing...." << endl;
 
     //Note, eg sf::Style is namespace Alhamdulilah! Alhamdulilahi rab al alameen
     sf::VideoMode VidMod=sf::VideoMode::getDesktopMode();//This basically gets thee resolution your screen (ensures the window fits to screen despite resolution change)
@@ -24,6 +25,8 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Vector2 is blank contained, tells i can hold two values, Vector2i tells it can hold two integers, similarly 2f and 2u for float and unsigned i think respecteively
     //Alhamdulilah!
+
+    
 
     /* while(VidMod>sf::VideoMode(ChoosenResolutionX,ChoosenResolutionY))
     {
@@ -93,6 +96,23 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
 
     window.setView(view);
+
+
+
+    //Note, to add bindings here for Now, to shift into player class or make their own class as needed
+
+    sf::Keyboard::Key P1_Left= sf::Keyboard::A;
+    sf::Keyboard::Key P1_Right= sf::Keyboard::D;
+    sf::Keyboard::Key P1_Jump=sf::Keyboard::W;
+    sf::Keyboard::Key P1_Hit= sf::Keyboard::Q;
+
+
+    sf::Keyboard::Key P2_Left= sf::Keyboard::J;
+    sf::Keyboard::Key P2_Right= sf::Keyboard::L;
+    sf::Keyboard::Key P2_Jump=sf::Keyboard::I;
+    sf::Keyboard::Key P2_Hit= sf::Keyboard::U;
+
+
 
 
 
