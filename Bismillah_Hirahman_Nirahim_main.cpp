@@ -71,6 +71,24 @@ void ForRelativeSizeAndPostionShape(float NeededWidth, float NeededHeight, sf::R
     shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
+void ForRelativeSizeAndPostionSprite(float NeededWidth, float NeededHeight, sf::Sprite &sprite, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = sprite.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    sprite.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    sprite.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
 int main()// // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 
