@@ -142,6 +142,9 @@ void Entity::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     //To later inshallah add checks if size is sent 0 as that might start causing issues (from memory:as you can do operations like printing and scaling etc normally, mostly scaling) allah swt knows best Alhamdulilah Rab Al ALameen, especially since we are using the Relative.... Functions that use divisions for comarision Alhamdulilah Rab Al Alameen
 }
 
+sf::Vector2f Entity::getSpawnPoint()
+{return this->spawnpoint;}
+
 //================Player Functions===============================
 
 sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(200.f, 20.f), sf::Vector2f(300.f, 20.f)}; // have to mention sf::vector2f or else it cant do conversion, Alhamdulilah rab al alameem
@@ -152,12 +155,18 @@ string Player::File_From_Where_To_Load_Resources_names[5] = {"..\Bismillah_Hirah
 
 int Player::No_of_Player_Sprite_and_related_present = 5;
 
+int Player::Standard_Default_Player_Mass=10;//10 kg....it is ceiling value of the 9.07 weight of nintendo switch and the snowbros game....because i couldnt find nicks weight anywhere...Alhamdulilah Rab Al Alameen, Although snowmen are generally over 200 kg, but there is no way such heavy person made of snow not only moves...but also flies.....in balood mode ofcourse...Alhamdulilah Rab Al Alameen...(other than the humour, 10 is choosen for ease of use, It may be changed as desired, Alhamdulilah Rab Al ALameen)
+
+float Player::Player_sprite_height_to_display=25;
+
+float Player::Player_sprite_width_to_display=10;//to be adjusted if needed inshallah
+
 void Player::Action_To_Move(Direction d)
 {
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
-void Player::Move()
+void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
@@ -171,9 +180,17 @@ void Player::Move_Right() // sets to +x
     // to define soon inshallah
 }
 
-Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[0], 2) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
+Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
-
+    player_id=Player_Count;
+    Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen
+    //spawn pt to set using player count, Alhamdulilah Rab Al Alameen
 
     // to define soon inshallah
+
+    sf::FloatRect Wanted_Size_And_Position(Player_sprite_width_to_display,Player_sprite_height_to_display,getSpawnPoint().x,getSpawnPoint().y);
+
+    //Note one thing, spawn pt already stored, hence now which calling setter for sprite and debug box we can just utilize that....I just got the idea...Alhamdulilah....
+    //Note done in Entity class setter for sprite itself, but that makes it multi purpose in some possible findout able way, I will check respawn at places, but lets use spawn pt here, Alhamdulilah Rab Al Alameen
+    setSprite_and_cocentric_Debug_box(File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */],sf::Color::Blue,Wanted_Size_And_Position);//debug box fixatedly blue for players, red for enemies, yellow for projections and green for power ups inshallah
 }

@@ -44,6 +44,7 @@ public:
     void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
     void setUsable_Movement_Speed(double s);
     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File,sf::Color Color_of_Debug_Box,sf::FloatRect Wanted_Size_And_Position);//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
+    sf::Vector2f getSpawnPoint();
     //Bismillah hirahman nirahim, Plan
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
@@ -65,6 +66,12 @@ private:
     static string File_From_Where_To_Load_Resources_names[5];
 
     int player_id;//which player 0 or 1
+
+    static float Player_sprite_height_to_display;
+
+    static float Player_sprite_width_to_display;
+
+    static int Standard_Default_Player_Mass;//Alhamdulilah Rab Al Alameen, although seems redundant it is better than hardcoding a mass value into code
 
     static int No_of_Spawn_points_present;//Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
