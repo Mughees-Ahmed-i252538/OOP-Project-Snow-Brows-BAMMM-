@@ -43,7 +43,7 @@ public:
 
     void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
     void setUsable_Movement_Speed(double s);
-    virtual void setSprite_and_cocentric_Debug_box()=0;//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
+    virtual void setSprite_and_cocentric(string Load_Texture_From_File,sf::Color Color_of_Debug_Box);//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
     //Bismillah hirahman nirahim, Plan
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
@@ -78,14 +78,14 @@ private:
     Direction Action_to_Move_in_Direction_Variable;
     Direction Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
-    void setSprite_and_cocentric_Debug_box();//box color blue inshallah
+    //void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
     public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
     void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x
     
-    Player(int Which_design_choosen_out_of_given_five); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
+    Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
     /* void input_handling_player(char button);
 
@@ -98,7 +98,7 @@ class Enemy: public Entity
     static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
 
     public:
-    void setSprite_and_cocentric_Debug_box();//box color red inshallah
+    //void setSprite_and_cocentric_Debug_box();//box color red inshallah
 };
 
 class Botom: public Enemy
@@ -172,7 +172,7 @@ class Tornado_Lvl_8_9 : public Tornado
 class Projectile: virtual public Entity
 {
 public:
-void setSprite_and_cocentric_Debug_box();//Box color yellow
+//void setSprite_and_cocentric_Debug_box();//Box color yellow
 };
 
 class Snowballs: public Projectile
@@ -188,7 +188,7 @@ class Knives : public Projectile
 class Power_Ups: public Entity
 {
 public:
-    void setSprite_and_cocentric_Debug_box();
+    //void setSprite_and_cocentric_Debug_box();
 };//box color green
 
 class Speed_Boost : public Power_Ups

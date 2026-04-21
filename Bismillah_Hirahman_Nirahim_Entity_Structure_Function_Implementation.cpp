@@ -61,7 +61,9 @@ void Player::Move_Right() // sets to +x
     // to define soon inshallah
 }
 
-Player::Player(int Which_design_choosen_out_of_given_five) : Entity(Spawn_Points[0], 2) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
+Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[0], 2) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
+
+    
     // to define soon inshallah
 }
