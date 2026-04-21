@@ -68,7 +68,9 @@ private:
 
     static int No_of_Spawn_points_present;//Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
-    static int Player_Count;//currently 0, first player, it becomes 1 which is used to get second indice of spawn pt array for p2
+    static int No_of_Player_Sprite_and_related_present;
+
+    static int Player_Count; // currently 0, first player, it becomes 1 which is used to get second indice of spawn pt array for p2
 
     sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;//eg for Walking Alhamdulilah
     float  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
