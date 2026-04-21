@@ -42,6 +42,8 @@ public:
     //Allah SWT knows best, Alhamdulilah rab al alameen
 
     void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
+    void setUsable_Movement_Speed(double s);
+    //Bismillah hirahman nirahim, Plan
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
