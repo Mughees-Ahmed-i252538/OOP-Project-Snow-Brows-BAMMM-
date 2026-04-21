@@ -195,6 +195,8 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     bool is_Multiplayer= true;
     int No_of_Players;
 
+    bool Debug_Mode_On=false;//to flip it on press of F11 inshallah soon
+
 
     //if(is_Multiplayer), ok lets do it this ways if P2 exsists than No of Players =2 else if individual vars conditional assignment, then issue Alhamdulilah Rab Al Alameen
 
@@ -251,6 +253,14 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
             if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed
                                                                                                                                     // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 window.close(); // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
+
+            if(event.type ==sf::Event::KeyPressed&& event.key.code == sf::Keyboard::F11)//Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+            {
+                if(Debug_Mode_On)
+                    Debug_Mode_On=false;
+                else
+                    Debug_Mode_On=true;
+            }
         }
 
 
@@ -291,6 +301,10 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         // Figures it bad to do color white while also doing viewport, because blank area also goes white, instead lets go with a huge white rectange, inshallah, may Allah make the GUI look amazing, Ameen sum ameen ya rab al alameen
         // window.clear(sf::Color::White);
+        for(int i=0;i<No_of_Players;i++)
+        {
+            Players[i]->display(window,Debug_Mode_On);
+        }
         window.clear();
         //window.draw(/*  Circle, image etc*/);//
 
