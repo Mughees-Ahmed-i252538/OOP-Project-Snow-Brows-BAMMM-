@@ -28,7 +28,7 @@ void Entity::display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes)/
     window.draw(this->sprite);//Please remember, RenderWindow-> is the window, VideoMode-> is for Screen resolution, .draw(shape) is to place on back buffer ,display() switches back and front buffer,
     //Alhamdulilah Rab Al Alameen
 
-    if(Debug_Mode_Show_Debug_Boxes)
+    if(Debug_Mode_Show_Debug_Boxes)//Note as windows,clear() removes previous prints effect on screen, if this isnt run in next iteration its effect will disappear Alhamdulilah Rab Al Alameen
     window.draw(this->Debug_box);//Note the box as smaller than shape must be over the sprite elsewise not visible Alhamdulilah Rab Al Alameen
 }
 
