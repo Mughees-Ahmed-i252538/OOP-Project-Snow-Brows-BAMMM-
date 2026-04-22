@@ -7,6 +7,7 @@ using namespace std;
 //Note have to save file before being able to commit changes
 
 
+//self note, you can = something in class for a non static var that is non constant and use normally just default value = that which, but if it is static var and not constant, you must define it at top of a cpp and cant give value Alhamdulilah Rab Al Alameen
 enum class Direction//we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
 {
     Idle=0,
@@ -45,11 +46,19 @@ public:
     void setUsable_Movement_Speed(double s);
     virtual void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File,sf::Color Color_of_Debug_Box,sf::FloatRect Wanted_Size_And_Position)=0;//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
     sf::Vector2f getSpawnPoint();//kept as value, as spawn pt cant and shouldnt be modified after initializing, Alhamdulilah Rab Al Alameen
+    virtual void Move()=0;
     protected://as theey allow access they cant be and shouldnt be used outside heirchy Alhamdulilah Rab Al Alameen
     sf::Texture& getTexture();
     sf::Sprite& getSprite();//to make these functions private if needed
     sf::RectangleShape& getDebugBox();
-    virtual void Move()=0;//move left and right kept for player, Enemies will use an Ai Algorithm in move inshallah
+    //move left and right kept for player, Enemies will use an Ai Algorithm in move inshallah
+
+    
+    int Part_of_Sprite_sheet_x;
+    int Part_of_Sprite_sheet_y;
+    int Part_of_Sprite_sheet_width;
+    int Part_of_Sprite_sheet_height;
+
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
@@ -90,10 +99,7 @@ private:
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
-    int Part_of_Sprite_sheet_x;
-    int Part_of_Sprite_sheet_y;
-    int Part_of_Sprite_sheet_width;
-    int Part_of_Sprite_sheet_height;
+    
 
 
     public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
