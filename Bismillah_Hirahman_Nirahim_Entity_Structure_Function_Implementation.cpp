@@ -118,44 +118,22 @@ void Entity::display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes)/
     //window.display();
 }
 
-void Entity::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position)
-{
-    if(!texture.loadFromFile(Load_Texture_From_File))
-    {
-        cout<<"Log: couldnt load sprite texture for Entity"<<endl;
-    }
-
-    sprite.setTexture(texture);
-
-    sf::Vector2f Wanted_Position(Wanted_Size_And_Position.getPosition().x, Wanted_Size_And_Position.getPosition().y); // vector 2f has width first as is x value, Alhamdulilah Rab Al Alameen
-    float NeededWidth = Wanted_Size_And_Position.getSize().x;
-    float NeededHeight = Wanted_Size_And_Position.getSize().y;
-
-    ForRelativeSizeAndPostionSprite_Entity_Copy( NeededWidth, NeededHeight, sprite, Wanted_Position);
-    //Also sets orign to centre, Alhamdulilah Rab Al Alameen
-
-    //Auto Makes the size wanted Alhamdulilah Rab Al ALameen
-
-    Debug_box.setSize(sf::Vector2f(1,1));//Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
-    //The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
-
-    ForRelativeSizeAndPostionShape_Entity_Copy(NeededWidth * 0.9, NeededHeight * 0.9, Debug_box, Wanted_Position); // using orignal set size to avoid division with 0, using this function as it also sets origin and All Alhamdulilah Rab Al Alameen
-    //This auto sets orign to centre, position to same place as shape etc, hence it is better this way Alhamdulilah Rab Al Alameen
-
-
-    Debug_box.setFillColor(Color_of_Debug_Box);
-
-    float Thickness_of_outline=10;
-
-    Debug_box.setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
-
-    //Alhamdulilah Rab Al Alameen now i can understand sfml better and easier to use to, Alhamdulilah Rab Al Alameen
-
-    //To later inshallah add checks if size is sent 0 as that might start causing issues (from memory:as you can do operations like printing and scaling etc normally, mostly scaling) allah swt knows best Alhamdulilah Rab Al ALameen, especially since we are using the Relative.... Functions that use divisions for comarision Alhamdulilah Rab Al Alameen
-}
 
 sf::Vector2f Entity::getSpawnPoint()
 {return this->spawnpoint;}
+
+sf::Texture &Entity::getTexture()
+{
+    return texture;
+}
+sf::Sprite &Entity::getSprite()
+{
+    return sprite;
+}
+sf::RectangleShape &Entity::getDebugBox()
+{
+    return Debug_box;
+}   
 
 //================Player Functions===============================
 
@@ -214,3 +192,39 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
     cout << "Player Made Alhamdulilah" << endl;
 }
 //Bismillah Hirahman Nirahim, tests
+//Bismillah Hirahman Nirahim
+
+void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position)
+{
+    if (!getTexture().loadFromFile(Load_Texture_From_File))
+    {
+        cout << "Log: couldnt load sprite texture for Entity" << endl;
+    }
+
+    getSprite().setTexture(getTexture());
+
+    sf::Vector2f Wanted_Position(Wanted_Size_And_Position.getPosition().x, Wanted_Size_And_Position.getPosition().y); // vector 2f has width first as is x value, Alhamdulilah Rab Al Alameen
+    float NeededWidth = Wanted_Size_And_Position.getSize().x;
+    float NeededHeight = Wanted_Size_And_Position.getSize().y;
+
+    ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position);
+    // Also sets orign to centre, Alhamdulilah Rab Al Alameen
+
+    // Auto Makes the size wanted Alhamdulilah Rab Al ALameen
+
+    getDebugBox().setSize(sf::Vector2f(1, 1)); // Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
+    // The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
+
+    ForRelativeSizeAndPostionShape_Entity_Copy(NeededWidth * 0.9, NeededHeight * 0.9, getDebugBox(), Wanted_Position); // using orignal set size to avoid division with 0, using this function as it also sets origin and All Alhamdulilah Rab Al Alameen
+    // This auto sets orign to centre, position to same place as shape etc, hence it is better this way Alhamdulilah Rab Al Alameen
+
+    getDebugBox().setFillColor(Color_of_Debug_Box);
+
+    float Thickness_of_outline = 10;
+
+    getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
+
+    // Alhamdulilah Rab Al Alameen now i can understand sfml better and easier to use to, Alhamdulilah Rab Al Alameen
+
+    // To later inshallah add checks if size is sent 0 as that might start causing issues (from memory:as you can do operations like printing and scaling etc normally, mostly scaling) allah swt knows best Alhamdulilah Rab Al ALameen, especially since we are using the Relative.... Functions that use divisions for comarision Alhamdulilah Rab Al Alameen
+}

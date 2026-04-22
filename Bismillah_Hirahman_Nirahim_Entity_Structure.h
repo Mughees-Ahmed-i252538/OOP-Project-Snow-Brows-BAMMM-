@@ -43,10 +43,12 @@ public:
 
     void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
     void setUsable_Movement_Speed(double s);
-    void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File,sf::Color Color_of_Debug_Box,sf::FloatRect Wanted_Size_And_Position);//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
-    sf::Vector2f getSpawnPoint();
-    //Bismillah hirahman nirahim, Plan
-
+    virtual void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File,sf::Color Color_of_Debug_Box,sf::FloatRect Wanted_Size_And_Position)=0;//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
+    sf::Vector2f getSpawnPoint();//kept as value, as spawn pt cant and shouldnt be modified after initializing, Alhamdulilah Rab Al Alameen
+    protected://as theey allow access they cant be and shouldnt be used outside heirchy Alhamdulilah Rab Al Alameen
+    sf::Texture& getTexture();
+    sf::Sprite& getSprite();//to make these functions private if needed
+    sf::RectangleShape& getDebugBox();
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
@@ -93,6 +95,8 @@ private:
     void Move_Right();//sets to +x
     
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
+
+     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
     /* void input_handling_player(char button);
 
