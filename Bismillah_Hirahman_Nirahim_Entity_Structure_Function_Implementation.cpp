@@ -183,7 +183,7 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
      Part_of_Sprite_sheet_x=0;//for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
      Part_of_Sprite_sheet_y=0;
      Part_of_Sprite_sheet_width=80;//To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
-     Part_of_Sprite_sheet_height=80;
+     Part_of_Sprite_sheet_height=80;//we can use scale (-1,1) for flipping image horizontally Alhamdulilah Rab Al Alameen, to arrange this and movement and possibly display inshallah, Self: I want to keep display simple, Movement handles this, also the Direction enum can be used and left value changed to -1, Alhamdulilah Rab Al Alameen
 
     player_id=Player_Count;
     Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen

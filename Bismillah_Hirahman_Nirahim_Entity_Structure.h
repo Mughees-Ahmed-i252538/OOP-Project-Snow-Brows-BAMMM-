@@ -10,8 +10,8 @@ using namespace std;
 enum class Direction//we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
 {
     Idle=0,
-    Left=1,
-    Right=2//basically made 3 intergers like things....Alhaamdulilah
+    Left=-1,//changed left to -1 to be used in image flipping as well, as setscale(-1,1) flips image horizontally, Inshallah we wont need to flip vertically seeing from images Alhamdulilah Rab Al Alameen
+    Right=1//basically made 3 intergers like things....Alhaamdulilah
 
 };//these are types not data memebers and hence can be accessed as if public Alhamdulilah Rab AL Alameen also you cant change their values in code so Alhamdulilah Rab Al Alameen
 
@@ -49,6 +49,7 @@ public:
     sf::Texture& getTexture();
     sf::Sprite& getSprite();//to make these functions private if needed
     sf::RectangleShape& getDebugBox();
+    virtual void Move()=0;//move left and right kept for player, Enemies will use an Ai Algorithm in move inshallah
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
