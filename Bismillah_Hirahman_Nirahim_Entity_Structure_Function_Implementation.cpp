@@ -159,11 +159,23 @@ int Player::Player_Count = 0;//ld error because had missed player count, Added A
 
 void Player::Action_To_Move(Direction d)
 {
+    this->Action_to_Move_in_Direction_Variable=d;//Bismillah hirahman Nirahim, this var means, in this iteration of main loop, player is intending to move in presented d direction Alhamdulilah, 0 if idle...(according to enum class direction Alhamdulilah Rab Al Alameen)
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
 void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
+    
+    if(Action_to_Move_in_Direction_Variable==Direction::Left)
+    {
+        Move_Left();//then move left and right handle if have been moving right -> shift texturerect to wanted.... Implementing wanted function next inshallah
+    }
+    else
+    {
+        Move_Right();
+    }
+    
+    
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah

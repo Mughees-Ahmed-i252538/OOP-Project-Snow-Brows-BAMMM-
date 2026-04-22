@@ -288,10 +288,16 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
 
             if(sf::Keyboard::isKeyPressed(Players_Left[i]))
-                Players[i]->Action_To_Move(Direction::Left);
+                Players[i]->Action_To_Move(Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
                 Players[i]->Action_To_Move(Direction::Right);
+
+            Players[i]->Move();
         }
+
+
+
+
 
 
 
