@@ -92,7 +92,7 @@ void ForRelativeSizeAndPostionSprite(float NeededWidth, float NeededHeight, sf::
 int main()// // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 
-    cout << "Bismillah hirahman Nirahim, Log Starts, Testing...." << endl;
+    std::cout << "Bismillah hirahman Nirahim, Log Starts, Testing...." << endl;
 
     //Note, eg sf::Style is namespace Alhamdulilah! Alhamdulilahi rab al alameen
     sf::VideoMode VidMod=sf::VideoMode::getDesktopMode();//This basically gets thee resolution your screen (ensures the window fits to screen despite resolution change)
@@ -210,7 +210,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     }
 
     int First_Persons_Choice=0;
-    int Second_Persons_Choice = 1;
+    int Second_Persons_Choice = 2;
 
     Player *P1 = new Player(First_Persons_Choice); // have to shift to one by one as new array cant use parameterized constructor, however for rescalability and ease of use(as you see how beneficial array usgae is with loops Alhamdulilah rab al alameen), I use a method that keeps arrays usable although individual working (also deleting array would auto delete orignal space no need for redelete Alhamdulilah rab al alameen)
     Player *P2 = new Player(Second_Persons_Choice); // 0 loads nick design and i believe 1 loads blue player (the one next to nick.pbg), this will be changed later
@@ -239,7 +239,18 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     Players_Jump[1] = sf::Keyboard::I;
     Players_Hit[1] = sf::Keyboard::U;
 
-    
+    /* sf::Texture Test_LoadingBluePlayerSpriteSheetT;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
+    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
+    {
+        std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<endl;
+    }
+    else
+    {
+        Test_LoadingBluePlayerSpriteSheetS.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+    }//This block only needs to be activated to test if loading the test sprite sheet Alhamdulilah Rab AL Alameen
+ */
+    //I believe we need ../ for linux compatability Allah SWT know best Alhamdulilah Rab Al Alameen
 
     while (window.isOpen())
     {
@@ -256,6 +267,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
             if(event.type ==sf::Event::KeyPressed&& event.key.code == sf::Keyboard::F11)//Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
             {
+                cout<<"Debug Key Pressed"<<endl;//Alhamdulilah Rab Al Alameen
                 if(Debug_Mode_On)
                     Debug_Mode_On=false;
                 else
@@ -301,11 +313,14 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         // Figures it bad to do color white while also doing viewport, because blank area also goes white, instead lets go with a huge white rectange, inshallah, may Allah make the GUI look amazing, Ameen sum ameen ya rab al alameen
         // window.clear(sf::Color::White);
+
+        window.clear();//windows clear was before player, printing, Alhamdulilah Rab Al Alameen Found it
         for(int i=0;i<No_of_Players;i++)
         {
             Players[i]->display(window,Debug_Mode_On);
         }
-        window.clear();
+        
+        //window.draw(Test_LoadingBluePlayerSpriteSheetS);
         //window.draw(/*  Circle, image etc*/);//
 
         // window.draw(Circle);
@@ -314,6 +329,8 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     }
     delete Players;
     Players=nullptr;
-    cout << "Log Ends, Alhamdulilah!" << endl; // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
+    std::cout << "Log Ends, Alhamdulilah!" << endl; // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
     return 0;
 }
+
+//Bismillah Hirahman Nirahim for Testing Alhamdulilah Rab Al Alameen

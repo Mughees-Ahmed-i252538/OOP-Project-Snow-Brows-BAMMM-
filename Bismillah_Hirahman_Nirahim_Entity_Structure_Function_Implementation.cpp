@@ -99,11 +99,23 @@ void Entity::setUsable_Movement_Speed(double s)
 
 void Entity::display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes)//passing the window itself by refernce to edit it in a function, Alhamdulilah rab al alameen
 {
+    //cout<<"Displaying Entity Sprite Alhamdulilah"<<endl;//Un comment for debugging, inshallah
     window.draw(this->sprite);//Please remember, RenderWindow-> is the window, VideoMode-> is for Screen resolution, .draw(shape) is to place on back buffer ,display() switches back and front buffer,
     //Alhamdulilah Rab Al Alameen
+/* 
+    sf::RectangleShape a;
+    a.setSize(sf::Vector2f(100,100));
+    a.setPosition(100,300);
+    
+
+    a.setFillColor(sf::Color::Blue);
+    window.draw(a); purely for debugging Alhamdulilah Rab al alameen*/
+
 
     if(Debug_Mode_Show_Debug_Boxes)//Note as windows,clear() removes previous prints effect on screen, if this isnt run in next iteration its effect will disappear Alhamdulilah Rab Al Alameen
-    window.draw(this->Debug_box);//Note the box as smaller than shape must be over the sprite elsewise not visible Alhamdulilah Rab Al Alameen
+    {//cout<<"Also Displaying Entity Debux Bux Alhamdulilah"<<endl;//uncomment to debug Alhamdulilah Rab Al ALameen
+    window.draw(this->Debug_box);}//Note the box as smaller than shape must be over the sprite elsewise not visible Alhamdulilah Rab Al Alameen
+    //window.display();
 }
 
 void Entity::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position)
@@ -151,7 +163,7 @@ sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(200.f, 20.f), sf::Vector2f(
 
 int Player::No_of_Spawn_points_present = 2; // unfortunately have to change these two values manually for rescalaing, but it does Allow Reslacinf Alhamdulilah Rab Al Alameen
 
-string Player::File_From_Where_To_Load_Resources_names[5] = {"..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Nick.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Blue.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Green.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Red.png", "..\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Images\Player_Yellow.png"};
+string Player::File_From_Where_To_Load_Resources_names[5] = {"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Nick.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Green.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Red.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Yellow.png"};// a single \ was trying to register as an escape sequence, Turned them into \\ Alhamdulilah Rab Al Alameen
 
 int Player::No_of_Player_Sprite_and_related_present = 5;
 
@@ -160,6 +172,8 @@ int Player::Standard_Default_Player_Mass=10;//10 kg....it is ceiling value of th
 float Player::Player_sprite_height_to_display=25;
 
 float Player::Player_sprite_width_to_display=10;//to be adjusted if needed inshallah
+
+int Player::Player_Count = 0;//ld error because had missed player count, Added Alhamdulilah Rab Al Alameen
 
 void Player::Action_To_Move(Direction d)
 {
@@ -182,15 +196,21 @@ void Player::Move_Right() // sets to +x
 
 Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
+    cout << "Making Player" << endl;
+
     player_id=Player_Count;
     Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen
     //spawn pt to set using player count, Alhamdulilah Rab Al Alameen
 
     // to define soon inshallah
 
+    cout << "Using File for texture Player" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<< endl;
+
     sf::FloatRect Wanted_Size_And_Position(Player_sprite_width_to_display,Player_sprite_height_to_display,getSpawnPoint().x,getSpawnPoint().y);
 
     //Note one thing, spawn pt already stored, hence now which calling setter for sprite and debug box we can just utilize that....I just got the idea...Alhamdulilah....
     //Note done in Entity class setter for sprite itself, but that makes it multi purpose in some possible findout able way, I will check respawn at places, but lets use spawn pt here, Alhamdulilah Rab Al Alameen
     setSprite_and_cocentric_Debug_box(File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */],sf::Color::Blue,Wanted_Size_And_Position);//debug box fixatedly blue for players, red for enemies, yellow for projections and green for power ups inshallah
+    cout << "Player Made Alhamdulilah" << endl;
 }
+//Bismillah Hirahman Nirahim, tests
