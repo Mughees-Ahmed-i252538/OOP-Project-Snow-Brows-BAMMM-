@@ -164,7 +164,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
          //i,e we need to leave space on the sides to centre the view as well as not have it streched irrecognizably...
     {
         view.setViewport(sf::FloatRect((1-(ChoosenRatio/UserRatio))/2,0.f,ChoosenRatio/UserRatio,1.f));//Floating point rectangle
-    }
+    }//Note we change x if x:y of user> x:y of wanted meaning their x is extending extra needs to make extra into bars, extra is gotten by Choosen ration/User RAtio which in this case is less than 1 always  Alhamdulilah Rab Al Alameen
     
 
     // Note: as users resolution is wider, we need a smaller width component to fit the magnified view without stretching it, for example 16:9 to 4:3,  (4/3)/(16/9) = 3/4 around 75 percent-> to conclude, as user ratio is around 25% wider as compared to height in ratio to choosen ratio, we need it to become 25% shorter, i.e we need the view to be 75% its size in x to fit without stretching on the user screen
@@ -209,7 +209,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         No_of_Players = 1;
     }
 
-    int First_Persons_Choice=0;
+    int First_Persons_Choice=1;//I guess as there are differences in positions of nick, hence same coordinates for nick.png wont work, hence changed to p1 for now, to ajust into code soon inshallah
     int Second_Persons_Choice = 2;
 
     Player *P1 = new Player(First_Persons_Choice); // have to shift to one by one as new array cant use parameterized constructor, however for rescalability and ease of use(as you see how beneficial array usgae is with loops Alhamdulilah rab al alameen), I use a method that keeps arrays usable although individual working (also deleting array would auto delete orignal space no need for redelete Alhamdulilah rab al alameen)

@@ -136,8 +136,10 @@ sf::RectangleShape &Entity::getDebugBox()
 }   
 
 //================Player Functions===============================
+//Corrected 
 
-sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(200.f, 20.f), sf::Vector2f(300.f, 20.f)}; // have to mention sf::vector2f or else it cant do conversion, Alhamdulilah rab al alameem
+//20 from bottom Alhamdulilah Rab Al Alameen, 150 left and 150 right of screen Alhamdulilah Rab Al Alameen, 500-20 wasnt appearing,on screen, changed to 500 - 100 Bismillah Hirahman Nirahim
+sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(150.f, (500.f - 100.f)), sf::Vector2f(500 - 150.f, (500.f - 100.f))}; // have to mention sf::vector2f or else it cant do conversion, Alhamdulilah rab al alameem
 
 int Player::No_of_Spawn_points_present = 2; // unfortunately have to change these two values manually for rescalaing, but it does Allow Reslacinf Alhamdulilah Rab Al Alameen
 
@@ -147,11 +149,13 @@ int Player::No_of_Player_Sprite_and_related_present = 5;
 
 int Player::Standard_Default_Player_Mass=10;//10 kg....it is ceiling value of the 9.07 weight of nintendo switch and the snowbros game....because i couldnt find nicks weight anywhere...Alhamdulilah Rab Al Alameen, Although snowmen are generally over 200 kg, but there is no way such heavy person made of snow not only moves...but also flies.....in balood mode ofcourse...Alhamdulilah Rab Al Alameen...(other than the humour, 10 is choosen for ease of use, It may be changed as desired, Alhamdulilah Rab Al ALameen)
 
-float Player::Player_sprite_height_to_display=25;
+float Player::Player_sprite_height_to_display=55;
 
-float Player::Player_sprite_width_to_display=10;//to be adjusted if needed inshallah
+float Player::Player_sprite_width_to_display=40;//to be adjusted if needed inshallah
 
 int Player::Player_Count = 0;//ld error because had missed player count, Added Alhamdulilah Rab Al Alameen
+
+
 
 void Player::Action_To_Move(Direction d)
 {
@@ -176,6 +180,11 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
 {
     cout << "Making Player" << endl;
 
+     Part_of_Sprite_sheet_x=0;//for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
+     Part_of_Sprite_sheet_y=0;
+     Part_of_Sprite_sheet_width=80;//To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
+     Part_of_Sprite_sheet_height=80;
+
     player_id=Player_Count;
     Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen
     //spawn pt to set using player count, Alhamdulilah Rab Al Alameen
@@ -184,7 +193,8 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
 
     cout << "Using File for texture Player" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<< endl;
 
-    sf::FloatRect Wanted_Size_And_Position(Player_sprite_width_to_display,Player_sprite_height_to_display,getSpawnPoint().x,getSpawnPoint().y);
+    //ok it says syntax is left top width height....hence the issue, we have done width first then position
+    sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y,Player_sprite_width_to_display, Player_sprite_height_to_display);
 
     //Note one thing, spawn pt already stored, hence now which calling setter for sprite and debug box we can just utilize that....I just got the idea...Alhamdulilah....
     //Note done in Entity class setter for sprite itself, but that makes it multi purpose in some possible findout able way, I will check respawn at places, but lets use spawn pt here, Alhamdulilah Rab Al Alameen
@@ -203,14 +213,34 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
 
     getSprite().setTexture(getTexture());
 
+    cout << "local width of sprite sheet " << getSprite().getLocalBounds().width << endl;
+    cout << "local height of sprite sheet" << getSprite().getLocalBounds().height << endl;
+
+    cout << "global width of sprite sheet" << getSprite().getGlobalBounds().width << endl;
+    cout << "global height of sprite sheet" << getSprite().getGlobalBounds().height << endl;
+
+    getSprite().setTextureRect(sf::IntRect(Part_of_Sprite_sheet_x, Part_of_Sprite_sheet_y, Part_of_Sprite_sheet_width, Part_of_Sprite_sheet_height)); // lets see from start we get 40 40 size sub texture from sprite sheet, Bismillah Hirahman Nirahim
+
+    cout << "local width of sprite sheet sub part" << getSprite().getLocalBounds().width << endl;
+    cout << "local height of sprite sheet sub part" << getSprite().getLocalBounds().height << endl;
+
+    cout << "global width of sprite sheet sub part before relative size and position wanted" << getSprite().getGlobalBounds().width << endl;
+    cout << "global height of sprite sheet sub part before relative size and position wanted" << getSprite().getGlobalBounds().height << endl;
+
     sf::Vector2f Wanted_Position(Wanted_Size_And_Position.getPosition().x, Wanted_Size_And_Position.getPosition().y); // vector 2f has width first as is x value, Alhamdulilah Rab Al Alameen
-    float NeededWidth = Wanted_Size_And_Position.getSize().x;
-    float NeededHeight = Wanted_Size_And_Position.getSize().y;
+    float NeededWidth = Wanted_Size_And_Position.width;
+    float NeededHeight = Wanted_Size_And_Position.height;
+
+    cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<endl;
+    cout << "Needed Height of Sprite found at proces time" << NeededHeight << endl;
 
     ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position);
     // Also sets orign to centre, Alhamdulilah Rab Al Alameen
 
     // Auto Makes the size wanted Alhamdulilah Rab Al ALameen
+
+    cout << "global width of sprite sheet sub part after relative size and position wanted" << getSprite().getGlobalBounds().width << endl;
+    cout << "global height of sprite sheet sub part after relative size and position wanted" << getSprite().getGlobalBounds().height << endl;
 
     getDebugBox().setSize(sf::Vector2f(1, 1)); // Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
     // The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
@@ -223,6 +253,33 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     float Thickness_of_outline = 10;
 
     getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
+
+    cout<<"set sprite sheet and debug box"<<endl;
+
+    
+
+    cout << "local width of debug box" << getDebugBox().getLocalBounds().width << endl;
+    cout << "local height of debug box" << getDebugBox().getLocalBounds().height << endl;
+
+    cout << "global width of debug box" << getDebugBox().getGlobalBounds().width << endl;
+    cout << "global height of debug box" << getDebugBox().getGlobalBounds().height << endl;
+
+
+    //Now for location to confirm best spawn points
+
+    //cout << "local width of debug box" << getDebugBox().getLocalBounds().width << endl;
+    //cout << "local height of debug box" << getDebugBox().getLocalBounds().height << endl; To change this to track location of texturect in sprite inshallah
+
+    cout << "global left of sprite" << getSprite().getGlobalBounds().left << endl;
+    cout << "global top of sprite" << getSprite().getGlobalBounds().top << endl;
+
+    cout << "x_position of orign of sprite" << getSprite().getOrigin().x<< endl;
+    cout << "y_position of orign of sprite" << getSprite().getOrigin().y << endl;
+
+    cout<< "Now for spawn point of given sprite"<<endl;
+
+    cout << "x_position of spawn point of sprite" << getSpawnPoint().x << endl;
+    cout << "y_position of spawn point of sprite" << getSpawnPoint().y << endl;
 
     // Alhamdulilah Rab Al Alameen now i can understand sfml better and easier to use to, Alhamdulilah Rab Al Alameen
 

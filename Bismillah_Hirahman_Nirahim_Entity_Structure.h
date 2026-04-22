@@ -13,7 +13,7 @@ enum class Direction//we can also do non class but that way its parts simply wor
     Left=1,
     Right=2//basically made 3 intergers like things....Alhaamdulilah
 
-};
+};//these are types not data memebers and hence can be accessed as if public Alhamdulilah Rab AL Alameen also you cant change their values in code so Alhamdulilah Rab Al Alameen
 
 class Entity//to make this an abstract class soon inshallah, but for now all majour methods taken care of by constructors, when making getter and setters perhaps, as might be using specififc things inshallah
 {
@@ -88,6 +88,12 @@ private:
     Direction Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
+
+    int Part_of_Sprite_sheet_x;
+    int Part_of_Sprite_sheet_y;
+    int Part_of_Sprite_sheet_width;
+    int Part_of_Sprite_sheet_height;
+
 
     public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
