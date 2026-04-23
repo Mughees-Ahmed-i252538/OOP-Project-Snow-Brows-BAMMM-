@@ -133,7 +133,13 @@ sf::Sprite &Entity::getSprite()
 sf::RectangleShape &Entity::getDebugBox()
 {
     return Debug_box;
-}   
+}
+
+double Entity::getUsable_Movement_Speed()
+{
+    return Usable_Movement_Speed;
+}
+
 
 //================Player Functions===============================
 //Corrected 
@@ -155,7 +161,7 @@ float Player::Player_sprite_width_to_display=40;//to be adjusted if needed insha
 
 int Player::Player_Count = 0;//ld error because had missed player count, Added Alhamdulilah Rab Al Alameen
 
-
+int Player::Standard_Default_Player_Speed=7.5;
 
 void Player::Action_To_Move(Direction d)
 {
@@ -170,10 +176,16 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     {
         Move_Left();//then move left and right handle if have been moving right -> shift texturerect to wanted.... Implementing wanted function next inshallah
     }
-    else
+    else if(Action_to_Move_in_Direction_Variable==Direction::Right)
     {
         Move_Right();
     }
+    else if(Action_to_Move_in_Direction_Variable==Direction::Idle)
+    {
+        is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
+    }
+    
+    getSprite().move(Current_velocity_x,Current_velocity_y);
     
     
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
@@ -182,11 +194,35 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {
     // to define soon inshallah
+    cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<endl;
+    cout << "Usable Speed" << getUsable_Movement_Speed() << endl;
+    Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
+    Current_velocity_y = 0;
+
+    this->Previously_Moving_in = Direction::Left;
 }
 void Player::Move_Right() // sets to +x
 {
     // to define soon inshallah
+    cout << "Bismillah Setting Player Velocity to - Usbale speed for Moving Left and Jump speed=0" << endl;
+    cout<< "Usable Speed"<<getUsable_Movement_Speed()<<endl;
+    Current_velocity_x=getUsable_Movement_Speed();//pos for right, neg for left...
+    Current_velocity_y=0;
+    //New Plan -> this sets the current velocity right, to deal with up and right movement, soon inshallah, actuall sfmove shall be called in this functions caller move with current velcocity inshallah, but this function handels image update inshallah
+
+    this->Previously_Moving_in = Direction::Right;
 }
+
+void Player::is_Not_Moving()
+{
+    //to deinfe more soon inshallah
+    cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" << endl;
+    Current_velocity_x=0;//plan make new type-> eg jump left in direction inshallah, when defining gravity inshallah, that also handels updates in texture rect calls
+    Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
+
+    this->Previously_Moving_in=Direction::Idle;
+
+}//Ok you can also just get texture rect from a sprite Alhamdulilah Rab AL Alameen
 
 Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
@@ -201,6 +237,7 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
     Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen
     //spawn pt to set using player count, Alhamdulilah Rab Al Alameen
 
+    
     // to define soon inshallah
 
     cout << "Using File for texture Player" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<< endl;
@@ -224,6 +261,8 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     }
 
     getSprite().setTexture(getTexture());
+
+    setUsable_Movement_Speed( Standard_Default_Player_Speed);
 
     cout << "local width of sprite sheet " << getSprite().getLocalBounds().width << endl;
     cout << "local height of sprite sheet" << getSprite().getLocalBounds().height << endl;

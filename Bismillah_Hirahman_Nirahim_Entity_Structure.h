@@ -16,13 +16,18 @@ enum class Direction//we can also do non class but that way its parts simply wor
 
 };//these are types not data memebers and hence can be accessed as if public Alhamdulilah Rab AL Alameen also you cant change their values in code so Alhamdulilah Rab Al Alameen
 
+enum class State: char{
+
+    w,//ok i am keeping char just to remember
+    r,
+    j
+};//walking running,jumping
+
 class Entity//to make this an abstract class soon inshallah, but for now all majour methods taken care of by constructors, when making getter and setters perhaps, as might be using specififc things inshallah
 {
 
 private:
     sf::Vector2f spawnpoint;   // tells us the position, initialize location to here
-    float Current_position_x, Current_position_y;//This is used as redundant variable, for ease of calculation, its value is stored after each movement in Move Left and Move Right, It is mainly helpful for ease of understanding while also simulatanously changing position for hitbox (also acting as health box being called as debug box) Alhamdulilah Rab Al Alameen
-    float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
     static float Usable_Movement_Speed;                  // similar to max speed only for left and right
     float Mass;                                          // for velocity of jump and fall down
 
@@ -44,6 +49,7 @@ public:
 
     void display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes);//Bismillah Hirahman Nirahim
     void setUsable_Movement_Speed(double s);
+    double getUsable_Movement_Speed();
     virtual void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File,sf::Color Color_of_Debug_Box,sf::FloatRect Wanted_Size_And_Position)=0;//shift move to entity, also keep track of position in each. Or better make move a virtual inherited function Inshallah, also keep colors for debug boxes using over riding make it a pure virtual here, enemy debug boxes red, player blue, projectile yellow, powerup green Alhamdulilah Rab al alameen
     sf::Vector2f getSpawnPoint();//kept as value, as spawn pt cant and shouldnt be modified after initializing, Alhamdulilah Rab Al Alameen
     virtual void Move()=0;
@@ -53,7 +59,11 @@ public:
     sf::RectangleShape& getDebugBox();
     //move left and right kept for player, Enemies will use an Ai Algorithm in move inshallah
 
-    
+    //virtual void update_Part_of_Sprite_sheet()=0;//Bismillah Hirahman Nirahim, to be used for animation changes in image Alhamdulilah Rab Al Alameen
+
+    float Current_position_x, Current_position_y; // This is used as redundant variable, for ease of calculation, its value is stored after each movement in Move Left and Move Right, It is mainly helpful for ease of understanding while also simulatanously changing position for hitbox (also acting as health box being called as debug box) Alhamdulilah Rab Al Alameen
+    float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
+
     int Part_of_Sprite_sheet_x;
     int Part_of_Sprite_sheet_y;
     int Part_of_Sprite_sheet_width;
@@ -84,6 +94,7 @@ private:
     static float Player_sprite_width_to_display;
 
     static int Standard_Default_Player_Mass;//Alhamdulilah Rab Al Alameen, although seems redundant it is better than hardcoding a mass value into code
+    static int Standard_Default_Player_Speed;
 
     static int No_of_Spawn_points_present;//Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
@@ -106,7 +117,8 @@ private:
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
     void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x
-    
+    void is_Not_Moving();;
+
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
      void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
