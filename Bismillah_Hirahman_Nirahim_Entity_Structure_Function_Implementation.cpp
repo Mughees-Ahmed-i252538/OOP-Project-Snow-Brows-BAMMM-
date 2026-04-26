@@ -155,14 +155,15 @@ void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right
 
     if (!Sprite_Already_Horizontally_Flipped && Right_or_not) // it should be flipped but isnt already
     {
-        sprite.setScale(-1,1);//this hf sprite image Alhamdulilah
+        
         Sprite_Already_Horizontally_Flipped=true;
-        cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<endl;
-        ForRelativeSizeAndPostionSprite_Entity_Copy(Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y)); // This is needed because scale(-1,1) resets enforced display scale, Alhamdulilah Rab Al Alameen
+        cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<endl;//I realized that sending one aspect negative here would work like set scale for flipping, but with new position, Alhamdulilah Rab Al Alameen, checking if it messes with something else, if so we could make a different function, Alhamdulilah Rab Al Alameen
+        ForRelativeSizeAndPostionSprite_Entity_Copy(-Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y)); // This is needed because scale(-1,1) resets enforced display scale, Alhamdulilah Rab Al Alameen//this hf sprite image Alhamdulilah, ok fine alhamdulilah but the - must go with needed width else flipped vertically if send with hight, Alhamdulilah Rab Al Alameen
     }
     if (Sprite_Already_Horizontally_Flipped && !Right_or_not) // it shouldnt be flipped but is already
     {
-        sprite.setScale(-1, 1); // this re hf to bring back ALhamdulilah sprite image Alhamdulilah
+        //sprite.setScale(1, 1); // this re hf to bring back ALhamdulilah sprite image Alhamdulilah, this comment set scale has been left for understanding, other removed, Alhamdulilah Rab Al Alameen
+        //Realized setscale works with orignal image then scales.,, hence to flip back we need +1 not -1. However now the for relative uses set scale too...so this one wont work we have to concatinate its function for realtive
         Sprite_Already_Horizontally_Flipped = false;
         cout << "Was Facing Right Intent to Flip Left as trying to move left" << endl;
         ForRelativeSizeAndPostionSprite_Entity_Copy(Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));

@@ -337,14 +337,14 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         //For sime reason Debug box not moving although i remmeber adding setposition measures, hence added .move meansures where.move of sprite, Alhamdulilah RAb Al Alameen now it works
 
-       /*  Test_LoadingBluePlayerSpriteSheetS.setPosition(100,200);
+        /*  Test_LoadingBluePlayerSpriteSheetS.setPosition(100,200);
         window.draw(Test_LoadingBluePlayerSpriteSheetS);
-        //Test_LoadingBluePlayerSpriteSheetS.setScale(-1,1);
+        Test_LoadingBluePlayerSpriteSheetS.setScale(-1,1);
         Test_LoadingBluePlayerSpriteSheetS.setPosition(200,200);
         window.draw(Test_LoadingBluePlayerSpriteSheetS);
-        //Test_LoadingBluePlayerSpriteSheetS.setScale(-1, 1);
+        Test_LoadingBluePlayerSpriteSheetS.setScale(1, 1);
         Test_LoadingBluePlayerSpriteSheetS.setPosition(300, 200);//Debugging measures for scale(-1,1) reflip Alhamdulilah Rab Al Alameen
-        window.draw(Test_LoadingBluePlayerSpriteSheetS); */
+        window.draw(Test_LoadingBluePlayerSpriteSheetS);  */
 
         //window.draw(Test_LoadingBluePlayerSpriteSheetS);
         //window.draw(/*  Circle, image etc*/);//
