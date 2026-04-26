@@ -1,39 +1,113 @@
 #include <iostream>          //if giving linker errors, first define  static vars inshallah
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
+#include <string>
+
+using namespace std;
 
 
-class Levels{
+class Level_Config{
 
 
-    static int Total_Levels_For_which_Data_is_Present;//This gives how many levels we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
     
 
     //Bismillah Hirahman Nirahim, This will just contain an huge array of stored data, 
-    //Initially ten levels so a Levels[10] array on which
+    //Initially ten Level_Config so a Level_Config[10] array on which
 
     // (1) Block: No of Blocks & Their location (position and size(size static)) is stored
     // (2) Mobs: Mobs no, type and location are stored
-    // (3) Backgroung: Background image & bakground music, strings are stores for loading
+    // (3) Background: Background image & bakground music, strings are stores for loading in the all data holders, Alhamdulilah Rab Al Alameen
+
+    static int Level_count; // auto 0 no need to initialize with the definition thing Alhamdulilah Rab Al Alameen, for knowing what the number of the next level will be, Alhamdulilah Rab Al Alameen
+    int Level_id;
+    sf::Texture BackgroundImageTexture;
+    sf::Sprite BackgroundImageSprite;
+    sf::SoundBuffer Level_MusicSB;
+    sf::Sound Level_MusicS;
+
+    static float Size_of_block_x;//to define soon inshallah
+    static float Size_of_block_y;
+
+    int No_of_Blocks_in_this_round; // initialized in constructor
+
+    sf::Texture BlockImageTexture;//this stays in memory because is object's class's memeber not local var ,Alhamdulilah Rab Al Alameen
+    sf::Sprite BlockImageSprite;
+
+    float *x_position_of_blocks_current_level_holder_array;
+    float *y_position_of_blocks_current_level_holder_array;
+
+    int no_of_mobs_in_this_round;
+
+    string *type_of_mobs_current_level_holder_array;
+
+    float *spawn_pt_of_mobs_current_level_holder_array;
+    float *spawn_pt_of_mobs_current_level_holder_array;
 
     //Alhamdulilah Rab Al Alameen, A level count gives the wanted level on the basis of iteration (loading level explicitly sends and changes this store count)
 
     //Alhamdulilah Rab Al Alameen
 
-    Level_Data* levels_data;//initliaed in constructor of Levels, this is
+    //I want to just store 12 of this function itself as memebers if possible.... well that was the orignal idea,,,..having another class that has the same mebers and having no of levels no of objects in that class......, well arrays would allow for easier working Allah SWT knows best Alhamdulilah Rab Al Alameen, ok stored level configs it is..... Stores cofigs of each level in its constructor....Alhamdulilah Rab Al Alameen, this will be a static memeber and each obj should have only one of it if possible Alhamdulilah Rab Al Alameen
 
-    public:
 
-    Levels();
-    ~Levels();
+    //Aaozbillah minashaetaun nirajeem 
+    //Bismillah Hirahman Nirahim
+    //New plan-> Level
+
+    //Level_Data_Present* levels_data;//initliaed in constructor of Level_Config, this is, Logic changed Alahamdulilah, now all the static data will be stored inside this class...although we could make a separate class that would make our lives easier by assign=ing using just an overridden eequal sign, Alhamdulilah Rab Al ALameen
+
+    public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has 
+
+    Level_Config();
+    ~Level_Config();
     
 
 };
+//It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
 
-class Level_Data
-{
-    static int Level_count;
-    int id;
+class Stored_Level_Configs
+{//As tecknically only 1 one these should be made, it makes no difference if static or not Alhamdulilah Rab Al Alameen, but it is easier to do things in constructor rather than do it in class utself, so, Alhamdulilah rab al alameen
+    //This basically has an array of whatever is in the Level Configs, one for each level, only static-> no of levels stored(tranfered here , Alhamdulilah)
 
+    static int Total_Levels_For_which_Data_is_Present; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
+    //This stored doesnt have is-> the one by one increasing level count and the level id, those are needed to track this level and know next level
+    //Both are actually required to ask from storage hence storage doesnt need them, Alhamdulilah
 
-};//It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
+    //its says on google that ypu cant put functions calls in class body...but by using objec..constructor call...Allah SWT knows best Alhamdulilah Rab AL Alameen
+
+    //Instead of sprites it has texture file locations, hence sprites textures can be assigned at run time while asking it for location, Alhamdulilah rab al alameen
+
+    string *BackgroundImageTexture_File_Locations;//This will become the size of Total Levels for which data is present, Alhamdulilah Rab Al Alameen
+    string *Level_MusicSB_File_Locations;//this holds sounder buffers file locations, Alhamdulilah rab al alameen
+
+    int* No_of_Blocks_in_each_round;//array that holds no of blocks for each level
+
+    float **x_positions_of_blocks_each_level_holder_array;//An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+    float **y_positions_of_blocks_each_level_holder_array;
+
+    int* no_of_mobs_in_each_round;
+
+    string **types_of_mobs_each_level_holder_array;
+
+    float **spawn_pts_of_mobs_each_level_holder_array;
+    float **spawn_pts_of_mobs_each_level_holder_array;
+
+    //Ok play for separate bonus level system, as a random choosen 2 levels of non boss levels will be bonus load bonus level things...., those levels are not with mobs but have blocks, these bonus level will be selected in stored's constructir usng rand inshallah, Bismillah Hirahman Nirahim
+
+    int No_of_Bonus_levels;
+    int* Indexes_of_Bonus_Levels;
+
+    string* Bonus_Level_BackgroundImageTexture_File_Locations;
+    string *Bonus_Level_MusicSB_File_Locations;
+
+    int *No_of_Blocks_in_each_bonus_round; // array that holds no of blocks for each level
+
+    float **x_positions_of_blocks_each_bonus_level_holder_array; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+    float **y_positions_of_blocks_each_bonus_level_holder_array;
+
+    //No mobs Alhamdulilah Rab Al Alameen
+
+    // In constructor-> all level's data assigned into this stored confis
+
+    //when each level made they get data from this, hence this is assigned first-> first memeber, Alhamdulilah Rab Al Alameen, first memeber gets assigned value forst no matter of sending order, Alhamdulilah Rab Al Alameen
+};
