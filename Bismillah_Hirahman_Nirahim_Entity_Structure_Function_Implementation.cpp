@@ -191,7 +191,7 @@ float Player::Player_sprite_width_to_display=40;//to be adjusted if needed insha
 
 int Player::Player_Count = 0;//ld error because had missed player count, Added Alhamdulilah Rab Al Alameen
 
-int Player::Standard_Default_Player_Speed=7.5;
+int Player::Standard_Default_Player_Speed=6.5;
 
 void Player::Action_To_Move(Direction d)
 {
@@ -234,14 +234,24 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
     int wanted_texture_rect_width = 0;
     int wanted_texture_rect_height = 0; // integers because part of int rect
 
+   
+
     if (Previously_Moving_in != Direction::Left) // this counter is only needed for moving animations ALhamdulilah
     {
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
+
+        //Perhaps adding a diff sound for dir change soon inshallah
     } // the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
     else
     { // modify here for updation speed adjustments
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+
+        if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//perhaps transfer this somewhere else if needed inshallah
+        FootStepsS.play();//Alhamdulilah found a way to download directly wav from an audio editor Alhamdulilah Rab Al Alameen
+
+
+
     } // animation speed determines how fast changes Alhamdulilah Rab AL ALameen, initial thought, try for different entitities different speed inshallah
 
     int total_no_of_images_in_walking_animation = 3; // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
@@ -291,6 +301,8 @@ void Player::Move_Right() // sets to +x
     int wanted_texture_rect_width = 0;
     int wanted_texture_rect_height = 0;//integers because part of int rect
 
+    
+
     if(Previously_Moving_in!=Direction::Right)//this counter is only needed for moving animations ALhamdulilah
     {
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
@@ -299,6 +311,9 @@ void Player::Move_Right() // sets to +x
     else
     {   //modify here for updation speed adjustments
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+
+        if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//if we start it even as it is playing, it restarts so the previiious one isnt heard, only the last one is heard at stopping, hence this, Alhamdulilah Rab Al Alameen
+        FootStepsS.play();
     }//animation speed determines how fast changes Alhamdulilah Rab AL ALameen, initial thought, try for different entitities different speed inshallah
 
     int total_no_of_images_in_walking_animation=3;//Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
@@ -370,6 +385,20 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
     //Note one thing, spawn pt already stored, hence now which calling setter for sprite and debug box we can just utilize that....I just got the idea...Alhamdulilah....
     //Note done in Entity class setter for sprite itself, but that makes it multi purpose in some possible findout able way, I will check respawn at places, but lets use spawn pt here, Alhamdulilah Rab Al Alameen
     setSprite_and_cocentric_Debug_box(File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */],sf::Color::Blue,Wanted_Size_And_Position);//debug box fixatedly blue for players, red for enemies, yellow for projections and green for power ups inshallah
+
+    
+    //"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
+    if (!FootStepsSB.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\SBFootsteps.wav")) // remember spaces are crucial in loading file, ensure there is no space after extension especially as suvh doesnt exsist in windows at the least as well as be careful of spaces pasted by vs code itself while pasting for formatting, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+    {                                                                                                                                             //"C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Sounds\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
+        cout << "Couldnt Load test sound, Oh Allah help us Ameen" << endl;
+    }
+    else
+    {
+        cout << "Successfully Loaded File Alhamdulilah Rab Al Alameen"; // Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
+        FootStepsS.setBuffer(FootStepsSB);
+        FootStepsS.setVolume(6);
+    }
+
     cout << "Player Made Alhamdulilah" << endl;
 }
 //Bismillah Hirahman Nirahim, tests

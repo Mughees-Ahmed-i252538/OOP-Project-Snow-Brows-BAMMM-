@@ -253,6 +253,23 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
  
     //I believe we need // instead of \ for linux compatability Allah SWT know best Alhamdulilah Rab Al Alameen
 
+     /* sf::SoundBuffer TestSoundSB;
+    sf::Sound TestSoundS;
+    //"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
+    if (!TestSoundSB.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\SBFootsteps.wav")) // remember spaces are crucial in loading file, ensure there is no space after extension especially as suvh doesnt exsist in windows at the least as well as be careful of spaces pasted by vs code itself while pasting for formatting, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+    { //"C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Sounds\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
+        cout << "Couldnt Load test sound, Oh Allah help us Ameen" << endl;
+    }
+    else
+    {
+        cout<<"Successfully Loaded File Alhamdulilah Rab Al Alameen";//Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
+        TestSoundS.setBuffer(TestSoundSB);
+    }
+
+    TestSoundS.play(); */
+
+    
+
     while (window.isOpen())
     {
 
@@ -346,11 +363,13 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         Test_LoadingBluePlayerSpriteSheetS.setPosition(300, 200);//Debugging measures for scale(-1,1) reflip Alhamdulilah Rab Al Alameen
         window.draw(Test_LoadingBluePlayerSpriteSheetS);  */
 
+        
         //window.draw(Test_LoadingBluePlayerSpriteSheetS);
         //window.draw(/*  Circle, image etc*/);//
 
         // window.draw(Circle);
         // window.draw();//It seems that this line is a must for drawing the given shape, Mashallah
+        
         window.display();//switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
     delete Players;
