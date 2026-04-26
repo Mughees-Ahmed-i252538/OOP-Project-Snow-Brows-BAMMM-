@@ -5,11 +5,12 @@
 
 using namespace std;
 
+class Stored_Level_Configs;
 
 class Level_Config{
 
 
-    
+    static Stored_Level_Configs stored_Level_configs;
 
     //Bismillah Hirahman Nirahim, This will just contain an huge array of stored data, 
     //Initially ten Level_Config so a Level_Config[10] array on which
@@ -25,8 +26,7 @@ class Level_Config{
     sf::SoundBuffer Level_MusicSB;
     sf::Sound Level_MusicS;
 
-    static float Size_of_block_x;//to define soon inshallah
-    static float Size_of_block_y;
+    
 
     int No_of_Blocks_in_this_round; // initialized in constructor
 
@@ -69,7 +69,10 @@ class Stored_Level_Configs
 {//As tecknically only 1 one these should be made, it makes no difference if static or not Alhamdulilah Rab Al Alameen, but it is easier to do things in constructor rather than do it in class utself, so, Alhamdulilah rab al alameen
     //This basically has an array of whatever is in the Level Configs, one for each level, only static-> no of levels stored(tranfered here , Alhamdulilah)
 
+    // This will become the size of Total Levels for which data is present, Alhamdulilah Rab Al Alameen
     static int Total_Levels_For_which_Data_is_Present; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
+    float Width_of_a_block=10;                      // to define soon inshallah
+    float Height_of_a_block=10;//these can be static but it is easier to manage this way as it is only planneed for a single storage level config to be made Alhamdulilah Rab Al Alameen, currently defining both height and width as 10 for testing later inshallah, Alhamdulilah rab al alameen
     //This stored doesnt have is-> the one by one increasing level count and the level id, those are needed to track this level and know next level
     //Both are actually required to ask from storage hence storage doesnt need them, Alhamdulilah
 
@@ -77,7 +80,7 @@ class Stored_Level_Configs
 
     //Instead of sprites it has texture file locations, hence sprites textures can be assigned at run time while asking it for location, Alhamdulilah rab al alameen
 
-    string *BackgroundImageTexture_File_Locations;//This will become the size of Total Levels for which data is present, Alhamdulilah Rab Al Alameen
+    string *BackgroundImageTexture_File_Locations;
     string *Level_MusicSB_File_Locations;//this holds sounder buffers file locations, Alhamdulilah rab al alameen
 
     int* No_of_Blocks_in_each_round;//array that holds no of blocks for each level
