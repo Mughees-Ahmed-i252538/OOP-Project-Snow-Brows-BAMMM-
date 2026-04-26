@@ -219,7 +219,33 @@ Stored_Level_Configs::Stored_Level_Configs()
     x_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
     y_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // Alhamdulilah Rab Al Alameen
     types_of_mobs_each_level_holder_array[9][9] = "Blue_Bottom";//Alhamdulilah rab al alameen
-}
+
+    Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
+    Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";
+    Bonus_Level_BackgroundImageTexture_File_Locations[1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png"; // LvlBonus
+
+    string *Bonus_Level_MusicSB_File_Locations = new string[No_of_Bonus_levels];
+    Bonus_Level_MusicSB_File_Locations[0] =
+        "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\snow_bros_theme_01.ogg";
+
+    Bonus_Level_MusicSB_File_Locations[1] =
+        "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\snow_bros_theme_01.ogg";//May add new track if needed inshallah, Alhamdulilah
+
+    No_of_Blocks_in_each_bonus_round=new int[No_of_Bonus_levels];
+
+    for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
+    {
+        x_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
+        y_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]]; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+    }
+
+    x_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0;
+    y_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+
+    x_positions_of_blocks_each_bonus_level_holder_array[1][1] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_bonus_level_holder_array[1][1] = 10;
+
+} // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
 Stored_Level_Configs::~Stored_Level_Configs()
 {
