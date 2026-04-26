@@ -70,7 +70,11 @@ class Stored_Level_Configs
     //This basically has an array of whatever is in the Level Configs, one for each level, only static-> no of levels stored(tranfered here , Alhamdulilah)
 
     // This will become the size of Total Levels for which data is present, Alhamdulilah Rab Al Alameen
-    static int Total_Levels_For_which_Data_is_Present; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
+
+    //int Stored_Level_Configs::Total_Levels_For_which_Data_is_Present = 10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
+     //This was decessively made non static, as only one object of stored is to be made technically, Alhamdulilah Rab Al Alameen                                                                      // 10+2 bonus Alhamdulilah, oops the bonus levels are selected from all levels except boss so only 10 levels Alhamdulilah Rab AL Alameen
+
+    int Total_Levels_For_which_Data_is_Present=10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
     float Width_of_a_block=10;                      // to define soon inshallah
     float Height_of_a_block=10;//these can be static but it is easier to manage this way as it is only planneed for a single storage level config to be made Alhamdulilah Rab Al Alameen, currently defining both height and width as 10 for testing later inshallah, Alhamdulilah rab al alameen
     //This stored doesnt have is-> the one by one increasing level count and the level id, those are needed to track this level and know next level
@@ -92,12 +96,12 @@ class Stored_Level_Configs
 
     string **types_of_mobs_each_level_holder_array;
 
-    float **spawn_pts_of_mobs_each_level_holder_array;
-    float **spawn_pts_of_mobs_each_level_holder_array;
+    float **x_of_spawn_pts_of_mobs_each_level_holder_array;
+    float **y_of_spawn_pts_of_mobs_each_level_holder_array;
 
     //Ok play for separate bonus level system, as a random choosen 2 levels of non boss levels will be bonus load bonus level things...., those levels are not with mobs but have blocks, these bonus level will be selected in stored's constructir usng rand inshallah, Bismillah Hirahman Nirahim
 
-    int No_of_Bonus_levels;
+    int No_of_Bonus_levels=2;
     int* Indexes_of_Bonus_Levels;
 
     string* Bonus_Level_BackgroundImageTexture_File_Locations;
@@ -113,4 +117,6 @@ class Stored_Level_Configs
     // In constructor-> all level's data assigned into this stored confis
 
     //when each level made they get data from this, hence this is assigned first-> first memeber, Alhamdulilah Rab Al Alameen, first memeber gets assigned value forst no matter of sending order, Alhamdulilah Rab Al Alameen
+
+    
 };

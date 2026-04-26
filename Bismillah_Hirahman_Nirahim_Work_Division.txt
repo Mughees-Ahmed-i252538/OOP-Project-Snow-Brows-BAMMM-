@@ -1,0 +1,93 @@
+
+
+Phase I: Day 1 to 5
+
+Mughees Ahmed i252538: All, Alhamdulilah
+
+Credits: Although everything had to be changed; when orignally grouped with Ayaan, initial OOP Heirachy was made with Ayaan, has been pasted here
+
+
+
+
+#include <iostream>
+using namespace std;
+
+class Entity {
+
+protected:
+	float x, y; // tells us the position 
+	float vx, vy; // tell us theh velocity 
+
+public:
+	Entity() {  // I used this to intiliaze the position 
+		x = 10;
+		y = 20;
+		vx = 0;
+		vy = 0;
+	}
+
+virtual void update() { // updates things like speed, attackingpower, and damage with levels! gravity
+
+	x += vx;
+	y += vy;
+
+	}
+
+virtual	void draw() { //appearance and keeps track
+		cout << "Entity's position " << x << ", " << y << endl;
+	}
+};
+
+
+class Player : public Entity {
+
+private:
+
+	float speed;
+	float jump;
+	bool jump_state;
+
+public:
+
+	Player() { // here i have assigned random values mughees you can change it if you want
+		speed = 2.0;
+		jump = 4.0;
+		jump_state = false;
+	}
+
+	void input_handling_player(char button) { // reacts to keyboard keys being used 
+
+		if (button == 'a') {
+			vx = -speed;
+		}
+		else if (button == 'd') {
+			vx = speed;
+		}
+		else if (button == 'w') {
+			vy = jump;
+			jump_state = true;
+		}
+		else {
+			vx = 0;
+		}
+
+	}
+
+
+	void update() override {
+
+		vy += 0.5; // this does one thing at every frame or block the gravity pull increases 
+		// for isntace at block 1 if player faled he expereienced 0.5 gravity at  block 2 he experienced gravity of 1.0 this way 
+		Entity::update(); // here the positon updates as well
+
+		if (y >= 20) { // ig there might be some errors in this but this actually means that at y = 20 there is ground already so if player's y is beyond that than he shall stay sticked to ground whihc is y = 20
+			y = 20;
+			vy = 0;
+			jump_state = false;
+		}
+
+	}
+	void draw() override {
+		cout << "Player at position: " << x << ", " << y << endl;
+	}//new position!
+};

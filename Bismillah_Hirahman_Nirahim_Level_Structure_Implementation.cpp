@@ -17,8 +17,6 @@ Level_Config::~Level_Config()
 
 //============================Stored_Level_Configs=====================================
 
-int Stored_Level_Configs::Total_Levels_For_which_Data_is_Present = 10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
-// 10+2 bonus Alhamdulilah, oops the bonus levels are selected from all levels except boss so only 10 levels Alhamdulilah Rab AL Alameen
 
 //Static Varible stays in memory until program terminates
 
@@ -143,6 +141,84 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     x_positions_of_blocks_each_level_holder_array[9][9] = 90;//also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
     y_positions_of_blocks_each_level_holder_array[9][9] = 90;//Alhamdulilah Rab Al Alameen
+
+    //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
+
+    no_of_mobs_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
+    // To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
+
+    no_of_mobs_in_each_round[0] = 1;
+    no_of_mobs_in_each_round[1] = 1;
+    no_of_mobs_in_each_round[2] = 1;
+    no_of_mobs_in_each_round[3] = 1;
+    no_of_mobs_in_each_round[4] = 1;
+    no_of_mobs_in_each_round[5] = 1;
+    no_of_mobs_in_each_round[6] = 1;
+    no_of_mobs_in_each_round[7] = 1;
+    no_of_mobs_in_each_round[8] = 1;
+    no_of_mobs_in_each_round[9] = 1;
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array = new float *[Total_Levels_For_which_Data_is_Present]; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+    // Now to loop and give needed width to each array (may be different for all, determined by no of blocks at respective index, Alhamdulilah)
+    y_of_spawn_pts_of_mobs_each_level_holder_array = new float *[Total_Levels_For_which_Data_is_Present];
+
+    types_of_mobs_each_level_holder_array=new string*[Total_Levels_For_which_Data_is_Present];
+    // Making Array in loop, assigning manually inshallah
+
+    // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
+
+    for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
+    {
+        x_of_spawn_pts_of_mobs_each_level_holder_array[i] = new float[no_of_mobs_in_each_round[i]];
+        y_of_spawn_pts_of_mobs_each_level_holder_array[i] = new float[no_of_mobs_in_each_round[i]]; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+        types_of_mobs_each_level_holder_array[i] = new string[no_of_mobs_in_each_round[i]];
+    } // Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
+    // sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
+
+    // As each block has different locations we must give it manually for each block
+    // May Allah SWT help us, Ameen
+
+    // Currently for testing, each level has one block so, bismillah hirahman nirahim (also ten levels total.... Alhamdulilah rab al alameen)
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 0 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 0 + 10; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    types_of_mobs_each_level_holder_array[0][0]="Blue_Bottom";//dummy enemies all blue bottoms Alhamdulilah
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[1][1] = 10 + 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_of_spawn_pts_of_mobs_each_level_holder_array[1][1] = 10 + 10;
+    types_of_mobs_each_level_holder_array[1][1] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[2][2] = 20 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[2][2] = 20 + 10;//each mob is 10 pixels abouve a Block Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[2][2] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[3][3] = 30 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[3][3] = 30 + 10;
+    types_of_mobs_each_level_holder_array[3][3] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[4][4] = 40 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[4][4] = 40 + 10;
+    types_of_mobs_each_level_holder_array[4][4] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[5][5] = 50 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[5][5] = 50 + 10;
+    types_of_mobs_each_level_holder_array[5][5] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[6][6] = 60 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[6][6] = 60 + 10;
+    types_of_mobs_each_level_holder_array[6][6] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[7][7] = 70 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[7][7] = 70 + 10;
+    types_of_mobs_each_level_holder_array[7][7] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[8][8] = 80 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[8][8] = 80 + 10; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[8][8] = "Blue_Bottom";
+
+    x_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
+    y_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[9][9] = "Blue_Bottom";//Alhamdulilah rab al alameen
 }
 
 Stored_Level_Configs::~Stored_Level_Configs()
