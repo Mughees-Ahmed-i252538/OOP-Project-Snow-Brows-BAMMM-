@@ -144,10 +144,10 @@ void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right
 {
     sprite.setTextureRect(Sub_part_inside_sprite_sheet); // Noticed, flipping is actually needed whenm wanted to face right not left, chaginfg mechanisms Alhamdulilah Rab Al Alameen
 
-    Part_of_Sprite_sheet_x = sprite.getTextureRect().getPosition().x;
-    Part_of_Sprite_sheet_y = sprite.getTextureRect().getPosition().y;
+    Part_of_Sprite_sheet_x = sprite.getTextureRect().getPosition().x;//These are supposed to hold the values of actual inside asprite file coordinates
+    Part_of_Sprite_sheet_y = sprite.getTextureRect().getPosition().y;//the wanted ones are for display size Alhamdulilah Rab Al Alameen
     Part_of_Sprite_sheet_width = sprite.getTextureRect().width;
-    Part_of_Sprite_sheet_height = sprite.getTextureRect().height;
+    Part_of_Sprite_sheet_height = sprite.getTextureRect().height;//I believ set scale(-1,1) sets the scale to orignal local again hence we also need to keep track of wanted scale
 
     cout<<"Sprite H Flipped?:"<<Sprite_Already_Horizontally_Flipped<<endl;
     cout<<"Should The sprite be moving right?:"<<Right_or_not<<endl;
@@ -158,12 +158,14 @@ void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right
         sprite.setScale(-1,1);//this hf sprite image Alhamdulilah
         Sprite_Already_Horizontally_Flipped=true;
         cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<endl;
+        ForRelativeSizeAndPostionSprite_Entity_Copy(Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y)); // This is needed because scale(-1,1) resets enforced display scale, Alhamdulilah Rab Al Alameen
     }
     if (Sprite_Already_Horizontally_Flipped && !Right_or_not) // it shouldnt be flipped but is already
     {
         sprite.setScale(-1, 1); // this re hf to bring back ALhamdulilah sprite image Alhamdulilah
         Sprite_Already_Horizontally_Flipped = false;
         cout << "Was Facing Right Intent to Flip Left as trying to move left" << endl;
+        ForRelativeSizeAndPostionSprite_Entity_Copy(Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));
     }//If no need to flip no need to write empty boxes Alhamdulilah
     //figure becomes bigger for some reason need to inspect...also need to make animation way faster..currently only changes image on one second....
 }
@@ -248,7 +250,7 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
         wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
         wanted_texture_rect_y = 0;
         wanted_texture_rect_width = 80;
-        wanted_texture_rect_height = 80;
+        wanted_texture_rect_height = 80;//I realized these are redundant, we are already using Part of....To remove if needed inshallah, replace with the orignal Part of spreecd sheet entity protected vars, and remove their reassignment in the called textrect changer function inshallah soon
 
         // show first walking image
     }
@@ -404,8 +406,13 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<endl;
     cout << "Needed Height of Sprite found at proces time" << NeededHeight << endl;
 
-    ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position);
+    ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position);//!!!!!!
     // Also sets orign to centre, Alhamdulilah Rab Al Alameen
+
+      // to solve bloadting,...think it like this, the above is the inside file actual coordinates, meanwhile these are what we need to display coordinates, Alhamdulilah
+     //we only need to track scale hence orignal waned position x and y trackers removed, Alhamdulilah Rab Al Alameen, If needed these wanteds can be explicity reset too, Alhamdulilah Rab Al Alameen
+     Wanted_For_Display_Part_of_Sprite_sheet_width=NeededWidth; // I saw that we did resizing inside Set sprite after  getting sub texture but didnt do so in movement, hence the bloating, to solve we just need to manage these two in parallel, Alhamdulilah Rab Al Alameen
+     Wanted_For_Display_Part_of_Sprite_sheet_height=NeededHeight;//These are for reproper sizing as setscale reset sizes....
 
     // Auto Makes the size wanted Alhamdulilah Rab Al ALameen
 

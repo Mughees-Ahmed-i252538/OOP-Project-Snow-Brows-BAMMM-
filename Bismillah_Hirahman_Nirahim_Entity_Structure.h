@@ -71,6 +71,11 @@ public:
     int Part_of_Sprite_sheet_width;
     int Part_of_Sprite_sheet_height;
 
+    //to solve bloadting,...think it like this, the above is the inside file actual coordinates, meanwhile these are what we need to display coordinates, Alhamdulilah
+    //I notice we dont need to track orignal location-> already done in spawn point so remove this sets x and y Alhamdulilah
+    int Wanted_For_Display_Part_of_Sprite_sheet_width;//I saw that we did resizing inside Set sprite after  getting sub texture but didnt do so in movement, hence the bloating, to solve we just need to manage these two in parallel, Alhamdulilah Rab Al Alameen
+    int Wanted_For_Display_Part_of_Sprite_sheet_height;
+
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
