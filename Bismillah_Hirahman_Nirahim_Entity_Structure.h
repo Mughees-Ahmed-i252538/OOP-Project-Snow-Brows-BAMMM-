@@ -56,11 +56,13 @@ public:
     protected://as theey allow access they cant be and shouldnt be used outside heirchy Alhamdulilah Rab Al Alameen
     sf::Texture& getTexture();
     sf::Sprite& getSprite();//to make these functions private if needed
+    void setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet,bool cc_or_not);
     sf::RectangleShape& getDebugBox();
     //move left and right kept for player, Enemies will use an Ai Algorithm in move inshallah
 
     //virtual void update_Part_of_Sprite_sheet()=0;//Bismillah Hirahman Nirahim, to be used for animation changes in image Alhamdulilah Rab Al Alameen
 
+    bool Sprite_Already_Horizontally_Flipped=false;
     float Current_position_x, Current_position_y; // This is used as redundant variable, for ease of calculation, its value is stored after each movement in Move Left and Move Right, It is mainly helpful for ease of understanding while also simulatanously changing position for hitbox (also acting as health box being called as debug box) Alhamdulilah Rab Al Alameen
     float Current_velocity_x, Current_velocity_y; // tell us theh velocity, 0 or non 0 based on key press
 
@@ -103,14 +105,14 @@ private:
     static int Player_Count; // currently 0, first player, it becomes 1 which is used to get second indice of spawn pt array for p2
 
     sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;//eg for Walking Alhamdulilah
-    float  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
+    int  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
 
     Direction Action_to_Move_in_Direction_Variable;
     Direction Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
-    
+    float Animation_Speed=10;//Determines how fast next image comes, Alhamdulilah Rab Al Alameen
 
 
     public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check

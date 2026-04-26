@@ -140,6 +140,33 @@ double Entity::getUsable_Movement_Speed()
     return Usable_Movement_Speed;
 }
 
+void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right_or_not)
+{
+    sprite.setTextureRect(Sub_part_inside_sprite_sheet); // Noticed, flipping is actually needed whenm wanted to face right not left, chaginfg mechanisms Alhamdulilah Rab Al Alameen
+
+    Part_of_Sprite_sheet_x = sprite.getTextureRect().getPosition().x;
+    Part_of_Sprite_sheet_y = sprite.getTextureRect().getPosition().y;
+    Part_of_Sprite_sheet_width = sprite.getTextureRect().width;
+    Part_of_Sprite_sheet_height = sprite.getTextureRect().height;
+
+    cout<<"Sprite H Flipped?:"<<Sprite_Already_Horizontally_Flipped<<endl;
+    cout<<"Should The sprite be moving right?:"<<Right_or_not<<endl;
+
+
+    if (!Sprite_Already_Horizontally_Flipped && Right_or_not) // it should be flipped but isnt already
+    {
+        sprite.setScale(-1,1);//this hf sprite image Alhamdulilah
+        Sprite_Already_Horizontally_Flipped=true;
+        cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<endl;
+    }
+    if (Sprite_Already_Horizontally_Flipped && !Right_or_not) // it shouldnt be flipped but is already
+    {
+        sprite.setScale(-1, 1); // this re hf to bring back ALhamdulilah sprite image Alhamdulilah
+        Sprite_Already_Horizontally_Flipped = false;
+        cout << "Was Facing Right Intent to Flip Left as trying to move left" << endl;
+    }//If no need to flip no need to write empty boxes Alhamdulilah
+    //figure becomes bigger for some reason need to inspect...also need to make animation way faster..currently only changes image on one second....
+}
 
 //================Player Functions===============================
 //Corrected 
@@ -194,29 +221,121 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {
     // to define soon inshallah
-    cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<endl;
-    cout << "Usable Speed" << getUsable_Movement_Speed() << endl;
+    //cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<endl;
+    //cout << "Usable Speed" << getUsable_Movement_Speed() << endl;
     Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
     Current_velocity_y = 0;
+
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 0;
+    int wanted_texture_rect_height = 0; // integers because part of int rect
+
+    if (Previously_Moving_in != Direction::Left) // this counter is only needed for moving animations ALhamdulilah
+    {
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
+    } // the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
+    else
+    { // modify here for updation speed adjustments
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+    } // animation speed determines how fast changes Alhamdulilah Rab AL ALameen, initial thought, try for different entitities different speed inshallah
+
+    int total_no_of_images_in_walking_animation = 3; // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
+
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    {
+        wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+
+        // show first walking image
+    }
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
+    {
+        // show second walking image, right to first image by first image width Alhamdulilah
+        wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+    }
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    {
+        // show third walking image
+        // right to first image by second second width Alhamdulilah
+        wanted_texture_rect_x = 160; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+    }
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), false); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
 
     this->Previously_Moving_in = Direction::Left;
 }
 void Player::Move_Right() // sets to +x
 {
     // to define soon inshallah
-    cout << "Bismillah Setting Player Velocity to - Usbale speed for Moving Left and Jump speed=0" << endl;
-    cout<< "Usable Speed"<<getUsable_Movement_Speed()<<endl;
+    //cout << "Bismillah Setting Player Velocity to - Usbale speed for Moving Left and Jump speed=0" << endl;
+    //cout<< "Usable Speed"<<getUsable_Movement_Speed()<<endl;
     Current_velocity_x=getUsable_Movement_Speed();//pos for right, neg for left...
     Current_velocity_y=0;
     //New Plan -> this sets the current velocity right, to deal with up and right movement, soon inshallah, actuall sfmove shall be called in this functions caller move with current velcocity inshallah, but this function handels image update inshallah
 
+    int wanted_texture_rect_x=0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 0;
+    int wanted_texture_rect_height = 0;//integers because part of int rect
+
+    if(Previously_Moving_in!=Direction::Right)//this counter is only needed for moving animations ALhamdulilah
+    {
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=0;//reseting the holder as well
+    }//the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
+    else
+    {   //modify here for updation speed adjustments
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+    }//animation speed determines how fast changes Alhamdulilah Rab AL ALameen, initial thought, try for different entitities different speed inshallah
+
+    int total_no_of_images_in_walking_animation=3;//Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
+
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)//initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    {
+        wanted_texture_rect_x=0;//Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y=0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height=80;
+
+        //show first walking image
+    }
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
+    {
+        // show second walking image, right to first image by first image width Alhamdulilah
+        wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+    }
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    {
+        // show third walking image
+        //right to first image by second second width Alhamdulilah
+        wanted_texture_rect_x = 160; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+    }
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x,wanted_texture_rect_y,wanted_texture_rect_width,wanted_texture_rect_height),true);//as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+    //Noticed, images are left facing, have to change logic, to only flip if right....Well Alhamdulilah, only need to change in actual function flipping, also need to change left or not to right or not inshallah
     this->Previously_Moving_in = Direction::Right;
 }
 
 void Player::is_Not_Moving()
 {
     //to deinfe more soon inshallah
-    cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" << endl;
+    //cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" << endl;//uncomment for debugging, Bismillah Awalahu wa Akhira hu
     Current_velocity_x=0;//plan make new type-> eg jump left in direction inshallah, when defining gravity inshallah, that also handels updates in texture rect calls
     Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
 
