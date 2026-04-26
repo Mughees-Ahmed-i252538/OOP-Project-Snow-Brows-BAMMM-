@@ -213,8 +213,8 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     }
     
     getSprite().move(Current_velocity_x,Current_velocity_y);
-    
-    
+    getDebugBox().move(Current_velocity_x, Current_velocity_y);
+
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
@@ -420,9 +420,9 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
 
     getDebugBox().setFillColor(Color_of_Debug_Box);
 
-    float Thickness_of_outline = 10;
+    //float Thickness_of_outline = 10;
 
-    getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
+    //getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
 
     cout<<"set sprite sheet and debug box"<<endl;
 
