@@ -4,11 +4,20 @@
 int Level_Config::Level_count = 0;
 
 
-Level_Config::Level_Config()
+Level_Config::Level_Config()//can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
 
+    Level_id=Level_count;
+    Level_count++;
 
+    /* if(!BackgroundImageTexture.loadFromFile(stored_Level_configs.getTextureFileName(this->Level_id)))
+    {
+
+    }
+    BackgroundImageSprite;
+    Level_MusicSB;
+    Level_MusicS; *///Forgot to implement the indexes for bonus count thing....doing that now Alhamdulilah
 }
 Level_Config::~Level_Config()
 {
@@ -220,6 +229,70 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // Alhamdulilah Rab Al Alameen
     types_of_mobs_each_level_holder_array[9][9] = "Blue_Bottom";//Alhamdulilah rab al alameen
 
+    //========================For Bonus Levels==============================================================
+
+    Indexs_of_Boss_Level=new int[No_of_Boss_Levels];
+    Indexs_of_Boss_Level[0]=5-1;
+    Indexs_of_Boss_Level[1]=10-1;//as start from 0 so -1 Alhamdulilah
+
+    //To add any more working on bosses if any here, inshallah Alhamdulilah Rab Al Alameen
+
+    //========================For Bonus Levels==============================================================
+
+
+    Indexes_of_Bonus_Levels=new int[No_of_Bonus_levels];
+
+    //assigning indices, which levels out of non boss levels will be bonus,...Note indices take first level as 0
+
+    srand(time(0));
+
+    for(int i=0;i<No_of_Bonus_levels;i++)
+    {
+
+        if(No_of_Bonus_levels>(Total_Levels_For_which_Data_is_Present-No_of_Boss_Levels))
+        {
+            cout<<"Bonus Levels no. not possible, enough feasible levels dont exsist"<<endl;//Alhamdulilah
+            break;
+        }//As boss levels fixed, it is fine to keep their file name in origna l string array, but for other things, like enetity mobs etc, we might have too see inshallah, Alhamdulilah Rab Al Alameen
+
+
+        Indexes_of_Bonus_Levels[i]=rand()%(Total_Levels_For_which_Data_is_Present);//0 to 9 if total 10
+
+         //New plan-> to make different everything including arrays etc for Boss levels too, and if index detected equal to these then load from those not the orignal array-> as orignal arrays etc cant directly account for something extra, Allah SWT knows best, Alhamdulilah
+         //eg we can easily list boss as enemy entity, but better keep those round special like bonus rounds, ok to implement after bonus inshallah
+
+    
+        bool already_undid_next_index_increment=false;
+
+        for(int j=0;j<No_of_Boss_Levels;j++)
+        {
+            if (Indexes_of_Bonus_Levels[i] == Indexs_of_Boss_Level[j])
+            {
+            i--;//redo
+            break;
+            already_undid_next_index_increment=true;
+            }
+        }
+
+        if (!already_undid_next_index_increment)//if already undid then shouldnt undo again, Alhamdulilah Rab Al Alameen
+        {
+            for(int j=i-1;j>=0;j++)//if i already 0 then loop just doesnt even start Alhamdulilah
+            {
+                if (Indexes_of_Bonus_Levels[j] == Indexes_of_Bonus_Levels[i])
+                {
+                    i--;
+                    break;//redo Alhamdulilah
+                }
+            }
+        }
+        
+    }//this basicalled goes on forever if not feasible so,
+
+
+
+
+
+
     Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
     Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";
     Bonus_Level_BackgroundImageTexture_File_Locations[1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png"; // LvlBonus
@@ -248,5 +321,149 @@ Stored_Level_Configs::Stored_Level_Configs()
 } // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
 Stored_Level_Configs::~Stored_Level_Configs()
+{//We could also do deleted on each specific array that is passed ptr to in level itself, but perhaps loading or perhaps other checks may not be possible hence everything declared in this class is destroyed here, Alhamdulilah Rab Al Alameen
+
+}
+
+//-----------Getters of Stored_Level_Configs::
+
+int Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() // Alhamdulilah Rab Al Alameen
 {
+    return Total_Levels_For_which_Data_is_Present;
+}
+float Stored_Level_Configs::getWidth_of_a_block()
+{
+    return Width_of_a_block;
+}
+float Stored_Level_Configs::getHeight_of_a_block()
+{
+    return Height_of_a_block;
+}
+string Stored_Level_Configs::getBackgroundImageTexture_File_Locations(int level) // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
+{
+    if(level>=0&&level<=Total_Levels_For_which_Data_is_Present)
+    {
+        return BackgroundImageTexture_File_Locations[level];
+    }
+    return " ";//else return a space string to avoid crashs....that sometimes occur with ""...
+}
+string Stored_Level_Configs::getLevel_MusicSB_File_Locations(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return Level_MusicSB_File_Locations[level];
+    }
+    return " "; // else return a space string to avoid crashs....that sometimes occur with ""..
+}
+float Stored_Level_Configs::getNo_of_Blocks_in_each_round(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return No_of_Blocks_in_each_round[level];
+    }
+    return 0;
+}
+float *Stored_Level_Configs::getx_positions_of_blocks_each_level_holder_array(int level)
+{
+
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return x_positions_of_blocks_each_level_holder_array[level];
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::gety_positions_of_blocks_each_level_holder_array(int level) // directly give ptr of that array ensure dont delete in single Level for possible reuse Alhamdulilah Rab Al Alameen
+{
+
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return y_positions_of_blocks_each_level_holder_array[level];
+    }
+    return nullptr;
+}
+
+int Stored_Level_Configs::getno_of_mobs_in_each_round(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return no_of_mobs_in_each_round[level];//note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return 0;
+}
+string *Stored_Level_Configs::gettypes_of_mobs_each_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return types_of_mobs_each_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::getx_of_spawn_pts_of_mobs_each_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return x_of_spawn_pts_of_mobs_each_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::gety_of_spawn_pts_of_mobs_each_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return y_of_spawn_pts_of_mobs_each_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+int Stored_Level_Configs::getNo_of_Bonus_levels()
+{
+    return No_of_Bonus_levels;
+}
+int Stored_Level_Configs::getIndexes_of_Bonus_Levels(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return Indexes_of_Bonus_Levels[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return 0;//Now plan-> have to sort the indices array of indices soon inshallah, or maybe we wont have to-> we will see working inshallah soon
+}
+string Stored_Level_Configs::getBonus_Level_BackgroundImageTexture_File_Locations(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return Bonus_Level_BackgroundImageTexture_File_Locations[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return " ";
+}
+string Stored_Level_Configs::getBonus_Level_MusicSB_File_Locations(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return Bonus_Level_MusicSB_File_Locations[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return " ";
+}
+int Stored_Level_Configs::getNo_of_Blocks_in_each_bonus_round(int level)// array that holds no of blocks for each level
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return No_of_Blocks_in_each_bonus_round[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return 0;
+}
+
+float *Stored_Level_Configs::getx_positions_of_blocks_each_bonus_level_holder_array(int level) // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return x_positions_of_blocks_each_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::gety_positions_of_blocks_each_bonus_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return y_positions_of_blocks_each_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
 }

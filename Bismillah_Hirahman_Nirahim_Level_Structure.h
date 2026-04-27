@@ -2,6 +2,8 @@
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 
@@ -21,6 +23,8 @@ class Level_Config{
 
     static int Level_count; // auto 0 no need to initialize with the definition thing Alhamdulilah Rab Al Alameen, for knowing what the number of the next level will be, Alhamdulilah Rab Al Alameen
     int Level_id;
+
+    //=================from here on requires Stored Level Configs, Alhamdulilah====================
     sf::Texture BackgroundImageTexture;
     sf::Sprite BackgroundImageSprite;
     sf::SoundBuffer Level_MusicSB;
@@ -118,5 +122,30 @@ class Stored_Level_Configs
 
     //when each level made they get data from this, hence this is assigned first-> first memeber, Alhamdulilah Rab Al Alameen, first memeber gets assigned value forst no matter of sending order, Alhamdulilah Rab Al Alameen
 
-    
+    int No_of_Boss_Levels=2;
+    int* Indexs_of_Boss_Level;
+    //as indices start from 0, so -1 Alhamdulilah
+
+    //-------getters
+    int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
+    float getWidth_of_a_block();                    
+    float getHeight_of_a_block();
+    string getBackgroundImageTexture_File_Locations(int level); // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
+    string getLevel_MusicSB_File_Locations(int level);
+    float getNo_of_Blocks_in_each_round(int level);
+    float* getx_positions_of_blocks_each_level_holder_array(int level);
+    float* gety_positions_of_blocks_each_level_holder_array(int level);//directly give ptr of that array ensure dont delete in single Level for possible reuse Alhamdulilah Rab Al Alameen
+
+    int getno_of_mobs_in_each_round(int level);
+    string *gettypes_of_mobs_each_level_holder_array(int level);
+    float *getx_of_spawn_pts_of_mobs_each_level_holder_array(int level);
+    float *gety_of_spawn_pts_of_mobs_each_level_holder_array(int level);
+    int getNo_of_Bonus_levels ();
+    int getIndexes_of_Bonus_Levels(int level);
+    string getBonus_Level_BackgroundImageTexture_File_Locations(int level);
+    string getBonus_Level_MusicSB_File_Locations(int level);
+    int getNo_of_Blocks_in_each_bonus_round(int level); // array that holds no of blocks for each level
+
+    float *getx_positions_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+    float *gety_positions_of_blocks_each_bonus_level_holder_array(int level);
 };
