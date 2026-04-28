@@ -99,17 +99,19 @@ Stored_Level_Configs::Stored_Level_Configs()
     //Now to loop and give needed width to each array (may be different for all, determined by no of blocks at respective index, Alhamdulilah)
     y_positions_of_blocks_each_level_holder_array = new float *[Total_Levels_For_which_Data_is_Present];
 
+    widths_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];
+    heights_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];//Had forgoted to inititalize the float* and directly done the float below, hence corrected Alahmdulilah Rab Al Alameen....It did give squiggly line in vscode....May Allah SWT help me and us all ameen
 
+    // Making Array in loop, assigning manually inshallah
 
+    // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
-    //Making Array in loop, assigning manually inshallah
-
-    //To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
-
-    for (int i = 0; i < Total_Levels_For_which_Data_is_Present;i++)
+    for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
     {
         x_positions_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];
         y_positions_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];//at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+        widths_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]]; // Bismillah Hirahman Nirahim, adding widths and height record arrays for each block as well, Alhamdulilah rab al alameen, logic changed from fixed width heiht, to varying Alhamdulilah
+        heights_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];
     }//Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
     //sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
 
@@ -123,33 +125,53 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     x_positions_of_blocks_each_level_holder_array[0][0]=0;
     y_positions_of_blocks_each_level_holder_array[0][0]=0;//making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][0]=10;
+    heights_of_blocks_each_level_holder_array[0][0]=10;//Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
 
-    x_positions_of_blocks_each_level_holder_array[1][1] = 10;//as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_positions_of_blocks_each_level_holder_array[1][1] = 10;
+    x_positions_of_blocks_each_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][0] = 10;
+    widths_of_blocks_each_level_holder_array[1][0] = 11;
+    heights_of_blocks_each_level_holder_array[1][0] = 11;
 
-    x_positions_of_blocks_each_level_holder_array[2][2] = 20;
-    y_positions_of_blocks_each_level_holder_array[2][2] = 20;
+    x_positions_of_blocks_each_level_holder_array[2][0] = 20;
+    y_positions_of_blocks_each_level_holder_array[2][0] = 20;
+    widths_of_blocks_each_level_holder_array[2][0] = 12;
+    heights_of_blocks_each_level_holder_array[2][0] = 12;
 
-    x_positions_of_blocks_each_level_holder_array[3][3] = 30;
-    y_positions_of_blocks_each_level_holder_array[3][3] = 30;
+    x_positions_of_blocks_each_level_holder_array[3][0] = 30;
+    y_positions_of_blocks_each_level_holder_array[3][0] = 30;
+    widths_of_blocks_each_level_holder_array[3][0] = 13;
+    heights_of_blocks_each_level_holder_array[3][0] = 13;
 
-    x_positions_of_blocks_each_level_holder_array[4][4] = 40;
-    y_positions_of_blocks_each_level_holder_array[4][4] = 40;
+    x_positions_of_blocks_each_level_holder_array[4][0] = 40;
+    y_positions_of_blocks_each_level_holder_array[4][0] = 40;
+    widths_of_blocks_each_level_holder_array[4][0] = 14;
+    heights_of_blocks_each_level_holder_array[4][0] = 14;
 
-    x_positions_of_blocks_each_level_holder_array[5][5] = 50;
-    y_positions_of_blocks_each_level_holder_array[5][5] = 50;
+    x_positions_of_blocks_each_level_holder_array[5][0] = 50;
+    y_positions_of_blocks_each_level_holder_array[5][0] = 50;
+    widths_of_blocks_each_level_holder_array[5][0] = 15;
+    heights_of_blocks_each_level_holder_array[5][0] = 15;
 
-    x_positions_of_blocks_each_level_holder_array[6][6] = 60;
-    y_positions_of_blocks_each_level_holder_array[6][6] = 60;
+    x_positions_of_blocks_each_level_holder_array[6][0] = 60;
+    y_positions_of_blocks_each_level_holder_array[6][0] = 60;
+    widths_of_blocks_each_level_holder_array[6][0] = 16;
+    heights_of_blocks_each_level_holder_array[6][0] = 16;
 
-    x_positions_of_blocks_each_level_holder_array[7][7] = 70;
-    y_positions_of_blocks_each_level_holder_array[7][7] = 70;
+    x_positions_of_blocks_each_level_holder_array[7][0] = 70;
+    y_positions_of_blocks_each_level_holder_array[7][0] = 70;
+    widths_of_blocks_each_level_holder_array[7][0] = 17;
+    heights_of_blocks_each_level_holder_array[7][0] = 17;
 
-    x_positions_of_blocks_each_level_holder_array[8][8] = 80;
-    y_positions_of_blocks_each_level_holder_array[8][8] = 80;//if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    x_positions_of_blocks_each_level_holder_array[8][0] = 80;
+    y_positions_of_blocks_each_level_holder_array[8][0] = 80; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    widths_of_blocks_each_level_holder_array[8][0] = 18;
+    heights_of_blocks_each_level_holder_array[8][0] = 18;
 
-    x_positions_of_blocks_each_level_holder_array[9][9] = 90;//also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
-    y_positions_of_blocks_each_level_holder_array[9][9] = 90;//Alhamdulilah Rab Al Alameen
+    x_positions_of_blocks_each_level_holder_array[9][0] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
+    y_positions_of_blocks_each_level_holder_array[9][0] = 90; // Alhamdulilah Rab Al Alameen
+    widths_of_blocks_each_level_holder_array[9][0] = 19;
+    heights_of_blocks_each_level_holder_array[9][0] = 19;
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
@@ -193,43 +215,43 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 0 + 10; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
     types_of_mobs_each_level_holder_array[0][0]="Blue_Bottom";//dummy enemies all blue bottoms Alhamdulilah
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[1][1] = 10 + 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_of_spawn_pts_of_mobs_each_level_holder_array[1][1] = 10 + 10;
-    types_of_mobs_each_level_holder_array[1][1] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[1][0] = 10 + 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_of_spawn_pts_of_mobs_each_level_holder_array[1][0] = 10 + 10;
+    types_of_mobs_each_level_holder_array[1][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[2][2] = 20 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[2][2] = 20 + 10;//each mob is 10 pixels abouve a Block Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[2][2] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[2][0] = 20 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[2][0] = 20 + 10; // each mob is 10 pixels abouve a Block Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[2][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[3][3] = 30 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[3][3] = 30 + 10;
-    types_of_mobs_each_level_holder_array[3][3] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[3][0] = 30 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[3][0] = 30 + 10;
+    types_of_mobs_each_level_holder_array[3][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[4][4] = 40 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[4][4] = 40 + 10;
-    types_of_mobs_each_level_holder_array[4][4] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[4][0] = 40 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[4][0] = 40 + 10;
+    types_of_mobs_each_level_holder_array[4][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[5][5] = 50 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[5][5] = 50 + 10;
-    types_of_mobs_each_level_holder_array[5][5] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[5][0] = 50 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[5][0] = 50 + 10;
+    types_of_mobs_each_level_holder_array[5][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[6][6] = 60 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[6][6] = 60 + 10;
-    types_of_mobs_each_level_holder_array[6][6] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[6][0] = 60 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[6][0] = 60 + 10;
+    types_of_mobs_each_level_holder_array[6][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[7][7] = 70 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[7][7] = 70 + 10;
-    types_of_mobs_each_level_holder_array[7][7] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[7][0] = 70 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[7][0] = 70 + 10;
+    types_of_mobs_each_level_holder_array[7][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[8][8] = 80 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[8][8] = 80 + 10; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[8][8] = "Blue_Bottom";
+    x_of_spawn_pts_of_mobs_each_level_holder_array[8][0] = 80 + 10;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[8][0] = 80 + 10; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[8][0] = "Blue_Bottom";
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
-    y_of_spawn_pts_of_mobs_each_level_holder_array[9][9] = 90 + 10; // Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[9][9] = "Blue_Bottom";//Alhamdulilah rab al alameen
+    x_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
+    y_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // Alhamdulilah Rab Al Alameen
+    types_of_mobs_each_level_holder_array[9][0] = "Blue_Bottom";//Alhamdulilah rab al alameen
 
-    //========================For Bonus Levels==============================================================
+    //========================For Boss Levels==============================================================
 
     Indexs_of_Boss_Level=new int[No_of_Boss_Levels];
     Indexs_of_Boss_Level[0]=5-1;
@@ -306,23 +328,103 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     No_of_Blocks_in_each_bonus_round=new int[No_of_Bonus_levels];
 
+    x_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
+    y_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels]; // at respectve level array see no of blocks at that level Alhamdullah Rab Al Alameen
+    width_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
+    height_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];//had forgotten to initlialize the ptr arrays in first place and had directly initialized the 1d arrays using those ptrs, fixed that Alhamdulilah rab al alameen (should have given run time  or compile time, as couldnt find or more likkely saying that ptr is null ptr... or actually they didnt even exsist in dma yet so i guess huge issue thrown? ...possible crash....derefrencing uniitialized location,,,...)
+
     for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
-    {
+    {//have to check if i dmaeed the array of float ptrs up....
         x_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
         y_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]]; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+        width_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
+        height_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];//could make a class of these each to stop the manual writing load........ but well, already done almost now Alhamdulilah
     }
 
     x_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0;
     y_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    width_positions_of_blocks_each_bonus_level_holder_array[0][0]= 10;
+    height_positions_of_blocks_each_bonus_level_holder_array[0][0] = 10;
 
-    x_positions_of_blocks_each_bonus_level_holder_array[1][1] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_positions_of_blocks_each_bonus_level_holder_array[1][1] = 10;
+    x_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
+    width_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
+    height_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
 
 } // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
 Stored_Level_Configs::~Stored_Level_Configs()
 {//We could also do deleted on each specific array that is passed ptr to in level itself, but perhaps loading or perhaps other checks may not be possible hence everything declared in this class is destroyed here, Alhamdulilah Rab Al Alameen
+    delete[] BackgroundImageTexture_File_Locations;
+    delete[] Level_MusicSB_File_Locations;
 
+    for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
+    {//for each level there are a b c d etc block varyinh Alhamdulilah, each level will have a no of blocks holder and a 2d array each 1d array hosting positions of Npofblocks of that array no. of floats for x and y, this first deletes that array having these positions, then the array holding ptrs to these arrays is erased, note this could also be done in each level but thinking of later we consider that we might want to reuse that level and have to make another storee hence delted in storage Alhamdulilah rab al alameen
+        delete[] x_positions_of_blocks_each_level_holder_array[i];
+        delete[] y_positions_of_blocks_each_level_holder_array[i] ; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+        delete[] widths_of_blocks_each_level_holder_array[i];
+        delete[] heights_of_blocks_each_level_holder_array[i];//note here their size doesnt matter, but how many there are, there are total level amount of them, but size = variable, due to no of blocks in that level but delete[] takes care of that alhamdulilah
+        //remember no index in delete []//// also try to find sleep time soon inshallah Jazakallah khairan
+    }
+
+    delete[] x_positions_of_blocks_each_level_holder_array;
+    delete[] y_positions_of_blocks_each_level_holder_array;
+    delete[] widths_of_blocks_each_level_holder_array;
+    delete[] heights_of_blocks_each_level_holder_array;
+
+    delete[] No_of_Blocks_in_each_round;//You can delte it before the bigger array of positions or actually ven before its inner array although these numbers was required to initialize their size, Alhamdulilah Rab AL Alameen but just for the sake of dependancy order that only exsists while constructing we do it this way Alhamdulilah
+    
+
+    //deleteing no of mobs in a level first it first to show independancy of next deletion alhamdulilah rab al alameen
+    delete[] no_of_mobs_in_each_round;//Bismillah hirahman Nirahim on with the destructor Alhamdulilah
+
+    for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
+    {//for each level there are a b c d etc block varyinh Alhamdulilah, each level will have a no of blocks holder and a 2d array each 1d array hosting positions of Npofblocks of that array no. of floats for x and y, this first deletes that array having these positions, then the array holding ptrs to these arrays is erased, note this could also be done in each level but thinking of later we consider that we might want to reuse that level and have to make another storee hence delted in storage Alhamdulilah rab al alameen
+        delete[] y_of_spawn_pts_of_mobs_each_level_holder_array[i];
+        delete[] x_of_spawn_pts_of_mobs_each_level_holder_array[i] ; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+        delete[] types_of_mobs_each_level_holder_array[i];
+        //remember no index in delete []//// also try to find sleep time soon inshallah Jazakallah khairan
+    }
+    delete[] y_of_spawn_pts_of_mobs_each_level_holder_array;
+    delete[] x_of_spawn_pts_of_mobs_each_level_holder_array; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
+    delete[] types_of_mobs_each_level_holder_array;
+
+    //============For Boss Levels Bismillah Hirahman Nirahim========================
+
+    delete[] Indexs_of_Boss_Level;
+
+    //============For Bonus Levels Bismillah Hirahman Nirahim========================
+
+    delete[] Indexes_of_Bonus_Levels;
+    delete[] Bonus_Level_BackgroundImageTexture_File_Locations;
+    delete[] Bonus_Level_MusicSB_File_Locations;
+
+    //again as size not needed for delete[] this below is able to be deleted first, Alhamdulilah rab al alameen, what this is doing is providing sizes of 1d arrays inside the 2d array(1d array of ptrs, Alhamdulilah, but delete[] makes do without, it ALhamdulilah)
+
+    delete[] No_of_Blocks_in_each_bonus_round;
+
+    //Note Bonus level everything separae cuz it is arbitary two levels, boss levels just need record of index for bonus levels, else they can coexsist in same arrays, Alhamdulilah rab al alameen soon inshallah, ok I checked and, (*P)[10] forces * to bind to P first, as [] have higher precedence, this makes an ptr to an array of 10, normally it would make [10] first and then decide that each of them is a ptr ti int (ie if datatype) Alhamdulilah Rab Al Alameen , advantage of (*P) is that it jusps by datatype*no of cells amount on adding 1, Alhamdulilah, oh Allah SWT please strengthen my basicas Ameen inshallah
+    
+    for(int i=0;i<No_of_Bonus_levels;i++)
+    {//To check and compare access of (P*)[10] & P*[10]// ptr to 10 array vs array of ptrs Alhamdulilah Rab Al alameen
+        //Bismillah Hirahman Nirahim, ensure use of [i] while delteing the 1d part in loop, else if the array of ptrs to it gone....memory leak...second try to delte it...error, Allah SWT knows best Alhamdulilah Rab Al Alameen
+        delete[] x_positions_of_blocks_each_bonus_level_holder_array[i];
+
+        delete[] y_positions_of_blocks_each_bonus_level_holder_array[i];
+
+        delete[] width_positions_of_blocks_each_bonus_level_holder_array[i];
+
+        delete[] height_positions_of_blocks_each_bonus_level_holder_array[i];
+    }
+
+    // Allah SWT knows best Alhamdulilah Rab Al Alameen
+    delete[] x_positions_of_blocks_each_bonus_level_holder_array;
+
+    delete[] y_positions_of_blocks_each_bonus_level_holder_array;
+
+    delete[] width_positions_of_blocks_each_bonus_level_holder_array;
+
+    delete[] height_positions_of_blocks_each_bonus_level_holder_array;
 }
 
 //-----------Getters of Stored_Level_Configs::
@@ -331,14 +433,7 @@ int Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() // Alhamdu
 {
     return Total_Levels_For_which_Data_is_Present;
 }
-float Stored_Level_Configs::getWidth_of_a_block()
-{
-    return Width_of_a_block;
-}
-float Stored_Level_Configs::getHeight_of_a_block()
-{
-    return Height_of_a_block;
-}
+
 string Stored_Level_Configs::getBackgroundImageTexture_File_Locations(int level) // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
 {
     if(level>=0&&level<=Total_Levels_For_which_Data_is_Present)
@@ -372,6 +467,24 @@ float *Stored_Level_Configs::getx_positions_of_blocks_each_level_holder_array(in
     }
     return nullptr;
 }
+
+float *Stored_Level_Configs::getwidths_of_blocks_each_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return widths_of_blocks_each_level_holder_array[level];
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::getheights_of_blocks_each_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return heights_of_blocks_each_level_holder_array[level];
+    }
+    return nullptr;
+}
+
 float *Stored_Level_Configs::gety_positions_of_blocks_each_level_holder_array(int level) // directly give ptr of that array ensure dont delete in single Level for possible reuse Alhamdulilah Rab Al Alameen
 {
 

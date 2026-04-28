@@ -79,8 +79,8 @@ class Stored_Level_Configs
      //This was decessively made non static, as only one object of stored is to be made technically, Alhamdulilah Rab Al Alameen                                                                      // 10+2 bonus Alhamdulilah, oops the bonus levels are selected from all levels except boss so only 10 levels Alhamdulilah Rab AL Alameen
 
     int Total_Levels_For_which_Data_is_Present=10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
-    float Width_of_a_block=10;                      // to define soon inshallah
-    float Height_of_a_block=10;//these can be static but it is easier to manage this way as it is only planneed for a single storage level config to be made Alhamdulilah Rab Al Alameen, currently defining both height and width as 10 for testing later inshallah, Alhamdulilah rab al alameen
+    //float Width_of_a_block=10; //These made viarying for each block and now stored for each block, Alhamdulilah Rab Al Alameen                     // to define soon inshallah
+    //float Height_of_a_block=10;//these can be static but it is easier to manage this way as it is only planneed for a single storage level config to be made Alhamdulilah Rab Al Alameen, currently defining both height and width as 10 for testing later inshallah, Alhamdulilah rab al alameen
     //This stored doesnt have is-> the one by one increasing level count and the level id, those are needed to track this level and know next level
     //Both are actually required to ask from storage hence storage doesnt need them, Alhamdulilah
 
@@ -95,6 +95,8 @@ class Stored_Level_Configs
 
     float **x_positions_of_blocks_each_level_holder_array;//An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     float **y_positions_of_blocks_each_level_holder_array;
+    float **widths_of_blocks_each_level_holder_array;
+    float **heights_of_blocks_each_level_holder_array;
 
     int* no_of_mobs_in_each_round;
 
@@ -115,6 +117,8 @@ class Stored_Level_Configs
 
     float **x_positions_of_blocks_each_bonus_level_holder_array; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     float **y_positions_of_blocks_each_bonus_level_holder_array;
+    float **width_positions_of_blocks_each_bonus_level_holder_array;
+    float **height_positions_of_blocks_each_bonus_level_holder_array;
 
     //No mobs Alhamdulilah Rab Al Alameen
 
@@ -128,8 +132,8 @@ class Stored_Level_Configs
 
     //-------getters
     int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
-    float getWidth_of_a_block();                    
-    float getHeight_of_a_block();
+    float *getwidths_of_blocks_each_level_holder_array(int level);
+    float *getheights_of_blocks_each_level_holder_array(int level);
     string getBackgroundImageTexture_File_Locations(int level); // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
     string getLevel_MusicSB_File_Locations(int level);
     float getNo_of_Blocks_in_each_round(int level);
