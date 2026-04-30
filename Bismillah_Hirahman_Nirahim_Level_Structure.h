@@ -26,26 +26,30 @@ class Level_Config{
 
     //=================from here on requires Stored Level Configs, Alhamdulilah====================
     sf::Texture BackgroundImageTexture;
-    sf::Sprite BackgroundImageSprite;
-    sf::SoundBuffer Level_MusicSB;
-    sf::Sound Level_MusicS;
+    sf::Sprite BackgroundImageSprite;//To implement if total no of levels reached than start ending in main inshallah
+    sf::Music Level_MusicSB;//sound buffer changed to music Alhamdulilah
+    //sf::Sound Level_MusicS;
 
     
 
     int No_of_Blocks_in_this_round; // initialized in constructor
 
-    sf::Texture BlockImageTexture;//this stays in memory because is object's class's memeber not local var ,Alhamdulilah Rab Al Alameen
-    sf::Sprite BlockImageSprite;
 
-    float *x_position_of_blocks_current_level_holder_array;
+    sf::Texture* BlockImageTextures;//this stays in memory because is object's class's memeber not local var ,Alhamdulilah Rab Al Alameen
+    sf::Sprite* BlockImageSprites;//hAVE TO DMA AND ALSO DELETE in lvl config not store Alhamdulilah
+    string* BlockImage_File_Locations;
+
+    float *x_position_of_blocks_current_level_holder_array;//we just get ptrs for these
     float *y_position_of_blocks_current_level_holder_array;
+    float *width_of_blocks_current_level_holder_array;
+    float *heights_of_blocks_current_level_holder_array;
 
     int no_of_mobs_in_this_round;
 
     string *type_of_mobs_current_level_holder_array;
 
-    float *spawn_pt_of_mobs_current_level_holder_array;
-    float *spawn_pt_of_mobs_current_level_holder_array;
+    float *x_spawn_pt_of_mobs_current_level_holder_array;
+    float *y_spawn_pt_of_mobs_current_level_holder_array;
 
     //Alhamdulilah Rab Al Alameen, A level count gives the wanted level on the basis of iteration (loading level explicitly sends and changes this store count)
 
@@ -60,10 +64,9 @@ class Level_Config{
 
     //Level_Data_Present* levels_data;//initliaed in constructor of Level_Config, this is, Logic changed Alahamdulilah, now all the static data will be stored inside this class...although we could make a separate class that would make our lives easier by assign=ing using just an overridden eequal sign, Alhamdulilah Rab Al ALameen
 
-    public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has 
-
-    Level_Config();
-    ~Level_Config();
+    public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has
+        Level_Config(sf::RenderWindow window);
+        ~Level_Config();
     
 
 };
@@ -93,6 +96,9 @@ class Stored_Level_Configs
 
     int* No_of_Blocks_in_each_round;//array that holds no of blocks for each level
 
+
+
+    string** BlockImageTexture_File_Location;  // this stays in memory because is object's class's memeber not local var ,Alhamdulilah Rab Al Alameen
     float **x_positions_of_blocks_each_level_holder_array;//An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     float **y_positions_of_blocks_each_level_holder_array;
     float **widths_of_blocks_each_level_holder_array;
@@ -115,10 +121,11 @@ class Stored_Level_Configs
 
     int *No_of_Blocks_in_each_bonus_round; // array that holds no of blocks for each level
 
+    string **BlockImageTexture_Bonus_Lvl_File_Location;
     float **x_positions_of_blocks_each_bonus_level_holder_array; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     float **y_positions_of_blocks_each_bonus_level_holder_array;
-    float **width_positions_of_blocks_each_bonus_level_holder_array;
-    float **height_positions_of_blocks_each_bonus_level_holder_array;
+    float **width_of_each_blocks_bonus_level_holder_array;
+    float **height_of_each_blocks_bonus_level_holder_array;
 
     //No mobs Alhamdulilah Rab Al Alameen
 
@@ -130,6 +137,7 @@ class Stored_Level_Configs
     int* Indexs_of_Boss_Level;
     //as indices start from 0, so -1 Alhamdulilah
 
+    public:
     //-------getters
     int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
     float *getwidths_of_blocks_each_level_holder_array(int level);
@@ -152,4 +160,8 @@ class Stored_Level_Configs
 
     float *getx_positions_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     float *gety_positions_of_blocks_each_bonus_level_holder_array(int level);
+    float *getwidth_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+    float *getheight_of_blocks_each_bonus_level_holder_array(int level);
+    string *getBlockImageTexture_File_Location(int level);
+    string *getBlockImageTexture_Bonus_lvl_File_Location(int level);
 };

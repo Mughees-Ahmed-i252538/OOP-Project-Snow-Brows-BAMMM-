@@ -3,31 +3,246 @@
 
 int Level_Config::Level_count = 0;
 
+void ForRelativeSizeAndPostionShape_Level_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
 
-Level_Config::Level_Config()//can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = shape.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    shape.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    shape.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+void ForRelativeSizeAndPostionShape_Level_Copy(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = shape.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    shape.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    shape.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+// Overloading for text
+void ForRelativeSizeAndPostionText_Level_Copy(float NeededWidth, float NeededHeight, sf::Text &text, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = text.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    text.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    text.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    text.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+void ForRelativeSizeAndPostionSprite_Level_Copy(float NeededWidth, float NeededHeight, sf::Sprite &sprite, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+{
+    // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
+
+    // Instead we can compare wanted to real size, using getLocalbounds() a function slightly differnt from global bounds( ) in the fact that it gives orignal (without calcualtion,position etc stats...)
+
+    sf::FloatRect RealBounds = sprite.getLocalBounds(); // Hold orignal bounds , at the end size of sprite image without roaation ppostion change etc
+
+    float Realwidth = RealBounds.width;   // self:: width is most likely a member of container rectangle
+    float Realheight = RealBounds.height; // I should change it to realheight isntead of current
+
+    sprite.setOrigin(Realwidth / 2, Realheight / 2); // This helps locate orign of objects as orign is basically at (total width/2,total width/2) eact cente ofrectangle
+
+    sprite.setScale(NeededWidth / Realwidth, NeededHeight / Realheight); // FOr example take wanted size = real size, it remains 1, so scale doesnt change, however if wanted size<real size, then scale is less than 1 greater than 0 (inshallah if input correct in code ) May Allah help me ameen
+
+    sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
+}
+
+Level_Config::Level_Config(sf::RenderWindow window)//can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
 
     Level_id=Level_count;
-    Level_count++;
+    Level_count++;//To Make constructor of Level Config Next inshallah Alahamdulilah Rab Al Alameen
 
     /* if(!BackgroundImageTexture.loadFromFile(stored_Level_configs.getTextureFileName(this->Level_id)))
     {
 
     }
+
+
     BackgroundImageSprite;
     Level_MusicSB;
     Level_MusicS; *///Forgot to implement the indexes for bonus count thing....doing that now Alhamdulilah
+
+    int No_of_Bonus_Levels=stored_Level_configs.getNo_of_Bonus_levels();
+    int Which_Of_The_Bonus_Levels=0;
+    bool is_Bonus_level=false;
+
+    for(int i=0;i<No_of_Bonus_Levels;i++)
+    {
+        if(Level_id==stored_Level_configs.getIndexes_of_Bonus_Levels(i))//this array isnt sorted so we have to store which of the stored bonus levels as well ALhamdulilah
+        {
+            Which_Of_The_Bonus_Levels=i;
+            is_Bonus_level=true;
+            break;
+        }
+    }
+    if(!is_Bonus_level)
+    {//if not bonus level, this otherwise that Alhamdulilah
+       
+        //Bismillah Hirahman Nirahim starting from bg texture
+
+        if(!BackgroundImageTexture.loadFromFile(stored_Level_configs.getBackgroundImageTexture_File_Locations(Level_id)))
+        {
+            cout<<"Filed to load lvl Bg tex from file"<<endl;
+
+        }
+        else
+        {
+            BackgroundImageSprite.setTexture(BackgroundImageTexture);
+            //now to set size of background to window height and width
+            ForRelativeSizeAndPostionSprite_Level_Copy(window.getSize().x, window.getSize().y, BackgroundImageSprite, sf::Vector2f(window.getSize().x / 2, window.getSize().y/2));
+
+            
+
+
+        }   //For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
+
+
+        if(!Level_MusicSB.openFromFile(stored_Level_configs.getLevel_MusicSB_File_Locations(Level_id)))
+        {
+            cout << "Filed to load lvl Bg music from file"<<endl;
+        }//no need for else here, music loaded
+        else
+        {
+            cout << "Loaded lvl Bg music from file" << endl;
+        }
+        
+
+        No_of_Blocks_in_this_round=stored_Level_configs.getNo_of_Blocks_in_each_round(Level_id);
+
+        BlockImageTextures = new sf::Texture[No_of_Blocks_in_this_round];
+        BlockImageSprites = new sf::Sprite[No_of_Blocks_in_this_round];//to add the block strings in bonus level as well inshallah
+
+        x_position_of_blocks_current_level_holder_array=stored_Level_configs.getx_positions_of_blocks_each_level_holder_array(Level_id); // we just get ptrs for these
+        y_position_of_blocks_current_level_holder_array = stored_Level_configs.gety_positions_of_blocks_each_level_holder_array(Level_id);
+        width_of_blocks_current_level_holder_array=stored_Level_configs.getwidths_of_blocks_each_level_holder_array(Level_id);
+        heights_of_blocks_current_level_holder_array=stored_Level_configs.getheights_of_blocks_each_level_holder_array(Level_id);
+
+        BlockImage_File_Locations=stored_Level_configs.getBlockImageTexture_File_Location(Level_id);
+
+        for (int i = 0; i < No_of_Blocks_in_this_round; i++)
+        {
+
+            if(!BlockImageTextures[i].loadFromFile(BlockImage_File_Locations[i]))
+            {
+                cout<<"Failed to load texture from file"<<endl;
+            }
+            else
+            {
+                BlockImageSprites[i].setTexture(BlockImageTextures[i]);
+                //As sprite so no /0 issue else had to setsize 1 1 for shapes before calling this....Not done in function cuz not done research on what happens if not Alhamdulilah
+                ForRelativeSizeAndPostionSprite_Level_Copy(width_of_blocks_current_level_holder_array[i], heights_of_blocks_current_level_holder_array[i], BlockImageSprites[i], sf::Vector2f(x_position_of_blocks_current_level_holder_array[i], y_position_of_blocks_current_level_holder_array[i]));
+            }
+        }
+
+        no_of_mobs_in_this_round=stored_Level_configs.getno_of_mobs_in_each_round(Level_id);
+
+        type_of_mobs_current_level_holder_array=stored_Level_configs.gettypes_of_mobs_each_level_holder_array(Level_id);
+
+        x_spawn_pt_of_mobs_current_level_holder_array = stored_Level_configs.getx_of_spawn_pts_of_mobs_each_level_holder_array(Level_id);
+        y_spawn_pt_of_mobs_current_level_holder_array = stored_Level_configs.gety_of_spawn_pts_of_mobs_each_level_holder_array(Level_id);
+        //boss level to use same arrays as normals, but the indices stored may be used for special purposes, Alhamdulilah Rab AL ALameen
+    }
+    else
+    {//for bonus lvls..
+
+        // Bismillah Hirahman Nirahim starting from bg texture
+
+        if (!BackgroundImageTexture.loadFromFile(stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels)))
+        {
+            cout << "Filed to load bonus lvl Bg tex from file" << endl;
+        }
+        else
+        {
+            BackgroundImageSprite.setTexture(BackgroundImageTexture);
+            // now to set size of background to window height and width
+            ForRelativeSizeAndPostionSprite_Level_Copy(window.getSize().x, window.getSize().y, BackgroundImageSprite, sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+
+        } // For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
+
+        if (!Level_MusicSB.openFromFile(stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Level_id)))
+        {
+            cout << "Filed to load lvl Bg music from file" << endl;
+        } // no need for else here, music loaded
+        else
+        {
+            cout << "Loaded lvl Bg music from file" << endl;
+        }
+
+        No_of_Blocks_in_this_round = stored_Level_configs.getNo_of_Blocks_in_each_bonus_round(Level_id);
+
+        BlockImageTextures = new sf::Texture[No_of_Blocks_in_this_round];
+        BlockImageSprites = new sf::Sprite[No_of_Blocks_in_this_round]; // to add the block strings in bonus level as well inshallah
+
+        x_position_of_blocks_current_level_holder_array = stored_Level_configs.getx_positions_of_blocks_each_bonus_level_holder_array(Level_id); // we just get ptrs for these
+        y_position_of_blocks_current_level_holder_array = stored_Level_configs.gety_positions_of_blocks_each_bonus_level_holder_array(Level_id);
+        width_of_blocks_current_level_holder_array = stored_Level_configs.getwidth_of_blocks_each_bonus_level_holder_array(Level_id);
+        heights_of_blocks_current_level_holder_array = stored_Level_configs.getheight_of_blocks_each_bonus_level_holder_array(Level_id);
+
+        BlockImage_File_Locations = stored_Level_configs.getBlockImageTexture_Bonus_lvl_File_Location(Level_id);
+
+        for (int i = 0; i < No_of_Blocks_in_this_round; i++)
+        {
+
+            if (!BlockImageTextures[i].loadFromFile(BlockImage_File_Locations[i]))
+            {
+                cout << "Failed to load texture from file" << endl;
+            }
+            else
+            {
+                BlockImageSprites[i].setTexture(BlockImageTextures[i]);
+                // As sprite so no /0 issue else had to setsize 1 1 for shapes before calling this....Not done in function cuz not done research on what happens if not Alhamdulilah
+                ForRelativeSizeAndPostionSprite_Level_Copy(width_of_blocks_current_level_holder_array[i], heights_of_blocks_current_level_holder_array[i], BlockImageSprites[i], sf::Vector2f(x_position_of_blocks_current_level_holder_array[i], y_position_of_blocks_current_level_holder_array[i]));
+            }
+        }
+
+        //No mobs in bonus Alhamdulilah
+        Which_Of_The_Bonus_Levels++;//First Bonus Level then second in storage
+    }//I dont think we need to add check for Which of Bonus Level= Total Bonus level...
+
+
+
 }
-Level_Config::~Level_Config()
-{
-    //delete levels_data;//Logic changed Alhamdulilah Rab Al Alameen
-}//As you know staging commit, makes the commit to your local repo then syncing will push it to orign main, i.e the remote repo, Alhamdulilah Rab Al Alameen
+
+Level_Config::~Level_Config(){
+    delete[] BlockImageTextures;
+    delete[] BlockImageSprites;//these are only two thingsthat require deleting, to still delay mob logic, perhpas changes soon inshallah
+    // delete levels_data;//Logic changed Alhamdulilah Rab Al Alameen
+} // As you know staging commit, makes the commit to your local repo then syncing will push it to orign main, i.e the remote repo, Alhamdulilah Rab Al Alameen
 
 //============================Stored_Level_Configs=====================================
 
-
-//Static Varible stays in memory until program terminates
+// Static Varible stays in memory until program terminates
 
 Stored_Level_Configs::Stored_Level_Configs()
 {
@@ -101,7 +316,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     widths_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];
     heights_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];//Had forgoted to inititalize the float* and directly done the float below, hence corrected Alahmdulilah Rab Al Alameen....It did give squiggly line in vscode....May Allah SWT help me and us all ameen
-
+    BlockImageTexture_Bonus_Lvl_File_Location = new string *[Total_Levels_For_which_Data_is_Present];
     // Making Array in loop, assigning manually inshallah
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
@@ -112,6 +327,8 @@ Stored_Level_Configs::Stored_Level_Configs()
         y_positions_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];//at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
         widths_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]]; // Bismillah Hirahman Nirahim, adding widths and height record arrays for each block as well, Alhamdulilah rab al alameen, logic changed from fixed width heiht, to varying Alhamdulilah
         heights_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];
+        BlockImageTexture_Bonus_Lvl_File_Location[i] = new string[No_of_Blocks_in_each_round[i]];
+
     }//Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
     //sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
 
@@ -127,51 +344,61 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_positions_of_blocks_each_level_holder_array[0][0]=0;//making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
     widths_of_blocks_each_level_holder_array[0][0]=10;
     heights_of_blocks_each_level_holder_array[0][0]=10;//Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_Bonus_Lvl_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
     y_positions_of_blocks_each_level_holder_array[1][0] = 10;
     widths_of_blocks_each_level_holder_array[1][0] = 11;
     heights_of_blocks_each_level_holder_array[1][0] = 11;
+    BlockImageTexture_Bonus_Lvl_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[2][0] = 20;
     y_positions_of_blocks_each_level_holder_array[2][0] = 20;
     widths_of_blocks_each_level_holder_array[2][0] = 12;
     heights_of_blocks_each_level_holder_array[2][0] = 12;
+    BlockImageTexture_Bonus_Lvl_File_Location[2][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[3][0] = 30;
     y_positions_of_blocks_each_level_holder_array[3][0] = 30;
     widths_of_blocks_each_level_holder_array[3][0] = 13;
     heights_of_blocks_each_level_holder_array[3][0] = 13;
+    BlockImageTexture_Bonus_Lvl_File_Location[3][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[4][0] = 40;
     y_positions_of_blocks_each_level_holder_array[4][0] = 40;
     widths_of_blocks_each_level_holder_array[4][0] = 14;
     heights_of_blocks_each_level_holder_array[4][0] = 14;
+    BlockImageTexture_Bonus_Lvl_File_Location[4][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[5][0] = 50;
     y_positions_of_blocks_each_level_holder_array[5][0] = 50;
     widths_of_blocks_each_level_holder_array[5][0] = 15;
     heights_of_blocks_each_level_holder_array[5][0] = 15;
+    BlockImageTexture_Bonus_Lvl_File_Location[5][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[6][0] = 60;
     y_positions_of_blocks_each_level_holder_array[6][0] = 60;
     widths_of_blocks_each_level_holder_array[6][0] = 16;
     heights_of_blocks_each_level_holder_array[6][0] = 16;
+    BlockImageTexture_Bonus_Lvl_File_Location[6][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[7][0] = 70;
     y_positions_of_blocks_each_level_holder_array[7][0] = 70;
     widths_of_blocks_each_level_holder_array[7][0] = 17;
     heights_of_blocks_each_level_holder_array[7][0] = 17;
+    BlockImageTexture_Bonus_Lvl_File_Location[7][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[8][0] = 80;
     y_positions_of_blocks_each_level_holder_array[8][0] = 80; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
     widths_of_blocks_each_level_holder_array[8][0] = 18;
     heights_of_blocks_each_level_holder_array[8][0] = 18;
+    BlockImageTexture_Bonus_Lvl_File_Location[8][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[9][0] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
     y_positions_of_blocks_each_level_holder_array[9][0] = 90; // Alhamdulilah Rab Al Alameen
     widths_of_blocks_each_level_holder_array[9][0] = 19;
     heights_of_blocks_each_level_holder_array[9][0] = 19;
+    BlockImageTexture_Bonus_Lvl_File_Location[9][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
@@ -330,26 +557,30 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     x_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
     y_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels]; // at respectve level array see no of blocks at that level Alhamdullah Rab Al Alameen
-    width_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
-    height_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];//had forgotten to initlialize the ptr arrays in first place and had directly initialized the 1d arrays using those ptrs, fixed that Alhamdulilah rab al alameen (should have given run time  or compile time, as couldnt find or more likkely saying that ptr is null ptr... or actually they didnt even exsist in dma yet so i guess huge issue thrown? ...possible crash....derefrencing uniitialized location,,,...)
+    width_of_each_blocks_bonus_level_holder_array = new float *[No_of_Bonus_levels];
+    height_of_each_blocks_bonus_level_holder_array = new float *[No_of_Bonus_levels];//had forgotten to initlialize the ptr arrays in first place and had directly initialized the 1d arrays using those ptrs, fixed that Alhamdulilah rab al alameen (should have given run time  or compile time, as couldnt find or more likkely saying that ptr is null ptr... or actually they didnt even exsist in dma yet so i guess huge issue thrown? ...possible crash....derefrencing uniitialized location,,,...)
+    BlockImageTexture_Bonus_Lvl_File_Location = new string *[No_of_Bonus_levels];
 
     for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
     {//have to check if i dmaeed the array of float ptrs up....
         x_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
         y_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]]; // at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
-        width_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
-        height_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];//could make a class of these each to stop the manual writing load........ but well, already done almost now Alhamdulilah
+        width_of_each_blocks_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
+        height_of_each_blocks_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];//could make a class of these each to stop the manual writing load........ but well, already done almost now Alhamdulilah
+        BlockImageTexture_Bonus_Lvl_File_Location[i] = new string[No_of_Blocks_in_each_bonus_round[i]];
     }
 
     x_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0;
     y_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
-    width_positions_of_blocks_each_bonus_level_holder_array[0][0]= 10;
-    height_positions_of_blocks_each_bonus_level_holder_array[0][0] = 10;
+    width_of_each_blocks_bonus_level_holder_array[0][0]= 10;
+    height_of_each_blocks_bonus_level_holder_array[0][0] = 10;
+    BlockImageTexture_Bonus_Lvl_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
     y_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
-    width_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
-    height_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
+    width_of_each_blocks_bonus_level_holder_array[1][0] = 10;
+    height_of_each_blocks_bonus_level_holder_array[1][0] = 10;
+    BlockImageTexture_Bonus_Lvl_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
 } // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
@@ -412,9 +643,9 @@ Stored_Level_Configs::~Stored_Level_Configs()
 
         delete[] y_positions_of_blocks_each_bonus_level_holder_array[i];
 
-        delete[] width_positions_of_blocks_each_bonus_level_holder_array[i];
+        delete[] width_of_each_blocks_bonus_level_holder_array[i];
 
-        delete[] height_positions_of_blocks_each_bonus_level_holder_array[i];
+        delete[] height_of_each_blocks_bonus_level_holder_array[i];
     }
 
     // Allah SWT knows best Alhamdulilah Rab Al Alameen
@@ -422,9 +653,9 @@ Stored_Level_Configs::~Stored_Level_Configs()
 
     delete[] y_positions_of_blocks_each_bonus_level_holder_array;
 
-    delete[] width_positions_of_blocks_each_bonus_level_holder_array;
+    delete[] width_of_each_blocks_bonus_level_holder_array;
 
-    delete[] height_positions_of_blocks_each_bonus_level_holder_array;
+    delete[] height_of_each_blocks_bonus_level_holder_array;
 }
 
 //-----------Getters of Stored_Level_Configs::
@@ -577,6 +808,39 @@ float *Stored_Level_Configs::gety_positions_of_blocks_each_bonus_level_holder_ar
     if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
     {
         return y_positions_of_blocks_each_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+string* Stored_Level_Configs::getBlockImageTexture_File_Location(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return BlockImageTexture_File_Location[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+string *Stored_Level_Configs::getBlockImageTexture_Bonus_lvl_File_Location(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return BlockImageTexture_Bonus_Lvl_File_Location[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+
+float *Stored_Level_Configs::getwidth_of_blocks_each_bonus_level_holder_array(int level) // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return width_of_each_blocks_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
+    }
+    return nullptr;
+}
+float *Stored_Level_Configs::getheight_of_blocks_each_bonus_level_holder_array(int level)
+{
+    if (level >= 0 && level <= Total_Levels_For_which_Data_is_Present)
+    {
+        return height_of_each_blocks_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
     }
     return nullptr;
 }
