@@ -369,10 +369,19 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         // window.clear(sf::Color::White);
 
         window.clear();//windows clear was before player, printing, Alhamdulilah Rab Al Alameen Found it
+
+        //Bismillah Hirahman Nirahim, ensure every display is after clear from now on inshallah Alhamdulilah Rab Al Alameen
+
+        //Background behind the players so,
+
+        levelConfig->display(window);
+
         for(int i=0;i<No_of_Players;i++)
         {
             Players[i]->display(window,Debug_Mode_On);
         }
+
+
 
         //For sime reason Debug box not moving although i remmeber adding setposition measures, hence added .move meansures where.move of sprite, Alhamdulilah RAb Al Alameen now it works
 

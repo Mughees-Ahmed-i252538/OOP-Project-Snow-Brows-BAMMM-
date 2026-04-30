@@ -237,6 +237,17 @@ Level_Config::~Level_Config(){
     // delete levels_data;//Logic changed Alhamdulilah Rab Al Alameen
 } // As you know staging commit, makes the commit to your local repo then syncing will push it to orign main, i.e the remote repo, Alhamdulilah Rab Al Alameen
 
+void Level_Config::display(sf::RenderWindow &window)
+{
+
+    window.draw(BackgroundImageSprite);
+
+    for(int i=0;i<No_of_Blocks_in_this_round;i++)
+    {
+        window.draw(BlockImageSprites[i]);
+    }
+}
+
 //============================Stored_Level_Configs=====================================
 
 // Static Varible stays in memory until program terminates

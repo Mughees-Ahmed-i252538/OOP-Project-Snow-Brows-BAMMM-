@@ -67,7 +67,8 @@ class Level_Config{
 
     public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has
         Level_Config(float Window_width,float Window_heightw);
-        ~Level_Config();
+        ~Level_Config();//Bismillah Hirahman Niraheem I would <stdexcept> try{code, using throw invalid_argument ,runtime error etc} catch(std::invalid_argument & e) basically catches and destructs all locals in try and runs catch to try prevent program crash, if nothing catches than calls terminate() that crashes program, after catch block, program resumes from after catch block, Alhamdulilah rab al alameen
+        void display(sf::RenderWindow& window);
     
 
 };
