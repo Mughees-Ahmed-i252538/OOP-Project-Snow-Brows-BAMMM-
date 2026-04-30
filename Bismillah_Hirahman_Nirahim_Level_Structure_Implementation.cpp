@@ -2,6 +2,7 @@
 
 Stored_Level_Configs Level_Config::stored_Level_configs;//as static so need to define must define in a cpp, ,also as we cant do =0 as object... so we leave as is and it calls default constructor, Alhamdulilah Rab Al Alameen., Alhamdulilah Rab Al Alameen
 int Level_Config::Level_count = 0;
+int Level_Config::Which_Of_The_Bonus_Levels=0;//made this static Alhamdulilah to track the bonus levels actually, Alhamdulilah rab al alameen, Bismillah hirahman nirahim
 
 void ForRelativeSizeAndPostionShape_Level_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
@@ -94,15 +95,17 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
     Level_MusicS; *///Forgot to implement the indexes for bonus count thing....doing that now Alhamdulilah
 
     int No_of_Bonus_Levels=stored_Level_configs.getNo_of_Bonus_levels();
-    int Which_Of_The_Bonus_Levels=0;
+    //Oh I see the which of the bonus level is a local....want recording bonus levels but always starting at 0...I think some allocation may have been bad due to mismatches Allah SWT knows best, but we shouldnt be accessing the same level again although only the sprites and textures made in this class itself are delected, Allah SWT Knows best, may he help us understand the real reason soon inshallah, May he also help us solve it instantly inshallah, Ameen May Allah be with you, Ameen,Lets make it static and inshallah wont crash, Alhamdulilah Rab Al Alameen
     bool is_Bonus_level=false;
 
     for(int i=0;i<No_of_Bonus_Levels;i++)
     {
         if(Level_id==stored_Level_configs.getIndexes_of_Bonus_Levels(i))//this array isnt sorted so we have to store which of the stored bonus levels as well ALhamdulilah
         {
+            cout << "\n\nThis Level is a bonus level\n\n"<<endl;
+            cout<<"";
             Which_Of_The_Bonus_Levels=i;
-            is_Bonus_level=true;
+            //is_Bonus_level=true;
             break;
         }
     }
@@ -564,10 +567,21 @@ Stored_Level_Configs::Stored_Level_Configs()
                 }
             }
         }
+
+
         
     }//this basicalled goes on forever if not feasible so,
 
     cout << "Bismillah Hirahman Nirahim Storage Construction Test 12" << endl;
+
+    cout<<"Indices of Bonus Rounds this turn "<<endl;
+
+    for(int i=0;i<No_of_Bonus_levels;i++)
+    {
+        cout<<Indexes_of_Bonus_Levels[i]<<" ";//Alhamdulilah Rab Al Alameen
+    }
+
+    cout<<endl;
 
     Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
     Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";

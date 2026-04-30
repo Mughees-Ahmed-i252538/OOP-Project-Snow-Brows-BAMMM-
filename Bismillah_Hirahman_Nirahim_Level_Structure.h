@@ -24,6 +24,7 @@ class Level_Config{
 
     static int Level_count; // auto 0 no need to initialize with the definition thing Alhamdulilah Rab Al Alameen, for knowing what the number of the next level will be, Alhamdulilah Rab Al Alameen
     int Level_id;
+    static int Which_Of_The_Bonus_Levels ;
 
     //=================from here on requires Stored Level Configs, Alhamdulilah====================
     sf::Texture BackgroundImageTexture;

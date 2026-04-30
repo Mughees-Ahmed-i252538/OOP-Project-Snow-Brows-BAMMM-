@@ -108,7 +108,6 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     //Vector2 is blank contained, tells i can hold two values, Vector2i tells it can hold two integers, similarly 2f and 2u for float and unsigned i think respecteively
     //Alhamdulilah!
 
-    
 
     /* while(VidMod>sf::VideoMode(ChoosenResolutionX,ChoosenResolutionY))
     {
@@ -157,6 +156,8 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     */
 
+   
+
     float UserRatio= static_cast<float>(VidMod.width)/static_cast<float>(VidMod.height);//Note this gives the ratio of users monitor eg 1920:1024
     //Note we can just take VidMod directly as that is a separate object....and we need calculation on individual parts
     float ChoosenRatio = ChoosenResolutionX / ChoosenResolutionY;
@@ -183,15 +184,10 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Note, to add bindings here for Now, to shift into player class or make their own class as needed
 
-
-    
-
-    
-
-
-    
-
-
+    cout << "window width" << window.getSize().x << endl;
+    cout << "window height" << window.getSize().y << endl;
+    cout << "window view width" << window.getView().getSize().x << endl;
+    cout << "window view height" << window.getView().getSize().x << endl;
 
     bool is_Multiplayer= true;
     int No_of_Players;
@@ -291,7 +287,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
 
     //To put this in control of main screen, load from should call another constructor ro be made soon inshallah(or perhaps pass this one a default argyukment than the load makes as read from file, Alhamdulilah Rab Al Alameen, Load also loads each players no of lifes left etc, Alhamdulilah rab al alameen)
-    Level_Config *levelConfig = new Level_Config(window.getSize().x,window.getSize().y);//ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
+    Level_Config *levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y); // ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
 
@@ -416,12 +412,12 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
             cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
             delete levelConfig;
-            levelConfig=new Level_Config(window.getSize().x, window.getSize().y);
+            levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y);
             level_ends=false;
             cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
         }
 
-        if (Level_Config::getLevel_Count() == Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())
+        if (level_ends&&Level_Config::getLevel_Count() == Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//Added level ends here to not abruptly close as it was doing...perhaps I should add a do you want to close....Alhamdulilah Rab Al Alameen
         {
             cout << "Level Count" << Level_Config::getLevel_Count() <<endl;
             cout << "Total Level's Present" << Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() << endl;
