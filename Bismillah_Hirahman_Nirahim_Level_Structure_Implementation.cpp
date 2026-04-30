@@ -2,7 +2,7 @@
 
 Stored_Level_Configs Level_Config::stored_Level_configs;//as static so need to define must define in a cpp, ,also as we cant do =0 as object... so we leave as is and it calls default constructor, Alhamdulilah Rab Al Alameen., Alhamdulilah Rab Al Alameen
 int Level_Config::Level_count = 0;
-int Level_Config::Which_Of_The_Bonus_Levels=0;//made this static Alhamdulilah to track the bonus levels actually, Alhamdulilah rab al alameen, Bismillah hirahman nirahim
+//int Level_Config::Which_Of_The_Bonus_Levels=0;//made this static Alhamdulilah to track the bonus levels actually, Alhamdulilah rab al alameen, Bismillah hirahman nirahim, now found that it wasnt needed, Alhamdulilah Rab Al Alameen
 
 void ForRelativeSizeAndPostionShape_Level_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
@@ -80,35 +80,50 @@ void ForRelativeSizeAndPostionSprite_Level_Copy(float NeededWidth, float NeededH
 Level_Config::Level_Config(float Window_width, float Window_height) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
-    cout<<"Bismillah Hirahman Nirahim, Constructing level"<<endl;
+    cout<<"--------------------------------------------------"<<"\n"<<endl;
+    cout<<"Bismillah Hirahman Nirahim, Constructing New Level"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     Level_id=Level_count;
     Level_count++;//To Make constructor of Level Config Next inshallah Alahamdulilah Rab Al Alameen
 
-    /* if(!BackgroundImageTexture.loadFromFile(stored_Level_configs.getTextureFileName(this->Level_id)))
-    {
+    cout<<"Level id:"<<Level_id<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    cout << "Level count:" << Level_count << endl;
+    //Forgot to implement the indexes for bonus count thing....doing that now Alhamdulilah
 
-    }
-
-
-    BackgroundImageSprite;
-    Level_MusicSB;
-    Level_MusicS; *///Forgot to implement the indexes for bonus count thing....doing that now Alhamdulilah
-
+    //===================Bonus Level or Not Check========================
     int No_of_Bonus_Levels=stored_Level_configs.getNo_of_Bonus_levels();
     //Oh I see the which of the bonus level is a local....want recording bonus levels but always starting at 0...I think some allocation may have been bad due to mismatches Allah SWT knows best, but we shouldnt be accessing the same level again although only the sprites and textures made in this class itself are delected, Allah SWT Knows best, may he help us understand the real reason soon inshallah, May he also help us solve it instantly inshallah, Ameen May Allah be with you, Ameen,Lets make it static and inshallah wont crash, Alhamdulilah Rab Al Alameen
     bool is_Bonus_level=false;
+    int Which_Of_The_Bonus_Levels=0;//I found that this is not needed 0,as not tracked this is found completely new each turn, not needed updated, nor needed memeber Alhamdulilah Rab Al Alameen
 
-    for(int i=0;i<No_of_Bonus_Levels;i++)
+    for (int i = 0; i < No_of_Bonus_Levels; i++) // it seems doing a \n in the ctrl + F actually does next line...so have to put \\n Alhamdulilah Rab Al Alameen
     {
         if(Level_id==stored_Level_configs.getIndexes_of_Bonus_Levels(i))//this array isnt sorted so we have to store which of the stored bonus levels as well ALhamdulilah
         {
-            cout << "\n\nThis Level is a bonus level\n\n"<<endl;
-            cout<<"";
+            cout << "\n\nThis Level is a bonus level\n"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
             Which_Of_The_Bonus_Levels=i;
-            //is_Bonus_level=true;
+            //is_Bonus_level=true;//set comment for debugging why crashing, to uncomment soon inshallah
             break;
         }
     }
+
+    //===================Boss Level or Not Check========================
+    int No_of_Boss_Levels=stored_Level_configs.getNo_of_Boss_levels();
+    bool is_Boss_level = false;
+    int Which_Of_The_Boss_Levels = 0;//calculated in this functions Alhamdulilah Rab Al Alameen, not tracked
+
+    for(int i=0;i<No_of_Boss_Levels;i++)//it seems doing a \n in the ctrl + F actually does next line...so have to put \\n Alhamdulilah Rab Al Alameen
+    {//! moeans to come back to this later soon inshallah, dont compile elsewise
+        if(Level_id==stored_Level_configs.getIndexs_of_Boss_Level(i))//this array isnt sorted so we have to store which of the stored bonus levels as well ALhamdulilah
+        {
+            cout << "\n\nThis Level is a boss level\n"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+            Which_Of_The_Boss_Levels=i;
+            //is_Boss_level=true;//set comment for debugging why crashing, to uncomment soon inshallah
+            break;
+        }
+    }
+
+
+
     if(!is_Bonus_level)
     {//if not bonus level, this otherwise that Alhamdulilah
        
@@ -116,11 +131,14 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
         if(!BackgroundImageTexture.loadFromFile(stored_Level_configs.getBackgroundImageTexture_File_Locations(Level_id)))
         {
-            cout<<"Filed to load lvl Bg tex from file"<<endl;
+            cout<<"Filed to load lvl Background texture from file:"<<stored_Level_configs.getBackgroundImageTexture_File_Locations(Level_id)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
         }
         else
         {
+
+            cout<<"Loaded lvl Background texture from file:"<<stored_Level_configs.getBackgroundImageTexture_File_Locations(Level_id)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             //now to set size of background to window height and width
             ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width/ 2, Window_height / 2));
@@ -130,11 +148,11 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
         if(!Level_MusicSB.openFromFile(stored_Level_configs.getLevel_MusicSB_File_Locations(Level_id)))
         {
-            cout << "Filed to load lvl Bg music from file"<<endl;
+            cout << "Filed to load lvl Background music from file"<<stored_Level_configs.getLevel_MusicSB_File_Locations(Level_id)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
         }//no need for else here, music loaded
         else
         {
-            cout << "Loaded lvl Bg music from file" << endl;
+            cout << "Loaded lvl Background music from file" << stored_Level_configs.getLevel_MusicSB_File_Locations(Level_id) << endl;
         }
         
 
@@ -155,10 +173,13 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
             if(!BlockImageTextures[i].loadFromFile(BlockImage_File_Locations[i]))
             {
-                cout<<"Failed to load texture from file"<<endl;
+                cout<<"Failed to load Block texture from file:"<<BlockImage_File_Locations[i]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
             }
             else
             {
+                
+                cout<<"Loaded Block texture from file:"<<BlockImage_File_Locations[i]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+            
                 BlockImageSprites[i].setTexture(BlockImageTextures[i]);
                 //As sprite so no /0 issue else had to setsize 1 1 for shapes before calling this....Not done in function cuz not done research on what happens if not Alhamdulilah
                 ForRelativeSizeAndPostionSprite_Level_Copy(width_of_blocks_current_level_holder_array[i], heights_of_blocks_current_level_holder_array[i], BlockImageSprites[i], sf::Vector2f(x_position_of_blocks_current_level_holder_array[i], y_position_of_blocks_current_level_holder_array[i]));
@@ -180,10 +201,12 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
         if (!BackgroundImageTexture.loadFromFile(stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels)))
         {
-            cout << "Filed to load bonus lvl Bg tex from file" << endl;
+            cout << "Filed to load bonus lvl Background texture from file" << stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels) << endl;
         }
         else
         {
+            cout << "Loaded bonus lvl Background texture from file" << stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels) << endl;
+       
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             // now to set size of background to window height and width
             ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width / 2, Window_height / 2));
@@ -192,11 +215,11 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
         if (!Level_MusicSB.openFromFile(stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Level_id)))
         {
-            cout << "Filed to load lvl Bg music from file" << endl;
+            cout << "Filed to load bonus lvl Background music from file:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Level_id) << endl;
         } // no need for else here, music loaded
         else
         {
-            cout << "Loaded lvl Bg music from file" << endl;
+            cout << "Loaded bonus lvl Background music from file:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Level_id) << endl;
         }
 
         No_of_Blocks_in_this_round = stored_Level_configs.getNo_of_Blocks_in_each_bonus_round(Level_id);
@@ -227,7 +250,7 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
         }
 
         //No mobs in bonus Alhamdulilah
-        Which_Of_The_Bonus_Levels++;//First Bonus Level then second in storage
+        //Which_Of_The_Bonus_Levels++;//First Bonus Level then second in storage, later note, this variable is local, calculated each time, and not tracked Alhamdulilah Rab Al Alameen
     }//I dont think we need to add check for Which of Bonus Level= Total Bonus level...
 
 
@@ -263,7 +286,7 @@ int Level_Config::getLevel_Count()
 Stored_Level_Configs::Stored_Level_Configs()
 {
 
-    cout<<"Creating Storage of Configs Alhamdulilah Rab Al Alameen"<<endl;
+    cout<<"Creating Storage of Configs Alhamdulilah Rab Al Alameen"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     BackgroundImageTexture_File_Locations = new string[Total_Levels_For_which_Data_is_Present] ;
 
     BackgroundImageTexture_File_Locations[0]=
@@ -289,7 +312,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     //Giving Error assigning together both while creating new string[] and also afterwards trying to do ={ string,string} so Bismillah Hirahman Nirahim, doing one by one
 
-    cout<<"Bismillah Hirahman Nirahim Storage Construction Test 1"<<endl;
+    cout<<"Bismillah Hirahman Nirahim Storage Construction Test 1"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
     Level_MusicSB_File_Locations = new string[Total_Levels_For_which_Data_is_Present];
 
@@ -313,7 +336,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     Level_MusicSB_File_Locations[8] =
         "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\snow_bros_theme_01.ogg";
     Level_MusicSB_File_Locations[9] =
-        "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\Lvl10(Boss)_Bg_Img.png"; // redundant kept if want to add more or change Alhamdulilah
+        "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\final_boss_snow_bros.ogg"; // redundant kept if want to add more or change Alhamdulilah
 
     cout << "Bismillah Hirahman Nirahim Storage Construction Test 2" << endl;
 
@@ -531,7 +554,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
         if(No_of_Bonus_levels>(Total_Levels_For_which_Data_is_Present-No_of_Boss_Levels))
         {
-            cout<<"Bonus Levels no. not possible, enough feasible levels dont exsist"<<endl;//Alhamdulilah
+            cout<<"Bonus Levels no. not possible, enough feasible levels dont exsist"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Alhamdulilah
             break;
         }//As boss levels fixed, it is fine to keep their file name in origna l string array, but for other things, like enetity mobs etc, we might have too see inshallah, Alhamdulilah Rab Al Alameen
 
@@ -574,15 +597,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     cout << "Bismillah Hirahman Nirahim Storage Construction Test 12" << endl;
 
-    cout<<"Indices of Bonus Rounds this turn "<<endl;
-
-    for(int i=0;i<No_of_Bonus_levels;i++)
-    {
-        cout<<Indexes_of_Bonus_Levels[i]<<" ";//Alhamdulilah Rab Al Alameen
-    }
-
-    cout<<endl;
-
+    
     Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
     Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";
     Bonus_Level_BackgroundImageTexture_File_Locations[1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png"; // LvlBonus
@@ -897,4 +912,16 @@ float *Stored_Level_Configs::getheight_of_blocks_each_bonus_level_holder_array(i
         return height_of_each_blocks_bonus_level_holder_array[level]; // note issue was forgot to include get in function name...so var name and function name same-> have to check later if time, inshallah
     }
     return nullptr;
+}
+
+int Stored_Level_Configs::getNo_of_Boss_levels()
+{
+    return No_of_Boss_Levels;
+}
+
+int Stored_Level_Configs::getIndexs_of_Boss_Level(int index)
+{
+    if(index>=0&&index<No_of_Boss_Levels)
+    return Indexs_of_Boss_Level[index];
+    return 0;
 }

@@ -24,7 +24,7 @@ class Level_Config{
 
     static int Level_count; // auto 0 no need to initialize with the definition thing Alhamdulilah Rab Al Alameen, for knowing what the number of the next level will be, Alhamdulilah Rab Al Alameen
     int Level_id;
-    static int Which_Of_The_Bonus_Levels ;
+    //static int Which_Of_The_Bonus_Levels ; //rechecked logic and found not needed, Alhamdulilah Rab Al Alameen
 
     //=================from here on requires Stored Level Configs, Alhamdulilah====================
     sf::Texture BackgroundImageTexture;
@@ -142,33 +142,46 @@ class Stored_Level_Configs
     //as indices start from 0, so -1 Alhamdulilah
 
     public:
-    //-------getters
-    static int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
-    float *getwidths_of_blocks_each_level_holder_array(int level);
-    float *getheights_of_blocks_each_level_holder_array(int level);
-    string getBackgroundImageTexture_File_Locations(int level); // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
-    string getLevel_MusicSB_File_Locations(int level);
-    float getNo_of_Blocks_in_each_round(int level);
-    float* getx_positions_of_blocks_each_level_holder_array(int level);
-    float* gety_positions_of_blocks_each_level_holder_array(int level);//directly give ptr of that array ensure dont delete in single Level for possible reuse Alhamdulilah Rab Al Alameen
+        //-------getters
+        //-----------General Functions------------------
+        static int getTotal_Levels_For_which_Data_is_Present();     // Alhamdulilah Rab Al Alameen
+        string getBackgroundImageTexture_File_Locations(int level); // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
+        string getLevel_MusicSB_File_Locations(int level);
 
-    int getno_of_mobs_in_each_round(int level);
-    string *gettypes_of_mobs_each_level_holder_array(int level);
-    float *getx_of_spawn_pts_of_mobs_each_level_holder_array(int level);
-    float *gety_of_spawn_pts_of_mobs_each_level_holder_array(int level);
-    int getNo_of_Bonus_levels ();
-    int getIndexes_of_Bonus_Levels(int level);
-    string getBonus_Level_BackgroundImageTexture_File_Locations(int level);
-    string getBonus_Level_MusicSB_File_Locations(int level);
-    int getNo_of_Blocks_in_each_bonus_round(int level); // array that holds no of blocks for each level
+        //-----------Blocks Functions------------------
+        float getNo_of_Blocks_in_each_round(int level);
+        float *getwidths_of_blocks_each_level_holder_array(int level);
+        float *getheights_of_blocks_each_level_holder_array(int level);
+        float *getx_positions_of_blocks_each_level_holder_array(int level);
+        float *gety_positions_of_blocks_each_level_holder_array(int level); // directly give ptr of that array ensure dont delete in single Level for possible reuse Alhamdulilah Rab Al Alameen
 
-    float *getx_positions_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
-    float *gety_positions_of_blocks_each_bonus_level_holder_array(int level);
-    float *getwidth_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
-    float *getheight_of_blocks_each_bonus_level_holder_array(int level);
-    string *getBlockImageTexture_File_Location(int level);
-    string *getBlockImageTexture_Bonus_lvl_File_Location(int level);
+        //-----------Mobs Functions------------------
+        int getno_of_mobs_in_each_round(int level);
+        string *gettypes_of_mobs_each_level_holder_array(int level);
+        float *getx_of_spawn_pts_of_mobs_each_level_holder_array(int level);
+        float *gety_of_spawn_pts_of_mobs_each_level_holder_array(int level);
 
-    Stored_Level_Configs();
-    ~Stored_Level_Configs();//declared here and also defined in cpp( constructor and destructor) Alhamdulilah
+        //-------Bonus Levels Functions---------
+        int getNo_of_Bonus_levels();
+        int getIndexes_of_Bonus_Levels(int level);
+        string getBonus_Level_BackgroundImageTexture_File_Locations(int level);
+        string getBonus_Level_MusicSB_File_Locations(int level);
+
+        //--Bonus lvl, Blocks
+        string *getBlockImageTexture_File_Location(int level);
+        string *getBlockImageTexture_Bonus_lvl_File_Location(int level);
+        int getNo_of_Blocks_in_each_bonus_round(int level); // array that holds no of blocks for each level
+        float *getx_positions_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+        float *gety_positions_of_blocks_each_bonus_level_holder_array(int level);
+        float *getwidth_of_blocks_each_bonus_level_holder_array(int level); // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
+        float *getheight_of_blocks_each_bonus_level_holder_array(int level);
+
+        //-------Boss Levels Functions---------
+
+        int getNo_of_Boss_levels();
+        int  getIndexs_of_Boss_Level(int index);
+
+        //-----Constructors, Destructor Alhamdulilah Rab Al Alameen
+        Stored_Level_Configs();
+        ~Stored_Level_Configs(); // declared here and also defined in cpp( constructor and destructor) Alhamdulilah
 };  

@@ -111,7 +111,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     /* while(VidMod>sf::VideoMode(ChoosenResolutionX,ChoosenResolutionY))
     {
-        cout<<"Your Screen is too low resolution, please adjust these values to fit your resolution"<<endl;
+        cout<<"Your Screen is too low resolution, please adjust these values to fit your resolution"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
         cout<<"Choosen Resolution in x(by default 800):";
         cin>>ChoosenResolutionX;
         cout << "Choosen Resolution in y(by default 600):";
@@ -248,7 +248,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
     if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
     {
-        std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<endl;
+        std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     }
     else
     {
@@ -283,8 +283,11 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Bismillah Hirahman Nirahim, Oh Allah SWT please provide barakah and save from errors Ameen
 
-    cout<<"\n\n\nBismillah Hirahman Nirahim Trying to make level\n\n\n"<<endl;
+    cout<<"\n\n\nBismillah Hirahman Nirahim Trying to make level\n\n\n"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
+
+    //I am sure that static memebrs are initialized before even main hence this should work before Level Config is Initialized Alhamdulilah Rab Al Alameen
+    //Oh searched and found, static memebers with constant initializer eg static x=5 ( i beleive haver to define in a cpp) are initlaied before main, just like globals but dynamic ones are defined in their function called to define....some might be deffered till (self because it is our power to do so) Alhamdulilah Rab AL Alameen
 
     //To put this in control of main screen, load from should call another constructor ro be made soon inshallah(or perhaps pass this one a default argyukment than the load makes as read from file, Alhamdulilah Rab Al Alameen, Load also loads each players no of lifes left etc, Alhamdulilah rab al alameen)
     Level_Config *levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y); // ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
@@ -308,7 +311,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
             if(event.type ==sf::Event::KeyPressed&& event.key.code == sf::Keyboard::F11)//Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
             {
-                cout<<"Debug Key Pressed"<<endl;//Alhamdulilah Rab Al Alameen
+                cout<<"Debug Key Pressed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Alhamdulilah Rab Al Alameen
                 if(Debug_Mode_On)
                     Debug_Mode_On=false;
                 else
@@ -336,7 +339,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
                 {
                     Players[i]->Action_To_Move(Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
 
-                    //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<endl;//For Debugging
+                    //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
 
                 }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
@@ -410,19 +413,19 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         if(level_ends&&Level_Config::getLevel_Count()!=Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//as couldnt call a non static memeber, hence made it static Alhamdulilah Rab Al Alameen
         {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
-            cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
-            delete levelConfig;
+            //cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
+            delete levelConfig;//Now new and previous dont need to be printed here, they are being shown in Level constructor, however kept for use in debugging Alhamdulilah Rab AL Alameen
             levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y);
             level_ends=false;
-            cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
+            //cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
         }
 
         if (level_ends&&Level_Config::getLevel_Count() == Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//Added level ends here to not abruptly close as it was doing...perhaps I should add a do you want to close....Alhamdulilah Rab Al Alameen
         {
-            cout << "Level Count" << Level_Config::getLevel_Count() <<endl;
-            cout << "Total Level's Present" << Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() << endl;
+            cout << "Level Count" << Level_Config::getLevel_Count() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+            cout << "Total Level's Present" << Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present()<<"\n" << endl;
             //game end logic soon inshallah, an ending screen, an animation or video if possible with credits inshallah
-            cout<<"Game Ended Alhamdulilah Rab Al Alameen"<<endl;
+            cout<<"Game Ended Alhamdulilah Rab Al Alameen"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
             window.close();//ok didnt need the retur 0 here but window.close() this ennds the loop and hence end of game smoother instead of sudden, Alhamdulilah Rab AL Alameen
             //currently forced exit, later change to suitable animation or ending screen for replay etc, Inshallah Allah SWT know best Alhamdulilah Rab AL ALameen
         }
