@@ -248,6 +248,11 @@ void Level_Config::display(sf::RenderWindow &window)
     }
 }
 
+int Level_Config::getLevel_Count()
+{
+    return Level_count;
+}
+
 //============================Stored_Level_Configs=====================================
 
 // Static Varible stays in memory until program terminates
@@ -281,7 +286,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     //Giving Error assigning together both while creating new string[] and also afterwards trying to do ={ string,string} so Bismillah Hirahman Nirahim, doing one by one
 
-    cout<<"Bismillah Hirahman Nirahim Phase Test 1"<<endl;
+    cout<<"Bismillah Hirahman Nirahim Storage Construction Test 1"<<endl;
 
     Level_MusicSB_File_Locations = new string[Total_Levels_For_which_Data_is_Present];
 
@@ -307,7 +312,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     Level_MusicSB_File_Locations[9] =
         "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\Lvl10(Boss)_Bg_Img.png"; // redundant kept if want to add more or change Alhamdulilah
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 2" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 2" << endl;
 
     No_of_Blocks_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
     //To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
@@ -323,7 +328,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     No_of_Blocks_in_each_round[8] = 1;
     No_of_Blocks_in_each_round[9] = 1;
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 3" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
 
     x_positions_of_blocks_each_level_holder_array = new float *[Total_Levels_For_which_Data_is_Present]; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     //Now to loop and give needed width to each array (may be different for all, determined by no of blocks at respective index, Alhamdulilah)
@@ -336,7 +341,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 4" << endl;//The non bonus levbel block sprite texture was miss spelled
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 4" << endl;//The non bonus levbel block sprite texture was miss spelled
 
     for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
     {
@@ -349,7 +354,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     }//Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
     //sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 5" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 5" << endl;
 
     //As each block has different locations we must give it manually for each block
     //May Allah SWT help us, Ameen
@@ -418,7 +423,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 6" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 6" << endl;
 
     no_of_mobs_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
     // To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
@@ -441,7 +446,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     types_of_mobs_each_level_holder_array=new string*[Total_Levels_For_which_Data_is_Present];
     // Making Array in loop, assigning manually inshallah
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 7" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 7" << endl;
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
@@ -498,7 +503,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // Alhamdulilah Rab Al Alameen
     types_of_mobs_each_level_holder_array[9][0] = "Blue_Bottom";//Alhamdulilah rab al alameen
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 8" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 8" << endl;
     //========================For Boss Levels==============================================================
 
     Indexs_of_Boss_Level=new int[No_of_Boss_Levels];
@@ -516,7 +521,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     srand(time(0));
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 10" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 10" << endl;
 
     for(int i=0;i<No_of_Bonus_levels;i++)
     {
@@ -546,7 +551,7 @@ Stored_Level_Configs::Stored_Level_Configs()
             }
         }
 
-        cout << "Bismillah Hirahman Nirahim Phase Test 11" << endl;
+        cout << "Bismillah Hirahman Nirahim Storage Construction Test 11" << endl;
 
         if (!already_undid_next_index_increment)//if already undid then shouldnt undo again, Alhamdulilah Rab Al Alameen
         {
@@ -562,7 +567,7 @@ Stored_Level_Configs::Stored_Level_Configs()
         
     }//this basicalled goes on forever if not feasible so,
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 12" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 12" << endl;
 
     Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
     Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";
@@ -580,7 +585,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     No_of_Blocks_in_each_bonus_round[0]=1;
     No_of_Blocks_in_each_bonus_round[1]=1;
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 13" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 13" << endl;
 
     x_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
     y_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels]; // at respectve level array see no of blocks at that level Alhamdullah Rab Al Alameen
@@ -588,7 +593,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     height_of_each_blocks_bonus_level_holder_array = new float *[No_of_Bonus_levels];//had forgotten to initlialize the ptr arrays in first place and had directly initialized the 1d arrays using those ptrs, fixed that Alhamdulilah rab al alameen (should have given run time  or compile time, as couldnt find or more likkely saying that ptr is null ptr... or actually they didnt even exsist in dma yet so i guess huge issue thrown? ...possible crash....derefrencing uniitialized location,,,...)
     BlockImageTexture_Bonus_Lvl_File_Location = new string *[No_of_Bonus_levels];
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 14" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 14" << endl;
     for (int i = 0; i < No_of_Bonus_levels; i++) // Issue was, Loop was using Total No of levels in condiion instead of no of bonus level
     {//have to check if i dmaeed the array of float ptrs up....
         x_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
@@ -598,14 +603,14 @@ Stored_Level_Configs::Stored_Level_Configs()
         BlockImageTexture_Bonus_Lvl_File_Location[i] = new string[No_of_Blocks_in_each_bonus_round[i]];
     }
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 14.5" << endl;//std bad allocation is thrown when compiler fails to allocate memeory may be due to exhastion of RAM
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 14.5" << endl;//std bad allocation is thrown when compiler fails to allocate memeory may be due to exhastion of RAM
     x_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0;//std bad array new length is threon when negative new length or exceeded implementation limits, Alhamdulilah Rab Al Alameen
     y_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
     width_of_each_blocks_bonus_level_holder_array[0][0]= 10;
     height_of_each_blocks_bonus_level_holder_array[0][0] = 10;
     BlockImageTexture_Bonus_Lvl_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 15" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 15" << endl;
 
     x_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
     y_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
@@ -613,7 +618,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     height_of_each_blocks_bonus_level_holder_array[1][0] = 10;
     BlockImageTexture_Bonus_Lvl_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 16" << endl;
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 16" << endl;
 
 } // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
@@ -692,6 +697,8 @@ Stored_Level_Configs::~Stored_Level_Configs()
 }
 
 //-----------Getters of Stored_Level_Configs::
+
+int Stored_Level_Configs::Total_Levels_For_which_Data_is_Present=10;//to be able to return outside using :: it was made a static again, Alhamdulilah Rab Al Alameen
 
 int Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() // Alhamdulilah Rab Al Alameen
 {

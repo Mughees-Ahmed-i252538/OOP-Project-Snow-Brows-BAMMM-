@@ -288,9 +288,14 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     //Bismillah Hirahman Nirahim, Oh Allah SWT please provide barakah and save from errors Ameen
 
     cout<<"\n\n\nBismillah Hirahman Nirahim Trying to make level\n\n\n"<<endl;
+
+
+    //To put this in control of main screen, load from should call another constructor ro be made soon inshallah(or perhaps pass this one a default argyukment than the load makes as read from file, Alhamdulilah Rab Al Alameen, Load also loads each players no of lifes left etc, Alhamdulilah rab al alameen)
     Level_Config *levelConfig = new Level_Config(window.getSize().x,window.getSize().y);//ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
+
+    bool level_ends=false;
 
     while (window.isOpen())//i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
@@ -312,6 +317,10 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
                     Debug_Mode_On=false;
                 else
                     Debug_Mode_On=true;
+            }
+            if(event.type==sf::Event::KeyPressed&& event.key.code== sf::Keyboard::F10)//force level ca=hanger key for Debugging to be removed in later levels inshallah
+            {
+                level_ends=true;
             }
         }
 
@@ -400,8 +409,29 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         // window.draw(Circle);
         // window.draw();//It seems that this line is a must for drawing the given shape, Mashallah
-        
-        window.display();//switches front bufffer and back buffer Alhamdulilah rab al alameen
+
+        //Bismillah hirahman nirahim, level changer
+
+        if(level_ends&&Level_Config::getLevel_Count()!=Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//as couldnt call a non static memeber, hence made it static Alhamdulilah Rab Al Alameen
+        {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
+            cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
+            delete levelConfig;
+            levelConfig=new Level_Config(window.getSize().x, window.getSize().y);
+            level_ends=false;
+            cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
+        }
+
+        if (Level_Config::getLevel_Count() == Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())
+        {
+            cout << "Level Count" << Level_Config::getLevel_Count() <<endl;
+            cout << "Total Level's Present" << Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present() << endl;
+            //game end logic soon inshallah, an ending screen, an animation or video if possible with credits inshallah
+            cout<<"Game Ended Alhamdulilah Rab Al Alameen"<<endl;
+            window.close();//ok didnt need the retur 0 here but window.close() this ennds the loop and hence end of game smoother instead of sudden, Alhamdulilah Rab AL Alameen
+            //currently forced exit, later change to suitable animation or ending screen for replay etc, Inshallah Allah SWT know best Alhamdulilah Rab AL ALameen
+        }
+
+            window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
     delete Players;
     Players=nullptr;

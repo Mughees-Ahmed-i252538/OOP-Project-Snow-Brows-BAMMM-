@@ -69,6 +69,7 @@ class Level_Config{
         Level_Config(float Window_width,float Window_heightw);
         ~Level_Config();//Bismillah Hirahman Niraheem I would <stdexcept> try{code, using throw invalid_argument ,runtime error etc} catch(std::invalid_argument & e) basically catches and destructs all locals in try and runs catch to try prevent program crash, if nothing catches than calls terminate() that crashes program, after catch block, program resumes from after catch block, Alhamdulilah rab al alameen
         void display(sf::RenderWindow& window);
+        static int getLevel_Count();
     
 
 };
@@ -83,7 +84,7 @@ class Stored_Level_Configs
     //int Stored_Level_Configs::Total_Levels_For_which_Data_is_Present = 10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
      //This was decessively made non static, as only one object of stored is to be made technically, Alhamdulilah Rab Al Alameen                                                                      // 10+2 bonus Alhamdulilah, oops the bonus levels are selected from all levels except boss so only 10 levels Alhamdulilah Rab AL Alameen
 
-    int Total_Levels_For_which_Data_is_Present=10; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
+    static int Total_Levels_For_which_Data_is_Present; // This gives how many Level_Config we have data of, this is used to give size of LevelData Array Alhamdulilah Rab Al Alameen
     //float Width_of_a_block=10; //These made viarying for each block and now stored for each block, Alhamdulilah Rab Al Alameen                     // to define soon inshallah
     //float Height_of_a_block=10;//these can be static but it is easier to manage this way as it is only planneed for a single storage level config to be made Alhamdulilah Rab Al Alameen, currently defining both height and width as 10 for testing later inshallah, Alhamdulilah rab al alameen
     //This stored doesnt have is-> the one by one increasing level count and the level id, those are needed to track this level and know next level
@@ -141,7 +142,7 @@ class Stored_Level_Configs
 
     public:
     //-------getters
-    int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
+    static int getTotal_Levels_For_which_Data_is_Present() ;  //Alhamdulilah Rab Al Alameen
     float *getwidths_of_blocks_each_level_holder_array(int level);
     float *getheights_of_blocks_each_level_holder_array(int level);
     string getBackgroundImageTexture_File_Locations(int level); // Dont forget the out of bound checks inshallah, Alhamdulilah Rab Al Alameen
