@@ -1,6 +1,6 @@
 #include "Bismillah_Hirahman_Nirahim_Level_Structure.h"
 
-
+Stored_Level_Configs Level_Config::stored_Level_configs;//as static so need to define must define in a cpp, ,also as we cant do =0 as object... so we leave as is and it calls default constructor, Alhamdulilah Rab Al Alameen., Alhamdulilah Rab Al Alameen
 int Level_Config::Level_count = 0;
 
 void ForRelativeSizeAndPostionShape_Level_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
@@ -76,7 +76,7 @@ void ForRelativeSizeAndPostionSprite_Level_Copy(float NeededWidth, float NeededH
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
-Level_Config::Level_Config(sf::RenderWindow window)//can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
+Level_Config::Level_Config(float Window_width, float Window_height) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
 
@@ -120,10 +120,7 @@ Level_Config::Level_Config(sf::RenderWindow window)//can you just call destructo
         {
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             //now to set size of background to window height and width
-            ForRelativeSizeAndPostionSprite_Level_Copy(window.getSize().x, window.getSize().y, BackgroundImageSprite, sf::Vector2f(window.getSize().x / 2, window.getSize().y/2));
-
-            
-
+            ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width/ 2, Window_height / 2));
 
         }   //For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
 
@@ -186,7 +183,7 @@ Level_Config::Level_Config(sf::RenderWindow window)//can you just call destructo
         {
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             // now to set size of background to window height and width
-            ForRelativeSizeAndPostionSprite_Level_Copy(window.getSize().x, window.getSize().y, BackgroundImageSprite, sf::Vector2f(window.getSize().x / 2, window.getSize().y / 2));
+            ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width / 2, Window_height / 2));
 
         } // For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
 

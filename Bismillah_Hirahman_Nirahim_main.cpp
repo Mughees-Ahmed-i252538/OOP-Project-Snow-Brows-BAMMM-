@@ -5,6 +5,7 @@
 #include <SFML/Audio.hpp>
 #include "Bismillah_Hirahman_Nirahim_Common_Header.h"
 #include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
+#include "Bismillah_Hirahman_Nirahim_Level_Structure.h"
 
 //Now trying a branch Bismillah hirahman nirahim
 
@@ -239,7 +240,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     Players_Jump[1] = sf::Keyboard::I;
     Players_Hit[1] = sf::Keyboard::U;
 
-     sf::Texture Test_LoadingBluePlayerSpriteSheetT;
+    sf::Texture Test_LoadingBluePlayerSpriteSheetT;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
     if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
     {
@@ -268,7 +269,19 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     TestSoundS.play(); */
 
-    
+    //Bismillah hirahman Nirahim
+
+    //Adding a parameterized constructor for stored level loading inshallah, 
+    //Level logic in main by the grace of Allah Almighty
+    //Level_Config* = new LevelConfig;
+    //delte when level end, redo for new level
+    //If Current level == StoredConfigs::TotalStored Levels game end, Alhamdulilah Rab Al Alameen
+
+    //Bismillah Hirahman Nirahim, Oh Allah SWT please provide barakah and save from errors Ameen
+
+    Level_Config *levelConfig = new Level_Config(window.getSize().x,window.getSize().y);//ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
+    //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
+    //Ameen, Alhamdulilah Rab Al Alameen
 
     while (window.isOpen())
     {

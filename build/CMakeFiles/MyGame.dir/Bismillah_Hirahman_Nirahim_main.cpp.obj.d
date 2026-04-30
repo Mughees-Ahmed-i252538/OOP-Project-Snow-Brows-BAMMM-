@@ -286,4 +286,5 @@ CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_main.cpp.obj: \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/quoted_string.h \
  C:/msys64/ucrt64/include/c++/14.2.0/sstream \
  C:/msys64/ucrt64/include/c++/14.2.0/bits/sstream.tcc \
- C:\Users\HP\OneDrive\Desktop\Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Entity_Structure.h
+ C:\Users\HP\OneDrive\Desktop\Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Entity_Structure.h \
+ C:\Users\HP\OneDrive\Desktop\Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Level_Structure.h
