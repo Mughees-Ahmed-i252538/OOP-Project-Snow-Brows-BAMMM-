@@ -1,4 +1,4 @@
-
+#pragma once
 #include <iostream>//if giving linker errors, first define  static vars inshallah
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>

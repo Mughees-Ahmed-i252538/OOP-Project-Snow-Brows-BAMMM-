@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    srand(time(0));
+    int Total_Levels_For_which_Data_is_Present=10;
+    int No_of_Boss_Levels=2;
+    int No_of_Bonus_levels = 2;
+    int Indexes_of_Bonus_Levels[2];
+    int Indexs_of_Boss_Level[2]={4,9};
+
+    for (int i = 0; i < No_of_Bonus_levels; i++)
+    {
+
+        if (No_of_Bonus_levels > (Total_Levels_For_which_Data_is_Present - No_of_Boss_Levels))
+        {
+            cout << "Bonus Levels no. not possible, enough feasible levels dont exsist" << endl; // Alhamdulilah
+            break;
+        } // As boss levels fixed, it is fine to keep their file name in origna l string array, but for other things, like enetity mobs etc, we might have too see inshallah, Alhamdulilah Rab Al Alameen
+
+        Indexes_of_Bonus_Levels[i] = rand() % (Total_Levels_For_which_Data_is_Present); // 0 to 9 if total 10
+
+        // New plan-> to make different everything including arrays etc for Boss levels too, and if index detected equal to these then load from those not the orignal array-> as orignal arrays etc cant directly account for something extra, Allah SWT knows best, Alhamdulilah
+        // eg we can easily list boss as enemy entity, but better keep those round special like bonus rounds, ok to implement after bonus inshallah
+
+        bool already_undid_next_index_increment = false;
+
+        for (int j = 0; j < No_of_Boss_Levels; j++)
+        {
+            if (Indexes_of_Bonus_Levels[i] == Indexs_of_Boss_Level[j])
+            {
+                i--; // redo
+                break;
+                already_undid_next_index_increment = true;
+            }
+        }
+
+        if (!already_undid_next_index_increment) // if already undid then shouldnt undo again, Alhamdulilah Rab Al Alameen
+        {
+            for (int j = i - 1; j >= 0; j--) // if i already 0 then loop just doesnt even start Alhamdulilah
+            {//had done j++ instead of --
+                if (Indexes_of_Bonus_Levels[j] == Indexes_of_Bonus_Levels[i])
+                {
+                    i--;
+                    break; // redo Alhamdulilah
+                }
+            }
+        }
+
+    } // this basicalled goes on forever if not feasible so,
+
+    cout<<Indexes_of_Bonus_Levels[0]<<endl;
+    cout<<Indexes_of_Bonus_Levels[1]<<endl;
+    
+}

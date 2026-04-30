@@ -217,8 +217,16 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     Player *P2 = new Player(Second_Persons_Choice); // 0 loads nick design and i believe 1 loads blue player (the one next to nick.pbg), this will be changed later
 
     Player** Players = new Player*[No_of_Players];//As array of & wasnt allowed so we make array of ptrs Alhamdulilah rab al alameen
+
+    
+
     Players[0]=P1;
+
+   
+
     Players[1] = P2;// Note as P1 and P2 are just pointing to DMA, now we can just assign those ptrs to array and null ptr p1 and p2
+
+
 
     P1=nullptr;//This way Alhamdulilah Rab Al Alameen, we manage to use array to point at same place but now access must be changed from directly players[] to players[]-> Alhamduliah rab al alameen
     P2=nullptr;
@@ -279,6 +287,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     //Bismillah Hirahman Nirahim, Oh Allah SWT please provide barakah and save from errors Ameen
 
+    cout<<"\n\n\nBismillah Hirahman Nirahim Trying to make level\n\n\n"<<endl;
     Level_Config *levelConfig = new Level_Config(window.getSize().x,window.getSize().y);//ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen

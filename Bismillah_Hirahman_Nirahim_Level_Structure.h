@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>          //if giving linker errors, first define  static vars inshallah
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
@@ -65,7 +66,7 @@ class Level_Config{
     //Level_Data_Present* levels_data;//initliaed in constructor of Level_Config, this is, Logic changed Alahamdulilah, now all the static data will be stored inside this class...although we could make a separate class that would make our lives easier by assign=ing using just an overridden eequal sign, Alhamdulilah Rab Al ALameen
 
     public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has
-        Level_Config(float Window_width,float Window_height);
+        Level_Config(float Window_width,float Window_heightw);
         ~Level_Config();
     
 
@@ -167,4 +168,4 @@ class Stored_Level_Configs
 
     Stored_Level_Configs();
     ~Stored_Level_Configs();//declared here and also defined in cpp( constructor and destructor) Alhamdulilah
-};
+};  
