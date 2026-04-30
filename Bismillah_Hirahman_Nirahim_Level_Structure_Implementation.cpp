@@ -320,12 +320,12 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     widths_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];
     heights_of_blocks_each_level_holder_array =new float *[Total_Levels_For_which_Data_is_Present];//Had forgoted to inititalize the float* and directly done the float below, hence corrected Alahmdulilah Rab Al Alameen....It did give squiggly line in vscode....May Allah SWT help me and us all ameen
-    BlockImageTexture_Bonus_Lvl_File_Location = new string *[Total_Levels_For_which_Data_is_Present];
+    BlockImageTexture_File_Location = new string *[Total_Levels_For_which_Data_is_Present];
     // Making Array in loop, assigning manually inshallah
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
-    cout << "Bismillah Hirahman Nirahim Phase Test 4" << endl;
+    cout << "Bismillah Hirahman Nirahim Phase Test 4" << endl;//The non bonus levbel block sprite texture was miss spelled
 
     for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
     {
@@ -333,7 +333,7 @@ Stored_Level_Configs::Stored_Level_Configs()
         y_positions_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];//at respective level array see no of blocks at that level Alhamdulilah Rab Al Alameen
         widths_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]]; // Bismillah Hirahman Nirahim, adding widths and height record arrays for each block as well, Alhamdulilah rab al alameen, logic changed from fixed width heiht, to varying Alhamdulilah
         heights_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];
-        BlockImageTexture_Bonus_Lvl_File_Location[i] = new string[No_of_Blocks_in_each_round[i]];
+        BlockImageTexture_File_Location[i] = new string[No_of_Blocks_in_each_round[i]];
 
     }//Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
     //sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
@@ -349,61 +349,61 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_positions_of_blocks_each_level_holder_array[0][0]=0;//making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
     widths_of_blocks_each_level_holder_array[0][0]=10;
     heights_of_blocks_each_level_holder_array[0][0]=10;//Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
-    BlockImageTexture_Bonus_Lvl_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    BlockImageTexture_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
     y_positions_of_blocks_each_level_holder_array[1][0] = 10;
     widths_of_blocks_each_level_holder_array[1][0] = 11;
     heights_of_blocks_each_level_holder_array[1][0] = 11;
-    BlockImageTexture_Bonus_Lvl_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    BlockImageTexture_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[2][0] = 20;
     y_positions_of_blocks_each_level_holder_array[2][0] = 20;
     widths_of_blocks_each_level_holder_array[2][0] = 12;
     heights_of_blocks_each_level_holder_array[2][0] = 12;
-    BlockImageTexture_Bonus_Lvl_File_Location[2][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    BlockImageTexture_File_Location[2][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[3][0] = 30;
     y_positions_of_blocks_each_level_holder_array[3][0] = 30;
     widths_of_blocks_each_level_holder_array[3][0] = 13;
     heights_of_blocks_each_level_holder_array[3][0] = 13;
-    BlockImageTexture_Bonus_Lvl_File_Location[3][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    BlockImageTexture_File_Location[3][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
 
     x_positions_of_blocks_each_level_holder_array[4][0] = 40;
     y_positions_of_blocks_each_level_holder_array[4][0] = 40;
     widths_of_blocks_each_level_holder_array[4][0] = 14;
     heights_of_blocks_each_level_holder_array[4][0] = 14;
-    BlockImageTexture_Bonus_Lvl_File_Location[4][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[4][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[5][0] = 50;
     y_positions_of_blocks_each_level_holder_array[5][0] = 50;
     widths_of_blocks_each_level_holder_array[5][0] = 15;
     heights_of_blocks_each_level_holder_array[5][0] = 15;
-    BlockImageTexture_Bonus_Lvl_File_Location[5][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[5][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[6][0] = 60;
     y_positions_of_blocks_each_level_holder_array[6][0] = 60;
     widths_of_blocks_each_level_holder_array[6][0] = 16;
     heights_of_blocks_each_level_holder_array[6][0] = 16;
-    BlockImageTexture_Bonus_Lvl_File_Location[6][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[6][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[7][0] = 70;
     y_positions_of_blocks_each_level_holder_array[7][0] = 70;
     widths_of_blocks_each_level_holder_array[7][0] = 17;
     heights_of_blocks_each_level_holder_array[7][0] = 17;
-    BlockImageTexture_Bonus_Lvl_File_Location[7][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[7][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[8][0] = 80;
     y_positions_of_blocks_each_level_holder_array[8][0] = 80; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
     widths_of_blocks_each_level_holder_array[8][0] = 18;
     heights_of_blocks_each_level_holder_array[8][0] = 18;
-    BlockImageTexture_Bonus_Lvl_File_Location[8][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[8][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     x_positions_of_blocks_each_level_holder_array[9][0] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
     y_positions_of_blocks_each_level_holder_array[9][0] = 90; // Alhamdulilah Rab Al Alameen
     widths_of_blocks_each_level_holder_array[9][0] = 19;
     heights_of_blocks_each_level_holder_array[9][0] = 19;
-    BlockImageTexture_Bonus_Lvl_File_Location[9][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    BlockImageTexture_File_Location[9][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
@@ -557,7 +557,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     Bonus_Level_BackgroundImageTexture_File_Locations[0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png";
     Bonus_Level_BackgroundImageTexture_File_Locations[1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\LvlBonus.png"; // LvlBonus
 
-    string *Bonus_Level_MusicSB_File_Locations = new string[No_of_Bonus_levels];
+    Bonus_Level_MusicSB_File_Locations = new string[No_of_Bonus_levels];//removed accident relocal instead of memeber of this array Alhamdulilah rab al alameen
     Bonus_Level_MusicSB_File_Locations[0] =
         "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\snow_bros_theme_01.ogg";
 

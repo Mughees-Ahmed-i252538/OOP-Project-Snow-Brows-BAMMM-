@@ -292,7 +292,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
 
-    while (window.isOpen())
+    while (window.isOpen())//i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
 
         sf::Event event;//For Press Type events eg snowball throw Alhamdulilah
