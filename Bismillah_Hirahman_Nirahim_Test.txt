@@ -1,56 +1,67 @@
-#include <iostream>
-using namespace std;
+Window_Res Window_view_Size;//should I make it an Enum class instead to not allow it to be changed? but enum cant take floats..., Well this should be easier to do but changing will be hard later on, Lets see as we go inshallah, Oh Allah SWT Please guide us all
+    int considered_sub_cube_width=20;
 
-int main()
-{
-    srand(time(0));
-    int Total_Levels_For_which_Data_is_Present=10;
-    int No_of_Boss_Levels=2;
-    int No_of_Bonus_levels = 2;
-    int Indexes_of_Bonus_Levels[2];
-    int Indexs_of_Boss_Level[2]={4,9};
+    cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.5" << endl;
 
-    for (int i = 0; i < No_of_Bonus_levels; i++)
+    for(int i=0;i<Total_Levels_For_which_Data_is_Present;i++)//Creating walls, texture different elsewise same size and position for each level, Alhamdulilah Rab Al Alameen
     {
+        cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.6.i:"<<i<<" " << endl;
+        string Wanted_Texture_FL;//ensuring there is a new local scope each iteration to ensure no trouble of removing the initialy present work in it, Alhamdulilah Rab Al Alameen
 
-        if (No_of_Bonus_levels > (Total_Levels_For_which_Data_is_Present - No_of_Boss_Levels))
+        if(i>=0&&i<=3)
         {
-            cout << "Bonus Levels no. not possible, enough feasible levels dont exsist" << endl; // Alhamdulilah
-            break;
-        } // As boss levels fixed, it is fine to keep their file name in origna l string array, but for other things, like enetity mobs etc, we might have too see inshallah, Alhamdulilah Rab Al Alameen
-
-        Indexes_of_Bonus_Levels[i] = rand() % (Total_Levels_For_which_Data_is_Present); // 0 to 9 if total 10
-
-        // New plan-> to make different everything including arrays etc for Boss levels too, and if index detected equal to these then load from those not the orignal array-> as orignal arrays etc cant directly account for something extra, Allah SWT knows best, Alhamdulilah
-        // eg we can easily list boss as enemy entity, but better keep those round special like bonus rounds, ok to implement after bonus inshallah
-
-        bool already_undid_next_index_increment = false;
-
-        for (int j = 0; j < No_of_Boss_Levels; j++)
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\WallBlock.png";
+        }
+        else if(i==4)
         {
-            if (Indexes_of_Bonus_Levels[i] == Indexs_of_Boss_Level[j])
-            {
-                i--; // redo
-                break;
-                already_undid_next_index_increment = true;
-            }
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        }
+        else if (i >= 5 && i <= 8)
+        {
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture3.png ";
+        }
+        else{
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture4.png ";
         }
 
-        if (!already_undid_next_index_increment) // if already undid then shouldnt undo again, Alhamdulilah Rab Al Alameen
-        {
-            for (int j = i - 1; j >= 0; j--) // if i already 0 then loop just doesnt even start Alhamdulilah
-            {//had done j++ instead of --
-                if (Indexes_of_Bonus_Levels[j] == Indexes_of_Bonus_Levels[i])
-                {
-                    i--;
-                    break; // redo Alhamdulilah
-                }
-            }
-        }
+        cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.i:" << i << " " << endl;
+        cout << Wanted_Texture_FL << endl;
 
-    } // this basicalled goes on forever if not feasible so,
+        // Left Wall, considering each sub block is 20 tall and 20 wide, so the whole wall should be stack of 25 blocks, that is 20 wide and 500 heigh or vice versa, centre one at 10 and the other at 250 Alhamdulilah Rab Al Alameen
+        // For left specifically, y at 250 and x at 10, as you notice both position will be at half of full sizes as becomes orign and then places , to ensure that the block summoned stays entirely on screen not leaking out, Alhadmulilah Rab AL Alameen
+        x_positions_of_blocks_each_level_holder_array[i][0] = considered_sub_cube_width/2;       // Note: although the walls can be done in a loop, but we try to keep the wall texture variable
+        y_positions_of_blocks_each_level_holder_array[i][0] = Window_view_Size.Win_Height / 2; // these are used to call the relative size & position function later on so work perfectly Alhamdulilah Rab Al Alameen
+        widths_of_blocks_each_level_holder_array[i][0] = considered_sub_cube_width;
+        heights_of_blocks_each_level_holder_array[i][0] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
 
-    cout<<Indexes_of_Bonus_Levels[0]<<endl;
-    cout<<Indexes_of_Bonus_Levels[1]<<endl;
-    
-}
+        cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.5.i:" << i << " " << endl;
+
+        BlockImageTexture_File_Location[i][0] = Wanted_Texture_FL;//oops accidently went overbound, resolved Alhamdulilah Rab Al Alameen
+
+        cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.8.i:" << i << " " << endl;
+
+        // Right, left shifted to right side by taking left x position and doing 500 - that, the sizes remain the same Alhamdulilah Rab Al Alameen, so does the ya pos
+        x_positions_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Width - considered_sub_cube_width / 2; // Just think that it is left boundary move right wards by increasing x, which you get equal as left was from left corner of screen (its x pos) but right corner is 500, so to get equal distance we subtract from 500, Alhamdulilah Rab AL Alameen
+        y_positions_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Height / 2;
+        widths_of_blocks_each_level_holder_array[i][1] = considered_sub_cube_width;
+        heights_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][1] = Wanted_Texture_FL;
+
+        //Top Wall,x centre at 250 so it doent escape out, y centre at 10, width full screen, Width instead of height, but we are assuming subcubes...I beleieve that boundaries may get thin or thick depending on resultion but they will cover any resolution inshallah May Allah help us Ameen 
+        x_positions_of_blocks_each_level_holder_array[i][2] = Window_view_Size.Win_Width / 2;
+        y_positions_of_blocks_each_level_holder_array[i][2] = considered_sub_cube_width / 2;
+        widths_of_blocks_each_level_holder_array[i][2] = Window_view_Size.Win_Width;// note cube with=cube height
+        heights_of_blocks_each_level_holder_array[i][2] = considered_sub_cube_width; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][2] = Wanted_Texture_FL;
+
+        //Reordereing ensuring left and right come over top and bottom for design, as drawn in order,0 --- so on, Alhamdulilah Rab Al alameen
+
+        
+
+        //Bottom is similar to top shifted down, just y value of position taken wrt down corner of screem ie Window res-position of x of top, Alhamdulilah Rab Al Alameen
+        x_positions_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width / 2;//Rememeber x remains unaltered from top but y is different, Alhamdulilah Rab Al Alameen, Bismillah Hirahman Nirahim, Test
+        y_positions_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width- considered_sub_cube_width / 2; // here the no of sub cubes constintuesnts of figures get as per resolution and we dont directly touch that, Alhamdulilah Rab AL ALameen
+        widths_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width;//Perhaps we could replace the single block texture in files to whole wall one, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+        heights_of_blocks_each_level_holder_array[i][3] = considered_sub_cube_width; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][3] = Wanted_Texture_FL;//Deadline was extended Alhamdulilah, Oh ALlah SWT please help me complete this project Ameen
+    }

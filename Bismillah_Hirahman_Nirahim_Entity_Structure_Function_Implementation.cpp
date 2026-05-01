@@ -185,9 +185,9 @@ int Player::No_of_Player_Sprite_and_related_present = 5;
 
 int Player::Standard_Default_Player_Mass=10;//10 kg....it is ceiling value of the 9.07 weight of nintendo switch and the snowbros game....because i couldnt find nicks weight anywhere...Alhamdulilah Rab Al Alameen, Although snowmen are generally over 200 kg, but there is no way such heavy person made of snow not only moves...but also flies.....in balood mode ofcourse...Alhamdulilah Rab Al Alameen...(other than the humour, 10 is choosen for ease of use, It may be changed as desired, Alhamdulilah Rab Al ALameen)
 
-float Player::Player_sprite_height_to_display=55;
+float Player::Player_sprite_height_to_display=55;//for trial raisinf to 1.5 times Alhamdulilah
 
-float Player::Player_sprite_width_to_display=40;//to be adjusted if needed inshallah
+float Player::Player_sprite_width_to_display=40;//to be adjusted if needed inshallah, making smaller again
 
 int Player::Player_Count = 0;//ld error because had missed player count, Added Alhamdulilah Rab Al Alameen
 

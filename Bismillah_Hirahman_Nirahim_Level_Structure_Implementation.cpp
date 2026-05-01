@@ -77,7 +77,7 @@ void ForRelativeSizeAndPostionSprite_Level_Copy(float NeededWidth, float NeededH
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
-Level_Config::Level_Config(float Window_width, float Window_height) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
+Level_Config::Level_Config(float Window_view_width, float Window_view_height) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
     cout<<"--------------------------------------------------"<<"\n"<<endl;
@@ -144,7 +144,7 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
 
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             //now to set size of background to window height and width
-            ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width/ 2, Window_height / 2));
+            ForRelativeSizeAndPostionSprite_Level_Copy(Window_view_width,Window_view_height, BackgroundImageSprite, sf::Vector2f(Window_view_width/ 2, Window_view_height / 2));
 
         }   //For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
 
@@ -205,8 +205,7 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
         cout << "No of blocks in this rounds:" << stored_Level_configs.getNo_of_Blocks_in_each_bonus_round(Which_Of_The_Bonus_Levels) << "\n"
              << endl;
         cout<<"Location of Bonus Level's Background Image:"<<stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels)<<"\n"<<endl;
-        cout << "Location of Bonus Level's Background Image:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels) << "\n"
-             << endl;
+        cout << "Location of Bonus Level's Background Image:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels) << "\n"<< endl;
         // Bismillah Hirahman Nirahim starting from bg texture
         //One more Level_id was remaining, resolved that and now it is normmaly working for all rounds, Alhamdulilah Rab Al Alameen
 
@@ -218,21 +217,25 @@ Level_Config::Level_Config(float Window_width, float Window_height) // can you j
         {
             cout << "Loaded bonus lvl Background texture from file" << stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels) << endl;
        
+            cout<<"Bismillah Hirahman Nirahim Bonus Round Construction Test 1"<<"\n"<<endl;
             BackgroundImageSprite.setTexture(BackgroundImageTexture);
             // now to set size of background to window height and width
-            ForRelativeSizeAndPostionSprite_Level_Copy(Window_width,Window_height, BackgroundImageSprite, sf::Vector2f(Window_width / 2, Window_height / 2));
-
+            ForRelativeSizeAndPostionSprite_Level_Copy(Window_view_width,Window_view_height, BackgroundImageSprite, sf::Vector2f(Window_view_width / 2, Window_view_height / 2));
+            cout<<"Bismillah Hirahman Nirahim Bonus Round Construction Test 2"<<"\n"<<endl;
         } // For sound, perhaps transfer it to music and then play in main as it will be destructed at function end as local, hence called in main and then played
 
-        if (!Level_MusicSB.openFromFile(stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Level_id)))
+        cout<<"Bismillah Hirahman Nirahim Bonus Round Construction Test 3"<<"\n"<<endl;
+        if (!Level_MusicSB.openFromFile(stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels)))//Corrected another use of Level id instead of which of the bonus levels Alhamdulilah Rab Al Alameen
         {
             cout << "Filed to load bonus lvl Background music from file:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels) << endl;
         } // no need for else here, music loaded
         else
         {
+            cout<<"Bismillah Hirahman Nirahim Bonus Round Construction Test 4"<<"\n"<<endl;
             cout << "Loaded bonus lvl Background music from file:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels) << endl;
         } 
 
+        cout<<"Bismillah Hirahman Nirahim Bonus Round Construction Test 5"<<"\n"<<endl;//self remember if template takes 1 data type and sent are two differnt then error compiler,,..Alhamdulilah Rab Al Alameen
         No_of_Blocks_in_this_round = stored_Level_configs.getNo_of_Blocks_in_each_bonus_round(Which_Of_The_Bonus_Levels);//The entire issue was that this was being called using Level id instead of which of the bonus rounds,....Solved, Alhamdulilah Rab AL Alameen
 
         BlockImageTextures = new sf::Texture[No_of_Blocks_in_this_round];
@@ -349,23 +352,23 @@ Stored_Level_Configs::Stored_Level_Configs()
     Level_MusicSB_File_Locations[9] =
         "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\final_boss_snow_bros.ogg"; // redundant kept if want to add more or change Alhamdulilah
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 2" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 2" << endl;
 
     No_of_Blocks_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
     //To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
 
-    No_of_Blocks_in_each_round[0]=1;
-    No_of_Blocks_in_each_round[1] = 1;
-    No_of_Blocks_in_each_round[2] = 1;
-    No_of_Blocks_in_each_round[3] = 1;
-    No_of_Blocks_in_each_round[4]=1;
-    No_of_Blocks_in_each_round[5] = 1;
-    No_of_Blocks_in_each_round[6] = 1;
-    No_of_Blocks_in_each_round[7] = 1;
-    No_of_Blocks_in_each_round[8] = 1;
-    No_of_Blocks_in_each_round[9] = 1;
+    No_of_Blocks_in_each_round[0]=4+9;//4 of boundary
+    No_of_Blocks_in_each_round[1] = 5;
+    No_of_Blocks_in_each_round[2] = 5;
+    No_of_Blocks_in_each_round[3] = 5;
+    No_of_Blocks_in_each_round[4]=5;
+    No_of_Blocks_in_each_round[5] = 5;
+    No_of_Blocks_in_each_round[6] = 5;
+    No_of_Blocks_in_each_round[7] = 5;
+    No_of_Blocks_in_each_round[8] = 5;
+    No_of_Blocks_in_each_round[9] = 5;
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
 
     x_positions_of_blocks_each_level_holder_array = new float *[Total_Levels_For_which_Data_is_Present]; // An array that holds arrays in dma on eacg blocks x position in each level, an array per level. Alhamdulilah Rab Al Alameen, rather than copying, we can also just give ptr to that dma,but Level Config shouldnt destroy it but stored should, Alhamdulilah rab al alameen
     //Now to loop and give needed width to each array (may be different for all, determined by no of blocks at respective index, Alhamdulilah)
@@ -378,7 +381,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 4" << endl;//The non bonus levbel block sprite texture was miss spelled
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 4" << endl;//The non bonus levbel block sprite texture was miss spelled
 
     for (int i = 0; i < Total_Levels_For_which_Data_is_Present; i++)
     {
@@ -388,79 +391,251 @@ Stored_Level_Configs::Stored_Level_Configs()
         heights_of_blocks_each_level_holder_array[i] = new float[No_of_Blocks_in_each_round[i]];
         BlockImageTexture_File_Location[i] = new string[No_of_Blocks_in_each_round[i]];
 
+        //On all levels the four blocks are required to be walls, Alhamdulilah Rab Al Alameen
+
     }//Perhaps we could make a structure , or no actually a Vector2f with refrence to these as well for easier sending? Well May Allah SWT help us ameen
     //sfml vector2f cant have refrences as parameters...so we can think of another way,but for now leave it, Alhamdulilah Rab Al Alameen
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 5" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5" << endl;
 
     //As each block has different locations we must give it manually for each block
     //May Allah SWT help us, Ameen
 
     //Currently for testing, each level has one block so, bismillah hirahman nirahim (also ten levels total.... Alhamdulilah rab al alameen)
 
-    x_positions_of_blocks_each_level_holder_array[0][0]=0;
-    y_positions_of_blocks_each_level_holder_array[0][0]=0;//making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
-    widths_of_blocks_each_level_holder_array[0][0]=10;
-    heights_of_blocks_each_level_holder_array[0][0]=10;//Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
-    BlockImageTexture_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    Window_Res Window_view_Size;//should I make it an Enum class instead to not allow it to be changed? but enum cant take floats..., Well this should be easier to do but changing will be hard later on, Lets see as we go inshallah, Oh Allah SWT Please guide us all
+    int considered_sub_cube_width=30;
 
-    x_positions_of_blocks_each_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_positions_of_blocks_each_level_holder_array[1][0] = 10;
-    widths_of_blocks_each_level_holder_array[1][0] = 11;
-    heights_of_blocks_each_level_holder_array[1][0] = 11;
-    BlockImageTexture_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.5" << endl;
 
-    x_positions_of_blocks_each_level_holder_array[2][0] = 20;
-    y_positions_of_blocks_each_level_holder_array[2][0] = 20;
-    widths_of_blocks_each_level_holder_array[2][0] = 12;
-    heights_of_blocks_each_level_holder_array[2][0] = 12;
-    BlockImageTexture_File_Location[2][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    int size_of_hot_bar_at_bottom=50;//This place is where all the hearts etc go so it is made space at below, Thought of as countermeasure to snowmen being up and full bottom not being visible  Alhamdulilah Rab Al Alameen
 
-    x_positions_of_blocks_each_level_holder_array[3][0] = 30;
-    y_positions_of_blocks_each_level_holder_array[3][0] = 30;
-    widths_of_blocks_each_level_holder_array[3][0] = 13;
-    heights_of_blocks_each_level_holder_array[3][0] = 13;
-    BlockImageTexture_File_Location[3][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png ";
+    for(int i=0;i<Total_Levels_For_which_Data_is_Present;i++)//Creating walls, texture different elsewise same size and position for each level, Alhamdulilah Rab Al Alameen
+    {
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.6.i:"<<i<<" " << endl;
+        string Wanted_Texture_Header_FL;//ensuring there is a new local scope each iteration to ensure no trouble of removing the initialy present work in it, Alhamdulilah Rab Al Alameen
+        string Wanted_Texture_Footer_FL;
+        string Wanted_Texture_Sides_FL;
 
-    x_positions_of_blocks_each_level_holder_array[4][0] = 40;
-    y_positions_of_blocks_each_level_holder_array[4][0] = 40;
-    widths_of_blocks_each_level_holder_array[4][0] = 14;
-    heights_of_blocks_each_level_holder_array[4][0] = 14;
-    BlockImageTexture_File_Location[4][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        if(i>=0&&i<=3)//Note file names are +1 to index s of level that are in it Alhamdulilah rab al alameen Alhamdulilah rab al alameen
+        {
+            Wanted_Texture_Header_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Header.png";
+            Wanted_Texture_Footer_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Footer.png ";
+            Wanted_Texture_Sides_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Sides.png ";
+        }
+        else if(i==4)
+        {
+            Wanted_Texture_Header_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+            Wanted_Texture_Footer_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Footer.png ";
+            Wanted_Texture_Sides_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Sides.png ";
+       
+        }
+        else if (i >= 5 && i <= 8)
+        {
+            Wanted_Texture_Header_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture3.png ";
+            Wanted_Texture_Footer_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Footer.png ";
+            Wanted_Texture_Sides_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Sides.png ";
+               }
+        else{
+            Wanted_Texture_Header_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png ";
+            Wanted_Texture_Footer_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Footer.png ";
+            Wanted_Texture_Sides_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1toL4Sides.png ";
+            }
 
-    x_positions_of_blocks_each_level_holder_array[5][0] = 50;
-    y_positions_of_blocks_each_level_holder_array[5][0] = 50;
-    widths_of_blocks_each_level_holder_array[5][0] = 15;
-    heights_of_blocks_each_level_holder_array[5][0] = 15;
-    BlockImageTexture_File_Location[5][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.i:" << i << " " << endl;
+        cout << Wanted_Texture_Header_FL << endl;
 
-    x_positions_of_blocks_each_level_holder_array[6][0] = 60;
-    y_positions_of_blocks_each_level_holder_array[6][0] = 60;
-    widths_of_blocks_each_level_holder_array[6][0] = 16;
-    heights_of_blocks_each_level_holder_array[6][0] = 16;
-    BlockImageTexture_File_Location[6][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        // Left Wall, considering each sub block is 20 tall and 20 wide, so the whole wall should be stack of 25 blocks, that is 20 wide and 500 heigh or vice versa, centre one at 10 and the other at 250 Alhamdulilah Rab Al Alameen
+        // For left specifically, y at 250 and x at 10, as you notice both position will be at half of full sizes as becomes orign and then places , to ensure that the block summoned stays entirely on screen not leaking out, Alhadmulilah Rab AL Alameen
+        x_positions_of_blocks_each_level_holder_array[i][0] = considered_sub_cube_width/2;       // Note: although the walls can be done in a loop, but we try to keep the wall texture variable
+        y_positions_of_blocks_each_level_holder_array[i][0] = Window_view_Size.Win_Height / 2; // these are used to call the relative size & position function later on so work perfectly Alhamdulilah Rab Al Alameen
+        widths_of_blocks_each_level_holder_array[i][0] = considered_sub_cube_width;
+        heights_of_blocks_each_level_holder_array[i][0] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
 
-    x_positions_of_blocks_each_level_holder_array[7][0] = 70;
-    y_positions_of_blocks_each_level_holder_array[7][0] = 70;
-    widths_of_blocks_each_level_holder_array[7][0] = 17;
-    heights_of_blocks_each_level_holder_array[7][0] = 17;
-    BlockImageTexture_File_Location[7][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.5.i:" << i << " " << endl;
 
-    x_positions_of_blocks_each_level_holder_array[8][0] = 80;
-    y_positions_of_blocks_each_level_holder_array[8][0] = 80; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
-    widths_of_blocks_each_level_holder_array[8][0] = 18;
-    heights_of_blocks_each_level_holder_array[8][0] = 18;
-    BlockImageTexture_File_Location[8][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        BlockImageTexture_File_Location[i][0] = Wanted_Texture_Sides_FL; // oops accidently went overbound, resolved Alhamdulilah Rab Al Alameen
 
-    x_positions_of_blocks_each_level_holder_array[9][0] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
-    y_positions_of_blocks_each_level_holder_array[9][0] = 90; // Alhamdulilah Rab Al Alameen
-    widths_of_blocks_each_level_holder_array[9][0] = 19;
-    heights_of_blocks_each_level_holder_array[9][0] = 19;
-    BlockImageTexture_File_Location[9][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+        cout<<"X position of Left Block for Level: "<<i<<" = "<<x_positions_of_blocks_each_level_holder_array[i][0]<<"\n"<<endl;
+        cout<<"Y position of Left Block for Level: "<<i<<" = "<<y_positions_of_blocks_each_level_holder_array[i][0]<<"\n"<<endl;
+
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.8.i:" << i << " " << endl;
+
+        // Right, left shifted to right side by taking left x position and doing 500 - that, the sizes remain the same Alhamdulilah Rab Al Alameen, so does the ya pos
+        x_positions_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Width - considered_sub_cube_width / 2; // Just think that it is left boundary move right wards by increasing x, which you get equal as left was from left corner of screen (its x pos) but right corner is 500, so to get equal distance we subtract from 500, Alhamdulilah Rab AL Alameen
+        y_positions_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Height / 2;
+        widths_of_blocks_each_level_holder_array[i][1] = considered_sub_cube_width;
+        heights_of_blocks_each_level_holder_array[i][1] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][1] = Wanted_Texture_Sides_FL;
+
+        //Top Wall,x centre at 250 so it doent escape out, y centre at 10, width full screen, Width instead of height, but we are assuming subcubes...I beleieve that boundaries may get thin or thick depending on resultion but they will cover any resolution inshallah May Allah help us Ameen 
+        x_positions_of_blocks_each_level_holder_array[i][2] = Window_view_Size.Win_Width / 2;
+        y_positions_of_blocks_each_level_holder_array[i][2] = considered_sub_cube_width / 2;
+        widths_of_blocks_each_level_holder_array[i][2] = Window_view_Size.Win_Width;// note cube with=cube height
+        heights_of_blocks_each_level_holder_array[i][2] = considered_sub_cube_width; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][2] = Wanted_Texture_Header_FL;
+
+        //Reordereing ensuring left and right come over top and bottom for design, as drawn in order,0 --- so on, Alhamdulilah Rab Al alameen
+
+        
+
+        //Bottom is similar to top shifted down, just y value of position taken wrt down corner of screem ie Window res-position of x of top, Alhamdulilah Rab Al Alameen
+        x_positions_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width / 2;//Rememeber x remains unaltered from top but y is different, Alhamdulilah Rab Al Alameen, Bismillah Hirahman Nirahim, Test
+        y_positions_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width- considered_sub_cube_width / 2 - size_of_hot_bar_at_bottom/2; // here the no of sub cubes constintuesnts of figures get as per resolution and we dont directly touch that, Alhamdulilah Rab AL ALameen, subtracting to move up Alhamdulilah rab al alameen
+        widths_of_blocks_each_level_holder_array[i][3] = Window_view_Size.Win_Width ;  //Added full width, orign moves up by half? to be experimented on Bismillah Hirahman Nirahim                                     // Perhaps we could replace the single block texture in files to whole wall one, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+        heights_of_blocks_each_level_holder_array[i][3] = considered_sub_cube_width + size_of_hot_bar_at_bottom; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_File_Location[i][3] = Wanted_Texture_Footer_FL;                                        // Deadline was extended Alhamdulilah, Oh ALlah SWT please help me complete this project Ameen
+    }
+
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.9.i:" << " " << endl;//Oh no i went overbound for every 5th block indexing it 5 instead of 4.....Oh Allah please save me Ameen
+
+    int const Blocks_of_boundary=4;//These meassures kept different for rescalability Alhamdulilah Rab Al Alameen
+    float L0BlockHeight=30;//I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
+    float L0_disttance_to_next_platform_level = (L0BlockHeight+3) * 2;    // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
+    float L0Distance_Required_to_be_on_top_of_previous_platform = L0BlockHeight; // Self considering in same range for now as previous platform (although it would be a middle range, Alhamdiulilah rab al alameen), currently middle range= block height but kept for rescalability Alhamdulilah rab al alameen, this is directly depending on block height so if gap is bigger than hright it wouldnt effect on top placement but might defer the blocky look
+    float Alvation_by_base_boundary=60;//dexreased alivation(elevation by base as changed textuer.. gives differt look Alhamdulilah) ALhamdulilah
+    //alevation had to be decreased so that first platform and second plat form are at same distance from lower level Alhamdulilah rab al alameen
+
+    //==========Lvl#0============
+    //3 of such required to almost cover whole screen width hence around 120 considering the walls (not detailed calculation, perhaps i should measure deatils of walls first Bimsillah Hirahman Nirahim )
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary+0]=250;//Alvation_by_base_boundary is height of raised base, Alhamdulilah Rab AL Alameen
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 0] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L0_disttance_to_next_platform_level; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary+0]=120;//Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary+0]=L0BlockHeight;//Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary+0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform.png";
+    //This blocks of boundary set up is to understand which one is our manually placed first Alhamdulilah rab al alameen
+
+    // 3 of such required to almost cover whole screen width hence around 120 considering the walls (not detailed calculation, perhaps i should measure deatils of walls first Bimsillah Hirahman Nirahim )
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 1] = 50;//remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 1] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L0_disttance_to_next_platform_level; // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 1] = 120;            // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 1] = L0BlockHeight; // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform.png";
+
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 2] = Window_view_Size.Win_Width-50;//To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 2] = Window_view_Size.Win_Height- Alvation_by_base_boundary - L0_disttance_to_next_platform_level ; // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 2] = 120;            // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 2] = L0BlockHeight; // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 2] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform.png";
+
+    //--second platform range Alhamdulilah (had missed now added Alhamdulilah)
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 3] =  Window_view_Size.Win_Width/2;//at centre of screen Alhamdulilah                                     // To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 3] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (L0_disttance_to_next_platform_level * 2); // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 3] = 300;//This one appearing bigger than half, Alhamdulilah                                                                                                      // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 3] = L0BlockHeight;                                                                                           // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 3] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform2.png";
+
+
+    //--third platform range
+    //Two wider platforms slightly upper
+
+    //Which platofmr_level (same range of height)* alevation per height, Alhamdulilah Rab Al Alameen 
+
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 4] = (210/2);    //half its width from left side +  left side base width  //To look better, now measure for not overlapping with boundary have been removed, they look better this way Alhamdulilah rab al alameen                                // To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary +4] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (L0_disttance_to_next_platform_level*3) ; // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    //Alvation_by_base_boundary to overcome raised base, then L0_disttance_to_next_platform_level is height of each platform level so Alhamdulilah Rab Al Alameen
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 4] = 210;                                    // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 4] = L0BlockHeight;                         // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 4] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform3.png";
+
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 5] = Window_view_Size.Win_Width - ((210 / 2) ); // To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 5] = Window_view_Size.Win_Height - Alvation_by_base_boundary-(L0_disttance_to_next_platform_level*3); // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 5] = 210;                                    // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 5] = L0BlockHeight;                         // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 5] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform3.png";
+
+
+    //fourth platform range and the platform that lie atop without gap, Alhamdulilah Rab al alameen
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 6] = Window_view_Size.Win_Width/2;//centre of screen Alhamdulilah                                                            // To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 6] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (L0_disttance_to_next_platform_level * 4); // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 6] = 400;//Taking most of the screen Alhamdulilah Rab Al Alameen                                                                                                      // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 6] = L0BlockHeight;                                                                                           // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 6] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform4.png";
+
+    x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = Window_view_Size.Win_Width / 2;                                                                      // centre of screen Alhamdulilah                                                            // To make it same distance from right as second is from left boundary Alhamdulilah Rab Al Alameen, now so I beleive the down boundary is hotbar+ cube so Alvation_by_base_boundary rn, Allah SWT knows best Alhamdulilah Rab Al Alameen // remember the greater the values of y pos the downeer..Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (L0_disttance_to_next_platform_level * 4) - L0Distance_Required_to_be_on_top_of_previous_platform; // Alvation_by_base_boundary is base Alhamdulilah      // 3 blocks height,size same different places in x Alhamdulilah     // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = 267.5;//Slightly less wide than previous block Alhamdulilah Rab Al alameen                                                                                                      // Taking most of the screen Alhamdulilah Rab Al Alameen        No. adjusted to match common lines Alhamdulilah rab al alameen, we could also make this dependant on the base of this but lets keep it independant for solidarity, also we may choose to change these specifc two blocks patrens soon inshallah                                                                                              // Bismillah Hirahman Nirahim
+    heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = L0BlockHeight;                                                                                           // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
+    BlockImageTexture_File_Location[0][Blocks_of_boundary + 7] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform5.png";
+
+    //==========Lvl#1============
+    //It appears that for inversed images it is better to just get new shot of those inversed images, because they are sccaled later on in relative...and all together, it would be easy to add an array to see if inverted or not, but this is easier to understand although slightly more work, if it gets much we can switch from that point on, inshallah May Allah SWT help us, Ameen Sum Ameen Ya rab al alameen, Ya arham ar rahimeen
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 10;
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 11;
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 11;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform.png";
+
+    //==========Lvl#2============
+
+    float L2BlockHeight=27;//I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
+    float L2_disttance_to_next_platform_level=60;
+
+    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 20;
+    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = L2BlockHeight;
+    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 12;
+    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 12;
+    BlockImageTexture_File_Location[2][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png";
+
+    //==========Lvl#3============
+    float L3BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 30;
+    y_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = L3BlockHeight;
+    widths_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 13;
+    heights_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 13;
+    BlockImageTexture_File_Location[3][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png";
+
+    //==========Lvl#4============
+    float L4BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 40;
+    y_positions_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = L4BlockHeight;
+    widths_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 14;
+    heights_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 14;
+    BlockImageTexture_File_Location[4][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png";
+
+    //==========Lvl#5============
+    float L5BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 50;
+    y_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = L5BlockHeight;
+    widths_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 15;
+    heights_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 15;
+    BlockImageTexture_File_Location[5][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png";
+
+    //==========Lvl#6============
+    float L6BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 60;
+    y_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = L6BlockHeight; // note dont worry if the log says failed to open block file, it is due to the fact that we have more block capacity but have not declared them, Alhamdulilah Rab Al alameen
+    widths_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 16;
+    heights_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 16;
+    BlockImageTexture_File_Location[6][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+
+    //==========Lvl#7============
+    float L7BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 70;
+    y_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = L7BlockHeight;
+    widths_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 17;
+    heights_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 17;
+    BlockImageTexture_File_Location[7][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+
+    //==========Lvl#8============
+    float L8BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 80;
+    y_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = L8BlockHeight; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    widths_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 18;
+    heights_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 18;
+    BlockImageTexture_File_Location[8][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+
+    //==========Lvl#9============
+    float L9BlockHeight = 27;
+    x_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
+    y_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = L9BlockHeight; // Alhamdulilah Rab Al Alameen, //Bismillah Hirahman Nirahim, second rule of dubugging found again, inspect arround if something that shouldnt happen in soething is happening, this mistake here was causingto rewrite [9][0] instead of[9][Blocks_of_boundary] Hence the wall was lifeted up, found, Oh Allah SWT please imprive my learning , observinf and debugging ability by leaps and bounds and please grant me patients and knowledge with wisdom that is beneficial Ameen
+    widths_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 19;
+    heights_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 19;
+    BlockImageTexture_File_Location[9][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 6" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 6" << endl;//Alhamdulilah Rab Al Alameen done with the walls now to slightly fix texture if possible inshallah
 
     no_of_mobs_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
     // To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
@@ -483,7 +658,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     types_of_mobs_each_level_holder_array=new string*[Total_Levels_For_which_Data_is_Present];
     // Making Array in loop, assigning manually inshallah
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 7" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 7" << endl;
 
     // To add more levels we have to add everything for new level but that was orignally happens so...>Alhamdulilah
 
@@ -540,7 +715,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     y_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // Alhamdulilah Rab Al Alameen
     types_of_mobs_each_level_holder_array[9][0] = "Blue_Bottom";//Alhamdulilah rab al alameen
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 8" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 8" << endl;
     //========================For Boss Levels==============================================================
 
     Indexs_of_Boss_Level=new int[No_of_Boss_Levels];
@@ -558,7 +733,7 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     srand(time(0));
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 10" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 10" << endl;
 
     for(int i=0;i<No_of_Bonus_levels;i++)
     {
@@ -588,7 +763,7 @@ Stored_Level_Configs::Stored_Level_Configs()
             }
         }
 
-        cout << "Bismillah Hirahman Nirahim Storage Construction Test 11" << endl;
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 11" << endl;
 
         if (!already_undid_next_index_increment)//if already undid then shouldnt undo again, Alhamdulilah Rab Al Alameen
         {
@@ -606,7 +781,7 @@ Stored_Level_Configs::Stored_Level_Configs()
         
     }//this basicalled goes on forever if not feasible so,
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 12" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 12" << endl;
 
     
     Bonus_Level_BackgroundImageTexture_File_Locations=new string[No_of_Bonus_levels];
@@ -622,10 +797,10 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     No_of_Blocks_in_each_bonus_round=new int[No_of_Bonus_levels];
 
-    No_of_Blocks_in_each_bonus_round[0]=1;
-    No_of_Blocks_in_each_bonus_round[1]=1;
+    No_of_Blocks_in_each_bonus_round[0]=5;
+    No_of_Blocks_in_each_bonus_round[1]=5;
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 13" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 13" << endl;
 
     x_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels];
     y_positions_of_blocks_each_bonus_level_holder_array = new float *[No_of_Bonus_levels]; // at respectve level array see no of blocks at that level Alhamdullah Rab Al Alameen
@@ -633,7 +808,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     height_of_each_blocks_bonus_level_holder_array = new float *[No_of_Bonus_levels];//had forgotten to initlialize the ptr arrays in first place and had directly initialized the 1d arrays using those ptrs, fixed that Alhamdulilah rab al alameen (should have given run time  or compile time, as couldnt find or more likkely saying that ptr is null ptr... or actually they didnt even exsist in dma yet so i guess huge issue thrown? ...possible crash....derefrencing uniitialized location,,,...)
     BlockImageTexture_Bonus_Lvl_File_Location = new string *[No_of_Bonus_levels];
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 14" << endl;
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 14" << endl;
     for (int i = 0; i < No_of_Bonus_levels; i++) // Issue was, Loop was using Total No of levels in condiion instead of no of bonus level
     {//have to check if i dmaeed the array of float ptrs up....
         x_positions_of_blocks_each_bonus_level_holder_array[i] = new float[No_of_Blocks_in_each_bonus_round[i]];
@@ -643,22 +818,82 @@ Stored_Level_Configs::Stored_Level_Configs()
         BlockImageTexture_Bonus_Lvl_File_Location[i] = new string[No_of_Blocks_in_each_bonus_round[i]];
     }
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 14.5" << endl;//std bad allocation is thrown when compiler fails to allocate memeory may be due to exhastion of RAM
-    x_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0;//std bad array new length is threon when negative new length or exceeded implementation limits, Alhamdulilah Rab Al Alameen
-    y_positions_of_blocks_each_bonus_level_holder_array[0][0] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
-    width_of_each_blocks_bonus_level_holder_array[0][0]= 10;
-    height_of_each_blocks_bonus_level_holder_array[0][0] = 10;
-    BlockImageTexture_Bonus_Lvl_File_Location[0][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png ";
+    
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 15" << endl;
+    
 
-    x_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_positions_of_blocks_each_bonus_level_holder_array[1][0] = 10;
-    width_of_each_blocks_bonus_level_holder_array[1][0] = 10;
-    height_of_each_blocks_bonus_level_holder_array[1][0] = 10;
-    BlockImageTexture_Bonus_Lvl_File_Location[1][0] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png ";
+    for (int i = 0; i < No_of_Bonus_levels; i++) // Creating walls, texture different elsewise same size and position for each level, Alhamdulilah Rab Al Alameen
+    {
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.6.i:" << i << " " << endl;
+        string Wanted_Texture_FL; // ensuring there is a new local scope each iteration to ensure no trouble of removing the initialy present work in it, Alhamdulilah Rab Al Alameen
 
-    cout << "Bismillah Hirahman Nirahim Storage Construction Test 16" << endl;
+        if (i == 0 )
+        {
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\WallBlock.png";
+        }
+        else
+        {
+            Wanted_Texture_FL = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png";
+        }
+
+        
+
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.i:" << i << " " << endl;
+        cout << Wanted_Texture_FL << endl;
+
+        // Left Wall, considering each sub block is 20 tall and 20 wide, so the whole wall should be stack of 25 blocks, that is 20 wide and 500 heigh or vice versa, centre one at 10 and the other at 250 Alhamdulilah Rab Al Alameen
+        // For left specifically, y at 250 and x at 10, as you notice both position will be at half of full sizes as becomes orign and then places , to ensure that the block summoned stays entirely on screen not leaking out, Alhadmulilah Rab AL Alameen
+        x_positions_of_blocks_each_bonus_level_holder_array[i][0] = considered_sub_cube_width / 2;   // Note: although the walls can be done in a loop, but we try to keep the wall texture variable
+        y_positions_of_blocks_each_bonus_level_holder_array[i][0] = Window_view_Size.Win_Height / 2; // these are used to call the relative size & position function later on so work perfectly Alhamdulilah Rab Al Alameen
+        width_of_each_blocks_bonus_level_holder_array[i][0] = considered_sub_cube_width;
+        height_of_each_blocks_bonus_level_holder_array[i][0] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
+
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.7.5.i:" << i << " " << endl;
+
+        BlockImageTexture_Bonus_Lvl_File_Location[i][0] = Wanted_Texture_FL; // oops accidently went overbound, resolved Alhamdulilah Rab Al Alameen
+
+        //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.8.i:" << i << " " << endl;
+
+        // Right, left shifted to right side by taking left x position and doing 500 - that, the sizes remain the same Alhamdulilah Rab Al Alameen, so does the ya pos
+        x_positions_of_blocks_each_bonus_level_holder_array[i][1] = Window_view_Size.Win_Width - considered_sub_cube_width / 2; // Just think that it is left boundary move right wards by increasing x, which you get equal as left was from left corner of screen (its x pos) but right corner is 500, so to get equal distance we subtract from 500, Alhamdulilah Rab AL Alameen
+        y_positions_of_blocks_each_bonus_level_holder_array[i][1] = Window_view_Size.Win_Height / 2;
+        width_of_each_blocks_bonus_level_holder_array[i][1] = considered_sub_cube_width;
+        height_of_each_blocks_bonus_level_holder_array[i][1] = Window_view_Size.Win_Height; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_Bonus_Lvl_File_Location[i][1] = Wanted_Texture_FL;
+
+        // Top Wall,x centre at 250 so it doent escape out, y centre at 10, width full screen, Width instead of height, but we are assuming subcubes...I beleieve that boundaries may get thin or thick depending on resultion but they will cover any resolution inshallah May Allah help us Ameen
+        x_positions_of_blocks_each_bonus_level_holder_array[i][2] = Window_view_Size.Win_Width / 2;
+        y_positions_of_blocks_each_bonus_level_holder_array[i][2] = considered_sub_cube_width / 2;
+        width_of_each_blocks_bonus_level_holder_array[i][2] = Window_view_Size.Win_Width; // note cube with=cube height
+        height_of_each_blocks_bonus_level_holder_array[i][2] = considered_sub_cube_width; // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_Bonus_Lvl_File_Location[i][2] = Wanted_Texture_FL;
+
+        // Reordereing ensuring left and right come over top and bottom for design, as drawn in order,0 --- so on, Alhamdulilah Rab Al alameen
+
+        // Bottom is similar to top shifted down, just y value of position taken wrt down corner of screem ie Window res-position of x of top, Alhamdulilah Rab Al Alameen
+        x_positions_of_blocks_each_bonus_level_holder_array[i][3] = Window_view_Size.Win_Width / 2;                             // Rememeber x remains unaltered from top but y is different, Alhamdulilah Rab Al Alameen, Bismillah Hirahman Nirahim, Test
+        y_positions_of_blocks_each_bonus_level_holder_array[i][3] = Window_view_Size.Win_Width- considered_sub_cube_width / 2 - size_of_hot_bar_at_bottom/2; // here the no of sub cubes constintuesnts of figures get as per resolution and we dont directly touch that, Alhamdulilah Rab AL ALameen
+        width_of_each_blocks_bonus_level_holder_array[i][3] = Window_view_Size.Win_Width;                                      // Perhaps we could replace the single block texture in files to whole wall one, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+        height_of_each_blocks_bonus_level_holder_array[i][3] = considered_sub_cube_width+size_of_hot_bar_at_bottom;//So hotbar leaves extra space at bottom for UI Alhamdulilah Rab Al Alameen                                      // Alhamdulilah Rab Al Alameen
+        BlockImageTexture_Bonus_Lvl_File_Location[i][3] = Wanted_Texture_FL;                                                        // Deadline was extended Alhamdulilah, Oh ALlah SWT please help me complete this project Ameen
+    }
+
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 14.5" << endl;//std bad allocation is thrown when compiler fails to allocate memeory may be due to exhastion of RAM
+    x_positions_of_blocks_each_bonus_level_holder_array[0][4] = 0;//std bad array new length is threon when negative new length or exceeded implementation limits, Alhamdulilah Rab Al Alameen
+    y_positions_of_blocks_each_bonus_level_holder_array[0][4] = 0; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    width_of_each_blocks_bonus_level_holder_array[0][4]= 10;
+    height_of_each_blocks_bonus_level_holder_array[0][4] = 10;
+    BlockImageTexture_Bonus_Lvl_File_Location[0][4] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png ";
+
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 15" << endl;
+
+    x_positions_of_blocks_each_bonus_level_holder_array[1][4] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_bonus_level_holder_array[1][4] = 10;
+    width_of_each_blocks_bonus_level_holder_array[1][4] = 10;
+    height_of_each_blocks_bonus_level_holder_array[1][4] = 10;
+    BlockImageTexture_Bonus_Lvl_File_Location[1][4] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BonusBlockTexture.png ";
+
+    //cout << "Bismillah Hirahman Nirahim Storage Construction Test 16" << endl;
 
     cout << "--------------------------"<<"\n" << endl;
     cout << "Indices of Bonus Levels"<<"\n" << endl;
@@ -677,7 +912,6 @@ Stored_Level_Configs::Stored_Level_Configs()
         cout << "Indices of Boss Level:"<<i<<" = "<<Indexs_of_Boss_Level[i]<<"\n" << endl;
     }
     cout << "--------------------------"<<"\n" << endl;
-
 
 } // Bismillah Hirahman Nirahim, I realize that gravity can only be implementaed after collusion detector..Alhamdulilah Rab Al Alameen
 
