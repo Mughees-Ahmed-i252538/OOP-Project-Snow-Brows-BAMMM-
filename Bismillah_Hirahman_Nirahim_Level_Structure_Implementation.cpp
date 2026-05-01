@@ -363,13 +363,13 @@ Stored_Level_Configs::Stored_Level_Configs()
     No_of_Blocks_in_each_round[0] = Blocks_of_boundary + 8; // 4 of boundary 8 otherwise, Alhamdulilah Rab Al Alameen
     No_of_Blocks_in_each_round[1] = Blocks_of_boundary +13;
     No_of_Blocks_in_each_round[2] = Blocks_of_boundary  +15;
-    No_of_Blocks_in_each_round[3] = Blocks_of_boundary + 1;//accidently did for three the +6 is for boss level 4 from 0 Alhamdulilah corrected
+    No_of_Blocks_in_each_round[3] = Blocks_of_boundary + 8;//accidently did for three the +6 is for boss level 4 from 0 Alhamdulilah corrected
     No_of_Blocks_in_each_round[4] = Blocks_of_boundary + 6;
     No_of_Blocks_in_each_round[5] = Blocks_of_boundary + 1;
     No_of_Blocks_in_each_round[6] = Blocks_of_boundary + 1;
     No_of_Blocks_in_each_round[7] = Blocks_of_boundary + 1;
     No_of_Blocks_in_each_round[8] = Blocks_of_boundary + 1;
-    No_of_Blocks_in_each_round[9] = Blocks_of_boundary + 1;//oops accidently forgot that i made no of blocks = boundary blocks and then trying to add blocks causes issues...and exe doesnt pop up, solved, Alhamduluilah rab al alameen
+    No_of_Blocks_in_each_round[9] = Blocks_of_boundary + 5;//oops accidently forgot that i made no of blocks = boundary blocks and then trying to add blocks causes issues...and exe doesnt pop up, solved, Alhamduluilah rab al alameen
 
     //cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
 
@@ -499,6 +499,17 @@ Stored_Level_Configs::Stored_Level_Configs()
     float LBlockHeight = 30;                                          // I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
     float L_distance_to_next_platform_level = (LBlockHeight + 3) * 2; // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
     float LDistance_Required_to_be_on_top_of_previous_platform = LBlockHeight;
+    int L=2;//holds level for ease of calculation writing Alhamdulilah rab al alameen
+    //if stacking false then the distance for stack objects doesnt get added Alhamdulilah rab al alameen, base of stack is 0 henceforth Alhamdulilah rab al alameen
+    int WS=0;//which of stack, these also make cal easier Alhamdulilah rab al alameen, we can just copy paste and manage heights using these value changes Alhamdulilah
+
+    int No_of_blocks_in_W = 10;
+    int No_of_blocks_in_H = 1;
+    char place = 'c'; // dont try accessing using place directly...instead use [] else wise whole string may be displayed also usng ptr logic is troubelsome as acts like string from that pt if tried to write instead of writing ptr...Alhamdulilah rab al alameen
+    float custom_calculation = 0;
+    int pr = 1; // platform range
+    int Bi = Blocks_of_boundary + 2; // To easify calculation we just ++ this instead of manually writing each tie from now on inshallah
+    //Introduced later carried here, Alhamdulilah rab al alameen
 
     //==========Lvl#0============
     //I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
@@ -692,7 +703,7 @@ Stored_Level_Configs::Stored_Level_Configs()
      // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
     
 
-    int pr=1;//platform range
+  
 
     x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = Window_view_Size.Win_Width/2;//centre of page
     y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr*L_distance_to_next_platform_level);
@@ -713,7 +724,6 @@ Stored_Level_Configs::Stored_Level_Configs()
     BlockImageTexture_File_Location[2][Blocks_of_boundary + 2] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform7.png";
 
     pr=2;//second range Alhamdulilah
-    int Bi=Blocks_of_boundary + 2;//To easify calculation we just ++ this instead of manually writing each tie from now on inshallah
     Bi=3;
     //block index
 
@@ -724,9 +734,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     BlockImageTexture_File_Location[2][Blocks_of_boundary + 3] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
     //now that i think about it we could also do this for level... ok from next level o...or not
 
-    int L=2;//holds level for ease of calculation writing Alhamdulilah rab al alameen
-    //if stacking false then the distance for stack objects doesnt get added Alhamdulilah rab al alameen, base of stack is 0 henceforth Alhamdulilah rab al alameen
-    int WS=0;//which of stack, these also make cal easier Alhamdulilah rab al alameen, we can just copy paste and manage heights using these value changes Alhamdulilah
+    
 
     Bi = Blocks_of_boundary+4; // next block is the single block at the side
 
@@ -832,9 +840,6 @@ Stored_Level_Configs::Stored_Level_Configs()
     pr=5;
     Bi = Blocks_of_boundary + 14;
 
-    int No_of_blocks_in_W=10;
-    int No_of_blocks_in_H=1;
-    char place='c';//dont try accessing using place directly...instead use [] else wise whole string may be displayed also usng ptr logic is troubelsome as acts like string from that pt if tried to write instead of writing ptr...Alhamdulilah rab al alameen
     //nvm we only needed a single character...Alhamdulilah
 
     x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2):WW/2);//last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
@@ -848,12 +853,32 @@ Stored_Level_Configs::Stored_Level_Configs()
      // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
     
 
-    x_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 30;
-    y_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 20;
-    widths_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 13;
-    heights_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = LBlockHeight;
-    BlockImageTexture_File_Location[3][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png";
+     L=3;
+     Bi = Blocks_of_boundary ; // removed the redundant local vars Alhamdulilah now working on same var
+     pr = 1;
+     No_of_blocks_in_W = 7;
+     No_of_blocks_in_H = 1;
+     place = 'c';
+ 
+     
+ 
+     //New 'f' = first quarter, s= last quarter
+     x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) :(place=='c')?( WW / 2):(place=='f'?(WW / 4):(place=='s'?(WW-(WW / 4)):(custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+     y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+     widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+     heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+     BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L4Platform.png";
 
+      Bi = Blocks_of_boundary+1;//blovk opposite it Alhamdulilah 
+     place = 'r';
+
+     x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) :(place=='c')?( WW / 2):(place=='f'?(WW / 4):(place=='s'?(WW-(WW / 4)):(custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+     y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+     widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+     heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+     BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L4Platform.png";
+  
+ 
     //==========Lvl#4============
      // I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
     // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
@@ -939,13 +964,24 @@ Stored_Level_Configs::Stored_Level_Configs()
 
 
 
-    //==========Lvl#5============
-    float L5BlockHeight = 27;
-    x_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 50;
-    y_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 10;
-    widths_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 15;
-    heights_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = L5BlockHeight;
-    BlockImageTexture_File_Location[5][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png";
+    //==========Lvl#5============'
+    
+    L=5;
+    Bi = Blocks_of_boundary ; // removed the redundant local vars Alhamdulilah now working on same var
+    pr = 1;
+    No_of_blocks_in_W = 8;
+    No_of_blocks_in_H = 1;
+    place = 'l';
+
+    
+
+    //New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) :(place=='c')?( WW / 2):(place=='f'?(WW / 4):(place=='s'?(WW-(WW / 4)):(custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L5Platform2.png";
+
 
     //==========Lvl#6============
     float L6BlockHeight = 27;
@@ -972,13 +1008,69 @@ Stored_Level_Configs::Stored_Level_Configs()
     BlockImageTexture_File_Location[8][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //==========Lvl#9============
-    float L9BlockHeight = 27;
-    x_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
-    y_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 43; // Alhamdulilah Rab Al Alameen, //Bismillah Hirahman Nirahim, second rule of dubugging found again, inspect arround if something that shouldnt happen in soething is happening, this mistake here was causingto rewrite [9][0] instead of[9][Blocks_of_boundary] Hence the wall was lifeted up, found, Oh Allah SWT please imprive my learning , observinf and debugging ability by leaps and bounds and please grant me patients and knowledge with wisdom that is beneficial Ameen
-    widths_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 19;
-    heights_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = L9BlockHeight;
-    BlockImageTexture_File_Location[9][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    L = 9;
+    Bi = Blocks_of_boundary; // removed the redundant local vars Alhamdulilah now working on same var
+    pr = 1;
+    No_of_blocks_in_W = 4.5;//four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;
+    place = 'f';
 
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                            : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L10Platform3.png";
+
+    Bi = Blocks_of_boundary + 1; // blovk opposite it Alhamdulilah
+    place = 's';
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L10Platform3.png";
+
+    pr = 2;
+    Bi = Blocks_of_boundary+2; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 7.5; // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;
+    place = 'l';
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L10Platform2.png";
+
+    Bi = Blocks_of_boundary + 3;//self note found....if exe doesnt load trying  to access undeclared dma, and if throws bad allocation then the thing you are feeding [] in new array is something wrong, especially check if the bad case is hitting if you called a function inside [] I think we should throw exception directly in that case or do error handling bu if==0 then dont dma Allah swt knows best Alhamdulilah rab al alameen
+    place = 'r';
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L10Platform2.png";
+
+    pr = 3;
+    Bi = Blocks_of_boundary+4; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 11.5; // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;
+    place = 'c';
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L10Platform.png";
+
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen
 
     //cout << "Bismillah Hirahman Nirahim Storage Construction Test 6" << endl;//Alhamdulilah Rab Al Alameen done with the walls now to slightly fix texture if possible inshallah
