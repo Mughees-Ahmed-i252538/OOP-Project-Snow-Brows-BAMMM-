@@ -72,7 +72,7 @@ class Level_Config{
     //Level_Data_Present* levels_data;//initliaed in constructor of Level_Config, this is, Logic changed Alahamdulilah, now all the static data will be stored inside this class...although we could make a separate class that would make our lives easier by assign=ing using just an overridden eequal sign, Alhamdulilah Rab Al ALameen
 
     public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has
-        Level_Config(float Window_view_width,float Window_view_heightw);
+        Level_Config(float Window_view_width, float Window_view_heightw, bool Bonus_levels_on=true);//Note default arguments are given in the declaration and t=not the defintion, I did try so and got error....HEnce ALhamdulilah rab al alameen
         ~Level_Config();//Bismillah Hirahman Niraheem I would <stdexcept> try{code, using throw invalid_argument ,runtime error etc} catch(std::invalid_argument & e) basically catches and destructs all locals in try and runs catch to try prevent program crash, if nothing catches than calls terminate() that crashes program, after catch block, program resumes from after catch block, Alhamdulilah rab al alameen
         void display(sf::RenderWindow& window);
         static int getLevel_Count();

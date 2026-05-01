@@ -77,7 +77,7 @@ void ForRelativeSizeAndPostionSprite_Level_Copy(float NeededWidth, float NeededH
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
-Level_Config::Level_Config(float Window_view_width, float Window_view_height) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
+Level_Config::Level_Config(float Window_view_width, float Window_view_height,bool Bonus_levels_on) // can you just call destructor using . ? Allah SWT knows best what would happen, let me try it soon inshallah
 {
     //levels_data= new Level_Data_Present[Total_Levels_For_which_Data_is_Present];//Lofic Changed, Alhamdulilah Rab Al Alameen, to avoid issues, all that data will be stored statically inside the class itself, Alhamdulilah Rab Al Alameen
     cout<<"--------------------------------------------------"<<"\n"<<endl;
@@ -104,6 +104,7 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height) //
             cout << "\n\nThis Level is a bonus level\n"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
             cout<<"It is taking the design of:"<<Which_Of_The_Bonus_Levels<<" among the bonus levels (0,1...in storage)"<<"\n"<<endl;
             Which_Of_The_Bonus_Levels=i;
+            if(Bonus_levels_on)//if sent false then bonus levels wont occur, this is being used for debugging and inshallah also forselective lvel playing, soon inshallah, bonus level data will still exsist but wont be copied, Alhamdulilah rab al alameen
             is_Bonus_level=true;//set comment for debugging why crashing, to uncomment soon inshallah, issue must be in the else block alhamdulilah
             break;
         }
@@ -357,16 +358,18 @@ Stored_Level_Configs::Stored_Level_Configs()
     No_of_Blocks_in_each_round = new int[Total_Levels_For_which_Data_is_Present];
     //To be assigned later when find no of blocks and postions in each rn gave 1 block to all levels and dummy position for testing, Alhamdulilah rab al alameen
 
-    No_of_Blocks_in_each_round[0]=4+9;//4 of boundary
-    No_of_Blocks_in_each_round[1] = 5;
-    No_of_Blocks_in_each_round[2] = 5;
-    No_of_Blocks_in_each_round[3] = 5;
-    No_of_Blocks_in_each_round[4]=5;
-    No_of_Blocks_in_each_round[5] = 5;
-    No_of_Blocks_in_each_round[6] = 5;
-    No_of_Blocks_in_each_round[7] = 5;
-    No_of_Blocks_in_each_round[8] = 5;
-    No_of_Blocks_in_each_round[9] = 5;
+    int const Blocks_of_boundary = 4;
+
+    No_of_Blocks_in_each_round[0] = Blocks_of_boundary + 8; // 4 of boundary 8 otherwise, Alhamdulilah Rab Al Alameen
+    No_of_Blocks_in_each_round[1] = Blocks_of_boundary +13;
+    No_of_Blocks_in_each_round[2] = Blocks_of_boundary+15;
+    No_of_Blocks_in_each_round[3] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[4] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[5] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[6] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[7] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[8] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[9] = Blocks_of_boundary + 1;//oops accidently forgot that i made no of blocks = boundary blocks and then trying to add blocks causes issues...and exe doesnt pop up, solved, Alhamduluilah rab al alameen
 
     //cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
 
@@ -487,16 +490,19 @@ Stored_Level_Configs::Stored_Level_Configs()
         BlockImageTexture_File_Location[i][3] = Wanted_Texture_Footer_FL;                                        // Deadline was extended Alhamdulilah, Oh ALlah SWT please help me complete this project Ameen
     }
 
+    
     //cout << "Bismillah Hirahman Nirahim Storage Construction Test 5.9.i:" << " " << endl;//Oh no i went overbound for every 5th block indexing it 5 instead of 4.....Oh Allah please save me Ameen
 
-    int const Blocks_of_boundary=4;//These meassures kept different for rescalability Alhamdulilah Rab Al Alameen
+    //shifted up Alhamdulilah//    int const Blocks_of_boundary=4;//These meassures kept different for rescalability Alhamdulilah Rab Al Alameen
+    float Alvation_by_base_boundary = 60; // dexreased alivation(elevation by base as changed textuer.. gives differt look Alhamdulilah) ALhamdulilah
+    // alevation had to be decreased so that first platform and second plat form are at same distance from lower level Alhamdulilah rab al alameen
+
+    //==========Lvl#0============
     float L0BlockHeight=30;//I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
     float L0_disttance_to_next_platform_level = (L0BlockHeight+3) * 2;    // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
     float L0Distance_Required_to_be_on_top_of_previous_platform = L0BlockHeight; // Self considering in same range for now as previous platform (although it would be a middle range, Alhamdiulilah rab al alameen), currently middle range= block height but kept for rescalability Alhamdulilah rab al alameen, this is directly depending on block height so if gap is bigger than hright it wouldnt effect on top placement but might defer the blocky look
-    float Alvation_by_base_boundary=60;//dexreased alivation(elevation by base as changed textuer.. gives differt look Alhamdulilah) ALhamdulilah
-    //alevation had to be decreased so that first platform and second plat form are at same distance from lower level Alhamdulilah rab al alameen
 
-    //==========Lvl#0============
+    
     //3 of such required to almost cover whole screen width hence around 120 considering the walls (not detailed calculation, perhaps i should measure deatils of walls first Bimsillah Hirahman Nirahim )
     x_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary+0]=250;//Alvation_by_base_boundary is height of raised base, Alhamdulilah Rab AL Alameen
     y_positions_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 0] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L0_disttance_to_next_platform_level; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
@@ -525,7 +531,7 @@ Stored_Level_Configs::Stored_Level_Configs()
     heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 3] = L0BlockHeight;                                                                                           // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
     BlockImageTexture_File_Location[0][Blocks_of_boundary + 3] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform2.png";
 
-
+    
     //--third platform range
     //Two wider platforms slightly upper
 
@@ -557,80 +563,337 @@ Stored_Level_Configs::Stored_Level_Configs()
     widths_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = 267.5;//Slightly less wide than previous block Alhamdulilah Rab Al alameen                                                                                                      // Taking most of the screen Alhamdulilah Rab Al Alameen        No. adjusted to match common lines Alhamdulilah rab al alameen, we could also make this dependant on the base of this but lets keep it independant for solidarity, also we may choose to change these specifc two blocks patrens soon inshallah                                                                                              // Bismillah Hirahman Nirahim
     heights_of_blocks_each_level_holder_array[0][Blocks_of_boundary + 7] = L0BlockHeight;                                                                                           // Ok I had mistaken made eg for 9th level access [9][9] although theire was only one block , fixed it to [9][0] for everything currently 2d Alhamdulilah Rab Al Alameen
     BlockImageTexture_File_Location[0][Blocks_of_boundary + 7] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L1Platform5.png";
-
+    
     //==========Lvl#1============
+    //cout << "Test 1";
+    float L1BlockHeight = 30;                                                    // I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
+    float L1_disttance_to_next_platform_level = (L0BlockHeight + 3) * 2;         // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
+    float L1Distance_Required_to_be_on_top_of_previous_platform = L0BlockHeight; // Self considering in same range for now as previous platform (although it would be a middle range, Alhamdiulilah rab al alameen), currently middle range= block height but kept for rescalability Alhamdulilah rab al alameen, this is directly depending on block height so if gap is bigger than hright it wouldnt effect on top placement but might defer the blocky look
+
     //It appears that for inversed images it is better to just get new shot of those inversed images, because they are sccaled later on in relative...and all together, it would be easy to add an array to see if inverted or not, but this is easier to understand although slightly more work, if it gets much we can switch from that point on, inshallah May Allah SWT help us, Ameen Sum Ameen Ya rab al alameen, Ya arham ar rahimeen
-    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
-    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 10;
-    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 11;
-    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = 11;
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = Window_view_Size.Win_Width / 2 - 40;//Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen, changed back due to found difference again to right wards Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L1_disttance_to_next_platform_level;
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = Window_view_Size.Win_Width/2+40;//slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary] = L1BlockHeight;
     BlockImageTexture_File_Location[1][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform.png";
+    //cout << "Test 2";
+
+    //now for the stacking to full monster Bismillah Hirahman Nirahim
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary+1] =112-20; // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 1] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L1_disttance_to_next_platform_level - L1Distance_Required_to_be_on_top_of_previous_platform; // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 1] =  55; // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 1] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform2.png";
+
+    //Head of stack monster face, Bismillah hirahman nirahim
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 2] = 112-20;//shifting slightly left to make space for right block Alhamdulilah rab al alameen (was overlapping or touching)                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 2] = Window_view_Size.Win_Height - Alvation_by_base_boundary - L1_disttance_to_next_platform_level - (2*L1Distance_Required_to_be_on_top_of_previous_platform);//second piece being stacked so 2* Alhamdulilah rab rab al alameen // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 2] = 55;                                                                                                                                                         // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 2] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 2] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform3.png";
+
+    //second platform range begins Alhamdulilah Rab Al Alameen
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 3] = (Window_view_Size.Win_Width-(Window_view_Size.Win_Width / 2 - 20))+53.25;  //needed to shift right now that smaller Alhamdulilah                                  // same distance as first placed block after boundary but from right side Alhamdulilah Rab Al Alameen                                                                                     // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 3] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (2*L1_disttance_to_next_platform_level) ; //Second platform level so 2* Alhamdulilah Rab Al Alameen// the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 3] = Window_view_Size.Win_Width / 2 - 30;                                                                     // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 3] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 3] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform4.png";
+    //ok i notice the right side one has lesser width elsewise the monster faces would be equal Alhamdulilah rab al alameen noticed in time, width and position x adjusted Alhamdulilah
+
+    //Now for the stack Alhamdulilah Rab Al Alameen
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 4] = Window_view_Size.Win_Height - (112-20 );                                                                                                                    // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 4] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (2 * L1_disttance_to_next_platform_level) - L1Distance_Required_to_be_on_top_of_previous_platform; // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 4] = 55;                                                                                                                                                         // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 4] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 4] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform2.png";
+
+    // Head of stack monster face, Bismillah hirahman nirahim
+
+    //Same x distance as of previous head of monster but from right instead of left Alhamdulilah rab al aalameen
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 5] = Window_view_Size.Win_Height - (112-20 );                                                                                                                        // shifting slightly left to make space for right block Alhamdulilah rab al alameen (was overlapping or touching)                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 5] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (2*L1_disttance_to_next_platform_level) - (2 * L1Distance_Required_to_be_on_top_of_previous_platform); // second piece being stacked so 2* Alhamdulilah rab rab al alameen // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 5] = 55;                                                                                                                                                               // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 5] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 5] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform3.png";
+
+    //platform range 3 a duplicate of platform 1 but up ALhamdulilah rab al alameen considering stcks on same platform
+    //Note dont forget that fn should be on to press F10 Alhamdulilah rab al alameen
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary+6] = Window_view_Size.Win_Width / 2 - 40; // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen, changed back due to found difference again to right wards Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 6] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (3*L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 6] = Window_view_Size.Win_Width / 2 + 40; // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 6] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 6] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform.png";
+    // cout << "Test 2";
+
+    // now for the stacking to full monster Bismillah Hirahman Nirahim
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 7] = 112-20;                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 7] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (3*L1_disttance_to_next_platform_level) - L1Distance_Required_to_be_on_top_of_previous_platform; // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 7] = 55;                                                                                                                                                         // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 7] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 7] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform2.png";
+
+    // Head of stack monster face, Bismillah hirahman nirahim
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 8] = 112-20;                                                                                                                                                         // shifting slightly left to make space for right block Alhamdulilah rab al alameen (was overlapping or touching)                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 8] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (3 * L1_disttance_to_next_platform_level) - (2 * L1Distance_Required_to_be_on_top_of_previous_platform); // second piece being stacked so 2* Alhamdulilah rab rab al alameen // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 8] = 55;                                                                                                                                                               // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 8] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 8] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform3.png";
+ 
+    //platforms intersecting moving apart, Bismillah Hirahman Nirahim, Alhamdulilah
+
+    //platform range 4 copy of 2 Alhamdulilah
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 9] = (Window_view_Size.Win_Width - (Window_view_Size.Win_Width / 2 - 20)) + 53.25;                        // needed to shift right now that smaller Alhamdulilah                                  // same distance as first placed block after boundary but from right side Alhamdulilah Rab Al Alameen                                                                                     // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 9] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (4 * L1_disttance_to_next_platform_level); // Second platform level so 2* Alhamdulilah Rab Al Alameen// the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 9] = Window_view_Size.Win_Width / 2 - 30;                                                                      // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 9] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 9] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform4.png";
+    // ok i notice the right side one has lesser width elsewise the monster faces would be equal Alhamdulilah rab al alameen noticed in time, width and position x adjusted Alhamdulilah
+
+    // Now for the stack Alhamdulilah Rab Al Alameen
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary +10] = Window_view_Size.Win_Height - (112 - 20);                                                                                                                    // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary +10] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (4 * L1_disttance_to_next_platform_level) - L1Distance_Required_to_be_on_top_of_previous_platform; // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary +10] = 55;                                                                                                                                                               // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary +10] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary +10] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform2.png";
+
+    // Head of stack monster face, Bismillah hirahman nirahim
+
+    // Same x distance as of previous head of monster but from right instead of left Alhamdulilah rab al aalameen
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary +11] = Window_view_Size.Win_Height - (112 - 20);                                                                                                                          // shifting slightly left to make space for right block Alhamdulilah rab al alameen (was overlapping or touching)                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary +11] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (4 * L1_disttance_to_next_platform_level) - (2 * L1Distance_Required_to_be_on_top_of_previous_platform); // second piece being stacked so 2* Alhamdulilah rab rab al alameen // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary +11] = 55;                                                                                                                                                                     // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary +11] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary +11] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform3.png";
+
+    //If you find an entire range mising it is most likely due to using its indexes accdiently in another range calculation leading to overwirting...Allah swt knows best Alhadulilah rab al alameen
+
+    //platform 5, a single long platform simple alhamdulilah
+
+    x_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 12] = 200 ;//left of centre                                                                                                                          // shifting slightly left to make space for right block Alhamdulilah rab al alameen (was overlapping or touching)                                                                                                                                                   // Slightly left of centre,to adjust the left end of the monster Alhamdulilah rab al alameen // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 12] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (5 * L1_disttance_to_next_platform_level) ; // second piece being stacked so 2* Alhamdulilah rab rab al alameen // the L1Distance_Required_to_be_on_top_of_previous_platform allows stacking Alhamdulilah rab al alameen
+    widths_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 12] = 150;                                                                                                                                                                     // slightly greater than half
+    heights_of_blocks_each_level_holder_array[1][Blocks_of_boundary + 12] = L1BlockHeight;
+    BlockImageTexture_File_Location[1][Blocks_of_boundary + 12] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L2Platform5.png";
 
     //==========Lvl#2============
 
-    float L2BlockHeight=27;//I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
-    float L2_disttance_to_next_platform_level=60;
+    float L2BlockHeight = 30;                                            // I feel they arent scaling equal to walls so do this, bismillah hirahman nirahim
+    float L2_disttance_to_next_platform_level = (L0BlockHeight + 3) * 2; // considering distance = 1 block worth of empty space(aka middle range) Alhmaudlilah rab al alameen, no made the gap slightly bigger than before, ok to better the orientation, plan , vhanged to wider gap than block, then decreased player height so switched back, not covering whole screen perhasp make block more in height or restore to gap more than block, ok i felt header bigger wasnt suitable, just made gap bigger than block height, Alhamdulilah rab al alameen
+    float L2Distance_Required_to_be_on_top_of_previous_platform = L0BlockHeight;
 
-    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 20;
-    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = L2BlockHeight;
-    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 12;
-    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = 12;
-    BlockImageTexture_File_Location[2][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png";
+    int pr=1;//platform range
+
+    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = Window_view_Size.Win_Width/2;//centre of page
+    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr*L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = (considered_sub_cube_width*6);//slightly less than half of page , now using cube calculation and six cubes Alhamdulilah
+    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary] = L2BlockHeight;
+    BlockImageTexture_File_Location[2][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform.png";
+
+    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 1] = (4 * considered_sub_cube_width)/2; // note keeo this half of size as half of this is left of object's orign, hence if not shape will escape page
+    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 1] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 1] = 4*considered_sub_cube_width;//90 as three blocks
+    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 1] = L2BlockHeight;//changed to 4 block thing...
+    BlockImageTexture_File_Location[2][Blocks_of_boundary + 1] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform7.png";
+
+    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 2] = Window_view_Size.Win_Width - (4 * considered_sub_cube_width)/2;
+    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 2] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 2] = 4 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 2] = L2BlockHeight;
+    BlockImageTexture_File_Location[2][Blocks_of_boundary + 2] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform7.png";
+
+    pr=2;//second range Alhamdulilah
+    int Bi=Blocks_of_boundary + 2;//To easify calculation we just ++ this instead of manually writing each tie from now on inshallah
+    Bi=3;
+    //block index
+
+    x_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 3] = Window_view_Size.Win_Width / 2;//centre of page
+    y_positions_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 3] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 3] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[2][Blocks_of_boundary + 3] = L2BlockHeight;
+    BlockImageTexture_File_Location[2][Blocks_of_boundary + 3] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+    //now that i think about it we could also do this for level... ok from next level o...or not
+
+    int L=2;//holds level for ease of calculation writing Alhamdulilah rab al alameen
+    //if stacking false then the distance for stack objects doesnt get added Alhamdulilah rab al alameen, base of stack is 0 henceforth Alhamdulilah rab al alameen
+    int WS=0;//which of stack, these also make cal easier Alhamdulilah rab al alameen, we can just copy paste and manage heights using these value changes Alhamdulilah
+
+    Bi = Blocks_of_boundary+4; // next block is the single block at the side
+
+    x_positions_of_blocks_each_level_holder_array[L][Blocks_of_boundary + 4] = (2 * considered_sub_cube_width)/2; // left corner of page hence the measure for making sure its left edge is toucing left edge of view of screen Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[L][Blocks_of_boundary + 4] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Blocks_of_boundary + 4] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[L][Blocks_of_boundary + 4] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Blocks_of_boundary + 4] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+
+    //same block to the right Alhamdulilah Rab Al Alameen
+
+    Bi = Blocks_of_boundary + 5;
+
+    float WW=Window_view_Size.Win_Width;
+    float WH=Window_view_Size.Win_Height;//changed to two blocks as single block gets merged into side of screen(wall) Alhamdulilah rab al alameen
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Width-((2 * considered_sub_cube_width) / 2); // left corner of page hence the measure for making sure its left edge is toucing left edge of view of screen Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+
+    pr=3;//now platform 3, which will be exact same as 2, which we now can just copy paste, Alhamdulilah rab al alameen
+
+    Bi = Blocks_of_boundary + 6;
+    // block index
+
+    x_positions_of_blocks_each_level_holder_array[2][Bi] = Window_view_Size.Win_Width / 2; // centre of page
+    y_positions_of_blocks_each_level_holder_array[2][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level);
+    widths_of_blocks_each_level_holder_array[2][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[2][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[2][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+
+    Bi = Blocks_of_boundary + 7; // next block is the single block at the side
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (2 * considered_sub_cube_width) / 2; // left corner of page hence the measure for making sure its left edge is toucing left edge of view of screen Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+
+    // same block to the right Alhamdulilah Rab Al Alameen
+
+    Bi = Blocks_of_boundary + 8;
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Width - ((2 * considered_sub_cube_width) / 2); // left corner of page hence the measure for making sure its left edge is toucing left edge of view of screen Alhamdulilah rab al alameen
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform4.png";
+
+    //Now it is time for the stack blocks monster image that I have made into one platform Alhamdulilah, notice how its size is 2 blocks * 3 blocks also notice how it is exactly between centre blocks and 3 and second level? we use exactly that to our advantage Alhamdulilah rab al alameen, but as it lies differently from platforms hence we dont use pr in its formula Alhamdulilah Rab Al Alameen
+
+    Bi = Blocks_of_boundary + 9; // now keeping track along with incrementing easily Alhamdulilah rab al alameen
+
+    //For better positioning using in suggested in the middle of logic Bismillah hirahman Nirahim
+    //for x it is bw [2][6] and 2 7, 2 7 combes first
+    //Alhamdulilah finally got it right
+    x_positions_of_blocks_each_level_holder_array[2][Bi] = WW / 4 + considered_sub_cube_width/2;//first quarter plus left side thickness/2  //  i.e mid pt formula Alhamdulilah     // at centre of first half, Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[2][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform) + (L1_disttance_to_next_platform_level/2);//Note we add to go down Alhamdulilah//last tesm is to bring it down half a distance to next platform... /*  -(pr/2) */
+                                                                                                                                                                                                                                                                      //-pr/2 as its centre would lie below this platform by half a platform could also go for using the Distance for stack but i think as it involves gap it is better to use -pr/2 Alhamdulilah rab al alameen, y pos is equal to difference bw y pos of the two platforms/2
+    widths_of_blocks_each_level_holder_array[2][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[2][Bi] = L2BlockHeight*3;//composed of 3 platforms in height Alhamdulilah
+    BlockImageTexture_File_Location[2][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3SPlatformStack.png";
+
+    //now it is hanrder to understand code, is there a way to replace Bi with its valur at a click? do we have to use math notepad? May Allah SWT save us ameen
+
+    Bi = Blocks_of_boundary + 10;
+
+    x_positions_of_blocks_each_level_holder_array[2][Bi] = WW-(WW / 4 + considered_sub_cube_width / 2);         //same thing but from right Alhmadulilah                                                                                                                                                                 // first quarter plus left side thickness/2  //  i.e mid pt formula Alhamdulilah     // at centre of first half, Alhamdulilah
+    y_positions_of_blocks_each_level_holder_array[2][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform) + (L1_disttance_to_next_platform_level / 2); // Note we add to go down Alhamdulilah//last tesm is to bring it down half a distance to next platform... /*  -(pr/2) */
+                                                                                                                                                                                                                                                                            //-pr/2 as its centre would lie below this platform by half a platform could also go for using the Distance for stack but i think as it involves gap it is better to use -pr/2 Alhamdulilah rab al alameen, y pos is equal to difference bw y pos of the two platforms/2
+    widths_of_blocks_each_level_holder_array[2][Bi] = 2 * considered_sub_cube_width; // I should just use the calculated height of each block being 30.....
+    heights_of_blocks_each_level_holder_array[2][Bi] = L2BlockHeight * 3;            // composed of 3 platforms in height Alhamdulilah
+    BlockImageTexture_File_Location[2][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3SPlatformStack.png";
+
+
+    pr=4;/////////////////////////////////////////////////////////////////////////
+    Bi = Blocks_of_boundary + 11;//remember in a platform centre then left then right then first quarter then last quearter Alhamdulilah Rab Al Alameen
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi]=WW/2;
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = 8*considered_sub_cube_width;
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform5.png";
+
+    Bi = Blocks_of_boundary + 12;//two side pts of 4th range Alhamdulilah
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (3 * considered_sub_cube_width) / 2;//from left side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (3 * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform2.png";
+
+    Bi = Blocks_of_boundary + 13;
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] =WW- ((3 * considered_sub_cube_width) / 2); // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (3 * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform2.png";
+
+    pr=5;
+    Bi = Blocks_of_boundary + 14;
+
+    int No_of_blocks_in_W=10;
+    int No_of_blocks_in_H=1;
+    char place='c';//dont try accessing using place directly...instead use [] else wise whole string may be displayed also usng ptr logic is troubelsome as acts like string from that pt if tried to write instead of writing ptr...Alhamdulilah rab al alameen
+    //nvm we only needed a single character...Alhamdulilah
+
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2):WW/2);//last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L1_disttance_to_next_platform_level) - (WS * L2Distance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H*L2BlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L3Platform6.png";
 
     //==========Lvl#3============
     float L3BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 30;
-    y_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = L3BlockHeight;
+    y_positions_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 20;
     widths_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 13;
-    heights_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = 13;
+    heights_of_blocks_each_level_holder_array[3][Blocks_of_boundary] = L3BlockHeight;
     BlockImageTexture_File_Location[3][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture1.png";
 
     //==========Lvl#4============
     float L4BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 40;
-    y_positions_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = L4BlockHeight;
+    y_positions_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 20;
     widths_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 14;
-    heights_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = 14;
+    heights_of_blocks_each_level_holder_array[4][Blocks_of_boundary] = L4BlockHeight;
     BlockImageTexture_File_Location[4][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png";
 
     //==========Lvl#5============
     float L5BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 50;
-    y_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = L5BlockHeight;
+    y_positions_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 10;
     widths_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 15;
-    heights_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = 15;
+    heights_of_blocks_each_level_holder_array[5][Blocks_of_boundary] = L5BlockHeight;
     BlockImageTexture_File_Location[5][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png";
 
     //==========Lvl#6============
     float L6BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 60;
-    y_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = L6BlockHeight; // note dont worry if the log says failed to open block file, it is due to the fact that we have more block capacity but have not declared them, Alhamdulilah Rab Al alameen
+    y_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 10; // note dont worry if the log says failed to open block file, it is due to the fact that we have more block capacity but have not declared them, Alhamdulilah Rab Al alameen
     widths_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 16;
-    heights_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 16;
+    heights_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = L6BlockHeight;
     BlockImageTexture_File_Location[6][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //==========Lvl#7============
     float L7BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 70;
-    y_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = L7BlockHeight;
+    y_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 29;
     widths_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 17;
-    heights_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 17;
+    heights_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = L7BlockHeight;
     BlockImageTexture_File_Location[7][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //==========Lvl#8============
     float L8BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 80;
-    y_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = L8BlockHeight; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
+    y_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 23; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
     widths_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 18;
-    heights_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 18;
+    heights_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = L8BlockHeight;
     BlockImageTexture_File_Location[8][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //==========Lvl#9============
     float L9BlockHeight = 27;
     x_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 90; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
-    y_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = L9BlockHeight; // Alhamdulilah Rab Al Alameen, //Bismillah Hirahman Nirahim, second rule of dubugging found again, inspect arround if something that shouldnt happen in soething is happening, this mistake here was causingto rewrite [9][0] instead of[9][Blocks_of_boundary] Hence the wall was lifeted up, found, Oh Allah SWT please imprive my learning , observinf and debugging ability by leaps and bounds and please grant me patients and knowledge with wisdom that is beneficial Ameen
+    y_positions_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 43; // Alhamdulilah Rab Al Alameen, //Bismillah Hirahman Nirahim, second rule of dubugging found again, inspect arround if something that shouldnt happen in soething is happening, this mistake here was causingto rewrite [9][0] instead of[9][Blocks_of_boundary] Hence the wall was lifeted up, found, Oh Allah SWT please imprive my learning , observinf and debugging ability by leaps and bounds and please grant me patients and knowledge with wisdom that is beneficial Ameen
     widths_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 19;
-    heights_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = 19;
+    heights_of_blocks_each_level_holder_array[9][Blocks_of_boundary] = L9BlockHeight;
     BlockImageTexture_File_Location[9][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
 
     //I guess we found out the hard way? pasted the code for initialization inside class....to get red squigly lines...anyways, Alhamdulilah Rab Al Alameen

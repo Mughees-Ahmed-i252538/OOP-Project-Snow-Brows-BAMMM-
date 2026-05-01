@@ -286,17 +286,19 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
     cout<<"\n\n\nBismillah Hirahman Nirahim Trying to make level\n\n\n"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
+    bool Bonus_Levels_on = false; // This is to be changed by mode selected by player, in selcted lvl play bonus levels of otherwisee in story mode, on Alhamdulilah rab al alameen
 
     //I am sure that static memebrs are initialized before even main hence this should work before Level Config is Initialized Alhamdulilah Rab Al Alameen
     //Oh searched and found, static memebers with constant initializer eg static x=5 ( i beleive haver to define in a cpp) are initlaied before main, just like globals but dynamic ones are defined in their function called to define....some might be deffered till (self because it is our power to do so) Alhamdulilah Rab AL Alameen
 
     //To put this in control of main screen, load from should call another constructor ro be made soon inshallah(or perhaps pass this one a default argyukment than the load makes as read from file, Alhamdulilah Rab Al Alameen, Load also loads each players no of lifes left etc, Alhamdulilah rab al alameen)
-    Level_Config *levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y); // ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
+    Level_Config *levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y,Bonus_Levels_on); // ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
 
     bool level_ends=false;
 
+    
     while (window.isOpen())//i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
 
@@ -416,7 +418,7 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
             //cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
             delete levelConfig;//Now new and previous dont need to be printed here, they are being shown in Level constructor, however kept for use in debugging Alhamdulilah Rab AL Alameen
-            levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y);
+            levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y, Bonus_Levels_on);
             level_ends=false;
             //cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
         }
