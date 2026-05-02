@@ -117,6 +117,11 @@ private:
 
     Direction Action_to_Move_in_Direction_Variable;
     Direction Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
+    Direction Currently_Faces;
+    bool reverse_image;
+
+    int total_no_of_images_in_walking_animation = 4;
+
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
@@ -125,9 +130,10 @@ private:
 
     public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
-    void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
-    void Move_Right();//sets to +x
-    void is_Not_Moving();;
+    /* void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
+    void Move_Right();//sets to +x */
+    void Walk();//Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
+    void is_Not_Moving();
 
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 

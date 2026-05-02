@@ -294,6 +294,11 @@ int Level_Config::getLevel_Count()
     return Level_count;
 }
 
+sf::Music& Level_Config::getMusic()
+{
+    return Level_MusicSB;
+}
+
 //============================Stored_Level_Configs=====================================
 
 // Static Varible stays in memory until program terminates

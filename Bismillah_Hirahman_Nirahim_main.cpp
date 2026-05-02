@@ -296,6 +296,12 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
 
+    if (levelConfig!=nullptr)
+    {
+        levelConfig->getMusic().play();
+        levelConfig->getMusic().setLoop(true);
+    }
+
     bool level_ends=false;
 
     
@@ -417,8 +423,14 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
         if(level_ends&&Level_Config::getLevel_Count()!=Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//as couldnt call a non static memeber, hence made it static Alhamdulilah Rab Al Alameen
         {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
             //cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
+            levelConfig->getMusic().stop();
             delete levelConfig;//Now new and previous dont need to be printed here, they are being shown in Level constructor, however kept for use in debugging Alhamdulilah Rab AL Alameen
             levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y, Bonus_Levels_on);
+            if (levelConfig != nullptr)
+            {
+                levelConfig->getMusic().play();
+                levelConfig->getMusic().setLoop(true);
+            }
             level_ends=false;
             //cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
         }

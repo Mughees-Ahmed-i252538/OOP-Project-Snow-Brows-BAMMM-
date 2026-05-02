@@ -202,13 +202,18 @@ void Player::Action_To_Move(Direction d)
 void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
     
-    if(Action_to_Move_in_Direction_Variable==Direction::Left)
+    /* if(Action_to_Move_in_Direction_Variable==Direction::Left)//trying with united Walk function, bismillah hirahman nirahim
     {
         Move_Left();//then move left and right handle if have been moving right -> shift texturerect to wanted.... Implementing wanted function next inshallah
     }
     else if(Action_to_Move_in_Direction_Variable==Direction::Right)
     {
         Move_Right();
+    } */
+
+    if (Action_to_Move_in_Direction_Variable == Direction::Left || Action_to_Move_in_Direction_Variable == Direction::Right)
+    {
+        Walk();//For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
     }
     else if(Action_to_Move_in_Direction_Variable==Direction::Idle)
     {
@@ -221,12 +226,20 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
-void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
+void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {//to add fourth imaage to animation and also making first image the idle picture, Alhamdulilah Rab Al Alameen, perhaps making the resizing common and making a which side bool in the Move() to take care of set scale instead of separately in each blockk, perhaps changing move left and right j=to simply walk....,, Alhamdulilah Rab Al Alameen
     // to define soon inshallah
     //cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     //cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    if(Action_to_Move_in_Direction_Variable==Direction::Left)
     Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
+    else if (Action_to_Move_in_Direction_Variable == Direction::Right)
+    {
+        Current_velocity_x = getUsable_Movement_Speed();//fixed added this ALhamdulilah rab al alameen
+    }
+    
+    if(Action_to_Move_in_Direction_Variable==Direction::Right)
+
     Current_velocity_y = 0;
 
     int wanted_texture_rect_x = 0;
@@ -236,7 +249,7 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
 
    
 
-    if (Previously_Moving_in != Direction::Left) // this counter is only needed for moving animations ALhamdulilah
+    if (Previously_Moving_in != Action_to_Move_in_Direction_Variable) // this counter is only needed for moving animations ALhamdulilah
     {
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
         this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
@@ -254,7 +267,7 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
 
     } // animation speed determines how fast changes Alhamdulilah Rab AL ALameen, initial thought, try for different entitities different speed inshallah
 
-    int total_no_of_images_in_walking_animation = 3; // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
+    //total_no_of_images_in_walking_animation = 4; tranfered to class Alhamdulilah // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
     if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
@@ -282,11 +295,36 @@ void Player::Move_Left() // Sets Current Velocity x to -Movement Speed,, starts 
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;
     }
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 3)
+    {
+        // show third walking image
+        // right to first image by second second width Alhamdulilah
+        wanted_texture_rect_x = 240; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;
+        wanted_texture_rect_height = 80;
+    }
 
-    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), false); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+    if(Action_to_Move_in_Direction_Variable==Direction::Left)
+    {
+    Currently_Faces=Direction::Left;
+    reverse_image=false;
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
 
     this->Previously_Moving_in = Direction::Left;
+    }
+    else if (Action_to_Move_in_Direction_Variable == Direction::Right)
+    {
+        Currently_Faces = Direction::Right;
+        reverse_image = true;
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        this->Previously_Moving_in = Direction::Right;
+    }
 }
+/* //Trying with united walking function as iss using same animations ALhamdulilah rab al alameen
 void Player::Move_Right() // sets to +x
 {
     // to define soon inshallah
@@ -345,17 +383,33 @@ void Player::Move_Right() // sets to +x
         wanted_texture_rect_height = 80;
     }
 
-    setTextureRect(sf::IntRect(wanted_texture_rect_x,wanted_texture_rect_y,wanted_texture_rect_width,wanted_texture_rect_height),true);//as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
-    //Noticed, images are left facing, have to change logic, to only flip if right....Well Alhamdulilah, only need to change in actual function flipping, also need to change left or not to right or not inshallah
+    Currently_Faces = Direction::Right;
+    reverse_image = true;
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+                                                                                                                                                     // Noticed, images are left facing, have to change logic, to only flip if right....Well Alhamdulilah, only need to change in actual function flipping, also need to change left or not to right or not inshallah
     this->Previously_Moving_in = Direction::Right;
 }
-
+ */
 void Player::is_Not_Moving()
 {
     //to deinfe more soon inshallah
     //cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//uncomment for debugging, Bismillah Awalahu wa Akhira hu
+
+    /* bool reverse_image=false;//Now this is ensuring that at idle, shows same picture instead of either of the walking one Alhamdulilah rab al alameen
+
+    if(Previously_Moving_in==Direction::Right)
+    reverse_image=true; facing left right logic transfered to walking left and rigjht and some part to class Alhamdulilah
+ */
     Current_velocity_x=0;//plan make new type-> eg jump left in direction inshallah, when defining gravity inshallah, that also handels updates in texture rect calls
     Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
+
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80;//first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+    int wanted_texture_rect_height = 80; // integers because part of int rect
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);//Currently facing and reverse image variables dont change just the moving left and right changes Alhamdiulilah rab al alameen
 
     this->Previously_Moving_in=Direction::Idle;
 

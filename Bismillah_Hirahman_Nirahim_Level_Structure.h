@@ -76,7 +76,7 @@ class Level_Config{
         ~Level_Config();//Bismillah Hirahman Niraheem I would <stdexcept> try{code, using throw invalid_argument ,runtime error etc} catch(std::invalid_argument & e) basically catches and destructs all locals in try and runs catch to try prevent program crash, if nothing catches than calls terminate() that crashes program, after catch block, program resumes from after catch block, Alhamdulilah rab al alameen
         void display(sf::RenderWindow& window);
         static int getLevel_Count();
-    
+        sf::Music& getMusic();
 
 };
 //It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
