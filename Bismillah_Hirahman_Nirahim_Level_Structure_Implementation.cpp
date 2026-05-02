@@ -360,15 +360,16 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     int const Blocks_of_boundary = 4;
 
+    //Assign No of Blocks in each round
     No_of_Blocks_in_each_round[0] = Blocks_of_boundary + 8; // 4 of boundary 8 otherwise, Alhamdulilah Rab Al Alameen
     No_of_Blocks_in_each_round[1] = Blocks_of_boundary +13;
     No_of_Blocks_in_each_round[2] = Blocks_of_boundary  +15;
     No_of_Blocks_in_each_round[3] = Blocks_of_boundary + 7;//accidently did for three the +6 is for boss level 4 from 0 Alhamdulilah corrected
     No_of_Blocks_in_each_round[4] = Blocks_of_boundary + 6;
     No_of_Blocks_in_each_round[5] = Blocks_of_boundary + 5;
-    No_of_Blocks_in_each_round[6] = Blocks_of_boundary + 1;
-    No_of_Blocks_in_each_round[7] = Blocks_of_boundary + 1;
-    No_of_Blocks_in_each_round[8] = Blocks_of_boundary + 1;
+    No_of_Blocks_in_each_round[6] = Blocks_of_boundary + 6;
+    No_of_Blocks_in_each_round[7] = Blocks_of_boundary + 6;
+    No_of_Blocks_in_each_round[8] = Blocks_of_boundary + 7;
     No_of_Blocks_in_each_round[9] = Blocks_of_boundary + 5;//oops accidently forgot that i made no of blocks = boundary blocks and then trying to add blocks causes issues...and exe doesnt pop up, solved, Alhamduluilah rab al alameen
 
     //cout << "Bismillah Hirahman Nirahim Storage Construction Test 3" << endl;
@@ -1102,29 +1103,276 @@ Stored_Level_Configs::Stored_Level_Configs()
     heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
     BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform8r.png";
 
-    //==========Lvl#6============
-    float L6BlockHeight = 27;
-    x_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 60;
-    y_positions_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 10; // note dont worry if the log says failed to open block file, it is due to the fact that we have more block capacity but have not declared them, Alhamdulilah Rab Al alameen
-    widths_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = 16;
-    heights_of_blocks_each_level_holder_array[6][Blocks_of_boundary] = L6BlockHeight;
-    BlockImageTexture_File_Location[6][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    //==========Lvl#6============//If blobk not placing another block is mistakely over writing that blocks coordinates insteaad of its iwn Alhamdulilah rab al alameen
+    L = 6;
+    pr = 1;
+    Bi = Blocks_of_boundary; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'f';
 
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 2;
+    Bi = Blocks_of_boundary+1; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 4;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'l';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform7.png";
+
+    Bi = Blocks_of_boundary + 2; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'c';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 3;
+    Bi = Blocks_of_boundary+3; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'f';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 4;
+    Bi = Blocks_of_boundary+4; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 12;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'l';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform.png";
+
+    pr = 5;
+    Bi = Blocks_of_boundary+5; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 4;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform7.png";
+
+   
     //==========Lvl#7============
-    float L7BlockHeight = 27;
-    x_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 70;
-    y_positions_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 29;
-    widths_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = 17;
-    heights_of_blocks_each_level_holder_array[7][Blocks_of_boundary] = L7BlockHeight;
-    BlockImageTexture_File_Location[7][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    L = 7;
+    pr = 1;
+    Bi = Blocks_of_boundary; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 2;
+    Bi = Blocks_of_boundary + 1; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'l';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    Bi = Blocks_of_boundary + 2; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 3;
+    Bi = Blocks_of_boundary + 3; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 4;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'f';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform7.png";
+
+    
+    Bi = Blocks_of_boundary + 4; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;      // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 4;
+    Bi = Blocks_of_boundary + 5; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 12;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform.png";
 
     //==========Lvl#8============
-    float L8BlockHeight = 27;
-    x_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 80;
-    y_positions_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 23; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
-    widths_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = 18;
-    heights_of_blocks_each_level_holder_array[8][Blocks_of_boundary] = L8BlockHeight;
-    BlockImageTexture_File_Location[8][Blocks_of_boundary] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\BlockTexture2.png ";
+    L = 8;
+    pr = 1;
+    Bi = Blocks_of_boundary; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 12;   // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;   // left left cent ri ri Alhamdulilah
+    place = 'c';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform.png";
+
+    pr = 2;
+    Bi = Blocks_of_boundary + 1; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'c';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    
+    pr = 3;
+
+    Bi = Blocks_of_boundary + 2; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'f';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    Bi = Blocks_of_boundary + 3; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 3;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 's';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform6.png";
+
+    pr = 4;
+    Bi = Blocks_of_boundary + 4; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 6;       // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'l';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform8.png";
+
+    Bi = Blocks_of_boundary + 5; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 6;      // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'r';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform8r.png";
+
+    pr = 5;
+    Bi = Blocks_of_boundary + 6; // removed the redundant local vars Alhamdulilah now working on same var
+    No_of_blocks_in_W = 4;      // four and half about Alhamdulilah
+    No_of_blocks_in_H = 1;       // left left cent ri ri Alhamdulilah
+    place = 'c';
+
+    // New 'f' = first quarter, s= last quarter
+    x_positions_of_blocks_each_level_holder_array[L][Bi] = (place == 'r') ? (WW - ((No_of_blocks_in_W * considered_sub_cube_width) / 2)) : ((place == 'l') ? ((No_of_blocks_in_W * considered_sub_cube_width) / 2) : (place == 'c') ? (WW / 2)
+                                                                                                                                                                                                                                    : (place == 'f' ? (WW / 4) : (place == 's' ? (WW - (WW / 4)) : (custom_calculation)))); // last case is centre Alhamdulilah rab al alameen, do by manually for custom, ALhamdulilah rab al alameen // from right side
+    y_positions_of_blocks_each_level_holder_array[L][Bi] = Window_view_Size.Win_Height - Alvation_by_base_boundary - (pr * L_distance_to_next_platform_level) - (WS * LDistance_Required_to_be_on_top_of_previous_platform);
+    widths_of_blocks_each_level_holder_array[L][Bi] = (No_of_blocks_in_W * considered_sub_cube_width);
+    heights_of_blocks_each_level_holder_array[L][Bi] = No_of_blocks_in_H * LBlockHeight;
+    BlockImageTexture_File_Location[L][Bi] = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\L6to9Platform7.png";
 
     //==========Lvl#9============
     L = 9;
