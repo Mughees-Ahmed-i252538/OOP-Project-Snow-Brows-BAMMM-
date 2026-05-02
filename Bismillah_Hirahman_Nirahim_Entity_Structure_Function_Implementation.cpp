@@ -99,7 +99,7 @@ void Entity::setUsable_Movement_Speed(double s)
 
 void Entity::display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes)//passing the window itself by refernce to edit it in a function, Alhamdulilah rab al alameen
 {
-    //cout<<"Displaying Entity Sprite Alhamdulilah"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Un comment for debugging, inshallah
+    ////cout<<"Displaying Entity Sprite Alhamdulilah"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Un comment for debugging, inshallah
     window.draw(this->sprite);//Please remember, RenderWindow-> is the window, VideoMode-> is for Screen resolution, .draw(shape) is to place on back buffer ,display() switches back and front buffer,
     //Alhamdulilah Rab Al Alameen
 /* 
@@ -113,7 +113,7 @@ void Entity::display(sf::RenderWindow &window,bool Debug_Mode_Show_Debug_Boxes)/
 
 
     if(Debug_Mode_Show_Debug_Boxes)//Note as windows,clear() removes previous prints effect on screen, if this isnt run in next iteration its effect will disappear Alhamdulilah Rab Al Alameen
-    {//cout<<"Also Displaying Entity Debux Bux Alhamdulilah"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//uncomment to debug Alhamdulilah Rab Al ALameen
+    {////cout<<"Also Displaying Entity Debux Bux Alhamdulilah"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//uncomment to debug Alhamdulilah Rab Al ALameen
     window.draw(this->Debug_box);}//Note the box as smaller than shape must be over the sprite elsewise not visible Alhamdulilah Rab Al Alameen
     //window.display();
 }
@@ -149,15 +149,15 @@ void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right
     Part_of_Sprite_sheet_width = sprite.getTextureRect().width;
     Part_of_Sprite_sheet_height = sprite.getTextureRect().height;//I believ set scale(-1,1) sets the scale to orignal local again hence we also need to keep track of wanted scale
 
-    //cout<<"Sprite H Flipped?:"<<Sprite_Already_Horizontally_Flipped<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
-    //cout<<"Should The sprite be moving right?:"<<Right_or_not<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging Alhamdulilah
+    ////cout<<"Sprite H Flipped?:"<<Sprite_Already_Horizontally_Flipped<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    ////cout<<"Should The sprite be moving right?:"<<Right_or_not<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging Alhamdulilah
 
 
     if (!Sprite_Already_Horizontally_Flipped && Right_or_not) // it should be flipped but isnt already
     {
         
         Sprite_Already_Horizontally_Flipped=true;
-        //cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//I realized that sending one aspect negative here would work like set scale for flipping, but with new position, Alhamdulilah Rab Al Alameen, checking if it messes with something else, if so we could make a different function, Alhamdulilah Rab Al Alameen
+        ////cout<<"Was Facing Left Intent to Flip Right as trying to move right"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//I realized that sending one aspect negative here would work like set scale for flipping, but with new position, Alhamdulilah Rab Al Alameen, checking if it messes with something else, if so we could make a different function, Alhamdulilah Rab Al Alameen
         ForRelativeSizeAndPostionSprite_Entity_Copy(-Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y)); // This is needed because scale(-1,1) resets enforced display scale, Alhamdulilah Rab Al Alameen//this hf sprite image Alhamdulilah, ok fine alhamdulilah but the - must go with needed width else flipped vertically if send with hight, Alhamdulilah Rab Al Alameen
     }
     if (Sprite_Already_Horizontally_Flipped && !Right_or_not) // it shouldnt be flipped but is already
@@ -165,7 +165,7 @@ void Entity::setTextureRect(sf::IntRect Sub_part_inside_sprite_sheet, bool Right
         //sprite.setScale(1, 1); // this re hf to bring back ALhamdulilah sprite image Alhamdulilah, this comment set scale has been left for understanding, other removed, Alhamdulilah Rab Al Alameen
         //Realized setscale works with orignal image then scales.,, hence to flip back we need +1 not -1. However now the for relative uses set scale too...so this one wont work we have to concatinate its function for realtive
         Sprite_Already_Horizontally_Flipped = false;
-        //cout << "Was Facing Right Intent to Flip Left as trying to move left" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//For Debugging
+        ////cout << "Was Facing Right Intent to Flip Left as trying to move left" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//For Debugging
         ForRelativeSizeAndPostionSprite_Entity_Copy(Wanted_For_Display_Part_of_Sprite_sheet_width, Wanted_For_Display_Part_of_Sprite_sheet_height, sprite, sf::Vector2f(sprite.getPosition().x, sprite.getPosition().y));
     }//If no need to flip no need to write empty boxes Alhamdulilah
     //figure becomes bigger for some reason need to inspect...also need to make animation way faster..currently only changes image on one second....
@@ -199,27 +199,67 @@ void Player::x_Action_To_Move(x_Direction d)
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
+/* void Player::y_Action_To_Move(y_Direction d)
+{
+    y_Action_To_Move_in_Direction_Variable = d;
+} */
+
 void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
+
+   /*  if (y_Action_To_Move_in_Direction_Variable == y_Direction::Jumping && Block_underneath && (-Current_velocity_y) < terminal_velocity) // to transfer to jumping once implemented inshallah
+    {
+        cout<<"Jumping"<<endl;
+        Current_velocity_y-=jump_velocity;
+    } */
     
-    /* if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//trying with united Walk function, bismillah hirahman nirahim
+    //gravity_timer_accumulator+=gravity_timer.restart().asSeconds();
+     /* if (!Block_underneath && Current_velocity_y<terminal_velocity&&gravity_timer_accumulator>=gravity_applied_only_every_in_seconds) // jumping or falling Alhamdulilah, this slowly adds downwards pull untill falling
     {
-        Move_Left();//then move left and right handle if have been moving right -> shift texturerect to wanted.... Implementing wanted function next inshallah
-    }
-    else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
-    {
-        Move_Right();
+        gravity_timer_accumulator=0;
+            Current_velocity_y += gravity; // Positive is down...Alhamdulilah
+        // To simplify calcualtion for computer mass has been excluded from the equation
     } */
 
-    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+    /* if (Current_velocity_y > 0   &&!Block_underneath ) // when headed downwards falling (pos y is down) Alhamdulilah
     {
-        Walk();//For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
+        ////cout<<"Falling"<<endl;
+        y_State = y_Direction::Falling; // if no block underneath then falling, Alhamdulilah rab al alameen
     }
-    else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle)
+
+     if(y_State == y_Direction::Falling&&Block_underneath)//while falling a block comes underneath (this is to stop the fall)
     {
-        is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
-    }
+        cout << "Stopped Falling" << endl;;
+        Current_velocity_y=0;
+        y_State = y_Direction::Idle;//stop Falling Alhamdulilah Rab Al Alameen
+    }  */
+
+    ////cout << "Current vy"<<Current_velocity_y<<":"<<endl;//count<<//cout?
+    ////cout << "Current vx" << Current_velocity_x << ":" << endl;
+
+    //if no ourter if then vy becomes 0 in each of inner function Alhamdulilah
+    //this should work same as vy-0 check leme see//if stationary wrt y then can walk, if jumping then different animation, and movement if falling then differentt movement
     
+        ////cout<<"Not Falling or Jumping, Permissible to Walk Alhamdulilah"<<endl;
+
+      if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+        {
+            Walk();//For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
+        }
+        else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle)
+        {
+            is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
+        }
+    
+
+
+    
+
+
+    //cout<<"vx"<<Current_velocity_x<<endl;
+
+    //cout << "vy" << Current_velocity_y << endl;
+
     getSprite().move(Current_velocity_x,Current_velocity_y);
     getDebugBox().move(Current_velocity_x, Current_velocity_y);
 
@@ -229,13 +269,16 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {//to add fourth imaage to animation and also making first image the idle picture, Alhamdulilah Rab Al Alameen, perhaps making the resizing common and making a which side bool in the Move() to take care of set scale instead of separately in each blockk, perhaps changing move left and right j=to simply walk....,, Alhamdulilah Rab Al Alameen
     // to define soon inshallah
-    //cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
-    //cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    ////cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    ////cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)
-    Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
+    {Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
+    Current_velocity_y=0;// actually this should come 0, only start if 0... Alhamdulilah 
+    }
     else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
     {
         Current_velocity_x = getUsable_Movement_Speed();//fixed added this ALhamdulilah rab al alameen
+        Current_velocity_y = 0;
     }
     
     if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
@@ -328,8 +371,8 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 void Player::Move_Right() // sets to +x
 {
     // to define soon inshallah
-    //cout << "Bismillah Setting Player Velocity to - Usbale speed for Moving Left and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    //cout<< "Usable Speed"<<getUsable_Movement_Speed()<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    ////cout << "Bismillah Setting Player Velocity to - Usbale speed for Moving Left and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    ////cout<< "Usable Speed"<<getUsable_Movement_Speed()<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     Current_velocity_x=getUsable_Movement_Speed();//pos for right, neg for left...
     Current_velocity_y=0;
     //New Plan -> this sets the current velocity right, to deal with up and right movement, soon inshallah, actuall sfmove shall be called in this functions caller move with current velcocity inshallah, but this function handels image update inshallah
@@ -394,7 +437,7 @@ void Player::Move_Right() // sets to +x
 void Player::is_Not_Moving()
 {
     //to deinfe more soon inshallah
-    //cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//uncomment for debugging, Bismillah Awalahu wa Akhira hu
+    ////cout << "Bismillah Setting Player Velocity to 0 for Not Moving and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//uncomment for debugging, Bismillah Awalahu wa Akhira hu
 
     /* bool reverse_image=false;//Now this is ensuring that at idle, shows same picture instead of either of the walking one Alhamdulilah rab al alameen
 
@@ -415,9 +458,9 @@ void Player::is_Not_Moving()
 
 }//Ok you can also just get texture rect from a sprite Alhamdulilah Rab AL Alameen
 
-Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
+Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count%2], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
-    cout << "Making Player" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "Making Player" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
      Part_of_Sprite_sheet_x=0;//for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
      Part_of_Sprite_sheet_y=0;
@@ -431,7 +474,7 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
     
     // to define soon inshallah
 
-    cout << "Using File for texture Player" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "Using File for texture Player" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Player_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     //ok it says syntax is left top width height....hence the issue, we have done width first then position
     sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y,Player_sprite_width_to_display, Player_sprite_height_to_display);
@@ -444,16 +487,16 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
     //"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
     if (!FootStepsSB.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\SBFootsteps.wav")) // remember spaces are crucial in loading file, ensure there is no space after extension especially as suvh doesnt exsist in windows at the least as well as be careful of spaces pasted by vs code itself while pasting for formatting, Allah SWT knows best, Alhamdulilah Rab Al Alameen
     {                                                                                                                                             //"C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Sounds\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
-        cout << "Couldnt Load test sound, Oh Allah help us Ameen" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+        //cout << "Couldnt Load test sound, Oh Allah help us Ameen" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     }
     else
     {
-        cout << "Successfully Loaded File Alhamdulilah Rab Al Alameen"; // Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
+        //cout << "Successfully Loaded File Alhamdulilah Rab Al Alameen"; // Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
         FootStepsS.setBuffer(FootStepsSB);
         FootStepsS.setVolume(6);
     }
 
-    cout << "Player Made Alhamdulilah" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "Player Made Alhamdulilah" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 }
 //Bismillah Hirahman Nirahim, tests
 //Bismillah Hirahman Nirahim
@@ -462,36 +505,36 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
 {
     if (!getTexture().loadFromFile(Load_Texture_From_File))
     {
-        cout << "Log: couldnt load sprite texture for Entity" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+        //cout << "Log: couldnt load sprite texture for Entity" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     }
 
     getSprite().setTexture(getTexture());
 
     setUsable_Movement_Speed( Standard_Default_Player_Speed);
 
-    cout<<"----------------------------------"<<"\n"<<endl;
-    cout<<"Statistics of Made Entity:\n"<<"\n"<<endl;
+    //cout<<"----------------------------------"<<"\n"<<endl;
+    //cout<<"Statistics of Made Entity:\n"<<"\n"<<endl;
 
-    cout << "local width of sprite sheet :" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "local height of sprite sheet:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local width of sprite sheet :" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local height of sprite sheet:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout << "global width of sprite sheet:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "global height of sprite sheet:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global width of sprite sheet:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global height of sprite sheet:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     getSprite().setTextureRect(sf::IntRect(Part_of_Sprite_sheet_x, Part_of_Sprite_sheet_y, Part_of_Sprite_sheet_width, Part_of_Sprite_sheet_height)); // lets see from start we get 40 40 size sub texture from sprite sheet, Bismillah Hirahman Nirahim
 
-    cout << "local width of sprite sheet sub part:" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "local height of sprite sheet sub part:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local width of sprite sheet sub part:" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local height of sprite sheet sub part:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout << "global width of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "global height of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global width of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global height of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     sf::Vector2f Wanted_Position(Wanted_Size_And_Position.getPosition().x, Wanted_Size_And_Position.getPosition().y); // vector 2f has width first as is x value, Alhamdulilah Rab Al Alameen
     float NeededWidth = Wanted_Size_And_Position.width;
     float NeededHeight = Wanted_Size_And_Position.height;
 
-    cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
-    cout << "Needed Height of Sprite found at proces time:" << NeededHeight <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    //cout << "Needed Height of Sprite found at proces time:" << NeededHeight <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position);//!!!!!!
     // Also sets orign to centre, Alhamdulilah Rab Al Alameen
@@ -503,8 +546,8 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
 
     // Auto Makes the size wanted Alhamdulilah Rab Al ALameen
 
-    cout << "global width of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "global height of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global width of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global height of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     getDebugBox().setSize(sf::Vector2f(1, 1)); // Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
     // The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
@@ -519,35 +562,41 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     //getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
 
     
-   //Old one, now at start, but perhaps some logic differnece, leaving here just in case, Allah SWT know best Alhamdulilah Rab Al Alameen //cout<<"Setting Sprite Sheet and Debug Box"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+   //Old one, now at start, but perhaps some logic differnece, leaving here just in case, Allah SWT know best Alhamdulilah Rab Al Alameen ////cout<<"Setting Sprite Sheet and Debug Box"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
     
 
-    cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout << "global width of debug box:" << getDebugBox().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "global height of debug box:" << getDebugBox().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global width of debug box:" << getDebugBox().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global height of debug box:" << getDebugBox().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
 
     //Now for location to confirm best spawn points
 
-    //cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    //cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen To change this to track location of texturect in sprite inshallah
+    ////cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    ////cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen To change this to track location of texturect in sprite inshallah
 
-    cout << "global left of sprite:" << getSprite().getGlobalBounds().left <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "global top of sprite:" << getSprite().getGlobalBounds().top <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global left of sprite:" << getSprite().getGlobalBounds().left <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "global top of sprite:" << getSprite().getGlobalBounds().top <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout << "x_position of orign of sprite:" << getSprite().getOrigin().x<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "y_position of orign of sprite:" << getSprite().getOrigin().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "x_position of orign of sprite:" << getSprite().getOrigin().x<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "y_position of orign of sprite:" << getSprite().getOrigin().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout<< "Now for spawn point of given sprite"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    //cout<< "Now for spawn point of given sprite"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
-    cout << "x_position of spawn point of sprite:" << getSpawnPoint().x <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    cout << "y_position of spawn point of sprite:" << getSpawnPoint().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "x_position of spawn point of sprite:" << getSpawnPoint().x <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    //cout << "y_position of spawn point of sprite:" << getSpawnPoint().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    cout<<"----------------------------------"<<"\n"<<endl;
+    //cout<<"----------------------------------"<<"\n"<<endl;
     // Alhamdulilah Rab Al Alameen now i can understand sfml better and easier to use to, Alhamdulilah Rab Al Alameen
 
     // To later inshallah add checks if size is sent 0 as that might start causing issues (from memory:as you can do operations like printing and scaling etc normally, mostly scaling) allah swt knows best Alhamdulilah Rab Al ALameen, especially since we are using the Relative.... Functions that use divisions for comarision Alhamdulilah Rab Al Alameen
+}
+
+void Player::SendtoSpawnPt()
+{
+    getSprite().setPosition(getSpawnPoint());
+    getDebugBox().setPosition(getSpawnPoint());
 }

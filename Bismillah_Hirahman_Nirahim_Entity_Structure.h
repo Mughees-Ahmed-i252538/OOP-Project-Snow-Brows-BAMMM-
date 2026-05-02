@@ -17,11 +17,11 @@ enum class x_Direction//we can also do non class but that way its parts simply w
 
 };//these are types not data memebers and hence can be accessed as if public Alhamdulilah Rab AL Alameen also you cant change their values in code so Alhamdulilah Rab Al Alameen
 
-enum class y_Direction // we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
+enum class y_State // we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
 {
-    Idle = 0,
-    Jumping = -1, // changed left to -1 to be used in image flipping as well, as setscale(-1,1) flips image horizontally, Inshallah we wont need to flip vertically seeing from images Alhamdulilah Rab Al Alameen
-    Falling = 1  // basically made 3 intergers like things....Alhaamdulilah
+    Stationary = 0,
+    Rising = 1, // changed left to -1 to be used in image flipping as well, as setscale(-1,1) flips image horizontally, Inshallah we wont need to flip vertically seeing from images Alhamdulilah Rab Al Alameen
+    Falling = -1  // basically made 3 intergers like things....Alhaamdulilah
 
 };
 
@@ -38,7 +38,7 @@ class Entity//to make this an abstract class soon inshallah, but for now all maj
 private:
     sf::Vector2f spawnpoint;   // tells us the position, initialize location to here
     static float Usable_Movement_Speed;                  // similar to max speed only for left and right
-    float Mass;                                          // for velocity of jump and fall down
+                                             // for velocity of jump and fall down
 
     sf::Vector2f Size_Wanted;//Whats done: Wanted size is obtained by calling a function that changes  actual picture size to wanted using a scaling trick and comparision, Alhamdulilah rab al alameen
                                        
@@ -47,6 +47,14 @@ private:
     sf::Sprite sprite;
     sf::RectangleShape Debug_box;//its size is determined in constructor of respective class Alhamdulilah Rab Al Alameen, The debuf button will work to change color of this bbox from invisible (initilaized in constructor) to another color (different for projectiles, players and enemies) Alhamdulilah Rab Al Alameen (I believe platform are not entities) Alhamdulilah Rab Al Alameen
 
+protected:
+    /* float gravity = 0.8;//very small because added 30 times per second...
+    sf::Clock gravity_timer;//to ease calculation done every less time
+    float gravity_timer_accumulator=0;
+    float gravity_applied_only_every_in_seconds=0.2;
+     */
+
+    float Mass;
 
 public:
     // you can and often must use the syntax : ParentClass(parameters) in a child class constructor to pass arguments to a base clas (found on slighht search Alhamdulilah rab al alameen)
@@ -84,7 +92,6 @@ public:
     //I notice we dont need to track orignal location-> already done in spawn point so remove this sets x and y Alhamdulilah
     int Wanted_For_Display_Part_of_Sprite_sheet_width;//I saw that we did resizing inside Set sprite after  getting sub texture but didnt do so in movement, hence the bloating, to solve we just need to manage these two in parallel, Alhamdulilah Rab Al Alameen
     int Wanted_For_Display_Part_of_Sprite_sheet_height;
-
     friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
@@ -131,9 +138,15 @@ private:
     x_Direction x_Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
     x_Direction Currently_Faces;
 
-   
+    /*  y_Direction y_Action_To_Move_in_Direction_Variable;
+     y_Direction y_Previous_State;
+     y_Direction y_State ; // Jumping falling or idle Alhamdulilah rab al alameen
+     
+     float jump_velocity=5;
+     int terminal_velocity=10; */
 
     int total_no_of_images_in_walking_animation = 4;
+    bool Block_underneath;
 
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
@@ -141,8 +154,13 @@ private:
     bool reverse_image;//general for each animation Alhamdulilah
     float Animation_Speed=10;//Determines how fast next image comes, Alhamdulilah Rab Al Alameen
 
+    //prevents downwards velocity from being too much Alhamdulilah rab al alameen, Being super professional we can even use the acti=ual formulah Alhamdulilah rab al alameen
+    //remove tv and now uses if condition ALhamdulilah
+    //readded now as if cindition Alhamdulilah
+    //needed int for the % but if want float can do changes in function and use the *100 into int and then back conversion Alhamdulilah rab al alameen
 
     public : void x_Action_To_Move(x_Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
+    //void y_Action_To_Move(y_Direction d);//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
     /* void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x */
@@ -158,6 +176,8 @@ private:
      /* void input_handling_player(char button);
 
      void draw();by ayan */
+
+     void SendtoSpawnPt();
 };
 
 
