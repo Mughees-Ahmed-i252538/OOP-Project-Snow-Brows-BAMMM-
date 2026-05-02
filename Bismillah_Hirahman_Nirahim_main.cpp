@@ -90,6 +90,35 @@ void ForRelativeSizeAndPostionSprite(float NeededWidth, float NeededHeight, sf::
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
+void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig)
+{
+    int No_of_Blocks_in_given_round=levelConfig->getNoofBlocks();
+    sf::Sprite *Blocks_in_given_round=levelConfig->getBlocksArray();
+
+
+    for(int i=0;i<No_of_Players;i++)
+    {
+        //doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
+
+        if (Players[i]->x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
+        {    if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
+            {
+                Players[i]->x_Action_To_Move(x_Direction::Idle);
+            } //If moving left and touches the boundary stop
+        }
+        if (Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right) // ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
+        {
+            if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[1].getGlobalBounds()))
+            {
+                Players[i]->x_Action_To_Move(x_Direction::Idle);
+            } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
+        }
+
+    }//friend of entity and level config for ease alhamdulilah
+
+
+}
+
 int main()// // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 
@@ -338,24 +367,28 @@ int main()// // Remember we still need to do -> sunc changes to push out merged/
 
         for(int i=0;i<No_of_Players;i++)
         {
-            Players[i]->Action_To_Move(Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+
+            Players[i]->x_Action_To_Move(x_Direction::Idle);//this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
             /* if (is_Multiplayer)
-            Players[1].Action_To_Move(Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
+            Players[1].x_Action_To_Move(x_Direction::Idle); *///lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
 
             if(sf::Keyboard::isKeyPressed(Players_Left[i]))
                 {
-                    Players[i]->Action_To_Move(Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
+                    Players[i]->x_Action_To_Move(x_Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
 
                     //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
 
                 }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
                 {
-                    Players[i]->Action_To_Move(Direction::Right);
+                    Players[i]->x_Action_To_Move(x_Direction::Right);
                     // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
                 }
+
+                //This may need to stop movement hence comes before Move call Alhamdulilah
+            Collusion_Detector(No_of_Players,Players,levelConfig);//can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah   
 
             Players[i]->Move();
         }

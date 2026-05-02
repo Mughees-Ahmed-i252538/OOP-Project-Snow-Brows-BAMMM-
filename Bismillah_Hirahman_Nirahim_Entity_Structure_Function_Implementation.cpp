@@ -193,29 +193,29 @@ int Player::Player_Count = 0;//ld error because had missed player count, Added A
 
 int Player::Standard_Default_Player_Speed=6.5;
 
-void Player::Action_To_Move(Direction d)
+void Player::x_Action_To_Move(x_Direction d)
 {
-    this->Action_to_Move_in_Direction_Variable=d;//Bismillah hirahman Nirahim, this var means, in this iteration of main loop, player is intending to move in presented d direction Alhamdulilah, 0 if idle...(according to enum class direction Alhamdulilah Rab Al Alameen)
+    this->x_Action_To_Move_in_Direction_Variable=d;//Bismillah hirahman Nirahim, this var means, in this iteration of main loop, player is intending to move in presented d direction Alhamdulilah, 0 if idle...(according to enum class direction Alhamdulilah Rab Al Alameen)
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
 void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
     
-    /* if(Action_to_Move_in_Direction_Variable==Direction::Left)//trying with united Walk function, bismillah hirahman nirahim
+    /* if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//trying with united Walk function, bismillah hirahman nirahim
     {
         Move_Left();//then move left and right handle if have been moving right -> shift texturerect to wanted.... Implementing wanted function next inshallah
     }
-    else if(Action_to_Move_in_Direction_Variable==Direction::Right)
+    else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
     {
         Move_Right();
     } */
 
-    if (Action_to_Move_in_Direction_Variable == Direction::Left || Action_to_Move_in_Direction_Variable == Direction::Right)
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
     {
         Walk();//For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
     }
-    else if(Action_to_Move_in_Direction_Variable==Direction::Idle)
+    else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle)
     {
         is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
     }
@@ -231,14 +231,14 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
     // to define soon inshallah
     //cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     //cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    if(Action_to_Move_in_Direction_Variable==Direction::Left)
+    if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)
     Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
-    else if (Action_to_Move_in_Direction_Variable == Direction::Right)
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
     {
         Current_velocity_x = getUsable_Movement_Speed();//fixed added this ALhamdulilah rab al alameen
     }
     
-    if(Action_to_Move_in_Direction_Variable==Direction::Right)
+    if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
 
     Current_velocity_y = 0;
 
@@ -249,16 +249,16 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
    
 
-    if (Previously_Moving_in != Action_to_Move_in_Direction_Variable) // this counter is only needed for moving animations ALhamdulilah
+    if (x_Previously_Moving_in != x_Action_To_Move_in_Direction_Variable) // this counter is only needed for moving animations ALhamdulilah
     {
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder = 0; // reseting the holder as well
 
         //Perhaps adding a diff sound for dir change soon inshallah
     } // the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
     else
     { // modify here for updation speed adjustments
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.getElapsedTime().asSeconds();
 
         if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//perhaps transfer this somewhere else if needed inshallah
         FootStepsS.play();//Alhamdulilah found a way to download directly wav from an audio editor Alhamdulilah Rab Al Alameen
@@ -269,7 +269,7 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
     //total_no_of_images_in_walking_animation = 4; tranfered to class Alhamdulilah // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
-    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
         wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
         wanted_texture_rect_y = 0;
@@ -278,15 +278,15 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
         // show first walking image
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
     {
         // show second walking image, right to first image by first image width Alhamdulilah
         wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
         wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;
+        wanted_texture_rect_width = 80;//ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah 
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
     {
         // show third walking image
         // right to first image by second second width Alhamdulilah
@@ -295,7 +295,7 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 3)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 3)
     {
         // show third walking image
         // right to first image by second second width Alhamdulilah
@@ -305,23 +305,23 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
         wanted_texture_rect_height = 80;
     }
 
-    if(Action_to_Move_in_Direction_Variable==Direction::Left)
+    if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)
     {
-    Currently_Faces=Direction::Left;
+    Currently_Faces=x_Direction::Left;
     reverse_image=false;
 
     setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
 
-    this->Previously_Moving_in = Direction::Left;
+    this->x_Previously_Moving_in = x_Direction::Left;
     }
-    else if (Action_to_Move_in_Direction_Variable == Direction::Right)
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
     {
-        Currently_Faces = Direction::Right;
+        Currently_Faces = x_Direction::Right;
         reverse_image = true;
 
         setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
 
-        this->Previously_Moving_in = Direction::Right;
+        this->x_Previously_Moving_in = x_Direction::Right;
     }
 }
 /* //Trying with united walking function as iss using same animations ALhamdulilah rab al alameen
@@ -341,14 +341,14 @@ void Player::Move_Right() // sets to +x
 
     
 
-    if(Previously_Moving_in!=Direction::Right)//this counter is only needed for moving animations ALhamdulilah
+    if(x_Previously_Moving_in!=x_Direction::Right)//this counter is only needed for moving animations ALhamdulilah
     {
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=0;//reseting the holder as well
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder=0;//reseting the holder as well
     }//the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
     else
     {   //modify here for updation speed adjustments
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.getElapsedTime().asSeconds();
 
         if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//if we start it even as it is playing, it restarts so the previiious one isnt heard, only the last one is heard at stopping, hence this, Alhamdulilah Rab Al Alameen
         FootStepsS.play();
@@ -356,7 +356,7 @@ void Player::Move_Right() // sets to +x
 
     int total_no_of_images_in_walking_animation=3;//Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
-    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)//initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0)//initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
         wanted_texture_rect_x=0;//Different for every animation and image Alhamdulilah
         wanted_texture_rect_y=0;
@@ -365,7 +365,7 @@ void Player::Move_Right() // sets to +x
 
         //show first walking image
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
     {
         // show second walking image, right to first image by first image width Alhamdulilah
         wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
@@ -373,7 +373,7 @@ void Player::Move_Right() // sets to +x
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
     {
         // show third walking image
         //right to first image by second second width Alhamdulilah
@@ -383,12 +383,12 @@ void Player::Move_Right() // sets to +x
         wanted_texture_rect_height = 80;
     }
 
-    Currently_Faces = Direction::Right;
+    Currently_Faces = x_Direction::Right;
     reverse_image = true;
 
     setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
                                                                                                                                                      // Noticed, images are left facing, have to change logic, to only flip if right....Well Alhamdulilah, only need to change in actual function flipping, also need to change left or not to right or not inshallah
-    this->Previously_Moving_in = Direction::Right;
+    this->x_Previously_Moving_in = x_Direction::Right;
 }
  */
 void Player::is_Not_Moving()
@@ -398,7 +398,7 @@ void Player::is_Not_Moving()
 
     /* bool reverse_image=false;//Now this is ensuring that at idle, shows same picture instead of either of the walking one Alhamdulilah rab al alameen
 
-    if(Previously_Moving_in==Direction::Right)
+    if(x_Previously_Moving_in==x_Direction::Right)
     reverse_image=true; facing left right logic transfered to walking left and rigjht and some part to class Alhamdulilah
  */
     Current_velocity_x=0;//plan make new type-> eg jump left in direction inshallah, when defining gravity inshallah, that also handels updates in texture rect calls
@@ -411,7 +411,7 @@ void Player::is_Not_Moving()
 
     setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);//Currently facing and reverse image variables dont change just the moving left and right changes Alhamdiulilah rab al alameen
 
-    this->Previously_Moving_in=Direction::Idle;
+    this->x_Previously_Moving_in=x_Direction::Idle;
 
 }//Ok you can also just get texture rect from a sprite Alhamdulilah Rab AL Alameen
 
@@ -422,7 +422,7 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
      Part_of_Sprite_sheet_x=0;//for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
      Part_of_Sprite_sheet_y=0;
      Part_of_Sprite_sheet_width=80;//To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
-     Part_of_Sprite_sheet_height=80;//we can use scale (-1,1) for flipping image horizontally Alhamdulilah Rab Al Alameen, to arrange this and movement and possibly display inshallah, Self: I want to keep display simple, Movement handles this, also the Direction enum can be used and left value changed to -1, Alhamdulilah Rab Al Alameen
+     Part_of_Sprite_sheet_height=80;//we can use scale (-1,1) for flipping image horizontally Alhamdulilah Rab Al Alameen, to arrange this and movement and possibly display inshallah, Self: I want to keep display simple, Movement handles this, also the x_Direction enum can be used and left value changed to -1, Alhamdulilah Rab Al Alameen
 
     player_id=Player_Count;
     Player_Count++;//For next player spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen

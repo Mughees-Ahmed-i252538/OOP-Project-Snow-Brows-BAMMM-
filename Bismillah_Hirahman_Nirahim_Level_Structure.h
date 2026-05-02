@@ -8,6 +8,9 @@
 
 using namespace std;
 
+class Player;
+class Level_Config; // declaaraing ahead of time Alhamdulilah
+
 struct Window_Res{
     float Win_Width=500;
     float Win_Height=500;
@@ -77,7 +80,9 @@ class Level_Config{
         void display(sf::RenderWindow& window);
         static int getLevel_Count();
         sf::Music& getMusic();
-
+        sf::Sprite* getBlocksArray();
+        int getNoofBlocks();
+        friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
 };
 //It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
 

@@ -6,15 +6,24 @@
 using namespace std;
 //Note have to save file before being able to commit changes
 
-
+class Player;
+class Level_Config;//declaaraing ahead of time Alhamdulilah
 //self note, you can = something in class for a non static var that is non constant and use normally just default value = that which, but if it is static var and not constant, you must define it at top of a cpp and cant give value Alhamdulilah Rab Al Alameen
-enum class Direction//we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
+enum class x_Direction//we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
 {
     Idle=0,
     Left=-1,//changed left to -1 to be used in image flipping as well, as setscale(-1,1) flips image horizontally, Inshallah we wont need to flip vertically seeing from images Alhamdulilah Rab Al Alameen
     Right=1//basically made 3 intergers like things....Alhaamdulilah
 
 };//these are types not data memebers and hence can be accessed as if public Alhamdulilah Rab AL Alameen also you cant change their values in code so Alhamdulilah Rab Al Alameen
+
+enum class y_Direction // we can also do non class but that way its parts simply work  like normal vars, I believe.... hence class
+{
+    Idle = 0,
+    Jumping = -1, // changed left to -1 to be used in image flipping as well, as setscale(-1,1) flips image horizontally, Inshallah we wont need to flip vertically seeing from images Alhamdulilah Rab Al Alameen
+    Falling = 1  // basically made 3 intergers like things....Alhaamdulilah
+
+};
 
 enum class State: char{
 
@@ -76,6 +85,8 @@ public:
     int Wanted_For_Display_Part_of_Sprite_sheet_width;//I saw that we did resizing inside Set sprite after  getting sub texture but didnt do so in movement, hence the bloating, to solve we just need to manage these two in parallel, Alhamdulilah Rab Al Alameen
     int Wanted_For_Display_Part_of_Sprite_sheet_height;
 
+    friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
+
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
@@ -112,23 +123,26 @@ private:
     sf::SoundBuffer FootStepsSB;
     sf::Sound FootStepsS;
 
-    sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;//eg for Walking Alhamdulilah
-    int  Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
+    sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking;//eg for Walking Alhamdulilah
+    int  Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder;//while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
 
-    Direction Action_to_Move_in_Direction_Variable;
-    Direction Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
-    Direction Currently_Faces;
-    bool reverse_image;
+    
+    x_Direction x_Action_To_Move_in_Direction_Variable;
+    x_Direction x_Previously_Moving_in;//if Action to move in is same as previous then keep acumulating timer for next animation image
+    x_Direction Currently_Faces;
+
+   
 
     int total_no_of_images_in_walking_animation = 4;
 
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     //Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
+    bool reverse_image;//general for each animation Alhamdulilah
     float Animation_Speed=10;//Determines how fast next image comes, Alhamdulilah Rab Al Alameen
 
 
-    public : void Action_To_Move(Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
+    public : void x_Action_To_Move(x_Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
     /* void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
     void Move_Right();//sets to +x */
@@ -137,11 +151,13 @@ private:
 
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
-     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
+    void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
-    /* void input_handling_player(char button);
+    friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);//can you declare friend in private: Will have to try later inshallah?
 
-    void draw();by ayan */
+     /* void input_handling_player(char button);
+
+     void draw();by ayan */
 };
 
 

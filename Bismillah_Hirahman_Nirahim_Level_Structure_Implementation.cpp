@@ -299,6 +299,16 @@ sf::Music& Level_Config::getMusic()
     return Level_MusicSB;
 }
 
+sf::Sprite *Level_Config::getBlocksArray()
+{
+    return BlockImageSprites;
+}
+
+int Level_Config::getNoofBlocks()
+{
+    return No_of_Blocks_in_this_round;
+}
+
 //============================Stored_Level_Configs=====================================
 
 // Static Varible stays in memory until program terminates
