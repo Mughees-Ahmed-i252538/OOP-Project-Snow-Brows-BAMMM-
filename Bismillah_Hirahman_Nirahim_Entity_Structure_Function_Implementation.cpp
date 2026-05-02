@@ -312,16 +312,17 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
     //total_no_of_images_in_walking_animation = 4; tranfered to class Alhamdulilah // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
-    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    //This animation now solely for idleness, it has been removed from walking Alhamdulilah
+    /* if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
         wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
         wanted_texture_rect_y = 0;
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;//I realized these are redundant, we are already using Part of....To remove if needed inshallah, replace with the orignal Part of spreecd sheet entity protected vars, and remove their reassignment in the called textrect changer function inshallah soon
 
-        // show first walking image
-    }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
+        // show first walking image, //Bismillah hirahman nirahim for testing
+    } */
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0)
     {
         // show second walking image, right to first image by first image width Alhamdulilah
         wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
@@ -329,7 +330,7 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
         wanted_texture_rect_width = 80;//ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah 
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
     {
         // show third walking image
         // right to first image by second second width Alhamdulilah
@@ -338,7 +339,7 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 3)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
     {
         // show third walking image
         // right to first image by second second width Alhamdulilah

@@ -161,18 +161,54 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting naother loop, the returned int tells game what changes were made in the menu.... 
 {
 
-    sf::Texture Test_LoadingBluePlayerSpriteSheetT;
-    sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
-    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
+    sf::Texture PauseMenuT;
+    sf::Sprite PauseMenuS;
+    if (!PauseMenuT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\PauseMenu.png"))
     {
-        std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     }
     else
     {
-        Test_LoadingBluePlayerSpriteSheetS.setTexture(Test_LoadingBluePlayerSpriteSheetT);// to be completed soon inshallah
-        Test_LoadingBluePlayerSpriteSheetS.setTextureRect(sf::IntRect(0,0,80,80));
+        PauseMenuS.setTexture(PauseMenuT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(window.getView().getSize().x, window.getView().getSize().y, PauseMenuS, sf::Vector2f(window.getView().getSize().x / 2, window.getView().getSize().y / 2));
     }
-
+    sf::Texture ResumeBT;
+    sf::Sprite ResumeBS;
+    if (!ResumeBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ResumeB.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ResumeBS.setTexture(ResumeBT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 80, ResumeBS, sf::Vector2f(window.getView().getSize().x / 2, 150));
+    }
+    sf::Texture MainMenuBT;
+    sf::Sprite MainMenuBS;
+    if (!MainMenuBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\MainMenuB.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        MainMenuBS.setTexture(MainMenuBT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 80, MainMenuBS, sf::Vector2f(window.getView().getSize().x / 2, 250));
+    }
+    sf::Texture ExitBT;
+    sf::Sprite ExitBS;
+    if (!ExitBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ExitB.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ExitBS.setTexture(ExitBT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 80, ExitBS, sf::Vector2f(window.getView().getSize().x / 2, 350));
+    }
 
     while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
@@ -191,7 +227,30 @@ int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting na
             
         }
 
+        sf::Vector2i MPosition = sf::Mouse::getPosition(window); // gets positon of mpuse
+        sf::Vector2f MCoords = window.mapPixelToCoords(MPosition);
+
+        if (ResumeBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            return 0;
+        }
+        if (MainMenuBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            return -1;
+        }
+        if (ExitBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            return -2;
+        }
+
         window.clear();
+        window.draw(PauseMenuS);
+        window.draw(ResumeBS);
+        window.draw(MainMenuBS);
+        window.draw(ExitBS);
         window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
 
@@ -225,7 +284,11 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     int Second_Persons_Choice = 2;
 
     Player *P1 = new Player(First_Persons_Choice); // have to shift to one by one as new array cant use parameterized constructor, however for rescalability and ease of use(as you see how beneficial array usgae is with loops Alhamdulilah rab al alameen), I use a method that keeps arrays usable although individual working (also deleting array would auto delete orignal space no need for redelete Alhamdulilah rab al alameen)
-    Player *P2 = new Player(Second_Persons_Choice); // 0 loads nick design and i believe 1 loads blue player (the one next to nick.pbg), this will be changed later
+
+    Player *P2 ;//ptr to dma p2 Alhamdulilah
+    if( No_of_Players==2)// ok previously player 2 was being made unconditionally but i believe wasnt being shown, Now P2 wont be made if not multiplayer Alhamdulilah rab al alameen inshallah
+    P2= new Player(Second_Persons_Choice); // 0 loads nick design and i believe 1 loads blue player (the one next to nick.pbg), this will be changed later
+    //Alhamdulilah rab al alameen, the crashes issues resolved
 
     Player** Players = new Player*[No_of_Players];//As array of & wasnt allowed so we make array of ptrs Alhamdulilah rab al alameen
 
@@ -235,6 +298,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
    
 
+    if( No_of_Players==2)
     Players[1] = P2;// Note as P1 and P2 are just pointing to DMA, now we can just assign those ptrs to array and null ptr p1 and p2
 
 
@@ -254,7 +318,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     Players_Hit[0]=sf::Keyboard::Q;
 
     if( No_of_Players==2)
-    Players_Left[  1] = sf::Keyboard::J;
+    Players_Left[1] = sf::Keyboard::J;
     Players_Right[1] = sf::Keyboard::L;
     Players_Jump[1] = sf::Keyboard::I;
     Players_Hit[1] = sf::Keyboard::U;
@@ -295,6 +359,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     //I am sure that static memebrs are initialized before even main hence this should work before Level Config is Initialized Alhamdulilah Rab Al Alameen
     //Oh searched and found, static memebers with constant initializer eg static x=5 ( i beleive haver to define in a cpp) are initlaied before main, just like globals but dynamic ones are defined in their function called to define....some might be deffered till (self because it is our power to do so) Alhamdulilah Rab AL Alameen
+
+    Level_Config::setInitialLevel(0);//As already in memory so we need to reset to 0 or else the same level plays after the selected level even in story mode, Astigfiruallah Alhamdulilah rab al alameen
+    //This resets the round if previous call had changed it Alhamdulilah rab al alameen
+
+    if (mode == false) // although this if is a redundant conditoin but just in case they change what wanted means and forget, or want for rescalability Alhamdulilah rab al alameem
+    {//In selective Level system, initaizlize count to wanted level to sent level by default 0 Alhamdulilah rab al alameen
+        Level_Config::setInitialLevel(Initial_Level);
+    }
 
     //To put this in control of main screen, load from should call another constructor ro be made soon inshallah(or perhaps pass this one a default argyukment than the load makes as read from file, Alhamdulilah Rab Al Alameen, Load also loads each players no of lifes left etc, Alhamdulilah rab al alameen)
     Level_Config *levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y,Bonus_Levels_on); // ok passing by value give issue, hence passing by refrence, Alhamdulilah Rab Al Alameen
@@ -357,6 +429,24 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 {
                     level_ends = true;
                 }
+            }
+            sf::Vector2i MPosition = sf::Mouse::getPosition(window);   // gets positon of mpuse
+            sf::Vector2f MCoords = window.mapPixelToCoords(MPosition); // converts to coordinates in views (so you dot have to calculate ALhamdulilah)
+
+            if (PauseBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+            {
+                // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+                levelConfig->getMusic().pause();
+                int option_choosen=PauseMenu(window); // true for story mode, think as if means bonus levells on
+                if (option_choosen==-1)//if 0 then just continue with the game Alhamdulilah
+                {
+                    return 0;//at -1 go to main menu Alhamdulilah
+                }
+                else if (option_choosen == -2)//at -2 exit entire game
+                {
+                    return -1;
+                }
+                levelConfig->getMusic().play();
             }
 
             // Now for hold type events Alhamdulilah
@@ -664,65 +754,146 @@ int Choose_Level_To_Play(sf::RenderWindow &window,int is_Multiplayer)
         sf::Vector2i MPosition = sf::Mouse::getPosition(window); // gets positon of mpuse
         sf::Vector2f MCoords = window.mapPixelToCoords(MPosition);
 
+
         if (ChooseLevel1S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false,  is_Multiplayer, 1-1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false,  is_Multiplayer, 1-1); // true for story mode, think as if means bonus levells on
+            if (option_choosen==0)
+            {
+                return 0;//to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel2S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 2 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 2 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel3S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 3 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 3 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel4S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 4 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 4 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel5S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 5 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 5 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel6S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 6 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 6 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel7S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 7 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 7 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel8S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 8 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 8 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel9S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 9 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 9 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
         if (ChooseLevel10S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
         {
             // mouse was on this coords and lb event occured, Alhamdulilah button pressed
 
-            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 10 - 1); // true for story mode, think as if means bonus levells on
+            int option_choosen=Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 10 - 1); // true for story mode, think as if means bonus levells on
+            if (option_choosen == 0)
+            {
+                return 0; // to main menu Alhamdulilah, this choose menu is extra step so it is treated just like normal story mode exit codes instead while getting to main Alhamdulilah rab al alameen however it is skipped while back iterating hence always returned as if story mode was returning directly hence even if 0 return ALhamdulilah rab al alameen, Alhamdulilah oh allah SWT please help me Ameen
+            }
+            else if (option_choosen == -1)
+            {
+                return -1;
+            }
         }
 
         window.clear();
@@ -942,14 +1113,22 @@ int main()
        {
         //mouse was on this coords and lb event occured, Alhamdulilah button pressed
         Music.pause();
-        Story_Mode_or_Selective_Mode(window,true,is_Multiplayer);//true for story mode, think as if means bonus levells on
+        int option_choosen=Story_Mode_or_Selective_Mode(window,true,is_Multiplayer);//true for story mode, think as if means bonus levells on
+        if(option_choosen==-1)
+        {
+            window.close();//if choosen exit game then close window Alhamdulilah rab al alameen
+        }
         Music.play();
        }
        if (SelectiveLevelBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
        {
            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
            Music.pause();
-           Choose_Level_To_Play(window,is_Multiplayer); // true for story mode, think as if means bonus levells on
+           int option_choosen=Choose_Level_To_Play(window,is_Multiplayer); // true for story mode, think as if means bonus levells on
+           if(option_choosen==-1)
+           {
+            window.close();//choosen to exit Alhamdulilah rab al alameen
+           }
            Music.play();
        }
        if (SinglePlayerBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))

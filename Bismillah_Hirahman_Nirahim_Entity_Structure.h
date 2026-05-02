@@ -145,7 +145,7 @@ private:
      float jump_velocity=5;
      int terminal_velocity=10; */
 
-    int total_no_of_images_in_walking_animation = 4;
+    int total_no_of_images_in_walking_animation = 3;
     bool Block_underneath;
 
     //If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen

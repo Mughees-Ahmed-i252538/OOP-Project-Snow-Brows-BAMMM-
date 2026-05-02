@@ -83,6 +83,7 @@ class Level_Config{
         sf::Sprite* getBlocksArray();
         int getNoofBlocks();
         friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
+        static void setInitialLevel(int Wanted_Level);//currently used for selective level which only runs a single level, but can be used for Loading as well with a separate function for replacing the indexes of bonus Levels, Alhamdulilah rab al alameen
 };
 //It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
 
@@ -194,4 +195,5 @@ class Stored_Level_Configs
         //-----Constructors, Destructor Alhamdulilah Rab Al Alameen
         Stored_Level_Configs();//Bismillah Hirahman Nirahim made meansures to have window size records without input, also ensuring they are same in main,by defining its structure here Alhamdulilah Rab Al ALameen 
         ~Stored_Level_Configs(); // declared here and also defined in cpp( constructor and destructor) Alhamdulilah
+        
 };  

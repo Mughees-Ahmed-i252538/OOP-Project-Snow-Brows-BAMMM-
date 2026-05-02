@@ -308,11 +308,20 @@ int Level_Config::getNoofBlocks()
     return No_of_Blocks_in_this_round;
 }
 
-//============================Stored_Level_Configs=====================================
+void Level_Config::setInitialLevel(int Wanted_Level)
+{
+    if(Wanted_Level>=0&&Wanted_Level<stored_Level_configs.getTotal_Levels_For_which_Data_is_Present())
+    {
+        Level_count=Wanted_Level;//first leveel will be wnted level if this fucntion called before level initialization Alhamdulilah rab al alameen
+    }
 
-// Static Varible stays in memory until program terminates
+}
 
-Stored_Level_Configs::Stored_Level_Configs()
+    //============================Stored_Level_Configs=====================================
+
+    // Static Varible stays in memory until program terminates
+
+    Stored_Level_Configs::Stored_Level_Configs()
 {
 
     //cout<<"Creating Storage of Configs Alhamdulilah Rab Al Alameen"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
