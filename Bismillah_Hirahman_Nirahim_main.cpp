@@ -158,7 +158,48 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
 }
 
-int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode,bool is_Multiplayer) // // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
+int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting naother loop, the returned int tells game what changes were made in the menu.... 
+{
+
+    sf::Texture Test_LoadingBluePlayerSpriteSheetT;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
+    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
+    {
+        std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        Test_LoadingBluePlayerSpriteSheetS.setTexture(Test_LoadingBluePlayerSpriteSheetT);// to be completed soon inshallah
+        Test_LoadingBluePlayerSpriteSheetS.setTextureRect(sf::IntRect(0,0,80,80));
+    }
+
+
+    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+    {
+
+        sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
+        while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
+        // pollEvent checks queue and if event queue empty returns 0,
+        // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
+        // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
+        {
+
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed
+                                                                                                                                    // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                return 0;
+
+            
+        }
+
+        window.clear();
+        window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
+    }
+
+    // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
+    return 0;
+}
+
+int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Multiplayer,int Initial_Level=0) // // Remember we still need to do -> sunc changes to push out merged/changed main to github Alhamdulilah rab al alameen, note if using a code space you dont need to sync changes to github, they are directly accessing github and any action is directly on github alhthough still requireing pushing and pulling Alhamdulilah
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 
 
@@ -271,7 +312,20 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode,bool is_Mul
      for(int i=0;i<No_of_Players;i++)
     {
         Players[i]->SendtoSpawnPt();
-    } 
+    } //Alhamdulilah sends to spawn pt Alhamdulilah
+
+    sf::Texture PauseBT;
+    sf::Sprite PauseBS;
+
+    if(!PauseBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\PauseB.png"))
+    {
+        cout<<"Pause b didnt load"<<endl;
+    }
+    else{
+        PauseBS.setTexture(PauseBT);
+        ForRelativeSizeAndPostionSprite(30, 30, PauseBS, sf::Vector2f(500-40,  40)); // Top Right Alhamdulilah Rab AL Alameen
+    }
+
 
    
         while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
@@ -435,8 +489,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode,bool is_Mul
             //currently forced exit, later change to suitable animation or ending screen for replay etc, Inshallah Allah SWT know best Alhamdulilah Rab AL ALameen
         }
 
-
-        window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
+        window.draw(PauseBS);
+            window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
     delete Players;
     Players=nullptr;
@@ -445,10 +499,251 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode,bool is_Mul
 
 //Bismillah Hirahman Nirahim for Testing Alhamdulilah Rab Al Alameen
 
-void Choose_Level_To_Play()
+int Choose_Level_To_Play(sf::RenderWindow &window,int is_Multiplayer)
 {
-    
+    sf::Texture ChooseLevelBgT;
+    sf::Sprite ChooseLevelBgS;
+    if (!ChooseLevelBgT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevelBg.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevelBgS.setTexture(ChooseLevelBgT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(window.getView().getSize().x, window.getView().getSize().y, ChooseLevelBgS, sf::Vector2f(window.getView().getSize().x / 2, window.getView().getSize().y/2));
+    }
+    sf::Texture ChooseLevel1T;
+    sf::Sprite ChooseLevel1S;
+    if (!ChooseLevel1T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel1.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel1S.setTexture(ChooseLevel1T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel1S, sf::Vector2f(65, 100));
+    }
+    sf::Texture ChooseLevel2T;
+    sf::Sprite ChooseLevel2S;
+    if (!ChooseLevel2T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel2.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel2S.setTexture(ChooseLevel2T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel2S, sf::Vector2f(175, 100));
+    }
+    sf::Texture ChooseLevel3T;
+    sf::Sprite ChooseLevel3S;
+    if (!ChooseLevel3T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel3.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel3S.setTexture(ChooseLevel3T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel3S, sf::Vector2f(65, 160));
+    }
+    sf::Texture ChooseLevel4T;
+    sf::Sprite ChooseLevel4S;
+    if (!ChooseLevel4T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel4.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel4S.setTexture(ChooseLevel4T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel4S, sf::Vector2f(175, 160));
+    }
+    sf::Texture ChooseLevel5T;
+    sf::Sprite ChooseLevel5S;
+    if (!ChooseLevel5T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel5.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel5S.setTexture(ChooseLevel5T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel5S, sf::Vector2f(65, 220));
+    }
+    sf::Texture ChooseLevel6T;
+    sf::Sprite ChooseLevel6S;
+    if (!ChooseLevel6T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel6.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel6S.setTexture(ChooseLevel6T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel6S, sf::Vector2f(175, 220));
+    }
+    sf::Texture ChooseLevel7T;
+    sf::Sprite ChooseLevel7S;
+    if (!ChooseLevel7T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel7.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel7S.setTexture(ChooseLevel7T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel7S, sf::Vector2f(65, 280));
+    }
+    sf::Texture ChooseLevel8T;
+    sf::Sprite ChooseLevel8S;
+    if (!ChooseLevel8T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel8.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel8S.setTexture(ChooseLevel8T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel8S, sf::Vector2f(175, 280));
+    }
+    sf::Texture ChooseLevel9T;
+    sf::Sprite ChooseLevel9S;
+    if (!ChooseLevel9T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel9.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel9S.setTexture(ChooseLevel9T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel9S, sf::Vector2f(65, 340));
+    }
+    sf::Texture ChooseLevel10T;
+    sf::Sprite ChooseLevel10S;
+    if (!ChooseLevel10T.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevel10.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevel10S.setTexture(ChooseLevel10T); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(100, 40, ChooseLevel10S, sf::Vector2f(175, 340));
+    }
+    sf::Texture ChooseLevelLabelT;
+    sf::Sprite ChooseLevelLabelS;
+    if (!ChooseLevelLabelT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ChooseLevelLabel.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ChooseLevelLabelS.setTexture(ChooseLevelLabelT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 30, ChooseLevelLabelS, sf::Vector2f(120, 40));
+    }
 
+    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+    {
+
+        sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
+        while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
+        // pollEvent checks queue and if event queue empty returns 0,
+        // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
+        // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
+        {
+
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed
+                                                                                                                                    // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                return 0;
+        }
+
+        sf::Vector2i MPosition = sf::Mouse::getPosition(window); // gets positon of mpuse
+        sf::Vector2f MCoords = window.mapPixelToCoords(MPosition);
+
+        if (ChooseLevel1S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false,  is_Multiplayer, 1-1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel2S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 2 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel3S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 3 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel4S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 4 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel5S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 5 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel6S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 6 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel7S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 7 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel8S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 8 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel9S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 9 - 1); // true for story mode, think as if means bonus levells on
+        }
+        if (ChooseLevel10S.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+
+            Story_Mode_or_Selective_Mode(window, false, is_Multiplayer, 10 - 1); // true for story mode, think as if means bonus levells on
+        }
+
+        window.clear();
+        window.draw(ChooseLevelBgS);
+        window.draw(ChooseLevel1S);
+        window.draw(ChooseLevel2S);
+        window.draw(ChooseLevel3S);
+        window.draw(ChooseLevel4S);
+        window.draw(ChooseLevel5S);
+        window.draw(ChooseLevel6S);
+        window.draw(ChooseLevel7S);
+        window.draw(ChooseLevel8S);
+        window.draw(ChooseLevel9S);
+        window.draw(ChooseLevel10S);
+        window.draw(ChooseLevelLabelS);
+
+        window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
+    }
+
+    // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
+    return 0;
 }
 
 
@@ -649,6 +944,13 @@ int main()
         Music.pause();
         Story_Mode_or_Selective_Mode(window,true,is_Multiplayer);//true for story mode, think as if means bonus levells on
         Music.play();
+       }
+       if (SelectiveLevelBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+       {
+           // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+           Music.pause();
+           Choose_Level_To_Play(window,is_Multiplayer); // true for story mode, think as if means bonus levells on
+           Music.play();
        }
        if (SinglePlayerBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
        {
