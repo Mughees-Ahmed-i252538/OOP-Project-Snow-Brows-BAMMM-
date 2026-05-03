@@ -111,6 +111,7 @@ class Player : public Entity//if issues arrive while calling constructor as is a
 private:
 
     int health=0;
+    int score=0;
     static int Player_Max_Health;
     //Will be used inshallah soon
     //Snowballs snowballs; include throw snow balls function instead that creates a snowball by dma, note all entity disapearing will be managed by deleting dama Alhamdulilah rab al alameen
@@ -118,7 +119,8 @@ private:
     Snowballs** snowballs_thrown;//array of ptrs Alhamdulilah
     int Snowball_Capacity=100;//At once how many can exsist
     int Current_Snowballs_Exsisting=0;
-    /* float Snow_Ball_Power;
+     float Snow_Ball_Power=1;// i by default Alhamdulilah
+     /*
     bool Gotten_Hit_Imunity;
     static double Hit_imunity_duration;//for mobs, every level configration haas such a spawn pt array for them along with their type and numbers (possibly using a class for mobsb spawn pt and adta, inshallah) Alhamdulilah Rab Al Alameen
      *///Used
@@ -224,6 +226,8 @@ private:
     void Throw_Snowball();
     void display_snowballs_of_Player(sf::RenderWindow& window,bool is_Debug_Mode_on);
     void move_snowballs_of_Player();//forgot to move...Astigfiruallah
+    void Add_To_Score(int add_score);
+    int Get_Score();
 };
 
 
@@ -236,6 +240,8 @@ class Enemy: public Entity//issue Enemy ptr cant use Bottom Data memebers so hav
     protected:
     int Enemy_id;//This is what is directly assigned and is actually what needs be managed for tracking which enemy this is
     int health = 0;
+    int Score_Added=0;
+    float Damage =0;
 
     //to be copied, initially for botom Alhamdulilah
     float Botom_sprite_height_to_display;
@@ -401,6 +407,8 @@ class Botom_Lvl_1_5: public Botom
     //static sf::Vector2f Spawn_Points[2];//given by level Alhamdulilah rab al alameen
 
     static int Botom_Lvl_1_5_Max_Health;
+    static int Botom_Lvl_1_5_Damage;
+    static int Botom_Lvl_1_5_Score_Added;
 
 public:
     
@@ -411,6 +419,9 @@ public:
 class Botom_Lvl_6_7 : public Botom
 {
     static int Botom_Lvl_6_7_Max_Health;
+    static int Botom_Lvl_6_7_Damage;
+    static int Botom_Lvl_6_7_Score_Added;
+
 
 public:
     Botom_Lvl_6_7(sf::Vector2f spawn_at);
@@ -420,6 +431,8 @@ public:
 class Botom_Lvl_7_8 : public Botom//considering both appear Alhamdulil 7 is common
 {
     static int Botom_Lvl_7_8_Max_Health;
+    static int Botom_Lvl_7_8_Damage;
+    static int Botom_Lvl_7_8_Score_Added;
 
 public:
     Botom_Lvl_7_8(sf::Vector2f spawn_at);
@@ -429,6 +442,8 @@ public:
 class Botom_Lvl_8_9 : public Botom // considering both appear Alhamdulil 8 is common
 {
     static int Botom_Lvl_8_9_Max_Health;
+    static int Botom_Lvl_8_9_Damage;
+    static int Botom_Lvl_8_9_Score_Added;
 
 public:
     Botom_Lvl_8_9(sf::Vector2f spawn_at);

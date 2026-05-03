@@ -201,6 +201,28 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                 //=================Bismillah hirahman nirahim, now for snowball to mob hit check inshallah
                 if (Players[i]->snowballs_thrown[k]!=nullptr)//considering it might have become null ptr inside code loop up Alhadmulilah
                 {
+                    for(int l=0;l<no_of_mobs_in_this_level;l++)
+                    {
+                        if(Array_of_Mobs[l]==nullptr)
+                        {
+                            continue;//go check next if this mob dead also have to add in each loop to not use if dead
+                            //Actually this is enough for interations inshallah
+                        }
+                        if (Players[i]->snowballs_thrown[k] != nullptr && Players[i]->snowballs_thrown[k]->getDebugBox().getGlobalBounds().intersects(Array_of_Mobs[l]->getDebugBox().getGlobalBounds()))
+                        { // it seems the snowball becomes a null ptr in a iteration and in second iteration, to check it needs to r=derefrence the nullptr whicch leads to error, hence the check is one of the conditons with &&, Interesting thing on && is that if first ocntditon fails second is never checked Alhamdulilah rab al alameenn, so first check if not = null ptr then actually use it, Alhamdulilah rab al alameen
+                            cout << "deleted snowball ALhamdulilah" << endl;
+                            delete Players[i]->snowballs_thrown[k];    // deleting snowball that hits a platform Alhamdulilah rab al alameen
+                            Players[i]->snowballs_thrown[k] = nullptr; // ensuring removing dangling ptr to make space for new ptr ALhamdulilah
+                            // Alhamdulilah destroyed snowballs cant hit a platform ,,
+                            Array_of_Mobs[l]->health -= Players[i]->Snow_Ball_Power;// the stronger the power the more the damage Alhamdulilah rab al alameen
+                            if (Array_of_Mobs[l]->health>=0)
+                            {
+                                Players[i]->Add_To_Score(Array_of_Mobs[l]->Score_Added);
+                                delete Array_of_Mobs[l];
+                                Array_of_Mobs[l]=nullptr;//Bismillah hirahman Nirahim for testing
+                            }
+                        }
+                    }
 
                 }
 
@@ -275,6 +297,36 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
         // cout<<"On Block?:"<<Array_of_Mobs[i]->Block_underneath<<endl;
 
         // cout<<"Block Underneath Player?: "<<Array_of_Mobs[i]->Block_underneath<<endl;//I think even cout can make the program crash? if too much...ALhamdulilah rab al alameen
+
+
+        for(int p=0;p<No_of_Players;p++)
+        {
+            if(Players[p]==nullptr)
+            {
+                continue;
+            }
+            if(Array_of_Mobs==nullptr)
+            {
+                continue;
+            }//just in case one has been destroyed Alhadulilah rab al alameen
+
+            
+            if (Players[p] != nullptr && Players[p]->getDebugBox().getGlobalBounds().intersects(Array_of_Mobs[i]->getDebugBox().getGlobalBounds()))
+            { // it seems the snowball becomes a null ptr in a iteration and in second iteration, to check it needs to r=derefrence the nullptr whicch leads to error, hence the check is one of the conditons with &&, Interesting thing on && is that if first ocntditon fails second is never checked Alhamdulilah rab al alameenn, so first check if not = null ptr then actually use it, Alhamdulilah rab al alameen
+                cout << "hit player Astigfirullah ALhamdulilah" << endl;
+                 // ensuring removing dangling ptr to make space for new ptr ALhamdulilah
+                // Alhamdulilah destroyed snowballs cant hit a platform ,,
+                Players[p]->health -= Array_of_Mobs[i]->Damage; // the stronger the power the more the damage Alhamdulilah rab al alameen
+                if (Players[p]->health >= 0)
+                {
+                    delete Players[p];
+                    Players[p] = nullptr; // Bismillah hirahman Nirahim for testing
+                }
+            } // i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
+            
+        }
+
+
 
     } // friend of entity and level config for ease alhamdulilah
  
@@ -371,6 +423,102 @@ int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting na
         window.clear();
         window.draw(PauseMenuS);
         window.draw(ResumeBS);
+        window.draw(MainMenuBS);
+        window.draw(ExitBS);
+        window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
+    }
+
+    // Inshallah success, May Allah help us, Ameen sum ameen ya rab al alameen
+    return 0;
+}
+
+int Game_over_menu(sf::RenderWindow &window) // effictiently pauses game by starting naother loop, the returned int tells game what changes were made in the menu....
+{                                                                                    // Note, Add restart level button if have time inshallah)
+//copied pause menu Alhamdulilah just replace resume option with a game over ....
+    sf::Texture GameOverMenuT;
+    sf::Sprite GameOverMenuS;
+    if (!GameOverMenuT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\GameOverMenu.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        GameOverMenuS.setTexture(GameOverMenuT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(window.getView().getSize().x, window.getView().getSize().y, GameOverMenuS, sf::Vector2f(window.getView().getSize().x / 2, window.getView().getSize().y / 2));
+    }
+
+    sf::Texture WrittenGameOverT;//better sign inshallah then text
+    sf::Sprite WrittenGameOverS;
+    if (!WrittenGameOverT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\WrittenGameOver.png"))
+    {
+        cout<<"Could open writen game over Astigfirullah Alhamdulilah"<<endl;
+    }
+    else
+    {
+        WrittenGameOverS.setTexture(WrittenGameOverT);
+        ForRelativeSizeAndPostionSprite(300, window.getView().getSize().x / 1.85, WrittenGameOverS, sf::Vector2f(window.getView().getSize().x / 2, 100)); // slightly bigger than the rest ALhamdulilah
+    }
+
+    sf::Texture MainMenuBT;
+    sf::Sprite MainMenuBS;
+    if (!MainMenuBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\MainMenuB.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        MainMenuBS.setTexture(MainMenuBT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 80, MainMenuBS, sf::Vector2f(window.getView().getSize().x / 2, 300));
+    }
+    sf::Texture ExitBT;
+    sf::Sprite ExitBS;
+    if (!ExitBT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\ExitB.png"))
+    {
+        std::cout << "Testing File Presence :, failed" << "\n"
+                  << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    }
+    else
+    {
+        ExitBS.setTexture(ExitBT); // to be completed soon inshallah
+        ForRelativeSizeAndPostionSprite(200, 80, ExitBS, sf::Vector2f(window.getView().getSize().x / 2, 400));
+    }
+
+    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+    {
+
+        sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
+        while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
+        // pollEvent checks queue and if event queue empty returns 0,
+        // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
+        // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
+        {
+
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed
+                                                                                                                                    // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                return 0;
+        }
+
+        sf::Vector2i MPosition = sf::Mouse::getPosition(window); // gets positon of mpuse
+        sf::Vector2f MCoords = window.mapPixelToCoords(MPosition);
+
+       
+        if (MainMenuBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            return -1;
+        }
+        if (ExitBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            return -2;
+        }
+
+        window.clear();
+        
+        window.draw(GameOverMenuS);
+        window.draw(WrittenGameOverS);//accidently had placed behind menu, replaced Alhamdulilah
         window.draw(MainMenuBS);
         window.draw(ExitBS);
         window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
@@ -811,6 +959,26 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             return 0;//ok didnt need the retur 0 here but window.close() this ennds the loop and hence end of game smoother instead of sudden, Alhamdulilah Rab AL Alameen
             //return to menu
             //currently forced exit, later change to suitable animation or ending screen for replay etc, Inshallah Allah SWT know best Alhamdulilah Rab AL ALameen
+        }
+        int Game_over=0;
+        for(int i=0;i<No_of_Players;i++)
+        {
+            if(Players[i]!=nullptr)
+            Game_over++;
+
+        }
+
+        if(Game_over==0)
+        {
+            int option_choosen=Game_over_menu(window);
+            if (option_choosen == -1) // if 0 then just continue with the game Alhamdulilah
+            {
+                return 0; // at -1 go to main menu Alhamdulilah
+            }
+            else if (option_choosen == -2) // at -2 exit entire game
+            {
+                return -1;
+            }
         }
 
         window.draw(PauseBS);

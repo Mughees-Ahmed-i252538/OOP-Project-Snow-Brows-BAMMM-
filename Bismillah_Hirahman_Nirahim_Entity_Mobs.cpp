@@ -614,17 +614,25 @@ void Botom::AI_for_Movement()
 
 string Botom_Lvl_1_5::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Blue.png";
 int Botom_Lvl_1_5::Botom_Lvl_1_5_Max_Health = 2;
+int Botom_Lvl_1_5::Botom_Lvl_1_5_Damage = 1;
+int Botom_Lvl_1_5::Botom_Lvl_1_5_Score_Added = 1;
 
 string Botom_Lvl_6_7::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Orange.png";
 int Botom_Lvl_6_7::Botom_Lvl_6_7_Max_Health = 3;
+int Botom_Lvl_6_7::Botom_Lvl_6_7_Damage = 1;
+int Botom_Lvl_6_7::Botom_Lvl_6_7_Score_Added = 2;
 
 string Botom_Lvl_7_8::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Pink.png";
 int Botom_Lvl_7_8::Botom_Lvl_7_8_Max_Health = 4;
+int Botom_Lvl_7_8::Botom_Lvl_7_8_Damage = 1;
+int Botom_Lvl_7_8::Botom_Lvl_7_8_Score_Added = 3;
 
 string Botom_Lvl_8_9::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Pink.png";//to change in future if time inshallah
 int Botom_Lvl_8_9::Botom_Lvl_8_9_Max_Health = 4;
+int Botom_Lvl_8_9::Botom_Lvl_8_9_Damage=1;
+int Botom_Lvl_8_9::Botom_Lvl_8_9_Score_Added = 4;
 
-Botom_Lvl_1_5::Botom_Lvl_1_5(sf::Vector2f spawn_at):Botom(spawn_at,File_From_Where_To_Load_Resources_names)
+Botom_Lvl_1_5::Botom_Lvl_1_5(sf::Vector2f spawn_at) : Botom(spawn_at, File_From_Where_To_Load_Resources_names)
 {
     health= Botom_Lvl_1_5_Max_Health;
 //Can you call constructor and do absolutely noting it it? i think that will give error Allah swt knows best Alhamdulilah rab al alameen..google says you can...Allah SWT knows best lets try that later inshallah

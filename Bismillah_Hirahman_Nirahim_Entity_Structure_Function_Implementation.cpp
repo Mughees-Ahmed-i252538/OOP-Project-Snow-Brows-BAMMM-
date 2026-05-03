@@ -947,4 +947,13 @@ void Player::move_snowballs_of_Player()
     }
 }
 
+void Player::Add_To_Score(int add_score)
+{
+    score+=add_score;
+}
+int Player::Get_Score()
+{
+    return score;
+}
+
 //==================Testing by placing mobs here, Bismillah hirahman nirahim, in the name of Allah SWT in the name of who there is barakah
