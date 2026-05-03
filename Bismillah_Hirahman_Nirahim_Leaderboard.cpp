@@ -379,7 +379,7 @@ int Leaderboard::ShowLeaderBoard(sf::RenderWindow &window, sf::Sprite Background
 
 
     sf::Font font;
-    if(!font.loadFromFile("ARCADECLASSIC.ttf"))
+    if (!font.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Fonts\\RusticRoadway.otf"))
     {
         cout<<"Failed to load font";
     }
@@ -405,7 +405,7 @@ int Leaderboard::ShowLeaderBoard(sf::RenderWindow &window, sf::Sprite Background
     //Orign at centre of page ignoring headerbar inshallah
 
     sf::Font EntryFont;
-    if (!EntryFont.loadFromFile("Roboto-Bold.ttf")) // changeable separately of leaderboard fucntion hence placed so even if redundant and consujems more space
+    if (!EntryFont.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Fonts\\RusticRoadway.otf")) // changeable separately of leaderboard fucntion hence placed so even if redundant and consujems more space
     // Alhamdulilah!
     {
         cout<<"Failed to load font";
@@ -687,7 +687,7 @@ int Leaderboard::EnterUsername(sf::RenderWindow &window, float ChoosenX, float C
     char User1[MaxNoOfChars] = {0}; // Two Users, note Max no of chars already accounts  \0
     // Logic change, just call function twice
     sf::Font font;
-    font.loadFromFile("Roboto-Bold.ttf");
+    font.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Fonts\\RusticRoadway.otf");
 
     sf::Text Prompt;
 

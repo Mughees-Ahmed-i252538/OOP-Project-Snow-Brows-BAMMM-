@@ -6,6 +6,7 @@
 #include "Bismillah_Hirahman_Nirahim_Common_Header.h"
 #include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
 #include "Bismillah_Hirahman_Nirahim_Level_Structure.h"
+#include "Bismillah_Hirahman_Nirahim_Leaderboard.h"
 
 //Now trying a branch Bismillah hirahman nirahim
 
@@ -554,7 +555,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 {//We have to do fetch from all remotes after doing sync changes from local to reflect on actual main
 
 
-    
+   
+
     //bool is_Multiplayer= false;//for debugging ALhamdulilah
     int No_of_Players;
 
@@ -779,6 +781,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         ForRelativeSizeAndPostionText(20, 20, score_display_p1, sf::Vector2f(Players[1]->getSpawnPoint().x, Players[1]->getSpawnPoint().y - 385));
         score_display_p1.setFillColor(sf::Color::Red);
     }
+    Leaderboard *LEADERBOARD = new Leaderboard;
+
+    Window_Res W;
+    int Player1Index = LEADERBOARD->EnterUsername(window, W.Win_Width, W.Win_Height, 1);
+
+    int Player2Index=0;
+    if(No_of_Players==2)
+    Player2Index = LEADERBOARD->EnterUsername(window, W.Win_Width, W.Win_Height, 2);
 
     while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
@@ -1104,6 +1114,27 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
             window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
+
+
+    if(Players[0]!=nullptr)
+    {
+        for(int i=0;i<Players[0]->Get_Score();i++)
+        {
+            LEADERBOARD->AddWin(Player1Index);
+                
+        }
+    }
+
+    if(No_of_Players==2)
+    {
+        if (Players[1] != nullptr)
+        {
+            LEADERBOARD->AddWin(Player2Index);
+        }
+    }
+
+    delete LEADERBOARD;
+
 
     for(int i=0;i<No_of_Players;i++)
     {
@@ -1542,6 +1573,35 @@ int main()
     cout << "window view width" << window.getView().getSize().x << endl;
     cout << "window view height" << window.getView().getSize().x << endl; */
 
+    //===========================
+
+    sf::Font Leaderboard_Font;
+    Leaderboard_Font.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Fonts\\RusticRoadway.otf");
+    Leaderboard_Font.setSmooth(false); // To give arcade look
+    sf::Text Leaderboard_Text;
+    Leaderboard_Text.setFont(Leaderboard_Font);
+
+    Leaderboard_Text.setCharacterSize(40);
+    Leaderboard_Text.setString("Leaderboard"); // Acts as button or its holder icon does, to call function Show Leaderboard
+    Leaderboard_Text.setFillColor(sf::Color::Magenta);
+    Leaderboard_Text.setOutlineThickness(ChoosenResolutionX * (1.f / 150));
+    Leaderboard_Text.setOutlineColor(sf::Color(48, 0, 80));
+
+    ForRelativeSizeAndPostionText(60,30, Leaderboard_Text, sf::Vector2f(500-95, 500-95)); // In position x calculationTo take it to almost end, y portion to centre it on the headerbar, Alhamdulilah, Alhamdulilah works
+
+    sf::Texture Leaderboard_text_HolderT;
+    if (!Leaderboard_text_HolderT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Leaderboard.png"))
+    {
+        std::cout << "Failed to Load Leaderboard text Holder (image) ";
+    }
+
+    sf::Sprite Leaderboard_text_HolderS;
+
+    Leaderboard_text_HolderS.setTexture(Leaderboard_text_HolderT);
+
+    ForRelativeSizeAndPostionSprite( 80,80,  Leaderboard_text_HolderS , sf::Vector2f(Leaderboard_Text.getPosition().x ,Leaderboard_Text.getPosition().y-5)); // To encase text alhamdulilah, had to change size due the blank area in images, well Alhamdulilah
+
+    //============================
 
     sf::Texture OperningScreenT;
     sf::Sprite OperningScreenS;
@@ -1617,6 +1677,7 @@ int main()
         MultiPlayerBS.setTexture(MultiPlayerBT);
         ForRelativeSizeAndPostionSprite(50, 20, MultiPlayerBS, sf::Vector2f(430, 350));
     }
+    Leaderboard* LEADERBOARD=new Leaderboard;
 
    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
    {
@@ -1642,7 +1703,9 @@ int main()
        {
         //mouse was on this coords and lb event occured, Alhamdulilah button pressed
         Music.pause();
+        delete LEADERBOARD;
         int option_choosen=Story_Mode_or_Selective_Mode(window,true,is_Multiplayer);//true for story mode, think as if means bonus levells on
+        LEADERBOARD= new Leaderboard;
         if(option_choosen==-1)
         {
             window.close();//if choosen exit game then close window Alhamdulilah rab al alameen
@@ -1653,7 +1716,9 @@ int main()
        {
            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
            Music.pause();
+           delete LEADERBOARD;
            int option_choosen=Choose_Level_To_Play(window,is_Multiplayer); // true for story mode, think as if means bonus levells on
+           LEADERBOARD=new Leaderboard;
            if(option_choosen==-1)
            {
             window.close();//choosen to exit Alhamdulilah rab al alameen
@@ -1670,6 +1735,11 @@ int main()
            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
            is_Multiplayer = true;
        }
+       if (Leaderboard_text_HolderS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+       {
+           // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+           LEADERBOARD->ShowLeaderBoard(window, OperningScreenS, sf::RectangleShape(), sf::Sprite(), Leaderboard_text_HolderS, Leaderboard_Text, ChoosenResolutionX, ChoosenResolutionY);
+       }
 
         window.clear();
        window.draw(OperningScreenS);
@@ -1677,6 +1747,8 @@ int main()
        window.draw(SelectiveLevelBS);
        window.draw(SinglePlayerBS);
        window.draw(MultiPlayerBS);
+       window.draw(Leaderboard_text_HolderS);
+       window.draw(Leaderboard_Text);
 
        window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
    }

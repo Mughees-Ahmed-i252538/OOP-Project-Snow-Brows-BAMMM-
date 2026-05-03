@@ -101,7 +101,7 @@ int Part_of_Sprite_sheet_height;
 // I notice we dont need to track orignal location-> already done in spawn point so remove this sets x and y Alhamdulilah
 int Wanted_For_Display_Part_of_Sprite_sheet_width; // I saw that we did resizing inside Set sprite after  getting sub texture but didnt do so in movement, hence the bloating, to solve we just need to manage these two in parallel, Alhamdulilah Rab Al Alameen
 int Wanted_For_Display_Part_of_Sprite_sheet_height;
-friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
+friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig, Leaderboard* LEADERBOARD);
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
@@ -205,7 +205,7 @@ private:
 
     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
-    friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);//can you declare friend in private: Will have to try later inshallah?
+    friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig, Leaderboard* LEADERBOARD);//can you declare friend in private: Will have to try later inshallah?
 
      /* void input_handling_player(char button);
 
