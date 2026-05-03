@@ -148,6 +148,8 @@ private:
     //actually just the function called Make Action to jump shall be enough inshallah, as jump is euphemeral and instantanous, it also doesnt happen after leaving ground, only after Landing, that is being Stationary Alhamdulilah rab al alameen
     float jump_speed=5;//remember - is up but that will be seen in respective funtions as this is speed not velocity Alhamdulilah rab al alameen
     float jump_span=20;//in iterations
+
+    float falling_speed=jump_speed*0.5;
     //Bismillah hirahman nirahim
     //Bismillah hirahman Nirahim
 

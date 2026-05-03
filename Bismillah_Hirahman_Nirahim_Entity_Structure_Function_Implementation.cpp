@@ -239,7 +239,7 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 
     if(Current_y_State==y_State::Stationary&&!Block_underneath)
     {
-        Current_velocity_y = 0.5 * jump_speed; // no headed down wards Alhamdulilah
+        Current_velocity_y = falling_speed;    // no headed down wards Alhamdulilah
         Going_up_since = 0;                    // Forgot to reset counter..... Coudnt jump again, resolved Alhamdulilah
         Current_y_State = y_State::Falling;
     }
@@ -669,7 +669,7 @@ void Player::Falling_Animate()
 
  void Player::Fall()
 {
-    Current_velocity_y = jump_speed * 0.5; //
+    Current_velocity_y = falling_speed; //
     Current_y_State = y_State::Falling;
     reset_roll_animation_timer=true;
 }
