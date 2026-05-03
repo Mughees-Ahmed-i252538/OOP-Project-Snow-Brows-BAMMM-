@@ -120,8 +120,12 @@ private:
     int Snowball_Capacity=100;//At once how many can exsist
     int Current_Snowballs_Exsisting=0;
      float Snow_Ball_Power=1;// i by default Alhamdulilah
+     bool Gotten_Hit_Imunity=false;
+     sf::Clock Hit_Immunity_Timer;
+     int Hit_Immunity_Timer_Acumulator=0;
+     int Hit_Immunity_Duration=3;//seconds ALhamdulilah
      /*
-    bool Gotten_Hit_Imunity;
+    
     static double Hit_imunity_duration;//for mobs, every level configration haas such a spawn pt array for them along with their type and numbers (possibly using a class for mobsb spawn pt and adta, inshallah) Alhamdulilah Rab Al Alameen
      *///Used
 

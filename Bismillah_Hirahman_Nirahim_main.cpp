@@ -311,16 +311,38 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
             }//just in case one has been destroyed Alhadulilah rab al alameen
 
             
-            if (Players[p] != nullptr && Players[p]->getDebugBox().getGlobalBounds().intersects(Array_of_Mobs[i]->getDebugBox().getGlobalBounds()))
+
+
+            if(Players[p]->Gotten_Hit_Imunity)
+            {
+                Players[p]->Hit_Immunity_Timer_Acumulator = Players[p]->Hit_Immunity_Timer.getElapsedTime().asSeconds();
+                if (Players[p]->Hit_Immunity_Timer_Acumulator > Players[p]->Hit_Immunity_Duration)
+                {
+                    Players[p]->Gotten_Hit_Imunity=false;
+                    Players[p]->Hit_Immunity_Timer_Acumulator=0;
+                    Players[p]->Hit_Immunity_Timer.restart();
+                }
+            }
+
+
+            if (!Players[p]->Gotten_Hit_Imunity&&Players[p] != nullptr && Players[p]->getDebugBox().getGlobalBounds().intersects(Array_of_Mobs[i]->getDebugBox().getGlobalBounds()))
             { // it seems the snowball becomes a null ptr in a iteration and in second iteration, to check it needs to r=derefrence the nullptr whicch leads to error, hence the check is one of the conditons with &&, Interesting thing on && is that if first ocntditon fails second is never checked Alhamdulilah rab al alameenn, so first check if not = null ptr then actually use it, Alhamdulilah rab al alameen
                 cout << "hit player Astigfirullah ALhamdulilah" << endl;
+                cout<<Players[p]->health<<endl;
                  // ensuring removing dangling ptr to make space for new ptr ALhamdulilah
                 // Alhamdulilah destroyed snowballs cant hit a platform ,,
                 Players[p]->health -= Array_of_Mobs[i]->Damage; // the stronger the power the more the damage Alhamdulilah rab al alameen
-                if (Players[p]->health >= 0)
+                cout<<Array_of_Mobs[i]->Damage<<endl;
+                if (Players[p]->health <= 0)//oops an inverted condition again, Oh Allah pleasesave me and help me improve and debug these simple mistakes Ameen 
                 {
                     delete Players[p];
                     Players[p] = nullptr; // Bismillah hirahman Nirahim for testing
+                }
+                else{
+                    Players[p]->Gotten_Hit_Imunity = true;
+                    Players[p]->Hit_Immunity_Timer.restart();
+                    Players[p]->Hit_Immunity_Timer_Acumulator = 0;
+                     // seconds ALhamdulilah
                 }
             } // i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
             
