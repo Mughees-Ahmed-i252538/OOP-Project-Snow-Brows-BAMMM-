@@ -333,34 +333,34 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     Players_Jump[1] = sf::Keyboard::I;
     Players_Hit[1] = sf::Keyboard::U;
 
-   /*  sf::Texture Test_LoadingBluePlayerSpriteSheetT;
+    /* sf::Texture Test_LoadingBluePlayerSpriteSheetT;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS1;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS2;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS3;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS4;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS5;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS6;
-    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
+    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Blue.png"))
     {
         std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     }
     else
     {
-        Test_LoadingBluePlayerSpriteSheetS1.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS2.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS3.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS4.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS5.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS6.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS1.setaTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS2.seatTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS3.setTextuare(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS4.setTextaure(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS5.setTextuare(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS6.setTextaure(Test_LoadingBluePlayerSpriteSheetT);
 
-        Test_LoadingBluePlayerSpriteSheetS1.setTextureRect(sf::IntRect(0,80,80,80));
-        Test_LoadingBluePlayerSpriteSheetS2.setTextureRect(sf::IntRect(80, 80, 80, 80));
-        Test_LoadingBluePlayerSpriteSheetS3.setTextureRect(sf::IntRect(160, 80, 80, 80));
-        Test_LoadingBluePlayerSpriteSheetS4.setTextureRect(sf::IntRect(240, 80, 80, 80));
-        Test_LoadingBluePlayerSpriteSheetS5.setTextureRect(sf::IntRect(320, 80, 80, 80));
-        Test_LoadingBluePlayerSpriteSheetS6.setTextureRect(sf::IntRect(400, 80, 80, 80));
-    }//This block only needs to be activated to test if loading the test sprite sheet Alhamdulilah Rab AL Alameen
-  */
+        Test_LoadingBluePlayerSpriteSheetS1.setTextureRect(sf::IntRect(5,133,93,96));
+        Test_LoadingBluePlayerSpriteSheetS2.setTextureRect(sf::IntRect(100, 100, 100, 120));
+        Test_LoadingBluePlayerSpriteSheetS3.setTextureRect(sf::IntRect(200, 100, 100, 120));
+        Test_LoadingBluePlayerSpriteSheetS4.setTextureRect(sf::IntRect(300, 1000, 100, 100));
+        Test_LoadingBluePlayerSpriteSheetS5.setTextureRect(sf::IntRect(320, 0, 100, 100));
+        Test_LoadingBluePlayerSpriteSheetS6.setTextureRect(sf::IntRect(400, 0, 100, 100));
+    } *///This block only needs to be activated to test if loading the test sprite sheet Alhamdulilah Rab AL Alameen
+  
     //I believe we need // instead of \ for linux compatability Allah SWT know best Alhamdulilah Rab Al Alameen
 
    
@@ -423,6 +423,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         PauseBS.setTexture(PauseBT);
         ForRelativeSizeAndPostionSprite(30, 30, PauseBS, sf::Vector2f(500-40,  40)); // Top Right Alhamdulilah Rab AL Alameen
     }
+
+    Botom_Lvl_1_5 Botom(sf::Vector2f(100,200));
 
 
    
@@ -498,13 +500,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 if (sf::Keyboard::isKeyPressed(Players_Left[i]))
                 {
                     Players[i]->x_Action_To_Move(x_Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
-
+                    Botom.x_Action_To_Move(x_Direction::Left);
                     //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
 
                 }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
                 {
                     Players[i]->x_Action_To_Move(x_Direction::Right);
+                    Botom.x_Action_To_Move(x_Direction::Right);
                     // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
                 }
             
@@ -512,6 +515,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 //This may need to stop movement hence comes before Move call Alhamdulilah
             Collusion_Detector(No_of_Players,Players,levelConfig);//can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah   
 
+            Botom.Move();
             Players[i]->Move();
         }
 
@@ -552,8 +556,10 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         {
             Players[i]->display(window,Debug_Mode_On);
         }
-/* 
-        Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
+
+        Botom.display(window,Debug_Mode_On);
+
+      /*   Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
         Test_LoadingBluePlayerSpriteSheetS2.setPosition(80, 100);
         Test_LoadingBluePlayerSpriteSheetS2.setPosition(120, 100);
         Test_LoadingBluePlayerSpriteSheetS3.setPosition(160, 100);
@@ -566,7 +572,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         window.draw(Test_LoadingBluePlayerSpriteSheetS3);
         window.draw(Test_LoadingBluePlayerSpriteSheetS4);
         window.draw(Test_LoadingBluePlayerSpriteSheetS5);
-        window.draw(Test_LoadingBluePlayerSpriteSheetS6); */
+        window.draw(Test_LoadingBluePlayerSpriteSheetS6);  */
         //For sime reason Debug box not moving although i remmeber adding setposition measures, hence added .move meansures where.move of sprite, Alhamdulilah RAb Al Alameen now it works
 
         /*  Test_LoadingBluePlayerSpriteSheetS.setPosition(100,200);

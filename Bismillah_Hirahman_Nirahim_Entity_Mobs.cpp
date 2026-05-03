@@ -30,10 +30,10 @@ Botom::Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_nam
 {
     // cout << "Making Botom" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    Part_of_Sprite_sheet_x = 0; // for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
-    Part_of_Sprite_sheet_y = 0;
-    Part_of_Sprite_sheet_width = 80;  // To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
-    Part_of_Sprite_sheet_height = 80; // we can use scale (-1,1) for flipping image horizontally Alhamdulilah Rab Al Alameen, to arrange this and movement and possibly display inshallah, Self: I want to keep display simple, Movement handles this, also the x_Direction enum can be used and left value changed to -1, Alhamdulilah Rab Al Alameen
+    Part_of_Sprite_sheet_x = 2; // for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
+    Part_of_Sprite_sheet_y = 936;
+    Part_of_Sprite_sheet_width = 109;  // To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
+    Part_of_Sprite_sheet_height = 96; // we can use scale (-1,1) for flipping image horizontally Alhamdulilah Rab Al Alameen, to arrange this and movement and possibly display inshallah, Self: I want to keep display simple, Movement handles this, also the x_Direction enum can be used and left value changed to -1, Alhamdulilah Rab Al Alameen
 
     Botom_id = Botom_Count;
     Botom_Count++; // For next Botom spawn pt at index 1 will be alloted Alhamdulilah Rab Al Alameen
@@ -164,6 +164,11 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
         Jump_Test = false;
     }
 
+    if (Current_y_State == y_State::Falling)
+    {
+        Falling_Animate(); // Jumping animation only happened when left or right key were pressed hence made independent and now entirely depending on jumping ALhamdulilah rab al alameen
+    }
+
     if (Current_y_State == y_State::Rising)
     {
         Jumping_Animate(); // Jumping animation only happened when left or right key were pressed hence made independent and now entirely depending on jumping ALhamdulilah rab al alameen
@@ -201,10 +206,10 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
     Current_velocity_y = 0; */
     // ok this if was causing issue in y movement removed Alhamdulilah
 
-    int wanted_texture_rect_x = 0;
-    int wanted_texture_rect_y = 0;
-    int wanted_texture_rect_width = 80;  // most likely issue resolved, 0 was being passed as initial width when rising case as that not catered to in move left ri,,,, but it should have been being overwriitteen
-    int wanted_texture_rect_height = 80; // integers because part of int rect
+    int wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
+    int wanted_texture_rect_y = 365;
+    int wanted_texture_rect_width = 93;  // ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah
+    int wanted_texture_rect_height = 96; // integers because part of int rect
 
     if (x_Previously_Moving_in != x_Action_To_Move_in_Direction_Variable) // this counter is only needed for moving animations ALhamdulilah
     {
@@ -240,28 +245,28 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
         if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)
         {
             // show second walking image, right to first image by first image width Alhamdulilah
-            wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
-            wanted_texture_rect_y = 0;
-            wanted_texture_rect_width = 80; // ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah
-            wanted_texture_rect_height = 80;
+            wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 365;
+            wanted_texture_rect_width = 93; // ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah
+            wanted_texture_rect_height = 96;
         }
         else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
         {
             // show third walking image
             // right to first image by second second width Alhamdulilah
-            wanted_texture_rect_x = 160; // Different for every animation and image Alhamdulilah
-            wanted_texture_rect_y = 0;
-            wanted_texture_rect_width = 80;
-            wanted_texture_rect_height = 80;
+            wanted_texture_rect_x = 97; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y =361;
+            wanted_texture_rect_width = 93;
+            wanted_texture_rect_height = 96;
         }
         else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
         {
             // show third walking image
             // right to first image by second second width Alhamdulilah
-            wanted_texture_rect_x = 240; // Different for every animation and image Alhamdulilah
-            wanted_texture_rect_y = 0;
-            wanted_texture_rect_width = 80;
-            wanted_texture_rect_height = 80;
+            wanted_texture_rect_x = 189; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 363;
+            wanted_texture_rect_width = 96;
+            wanted_texture_rect_height = 96;
         }
     }
 
@@ -287,10 +292,10 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
 
 void Botom::Jumping_Animate() // this effictively will overirde the left right walking animation whatever the image may be currently to give own image while depending on its own timer inshallah, and not left right key presses but the rising state start and end inshallah
 {
-    int wanted_texture_rect_x = 0;
-    int wanted_texture_rect_y = 0;
-    int wanted_texture_rect_width = 80; // setting default width as 0 might be whats causing invisbility
-    int wanted_texture_rect_height = 80;
+    int wanted_texture_rect_x = 4;
+    int wanted_texture_rect_y = 478;
+    int wanted_texture_rect_width = 93; // setting default width as 0 might be whats causing invisbility
+    int wanted_texture_rect_height = 96;
 
     
     if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)//again these blocks are needed to reflip as set Texture calls ForRexlative which uses setsclae which if 1 1 resets flipping Alhamdulilah rab al alameen
@@ -331,17 +336,14 @@ void Botom::Jumping_Animate() // this effictively will overirde the left right w
 
 void Botom::Falling_Animate()
 {
-    int wanted_texture_rect_x = 0;
-    int wanted_texture_rect_y = 0;
-    int wanted_texture_rect_width = 80; // setting default width as 0 might be whats causing invisbility
-    int wanted_texture_rect_height = 80;
+   
 
     // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
     // Alhamdulilah rab al alameen, working
-    wanted_texture_rect_x = 320;
-    wanted_texture_rect_y = 0;
-    wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
-    wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
+    int wanted_texture_rect_x = 4;
+    int wanted_texture_rect_y = 595;
+    int wanted_texture_rect_width = 92;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+    int wanted_texture_rect_height = 96; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
 
     if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
     {
@@ -399,10 +401,10 @@ void Botom::is_Not_Moving()
     // Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
     // Excluding idle from Stationary that is y = 0 Alhamdulilah
 
-    int wanted_texture_rect_x = 0;
-    int wanted_texture_rect_y = 0;
-    int wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
-    int wanted_texture_rect_height = 80; // integers because part of int rect
+    int wanted_texture_rect_x = 5;
+    int wanted_texture_rect_y = 133;
+    int wanted_texture_rect_width = 93;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+    int wanted_texture_rect_height = 96; // integers because part of int rect
 
     setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // Currently facing and reverse image variables dont change just the moving left and right changes Alhamdiulilah rab al alameen
 

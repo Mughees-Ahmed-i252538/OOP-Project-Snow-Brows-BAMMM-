@@ -1,7 +1,6 @@
 #include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
 
 
-int Enemy::Hits_To_encase=0;//Alhamdulilah Child class doesnt need to define separately
 
 float Entity::Usable_Movement_Speed=0;
 

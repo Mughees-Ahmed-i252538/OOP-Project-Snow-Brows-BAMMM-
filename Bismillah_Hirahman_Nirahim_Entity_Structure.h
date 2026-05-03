@@ -222,6 +222,7 @@ class Enemy: public Entity
     public:
         Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
         // Removed void setSprite_and_cocentric_Debug_box();//box color red inshallah
+        
 };
 
 class Botom: public Enemy
@@ -270,7 +271,7 @@ class Botom: public Enemy
     // set y state stationary at default to allow movement at start Alhamdulilah
     // Single trigger solves alot of things Alhamdulilah rab al alameen, at jump just put velocity = - jump speed Alhamdulilah Rab Al Alameen
 
-    bool Block_underneath;
+    bool Block_underneath=false;//testing as currently collusion detector not function for this as not attached
     bool Action_To_Jump = false;
     // Bismillah hirahman Nirahim, starting the jump and y dimension work in the name of Allah SWT with whose name there is barakah, Oh Allah Please put Barakah in this work and please accept our small actions, Please also forgive our mistakes, Ya Zuljalal e wal ikraam Ameen sum ameen ya rab al alameen ya arham ar rahimeen !
 
