@@ -133,7 +133,13 @@ private:
 
     static string File_From_Where_To_Load_Resources_names[5];
 
+    sf::Texture HealthT;
+    sf::Sprite Health1;
+    sf::Sprite Health2;
+
     int player_id;//which player 0 or 1
+
+
 
     static float Player_sprite_height_to_display;
 
@@ -232,6 +238,7 @@ private:
     void move_snowballs_of_Player();//forgot to move...Astigfiruallah
     void Add_To_Score(int add_score);
     int Get_Score();
+    void display_Health(sf::RenderWindow& window);
 };
 
 

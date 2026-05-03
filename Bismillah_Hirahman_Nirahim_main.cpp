@@ -692,6 +692,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     //Bismillah Hirahman Nirahim, oh Allah SWT please help me avoid issues and help me debug if need to
     //Ameen, Alhamdulilah Rab Al Alameen
 
+    
+    //int Mobs_Left_counter=levelConfig->getNoofMobs();
+
+
+    
+
+
     if (levelConfig!=nullptr)
     {
         levelConfig->getMusic().play();
@@ -723,11 +730,24 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     int no_of_mobs_in_this_level= levelConfig->getNoofMobs();//If you leave code and see anot of error on getting back it is because you left at an odd point inshallah something smmall should fix it , look around carefully jazakallah
     Enemy** Array_of_Mobs= levelConfig->getMobArray();//later need to do this again for every round inshallah
 
-    
 
-    
+    sf::Texture level_endsT;
+    sf::Sprite level_endsS;
+
+    if (!level_endsT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\level_ends.png"))
+    {
+        cout << "Pause b didnt load" << endl;
+    }
+    else
+    {
+        level_endsS.setTexture(level_endsT);
+        ForRelativeSizeAndPostionSprite(300, 200, level_endsS, sf::Vector2f(250, 200)); // Top Right Alhamdulilah Rab AL Alameen
+    }
+
+    bool all_mobs_dead=0;
     while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
+
         
         sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
         while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
@@ -756,6 +776,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             {
                 level_ends = true;
             }
+            
 
             for (int i = 0; i < No_of_Players; i++)
             {
@@ -770,6 +791,11 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                     if (Players[i] != nullptr)
                         Players[i]->Make_Action_to_Throw_Snowball(); // Alhamdulilah
                     // Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
+                }
+                if (all_mobs_dead && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Enter)
+                {
+                    all_mobs_dead=false;
+                    level_ends=true;//Alhamdulilah
                 }
             }
         }
@@ -857,6 +883,27 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 Array_of_Mobs[i]->Move();
         }
 
+
+        int Mobs_Left=0;
+
+        if(Array_of_Mobs!=nullptr)
+        {
+            for(int i=0;i<no_of_mobs_in_this_level;i++)
+            {
+                if (Array_of_Mobs != nullptr && Array_of_Mobs[i]!=nullptr)//ok i was checking whole array instead of just the round ALhamdulilah
+                    Mobs_Left++;
+            }
+        }
+
+        all_mobs_dead=false;
+
+        //cout<<"Mobs Left"<<Mobs_Left;
+        if(Mobs_Left==0)
+        all_mobs_dead=true;
+
+        
+        
+
         
 
         //Collusion_Detector(No_of_Players, Players, levelConfig); // put outside to ensure it is called only once per round, also putting it after enemy move to completely ensure same time and frames for both inshallah
@@ -895,6 +942,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             if (Players[i] != nullptr) // now thinking of deleting plr on death need to put thesee checks everywhere including on mobs too ALhamdulilah rab al alameen
                 {Players[i]->display(window, Debug_Mode_On);
                     Players[i]->display_snowballs_of_Player(window,Debug_Mode_On);
+                    Players[i]->display_Health(window);
                 }
         }
         //cout << "Test7" << endl;
@@ -1003,7 +1051,15 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             }
         }
 
+
         window.draw(PauseBS);
+
+        if(all_mobs_dead)
+        {
+            window.draw(level_endsS);
+        }
+
+
             window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
 

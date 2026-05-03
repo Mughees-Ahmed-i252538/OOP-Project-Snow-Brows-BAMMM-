@@ -753,6 +753,20 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
 {
     //cout << "Making Player" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
+    if(!HealthT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Health.png"))
+    {
+        cout<<"Coudlnt loa"<<endl;
+    }
+    else{
+        Health1.setTexture(HealthT);
+        Health2.setTexture(HealthT);
+
+        ForRelativeSizeAndPostionSprite_Entity_Copy(30, 30, Health1, sf::Vector2f(getSpawnPoint().x-30, getSpawnPoint().y+70));
+        ForRelativeSizeAndPostionSprite_Entity_Copy(30, 30, Health2, sf::Vector2f(getSpawnPoint().x + 30, getSpawnPoint().y + 70));//I keep forgetting + is down ALhamdulilah
+        }
+
+
+
     health=Player_Max_Health;
 
     snowballs_thrown=new Snowballs*[Snowball_Capacity];//it appears if you dont equal to null ptr they may contain garbage ptrs? And cause crashes as you try to access? Allah SWT knows best lets check Bismillah hirahman Nirahim
@@ -954,6 +968,15 @@ void Player::Add_To_Score(int add_score)
 int Player::Get_Score()
 {
     return score;
+}
+
+void Player::display_Health(sf::RenderWindow &window)
+{
+    if(health>=1)
+    window.draw(Health1);
+    if(health>=2)
+    window.draw(Health2);
+
 }
 
 //==================Testing by placing mobs here, Bismillah hirahman nirahim, in the name of Allah SWT in the name of who there is barakah
