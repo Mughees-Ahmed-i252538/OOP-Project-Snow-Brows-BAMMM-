@@ -613,28 +613,35 @@ void Botom::AI_for_Movement()
 //ok it appears they do work but they have to be defined before the first fucntion that uses them Alhamdulilah rab al alameen, to test this later on inshallah
 
 string Botom_Lvl_1_5::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Blue.png";
+int Botom_Lvl_1_5::Botom_Lvl_1_5_Max_Health = 2;
 
 string Botom_Lvl_6_7::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Orange.png";
+int Botom_Lvl_6_7::Botom_Lvl_6_7_Max_Health = 3;
 
 string Botom_Lvl_7_8::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Pink.png";
+int Botom_Lvl_7_8::Botom_Lvl_7_8_Max_Health = 4;
 
 string Botom_Lvl_8_9::File_From_Where_To_Load_Resources_names = "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Pink.png";//to change in future if time inshallah
+int Botom_Lvl_8_9::Botom_Lvl_8_9_Max_Health = 4;
 
 Botom_Lvl_1_5::Botom_Lvl_1_5(sf::Vector2f spawn_at):Botom(spawn_at,File_From_Where_To_Load_Resources_names)
 {
+    health= Botom_Lvl_1_5_Max_Health;
 //Can you call constructor and do absolutely noting it it? i think that will give error Allah swt knows best Alhamdulilah rab al alameen..google says you can...Allah SWT knows best lets try that later inshallah
 }
 
 Botom_Lvl_6_7::Botom_Lvl_6_7(sf::Vector2f spawn_at):Botom(spawn_at,File_From_Where_To_Load_Resources_names)
 {
+    health = Botom_Lvl_6_7_Max_Health;
 }
 Botom_Lvl_7_8::Botom_Lvl_7_8(sf::Vector2f spawn_at):Botom(spawn_at,File_From_Where_To_Load_Resources_names)
 {
+    health = Botom_Lvl_7_8_Max_Health;
 }
 
 Botom_Lvl_8_9::Botom_Lvl_8_9(sf::Vector2f spawn_at):Botom(spawn_at,File_From_Where_To_Load_Resources_names)
 {
-
+    health = Botom_Lvl_8_9_Max_Health;
 }
 
 

@@ -207,10 +207,18 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height,boo
 
         for(int i=0;i<no_of_mobs_in_this_round;i++)
         {
-            if (type_of_mobs_current_level_holder_array[i] == "Blue_Bottom" ) // Alhamdulilah we only need to do it one by one or the default constructor would have been an issue Alhamdulilah rab al alameen
+            if (type_of_mobs_current_level_holder_array[i] == "Botom_Blue" ) // Alhamdulilah we only need to do it one by one or the default constructor would have been an issue Alhamdulilah rab al alameen
             {
                 Array_of_Mobs[i]=new Botom_Lvl_1_5 (sf::Vector2f(x_spawn_pt_of_mobs_current_level_holder_array[i], y_spawn_pt_of_mobs_current_level_holder_array[i]));
             }//If throwing incomplete class not allowed then include header file (this case Alhamdulilah)
+            if (type_of_mobs_current_level_holder_array[i] == "Botom_Orange") // Alhamdulilah we only need to do it one by one or the default constructor would have been an issue Alhamdulilah rab al alameen
+            {
+                Array_of_Mobs[i] = new Botom_Lvl_6_7(sf::Vector2f(x_spawn_pt_of_mobs_current_level_holder_array[i], y_spawn_pt_of_mobs_current_level_holder_array[i]));
+            }
+            if (type_of_mobs_current_level_holder_array[i] == "Botom_Pink") // Alhamdulilah we only need to do it one by one or the default constructor would have been an issue Alhamdulilah rab al alameen
+            {
+                Array_of_Mobs[i] = new Botom_Lvl_7_8(sf::Vector2f(x_spawn_pt_of_mobs_current_level_holder_array[i], y_spawn_pt_of_mobs_current_level_holder_array[i]));
+            }//currently 7 8 and 89 have same oink botom inshallah if time add more
         }
 
 
@@ -1559,43 +1567,43 @@ Stored_Level_Configs::Stored_Level_Configs()
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 100 ;
     y_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 100; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
-    types_of_mobs_each_level_holder_array[0][0]="Blue_Bottom";//dummy enemies all blue bottoms Alhamdulilah
+    types_of_mobs_each_level_holder_array[0][0]="Botom_Blue";//dummy enemies all blue bottoms Alhamdulilah
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[1][0] = 10 + 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen
     y_of_spawn_pts_of_mobs_each_level_holder_array[1][0] = 10 + 10;
-    types_of_mobs_each_level_holder_array[1][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[1][0] = "Botom_Blue";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[2][0] = 20 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[2][0] = 20 + 10; // each mob is 10 pixels abouve a Block Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[2][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[2][0] = "Botom_Blue";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[3][0] = 30 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[3][0] = 30 + 10;
-    types_of_mobs_each_level_holder_array[3][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[3][0] = "Botom_Blue";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[4][0] = 40 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[4][0] = 40 + 10;
-    types_of_mobs_each_level_holder_array[4][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[4][0] = "Botom_Blue";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[5][0] = 50 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[5][0] = 50 + 10;
-    types_of_mobs_each_level_holder_array[5][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[5][0] = "Botom_Orange";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[6][0] = 60 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[6][0] = 60 + 10;
-    types_of_mobs_each_level_holder_array[6][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[6][0] = "Botom_Orange";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[7][0] = 70 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[7][0] = 70 + 10;
-    types_of_mobs_each_level_holder_array[7][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[7][0] = "Botom_Pink";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[8][0] = 80 + 10;
     y_of_spawn_pts_of_mobs_each_level_holder_array[8][0] = 80 + 10; // if the selective range find values is not finding, try turning selective range of, doing some click and writing and then try again after selecting, Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[8][0] = "Blue_Bottom";
+    types_of_mobs_each_level_holder_array[8][0] = "Botom_Pink";
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // also when selecting whole (even multi) statements dont press ctrl+F, if needed then copy paste
     y_of_spawn_pts_of_mobs_each_level_holder_array[9][0] = 90 + 10; // Alhamdulilah Rab Al Alameen
-    types_of_mobs_each_level_holder_array[9][0] = "Blue_Bottom";//Alhamdulilah rab al alameen
+    types_of_mobs_each_level_holder_array[9][0] = "Botom_Pink";     // Alhamdulilah rab al alameen
 
     ////cout << "Bismillah Hirahman Nirahim Storage Construction Test 8" << endl;
     //========================For Boss Levels==============================================================

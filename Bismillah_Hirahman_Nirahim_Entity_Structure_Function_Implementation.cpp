@@ -195,6 +195,8 @@ int Player::Player_Count = 0;//ld error because had missed player count, Added A
 
 int Player::Standard_Default_Player_Speed=6.5;
 
+int Player::Player_Max_Health=2;
+
 void Player::x_Action_To_Move(x_Direction d)
 {
     this->x_Action_To_Move_in_Direction_Variable=d;//Bismillah hirahman Nirahim, this var means, in this iteration of main loop, player is intending to move in presented d direction Alhamdulilah, 0 if idle...(according to enum class direction Alhamdulilah Rab Al Alameen)
@@ -750,6 +752,8 @@ void Player::Falling()//currently not tracking previous state in y unlike x Alha
 Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count%2], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
     //cout << "Making Player" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+
+    health=Player_Max_Health;
 
     snowballs_thrown=new Snowballs*[Snowball_Capacity];//it appears if you dont equal to null ptr they may contain garbage ptrs? And cause crashes as you try to access? Allah SWT knows best lets check Bismillah hirahman Nirahim
 

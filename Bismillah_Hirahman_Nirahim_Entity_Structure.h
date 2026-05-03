@@ -110,6 +110,8 @@ class Player : public Entity//if issues arrive while calling constructor as is a
 
 private:
 
+    int health=0;
+    static int Player_Max_Health;
     //Will be used inshallah soon
     //Snowballs snowballs; include throw snow balls function instead that creates a snowball by dma, note all entity disapearing will be managed by deleting dama Alhamdulilah rab al alameen
     float Snow_Ball_Throw_x_Speed=5;
@@ -228,12 +230,13 @@ private:
 class Enemy: public Entity//issue Enemy ptr cant use Bottom Data memebers so have to make the bottom data as standard, make enemy have all of its funcs as pure virtaual and have data members that copy botoms memebers at time of initialization
 {
     
+   
     static int Current_Level_Enemy_Count;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
     //possibly incremented in constructor and decrememneted in destructor inshallah
     protected:
     int Enemy_id;//This is what is directly assigned and is actually what needs be managed for tracking which enemy this is
+    int health = 0;
 
-  
     //to be copied, initially for botom Alhamdulilah
     float Botom_sprite_height_to_display;
     float Botom_sprite_width_to_display;
@@ -396,13 +399,19 @@ class Botom: public Enemy
 class Botom_Lvl_1_5: public Botom
 {
     //static sf::Vector2f Spawn_Points[2];//given by level Alhamdulilah rab al alameen
-    public:
+
+    static int Botom_Lvl_1_5_Max_Health;
+
+public:
+    
     Botom_Lvl_1_5(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names ;
 };
 
 class Botom_Lvl_6_7 : public Botom
 {
+    static int Botom_Lvl_6_7_Max_Health;
+
 public:
     Botom_Lvl_6_7(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
@@ -410,6 +419,8 @@ public:
 
 class Botom_Lvl_7_8 : public Botom//considering both appear Alhamdulil 7 is common
 {
+    static int Botom_Lvl_7_8_Max_Health;
+
 public:
     Botom_Lvl_7_8(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
@@ -417,6 +428,8 @@ public:
 
 class Botom_Lvl_8_9 : public Botom // considering both appear Alhamdulil 8 is common
 {
+    static int Botom_Lvl_8_9_Max_Health;
+
 public:
     Botom_Lvl_8_9(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;

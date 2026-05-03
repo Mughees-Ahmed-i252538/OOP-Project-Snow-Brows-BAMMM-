@@ -98,7 +98,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
     int no_of_mobs_in_this_level=levelConfig->getNoofMobs();
     Enemy** Array_of_Mobs=levelConfig->getMobArray();
 
-
+//=================For Players===========================
     for(int i=0;i<No_of_Players;i++)
     {
         if(Players[i]==nullptr)
@@ -197,12 +197,21 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                         //Alhamdulilah destroyed snowballs cant hit a platform ,,
                     }
                 }
+
+                //=================Bismillah hirahman nirahim, now for snowball to mob hit check inshallah
+                if (Players[i]->snowballs_thrown[k]!=nullptr)//considering it might have become null ptr inside code loop up Alhadmulilah
+                {
+
+                }
+
             }
         }
 
 
+
     }//friend of entity and level config for ease alhamdulilah
 
+//===================For Mobs===========================
     //for no mobs it shouldnt run ALhamdulilah
     for (int i = 0; i < no_of_mobs_in_this_level; i++)
     {
