@@ -284,7 +284,7 @@ public:
 
     virtual void Make_Action_To_Jump() = 0;
 
-    friend void Collusion_Detector(int No_of_Botoms, Player **Players, Level_Config *levelConfig);
+    friend void Collusion_Detector(int No_of_Botoms, Player **Players, Level_Config *levelConfig);//cool thing access specifiers are checked at run time even for virtuals ALhamdulilah
 };
 
 class Botom: public Enemy

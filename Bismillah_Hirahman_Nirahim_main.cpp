@@ -340,7 +340,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS4;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS5;
     sf::Sprite Test_LoadingBluePlayerSpriteSheetS6;
-    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Botom_Blue.png"))
+    if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Blue_Player.png"))
     {
         std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     }
@@ -424,7 +424,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         ForRelativeSizeAndPostionSprite(30, 30, PauseBS, sf::Vector2f(500-40,  40)); // Top Right Alhamdulilah Rab AL Alameen
     }
 
-    Botom_Lvl_1_5 Botom(sf::Vector2f(100,200));
+    Enemy* Botom=new Botom_Lvl_1_5 (sf::Vector2f(100,200));
 
 
    
@@ -500,14 +500,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 if (sf::Keyboard::isKeyPressed(Players_Left[i]))
                 {
                     Players[i]->x_Action_To_Move(x_Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
-                    Botom.x_Action_To_Move(x_Direction::Left);
+                    Botom->x_Action_To_Move(x_Direction::Left);
                     //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
 
                 }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
                 {
                     Players[i]->x_Action_To_Move(x_Direction::Right);
-                    Botom.x_Action_To_Move(x_Direction::Right);
+                    Botom->x_Action_To_Move(x_Direction::Right);
                     // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
                 }
             
@@ -515,7 +515,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 //This may need to stop movement hence comes before Move call Alhamdulilah
             Collusion_Detector(No_of_Players,Players,levelConfig);//can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah   
 
-            Botom.Move();
+            Botom->Move();
             Players[i]->Move();
         }
 
@@ -557,7 +557,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             Players[i]->display(window,Debug_Mode_On);
         }
 
-        Botom.display(window,Debug_Mode_On);
+        Botom->display(window,Debug_Mode_On);
 
       /*   Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
         Test_LoadingBluePlayerSpriteSheetS2.setPosition(80, 100);
