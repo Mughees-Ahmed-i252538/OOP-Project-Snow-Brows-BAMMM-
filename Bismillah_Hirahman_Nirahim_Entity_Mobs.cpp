@@ -3,6 +3,7 @@
 
 #include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
 
+#include "Bismillah_Hirahman_Nirahim_Level_Structure.h"
 
 //===========Enemy==============
 
@@ -34,7 +35,7 @@ int Botom::Botom_Count=0;
 
 Botom::Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_names) : Enemy(spawn_at, Standard_Default_Botom_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
-    // cout << "Making Botom" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "Making Botom" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     Part_of_Sprite_sheet_x = 2; // for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
     Part_of_Sprite_sheet_y = 936;
@@ -59,7 +60,7 @@ Botom::Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_nam
 
      Animation_Speed=botom_Animation_Speed;
 
-    // cout << "Using File for texture Botom" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Botom_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "Using File for texture Botom" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Botom_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     // ok it says syntax is left top width height....hence the issue, we have done width first then position
     sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y, Botom_sprite_width_to_display, Botom_sprite_height_to_display);
@@ -72,16 +73,16 @@ Botom::Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_nam
     //to see if need to change in the future inshallah
     if (!FootStepsSB.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Sounds\\SBFootsteps.wav")) // remember spaces are crucial in loading file, ensure there is no space after extension especially as suvh doesnt exsist in windows at the least as well as be careful of spaces pasted by vs code itself while pasting for formatting, Allah SWT knows best, Alhamdulilah Rab Al Alameen
     {                                                                                                                                             //"C:\Users\HP\OneDrive\Desktop\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\OOP-Project-Snow-Brows-BAMMM-\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\Bismillah_Hirahman_Nirahim_Assets\Sounds\Bismillah_Hirahman_Nirahim_Foot_step_Sounds.wav"
-                                                                                                                                                  // cout << "Couldnt Load test sound, Oh Allah help us Ameen" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+                                                                                                                                                  // // cout << "Couldnt Load test sound, Oh Allah help us Ameen" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     }
     else
     {
-        // cout << "Successfully Loaded File Alhamdulilah Rab Al Alameen"; // Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
+        // // cout << "Successfully Loaded File Alhamdulilah Rab Al Alameen"; // Remember manage spaces in the load from string, also the no of charcaters, especially in relative path as the orignal directorys path and the string you write are concatenated and lead to a bigger string, if string too big then basically it becomes irredadble by system and sfml gives couldnt read, Alhamdulilah Rab Al Alameen
         FootStepsS.setBuffer(FootStepsSB);
         FootStepsS.setVolume(4);//volume different Alhamdulilah
     }
 
-    // cout << "Botom Made Alhamdulilah" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "Botom Made Alhamdulilah" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 }
 // Bismillah Hirahman Nirahim, tests
 
@@ -97,13 +98,13 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
     bool Jump_Test = false;
     if (Action_To_Jump)
     {
-        cout << "Pressed jump" << endl;
+        // cout << "Pressed jump" << endl;
         if (Block_underneath && Current_y_State == y_State::Stationary) // still deciding if we need a bool Action to ump..Lets see bismillah hirahman Nirahim
         {
-            cout << "Block Was also underneath" << endl; // ok lets transfer this to move, Bismillah hirahman nirahim
+            // cout << "Block Was also underneath" << endl; // ok lets transfer this to move, Bismillah hirahman nirahim
             Jump();
             Jump_Test = true;
-            cout << "vy:" << Current_velocity_y << endl;
+            // cout << "vy:" << Current_velocity_y << endl;
         }
         Action_To_Jump = false;
     }
@@ -133,7 +134,7 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 0.5:" << Current_velocity_y << endl;
+        // cout << "vy at check pt 0.5:" << Current_velocity_y << endl;
     }
 
     if (Current_y_State == y_State::Falling && Block_underneath)
@@ -144,18 +145,18 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 1:" << Current_velocity_y << endl;
+        // cout << "vy at check pt 1:" << Current_velocity_y << endl;
     }
 
     // Now for back to , ok lets do rolling movement first before back to stationary inshallah
 
-    ////cout << "Current vy"<<Current_velocity_y<<":"<<endl;//count<<//cout?
-    ////cout << "Current vx" << Current_velocity_x << ":" << endl;
+    ////// cout << "Current vy"<<Current_velocity_y<<":"<<endl;//count<<//// cout?
+    ////// cout << "Current vx" << Current_velocity_x << ":" << endl;
 
     // if no ourter if then vy becomes 0 in each of inner function Alhamdulilah
     // this should work same as vy-0 check leme see//if stationary wrt y then can walk, if jumping then different animation, and movement if falling then differentt movement
 
-    ////cout<<"Not Falling or Jumping, Permissible to Walk Alhamdulilah"<<endl;
+    ////// cout<<"Not Falling or Jumping, Permissible to Walk Alhamdulilah"<<endl;
 
     // Falling logic has been moved into the now Animate and move left and right as fall only has different image, ALhamdulilah rab ak akameen
     if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right) // to prevent walking while going up or down, we will be adding a rolling movement set inside this inshallah, Alhmost nearly identical to walking function
@@ -165,7 +166,7 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 2:" << Current_velocity_y << endl;
+        // cout << "vy at check pt 2:" << Current_velocity_y << endl;
     }
     /* else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle&&Current_y_State==y_State::Falling)
     {
@@ -178,7 +179,7 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "new vy:" << Current_velocity_y << endl;
+        // cout << "new vy:" << Current_velocity_y << endl;
         Jump_Test = false;
     }
 
@@ -192,9 +193,9 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
         Jumping_Animate(); // Jumping animation only happened when left or right key were pressed hence made independent and now entirely depending on jumping ALhamdulilah rab al alameen
     }
 
-    // cout<<"vx"<<Current_velocity_x<<endl;
+    // // cout<<"vx"<<Current_velocity_x<<endl;
 
-    // cout << "vy" << Current_velocity_y << endl;
+    // // cout << "vy" << Current_velocity_y << endl;
 
     getSprite().move(Current_velocity_x, Current_velocity_y);
     getDebugBox().move(Current_velocity_x, Current_velocity_y);
@@ -206,8 +207,8 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
 void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {                                          // to add fourth imaage to animation and also making first image the idle picture, Alhamdulilah Rab Al Alameen, perhaps making the resizing common and making a which side bool in the Move() to take care of set scale instead of separately in each blockk, perhaps changing move left and right j=to simply walk....,, Alhamdulilah Rab Al Alameen
     // to define soon inshallah
-    ////cout<<"Bismillah Setting Botom Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
-    ////cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    ////// cout<<"Bismillah Setting Botom Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    ////// cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
     {
         Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
@@ -408,7 +409,7 @@ void Botom::Fall()
 void Botom::is_Not_Moving()
 {
     // to deinfe more soon inshallah
-    ////cout << "Bismillah Setting Botom Velocity to 0 for Not Moving and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//uncomment for debugging, Bismillah Awalahu wa Akhira hu
+    ////// cout << "Bismillah Setting Botom Velocity to 0 for Not Moving and Jump speed=0" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen//uncomment for debugging, Bismillah Awalahu wa Akhira hu
 
     /* bool reverse_image=false;//Now this is ensuring that at idle, shows same picture instead of either of the walking one Alhamdulilah rab al alameen
 
@@ -438,36 +439,36 @@ void Botom::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf:
 {
     if (!getTexture().loadFromFile(Load_Texture_From_File))
     {
-        // cout << "Log: couldnt load sprite texture for Entity" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+        // // cout << "Log: couldnt load sprite texture for Entity" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     }
 
     getSprite().setTexture(getTexture());
 
     setUsable_Movement_Speed(Standard_Default_Botom_Speed);
 
-    // cout<<"----------------------------------"<<"\n"<<endl;
-    // cout<<"Statistics of Made Entity:\n"<<"\n"<<endl;
+    // // cout<<"----------------------------------"<<"\n"<<endl;
+    // // cout<<"Statistics of Made Entity:\n"<<"\n"<<endl;
 
-    // cout << "local width of sprite sheet :" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "local height of sprite sheet:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local width of sprite sheet :" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local height of sprite sheet:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout << "global width of sprite sheet:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "global height of sprite sheet:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global width of sprite sheet:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global height of sprite sheet:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     getSprite().setTextureRect(sf::IntRect(Part_of_Sprite_sheet_x, Part_of_Sprite_sheet_y, Part_of_Sprite_sheet_width, Part_of_Sprite_sheet_height)); // lets see from start we get 40 40 size sub texture from sprite sheet, Bismillah Hirahman Nirahim
 
-    // cout << "local width of sprite sheet sub part:" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "local height of sprite sheet sub part:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local width of sprite sheet sub part:" << getSprite().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local height of sprite sheet sub part:" << getSprite().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout << "global width of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "global height of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global width of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global height of sprite sheet sub part before relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     sf::Vector2f Wanted_Position(Wanted_Size_And_Position.getPosition().x, Wanted_Size_And_Position.getPosition().y); // vector 2f has width first as is x value, Alhamdulilah Rab Al Alameen
     float NeededWidth = Wanted_Size_And_Position.width;
     float NeededHeight = Wanted_Size_And_Position.height;
 
-    // cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
-    // cout << "Needed Height of Sprite found at proces time:" << NeededHeight <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout<<"Needed Width of Sprite found at proces time"<<NeededWidth<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    // // cout << "Needed Height of Sprite found at proces time:" << NeededHeight <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     ForRelativeSizeAndPostionSprite_Entity_Copy(NeededWidth, NeededHeight, getSprite(), Wanted_Position); //!!!!!!
                                                                                                           // Also sets orign to centre, Alhamdulilah Rab Al Alameen
@@ -479,8 +480,8 @@ void Botom::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf:
 
     // Auto Makes the size wanted Alhamdulilah Rab Al ALameen
 
-    // cout << "global width of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "global height of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global width of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global height of sprite sheet sub part after relative size and position wanted:" << getSprite().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     getDebugBox().setSize(sf::Vector2f(1, 1)); // Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
     // The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
@@ -494,31 +495,31 @@ void Botom::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf:
 
     // getDebugBox().setOutlineThickness(Thickness_of_outline); // TO ADJUST ACCORDING TO Size but be uniform, the outline size is respective to Height of box, may seem incosisitant as the bigger the entity the thicker the outline, perhaps choosing to change to constant later on, now set to variable currently 10 Alhamdulilah Rab Al Alameen
 
-    // Old one, now at start, but perhaps some logic differnece, leaving here just in case, Allah SWT know best Alhamdulilah Rab Al Alameen ////cout<<"Setting Sprite Sheet and Debug Box"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    // Old one, now at start, but perhaps some logic differnece, leaving here just in case, Allah SWT know best Alhamdulilah Rab Al Alameen ////// cout<<"Setting Sprite Sheet and Debug Box"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
-    // cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout << "global width of debug box:" << getDebugBox().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "global height of debug box:" << getDebugBox().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global width of debug box:" << getDebugBox().getGlobalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global height of debug box:" << getDebugBox().getGlobalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
     // Now for location to confirm best spawn points
 
-    ////cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    ////cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen To change this to track location of texturect in sprite inshallah
+    ////// cout << "local width of debug box:" << getDebugBox().getLocalBounds().width <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    ////// cout << "local height of debug box:" << getDebugBox().getLocalBounds().height <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen To change this to track location of texturect in sprite inshallah
 
-    // cout << "global left of sprite:" << getSprite().getGlobalBounds().left <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "global top of sprite:" << getSprite().getGlobalBounds().top <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global left of sprite:" << getSprite().getGlobalBounds().left <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "global top of sprite:" << getSprite().getGlobalBounds().top <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout << "x_position of orign of sprite:" << getSprite().getOrigin().x<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "y_position of orign of sprite:" << getSprite().getOrigin().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "x_position of orign of sprite:" << getSprite().getOrigin().x<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "y_position of orign of sprite:" << getSprite().getOrigin().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout<< "Now for spawn point of given sprite"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
+    // // cout<< "Now for spawn point of given sprite"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
 
-    // cout << "x_position of spawn point of sprite:" << getSpawnPoint().x <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
-    // cout << "y_position of spawn point of sprite:" << getSpawnPoint().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "x_position of spawn point of sprite:" << getSpawnPoint().x <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
+    // // cout << "y_position of spawn point of sprite:" << getSpawnPoint().y <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
-    // cout<<"----------------------------------"<<"\n"<<endl;
+    // // cout<<"----------------------------------"<<"\n"<<endl;
     //  Alhamdulilah Rab Al Alameen now i can understand sfml better and easier to use to, Alhamdulilah Rab Al Alameen
 
     // To later inshallah add checks if size is sent 0 as that might start causing issues (from memory:as you can do operations like printing and scaling etc normally, mostly scaling) allah swt knows best Alhamdulilah Rab Al ALameen, especially since we are using the Relative.... Functions that use divisions for comarision Alhamdulilah Rab Al Alameen
@@ -534,9 +535,76 @@ void Botom::Make_Action_To_Jump()
 
 void Botom::Jump()
 {
-    cout << "Jumping" << endl;
+    // cout << "Jumping" << endl;
     Current_velocity_y = -jump_speed; // if block Underneath then jump
     Current_y_State = y_State::Rising;
+}
+
+void Botom::AI_for_Movement()
+{
+
+    Move_left_or_right_for_Ai_Accumulator= Move_left_or_right_for_Ai.getElapsedTime().asSeconds();
+
+    Window_Res Wanted_window_view;
+
+
+    if(!Ai_Starter&&Move_left_or_right_for_Ai_Accumulator>Direction_Persistance_For_Ai)
+    {
+        if(x_Previously_Moving_in==x_Direction::Left)
+        {
+            x_Action_To_Move(x_Direction::Right);
+        }
+        else{
+            x_Action_To_Move(x_Direction::Left);
+        }
+
+        Move_left_or_right_for_Ai.restart();
+        Move_left_or_right_for_Ai_Accumulator=0;//Bismillah hirahman nirahim, in the name of Allah SWT with whose name there is barakah
+    }
+    if (!Ai_Starter && Move_left_or_right_for_Ai_Accumulator < Direction_Persistance_For_Ai)
+    {
+        if (x_Previously_Moving_in == x_Direction::Left)//I forgot to hold, this basically makes it hold ALhanmdulilah
+        {
+            x_Action_To_Move(x_Direction::Left);
+        }
+        else//dont restart timer here or ever keeps moving, ensure it doesnt stay idle
+        {
+            x_Action_To_Move(x_Direction::Right);
+        }
+    }
+    
+
+    if(Ai_Starter)
+    {
+        int randomizer=rand()%2;
+        if(randomizer==0)
+        x_Action_To_Move(x_Direction::Left);
+        else
+        x_Action_To_Move(x_Direction::Right);
+
+        Move_left_or_right_for_Ai_Accumulator=0;
+        Ai_Starter=false;
+        Move_left_or_right_for_Ai.restart();
+    }
+
+    if (getDebugBox().getPosition().x < 100 && Move_left_or_right_for_Ai_Accumulator>Corner_persistancy) // if reach left corner turn right
+        {x_Action_To_Move(x_Direction::Right);
+            Move_left_or_right_for_Ai_Accumulator = 0;
+            Move_left_or_right_for_Ai.restart();
+        }
+
+        if (getDebugBox().getPosition().x > Wanted_window_view.Win_Width - 100 && Move_left_or_right_for_Ai_Accumulator > Corner_persistancy) // absolute may be causing issues so now timed Alhamdulilah
+        {x_Action_To_Move(x_Direction::Left);
+            Move_left_or_right_for_Ai_Accumulator=0;
+            Move_left_or_right_for_Ai.restart();//hurrying it if stays in same place for long
+        }
+    
+
+    int jump_or_not=rand()%Jump_Anti_Probability_For_Ai;
+
+    if(jump_or_not==0)//30 percent chance of jumping.... 
+    Make_Action_To_Jump();
+
 }
 
 //===========Specific Bottoms================================

@@ -105,12 +105,29 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
         if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
             {//left boundary stopper
+                cout << "Player Touching Left Wall" << endl;
                 if (Players[i]->x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
-                Players[i]->x_Action_To_Move(x_Direction::Idle);
+                {
+                    Players[i]->x_Action_To_Move(x_Direction::Idle);
+                    cout << "Making player go to idle state" << endl;
+                }
+
+                if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+                cout << "x_Action_To_Move_in_Direction_Variable is Right"<<endl;
+                if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+                cout << "x_Action_To_Move_in_Direction_Variable is Idle"<<endl;
+
                 if (Players[i]->x_Previously_Moving_in == x_Direction::Left)
                 {
+                    cout << "Making player stop moving in x" << endl;
                     Players[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
                 }
+                if(Players[i]->x_Previously_Moving_in== x_Direction::Right)
+                cout << "x_Previously_Moving_in is Right"<< endl;
+                if (Players[i]->x_Previously_Moving_in == x_Direction::Idle)
+                    cout << "x_Previously_Moving_in is Idle" << endl;
+
+                cout << Players[i]->Current_velocity_x <<endl;
 
             } //If moving left and touches the boundary stop
         
@@ -126,16 +143,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                 }
             } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
 
-        /* if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//top (header)
-            {                                                                                 // for right boundary stopper
-                if (Players[i]->y_Action_To_Move_in_Direction_Variable == y_Direction::Jumping) // ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
-                    Players[i]->y_Action_To_Move(y_Direction::Idle);
-                if (Players[i]->y_State == y_Direction::Jumping)
-                {
-                    cout << "Was prev jumping stopped now";
-                    Players[i]->Current_velocity_y = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
-                }//top touch checker
-            } *///
+       
         if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//note state falling is made after conversion of heading downwards Alhamdulilah
         {//this is for header Alhamdulilah
             if (Players[i]->getDebugBox().getGlobalBounds().top + Players[i]->getDebugBox().getGlobalBounds().height > Blocks_in_given_round[2].getGlobalBounds().top + 5) // this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
@@ -168,6 +176,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
     }//friend of entity and level config for ease alhamdulilah
 
+    //for no mobs it shouldnt run ALhamdulilah
     for (int i = 0; i < no_of_mobs_in_this_level; i++)
     {
         // doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
@@ -194,16 +203,6 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
             }
         } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
 
-        /* if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//top (header)
-            {                                                                                 // for right boundary stopper
-                if (Array_of_Mobs[i]->y_Action_To_Move_in_Direction_Variable == y_Direction::Jumping) // ok have to make a friend in Player separately as it cant access Array_of_Mobs private memebrs even though it can access ENtities...
-                    Array_of_Mobs[i]->y_Action_To_Move(y_Direction::Idle);
-                if (Array_of_Mobs[i]->y_State == y_Direction::Jumping)
-                {
-                    cout << "Was prev jumping stopped now";
-                    Array_of_Mobs[i]->Current_velocity_y = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
-                }//top touch checker
-            } */
         //
         if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds())) // note state falling is made after conversion of heading downwards Alhamdulilah
         {
@@ -538,6 +537,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Jump[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 {
                     Players[i]->Make_Action_To_Jump();
+                    //Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
                 }
             }
         }
@@ -563,6 +563,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         // Now for hold type events Alhamdulilah
         // Is Key Pressed Is function that returns bool Alhamdulilah Rab Al Alameen
 
+        
+
         for (int i = 0; i < No_of_Players; i++)
         {
 
@@ -587,11 +589,12 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
             // This may need to stop movement hence comes before Move call Alhamdulilah
             // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah
-
+            Collusion_Detector(No_of_Players, Players, levelConfig);
             Players[i]->Move();
         }
 
         
+
         for (int i = 0; i < no_of_mobs_in_this_level; i++)
         {
 
@@ -602,7 +605,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             Players[1].x_Action_To_Move(x_Direction::Idle); */
             // lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
-          /*   if (sf::Keyboard::isKeyPressed(Players_Left[0]))
+           /*  if (sf::Keyboard::isKeyPressed(Players_Left[0]))
             {
                 Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
 
@@ -617,12 +620,15 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
             // This may need to stop movement hence comes before Move call Alhamdulilah
             //Collusion_Detector(No_of_Players, Players, levelConfig); // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah only one collusion detector, being called once with each player,  lets change that tto put it outside loop it should still work inshallah Alhamdulilah rab al alameen
-
+            //Array_of_Mobs[i]->AI_for_Movement();//Remember AI is firing controls while move actually allows movement Alhamdulilah rab al alameen
+            Array_of_Mobs[i]->AI_for_Movement();//Bismillah hirahman nirahim, In the name of Allah SWT with whose name there is barakah, Ya zuljalal e wal ikram
+            Collusion_Detector(No_of_Players, Players, levelConfig);
             Array_of_Mobs[i]->Move();
         }
 
-        Collusion_Detector(No_of_Players, Players, levelConfig); // put outside to ensure it is called only once per round, also putting it after enemy move to completely ensure same time and frames for both inshallah
+        //Collusion_Detector(No_of_Players, Players, levelConfig); // put outside to ensure it is called only once per round, also putting it after enemy move to completely ensure same time and frames for both inshallah
 
+        
         // TREATING IT AS BOILER PLATE CODE FOR NOW
 
         // Three clickable buttons, pictures hsoing each game

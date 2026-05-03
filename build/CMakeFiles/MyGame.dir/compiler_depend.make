@@ -274,7 +274,8 @@ CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj: C:/Users/H
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stddef.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h \
   C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/syslimits.h \
-  C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Structure.h
+  C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Structure.h \
+  C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Level_Structure.h
 
 CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj: C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp \
   C:/msys64/ucrt64/include/SFML/Audio.hpp \
@@ -1156,9 +1157,9 @@ C:/msys64/ucrt64/include/c++/14.2.0/bits/quoted_string.h:
 
 C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_main.cpp:
 
-C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Level_Structure.h:
-
 C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp:
+
+C:/Users/HP/OneDrive/Desktop/Bismillah\ Hirahman\ Nirahim,\ Github\ OOP\ Project\ Repository\ Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Level_Structure.h:
 
 C:/msys64/ucrt64/lib/gcc/x86_64-w64-mingw32/14.2.0/include/stdint.h:
 

@@ -254,8 +254,15 @@ class Enemy: public Entity//issue Enemy ptr cant use Bottom Data memebers so hav
     bool Block_underneath; // testing as currently collusion detector not function for this as not attached
     bool Action_To_Jump = false;
 
-public:
-    Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
+    sf::Clock Move_left_or_right_for_Ai; // Alhamdulilah rab al alameen
+    int Move_left_or_right_for_Ai_Accumulator = 0;
+    bool Ai_Starter = true;
+
+    int Direction_Persistance_For_Ai=20;
+    int Jump_Anti_Probability_For_Ai=70;
+    int Corner_persistancy=3;
+
+    public : Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
     virtual ~Enemy();
     // Removed  void setSprite_and_cocentric_Debug_box();//box color red inshallah
 
@@ -335,19 +342,19 @@ class Botom: public Enemy
     int botom_total_no_of_images_in_walking_animation = 3;
     float botom_Animation_Speed = 10;
 
+   
     // If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     // Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
-        // general for each animation Alhamdulilah
-     // Determines how fast next image comes, Alhamdulilah Rab Al Alameen
+    // general for each animation Alhamdulilah
+    // Determines how fast next image comes, Alhamdulilah Rab Al Alameen
 
     // prevents downwards velocity from being too much Alhamdulilah rab al alameen, Being super professional we can even use the acti=ual formulah Alhamdulilah rab al alameen
     // remove tv and now uses if condition ALhamdulilah
     // readded now as if cindition Alhamdulilah
     // needed int for the % but if want float can do changes in function and use the *100 into int and then back conversion Alhamdulilah rab al alameen
 
-public:
-    void x_Action_To_Move(x_Direction d); // sets which direction Botom wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
+    public : void x_Action_To_Move(x_Direction d); // sets which direction Botom wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     // void y_Action_To_Move(y_Direction d);//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     void Move(); // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
 
