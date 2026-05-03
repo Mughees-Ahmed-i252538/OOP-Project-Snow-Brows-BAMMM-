@@ -101,6 +101,10 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
     for(int i=0;i<No_of_Players;i++)
     {
+        if(Players[i]==nullptr)
+        {
+            break;//Alhamdulilah rab al alameen, to ebsure that we properly resolve dangling ptr or this wont trigger, May Allah SWT remind us Ameen sum ameen yya rab al alameen, ya arham ar rahimeen
+        }
         //doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
 
         if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
@@ -112,22 +116,22 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                    // cout << "Making player go to idle state" << endl;
                 }
 
-                if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+                //if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
                 //cout << "x_Action_To_Move_in_Direction_Variable is Right"<<endl;
-                if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+                //if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
                 //cout << "x_Action_To_Move_in_Direction_Variable is Idle"<<endl;
 
-                if (Players[i]->x_Previously_Moving_in == x_Direction::Left)
+                if (Players[i]->x_Previously_Moving_in == x_Direction::Left)//Bismillah hirahman nirahim on commenting out the couts as no braces this conditon came under just print conditions that couldnt be true at once hence causing issues on left wall now fixed Alhamdulilah rab al alameen
                 {
                     //cout << "Making player stop moving in x" << endl;
                     Players[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
                 }
-                if(Players[i]->x_Previously_Moving_in== x_Direction::Right)
+                //if(Players[i]->x_Previously_Moving_in== x_Direction::Right)
                // cout << "x_Previously_Moving_in is Right"<< endl;
-                if (Players[i]->x_Previously_Moving_in == x_Direction::Idle)
+                //if (Players[i]->x_Previously_Moving_in == x_Direction::Idle)
                     //cout << "x_Previously_Moving_in is Idle" << endl;
 
-                cout << Players[i]->Current_velocity_x <<endl;
+                //cout << Players[i]->Current_velocity_x <<endl;
 
             } //If moving left and touches the boundary stop
         
@@ -172,6 +176,28 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
         //cout<<"On Block?:"<<Players[i]->Block_underneath<<endl;
 
         //cout<<"Block Underneath Player?: "<<Players[i]->Block_underneath<<endl;//I think even cout can make the program crash? if too much...ALhamdulilah rab al alameen
+
+        //==========================Now for snowballs Alhamdulilah, to add animation if time inshallah========================
+
+        for(int k=0;k<Players[i]->Snowball_Capacity;k++)
+        {
+            if (Players[i]->snowballs_thrown[k]!=nullptr)
+            {
+                for (int j = 0; j < No_of_Blocks_in_given_round; j++) // issue was i used i again that was being used in out er loop corrected Alhamdulilah
+                {
+                    // cout<<"i="<<i<<endl;
+                    // cout<<"j="<<j<<endl;
+                    cout<<"Snowball destruction test phase 2"<<endl;
+                    if (Players[i]->snowballs_thrown[k] != nullptr&&Players[i]->snowballs_thrown[k]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[j].getGlobalBounds()))
+                    {//it seems the snowball becomes a null ptr in a iteration and in second iteration, to check it needs to r=derefrence the nullptr whicch leads to error, hence the check is one of the conditons with &&, Interesting thing on && is that if first ocntditon fails second is never checked Alhamdulilah rab al alameenn, so first check if not = null ptr then actually use it, Alhamdulilah rab al alameen
+                        cout<<"deleted snowball ALhamdulilah"<<endl;
+                        delete Players[i]->snowballs_thrown[k];//deleting snowball that hits a platform Alhamdulilah rab al alameen
+                        Players[i]->snowballs_thrown[k]=nullptr;//ensuring removing dangling ptr to make space for new ptr ALhamdulilah
+                        //Alhamdulilah destroyed snowballs cant hit a platform ,,
+                    }
+                }
+            }
+        }
 
 
     }//friend of entity and level config for ease alhamdulilah
