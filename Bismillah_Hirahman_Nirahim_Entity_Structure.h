@@ -262,6 +262,7 @@ class Botom: public Enemy
     float jump_span = 20; // in iterations
     // Bismillah hirahman nirahim
     // Bismillah hirahman Nirahim
+    float falling_speed = jump_speed * 0.5;
 
     // only one image for jumping Alhamdulilah rab al alameen
     y_State Current_y_State = y_State::Stationary; // lets try to skip gravity and keep matters separate from x motion along with making it single trigger not hold trigger jump inshallah, Alhamdulilah rab al alameen
@@ -296,6 +297,8 @@ public:
    
     void Move_Left_Right_and_Animate(); // Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
     void Jumping_Animate();
+    void Falling_Animate();// Plan Changed regetting falling jumping, and also move and walk from player, now each is seaprat falling and jumping both overwrite walking image Alhamdulilah rab al alameen
+
     void Jump();
     void Fall();
     void is_Not_Moving();

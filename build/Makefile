@@ -128,6 +128,30 @@ MyGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/build
 .PHONY : MyGame/fast
 
+Bismillah_Hirahman_Nirahim_Entity_Mobs.obj: Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.obj
+
+# target to build an object file
+Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj
+
+Bismillah_Hirahman_Nirahim_Entity_Mobs.i: Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.i
+
+# target to preprocess a source file
+Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.i
+
+Bismillah_Hirahman_Nirahim_Entity_Mobs.s: Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.s
+
+# target to generate assembly for a file
+Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.s
+
 Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.obj: Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.obj
 .PHONY : Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.obj
 
@@ -209,6 +233,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... MyGame
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.obj
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.i
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.s
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.obj
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.i
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.s

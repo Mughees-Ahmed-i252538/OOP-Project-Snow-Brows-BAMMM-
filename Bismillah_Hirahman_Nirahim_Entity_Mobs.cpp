@@ -179,6 +179,7 @@ void Botom::Move() // to be made into pure virtual instead soon, inshallah
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
+// This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
 void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {                                          // to add fourth imaage to animation and also making first image the idle picture, Alhamdulilah Rab Al Alameen, perhaps making the resizing common and making a which side bool in the Move() to take care of set scale instead of separately in each blockk, perhaps changing move left and right j=to simply walk....,, Alhamdulilah Rab Al Alameen
     // to define soon inshallah
@@ -234,14 +235,7 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
         // show first walking image, //Bismillah hirahman nirahim for testing
     } */
 
-    if (Current_y_State == y_State::Falling) // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
-    {                                        // Alhamdulilah rab al alameen, working
-        wanted_texture_rect_x = 320;
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
-        wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
-    }
-    else if (Current_y_State == y_State::Stationary)
+    if (Current_y_State == y_State::Stationary)
     {
         if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)
         {
@@ -270,13 +264,6 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
             wanted_texture_rect_height = 80;
         }
     }
-    else if (Current_y_State == y_State::Stationary)
-    {
-        wanted_texture_rect_x = 320;
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80; // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
-        wanted_texture_rect_height = 80;
-    }
 
     if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
     {
@@ -298,6 +285,99 @@ void Botom::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movemen
     }
 }
 
+void Botom::Jumping_Animate() // this effictively will overirde the left right walking animation whatever the image may be currently to give own image while depending on its own timer inshallah, and not left right key presses but the rising state start and end inshallah
+{
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80; // setting default width as 0 might be whats causing invisbility
+    int wanted_texture_rect_height = 80;
+
+    
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)//again these blocks are needed to reflip as set Texture calls ForRexlative which uses setsclae which if 1 1 resets flipping Alhamdulilah rab al alameen
+    {
+        Currently_Faces = x_Direction::Left;
+        reverse_image = false;
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    } // normal up jump is with current facing alhamdulilah rab al alameen inshallah
+
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+    {
+        if (Currently_Faces == x_Direction::Left)
+        {
+            reverse_image = false;
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);
+        } // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        else if (Currently_Faces == x_Direction::Right)
+        {
+            reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        }
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    }
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+    {
+        Currently_Faces = x_Direction::Right;
+        reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Right; the previous direction thing is already being tke care of in move left and right and animate Alhamdulilah rab al alameen
+    }
+}
+
+void Botom::Falling_Animate()
+{
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80; // setting default width as 0 might be whats causing invisbility
+    int wanted_texture_rect_height = 80;
+
+    // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
+    // Alhamdulilah rab al alameen, working
+    wanted_texture_rect_x = 320;
+    wanted_texture_rect_y = 0;
+    wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+    wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
+
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
+    {
+        Currently_Faces = x_Direction::Left;
+        reverse_image = false;
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    } // normal up jump is with current facing alhamdulilah rab al alameen inshallah
+
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+    {
+        if (Currently_Faces == x_Direction::Left)
+        {
+            reverse_image = false;
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);
+        } // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        else if (Currently_Faces == x_Direction::Right)
+        {
+            reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        }
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    }
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+    {
+        Currently_Faces = x_Direction::Right;
+        reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Right; the previous direction thing is already being tke care of in move left and right and animate Alhamdulilah rab al alameen
+    }
+}
 
 void Botom::Fall()
 {

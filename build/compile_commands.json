@@ -16,5 +16,11 @@
   "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -o CMakeFiles\\MyGame.dir\\Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp.obj -c \"C:\\Users\\HP\\OneDrive\\Desktop\\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\\OOP-Project-Snow-Brows-BAMMM-\\Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp\"",
   "file": "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp",
   "output": "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp.obj"
+},
+{
+  "directory": "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -o CMakeFiles\\MyGame.dir\\Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj -c \"C:\\Users\\HP\\OneDrive\\Desktop\\Bismillah Hirahman Nirahim, Github OOP Project Repository Clone\\OOP-Project-Snow-Brows-BAMMM-\\Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp\"",
+  "file": "C:/Users/HP/OneDrive/Desktop/Bismillah Hirahman Nirahim, Github OOP Project Repository Clone/OOP-Project-Snow-Brows-BAMMM-/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp",
+  "output": "CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj"
 }
 ]
