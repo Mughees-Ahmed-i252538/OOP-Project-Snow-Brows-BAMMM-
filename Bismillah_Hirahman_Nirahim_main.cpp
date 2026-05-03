@@ -745,10 +745,49 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     }
 
     bool all_mobs_dead=0;
-    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+
+
+    sf::Font score_display_f;
+    sf::Text score_display_p0;
+
+    sf::Text score_display_p1;
+
+    if (!score_display_f.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Fonts\\RusticRoadway.otf"))
+    {
+        cout<<"er"<<endl;
+    }
+    else
     {
 
+        score_display_p0.setFont(score_display_f);
+        if(No_of_Players==2)//crashing cuz not equal to two and usin so condition ALhamdulilah
+        score_display_p1.setFont(score_display_f);
         
+    }
+
+
+    score_display_p0.setString(to_string(Players[0]->Get_Score()));
+    
+
+    ForRelativeSizeAndPostionText(20, 20, score_display_p0, sf::Vector2f(Players[0]->getSpawnPoint().x, Players[0]->getSpawnPoint().y-385));
+
+    score_display_p0.setFillColor(sf::Color::Red);
+
+    if (No_of_Players == 2)
+    {
+        score_display_p1.setString(to_string(Players[1]->Get_Score()));
+        ForRelativeSizeAndPostionText(20, 20, score_display_p1, sf::Vector2f(Players[1]->getSpawnPoint().x, Players[1]->getSpawnPoint().y - 385));
+        score_display_p1.setFillColor(sf::Color::Red);
+    }
+
+    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+    {
+        if(Players[0]!=nullptr)
+            score_display_p0.setString(to_string(Players[0]->Get_Score()));
+
+        if (No_of_Players==2&& Players[1] != nullptr)//it appears as the second ptr doesnt even exsist (not even declared if no of play ==1 so if  we check it first code can crash Alhamdulilah rab al alameen)
+            score_display_p1.setString(to_string(Players[1]->Get_Score()));
+
         sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
         while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
         // pollEvent checks queue and if event queue empty returns 0,
@@ -1059,6 +1098,9 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             window.draw(level_endsS);
         }
 
+            window.draw(score_display_p0);
+            if(No_of_Players==2)
+            window.draw(score_display_p1);
 
             window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }

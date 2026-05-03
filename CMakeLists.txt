@@ -14,6 +14,7 @@ add_executable(MyGame Bismillah_Hirahman_Nirahim_main.cpp
     Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp
     Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp
     Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp
+    Bismillah_Hirahman_Nirahim_Leaderboard.cpp
      #shortened the name and registered Alhamdulilah rab al alameen
 )#dont forget you need to add files here or they wont be considered, might give linker error, Alhamdulilah rab al alameen
 #Bismillah Hirahman Nirahim

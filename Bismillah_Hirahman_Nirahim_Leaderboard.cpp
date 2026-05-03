@@ -1,7 +1,7 @@
 // Aaozbillahi minashaetaun nirajeem
 // Bismillah hirahman nirahim
 
-#include "Leaderboard.h"
+#include "Bismillah_Hirahman_Nirahim_Leaderboard.h"
 #include <fstream>
 #include <SFML/Graphics.hpp>
 //#include "main.cpp"
@@ -172,8 +172,8 @@ Leaderboard::Leaderboard()
             CreatesNewFile.close(); 
             TotalEntries=0;//I dont think we need this due to it being a class but just in case
 
-            this->leaderboard = new record[TotalEntries + 2];//I want to remove this, but just in case
-        }
+            this->leaderboard = new record[TotalEntries + 200];//I want to remove this, but just in case
+        }//I remembered this issue, ALhamdulilah rab al alameen
         
     }
     else

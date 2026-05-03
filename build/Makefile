@@ -200,6 +200,30 @@ Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s
 .PHONY : Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.cpp.s
 
+Bismillah_Hirahman_Nirahim_Leaderboard.obj: Bismillah_Hirahman_Nirahim_Leaderboard.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.obj
+
+# target to build an object file
+Bismillah_Hirahman_Nirahim_Leaderboard.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Leaderboard.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.cpp.obj
+
+Bismillah_Hirahman_Nirahim_Leaderboard.i: Bismillah_Hirahman_Nirahim_Leaderboard.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.i
+
+# target to preprocess a source file
+Bismillah_Hirahman_Nirahim_Leaderboard.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Leaderboard.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.cpp.i
+
+Bismillah_Hirahman_Nirahim_Leaderboard.s: Bismillah_Hirahman_Nirahim_Leaderboard.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.s
+
+# target to generate assembly for a file
+Bismillah_Hirahman_Nirahim_Leaderboard.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Leaderboard.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Leaderboard.cpp.s
+
 Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.obj: Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.cpp.obj
 .PHONY : Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.obj
 
@@ -266,6 +290,9 @@ help:
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.obj
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.i
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Structure_Function_Implementation.s
+	@echo ... Bismillah_Hirahman_Nirahim_Leaderboard.obj
+	@echo ... Bismillah_Hirahman_Nirahim_Leaderboard.i
+	@echo ... Bismillah_Hirahman_Nirahim_Leaderboard.s
 	@echo ... Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.obj
 	@echo ... Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.i
 	@echo ... Bismillah_Hirahman_Nirahim_Level_Structure_Implementation.s
