@@ -5,7 +5,7 @@ int Enemy::Hits_To_encase=0;//Alhamdulilah Child class doesnt need to define sep
 
 float Entity::Usable_Movement_Speed=0;
 
-void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+void Entity::ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
     // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
 
@@ -23,7 +23,7 @@ void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededH
     shape.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
-void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+void Entity::ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
     // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
 
@@ -42,7 +42,7 @@ void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededH
 }
 
 // Overloading for text
-void ForRelativeSizeAndPostionText_Entity_Copy(float NeededWidth, float NeededHeight, sf::Text &text, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+void Entity::ForRelativeSizeAndPostionText_Entity_Copy(float NeededWidth, float NeededHeight, sf::Text &text, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
     // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
 
@@ -60,7 +60,7 @@ void ForRelativeSizeAndPostionText_Entity_Copy(float NeededWidth, float NeededHe
     text.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
-void ForRelativeSizeAndPostionSprite_Entity_Copy(float NeededWidth, float NeededHeight, sf::Sprite &sprite, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
+void Entity::ForRelativeSizeAndPostionSprite_Entity_Copy(float NeededWidth, float NeededHeight, sf::Sprite &sprite, sf::Vector2f Wantedposition) // perhaps noticable in comments....the absolute calcultaion got too bad....
 {
     // you see we need to manage orignal size of picture and have to do individual calculations for each sprite, to adjust width, and all relative to something...which is a bit too much sometimes
 
@@ -77,7 +77,6 @@ void ForRelativeSizeAndPostionSprite_Entity_Copy(float NeededWidth, float Needed
 
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
-
 
 Entity::Entity(sf::Vector2f spawn_at, float mass)
 {
@@ -199,40 +198,71 @@ void Player::x_Action_To_Move(x_Direction d)
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
-/* void Player::y_Action_To_Move(y_Direction d)
-{
-    y_Action_To_Move_in_Direction_Variable = d;
-} */
+
 
 void Player::Move()//to be made into pure virtual instead soon, inshallah
 {
-
-   /*  if (y_Action_To_Move_in_Direction_Variable == y_Direction::Jumping && Block_underneath && (-Current_velocity_y) < terminal_velocity) // to transfer to jumping once implemented inshallah
-    {
-        cout<<"Jumping"<<endl;
-        Current_velocity_y-=jump_velocity;
-    } */
     
-    //gravity_timer_accumulator+=gravity_timer.restart().asSeconds();
-     /* if (!Block_underneath && Current_velocity_y<terminal_velocity&&gravity_timer_accumulator>=gravity_applied_only_every_in_seconds) // jumping or falling Alhamdulilah, this slowly adds downwards pull untill falling
+    bool Jump_Test=false;
+    if(Action_To_Jump)
     {
-        gravity_timer_accumulator=0;
-            Current_velocity_y += gravity; // Positive is down...Alhamdulilah
-        // To simplify calcualtion for computer mass has been excluded from the equation
-    } */
-
-    /* if (Current_velocity_y > 0   &&!Block_underneath ) // when headed downwards falling (pos y is down) Alhamdulilah
-    {
-        ////cout<<"Falling"<<endl;
-        y_State = y_Direction::Falling; // if no block underneath then falling, Alhamdulilah rab al alameen
+        cout<<"Pressed jump"<<endl;
+        if (Block_underneath&&Current_y_State==y_State::Stationary)                 // still deciding if we need a bool Action to ump..Lets see bismillah hirahman Nirahim
+        {
+            cout << "Block Was also underneath" << endl; // ok lets transfer this to move, Bismillah hirahman nirahim
+            Jump();
+            Jump_Test=true;
+            cout<<"vy:"<<Current_velocity_y<<endl;
+        }
+        Action_To_Jump=false;
     }
 
-     if(y_State == y_Direction::Falling&&Block_underneath)//while falling a block comes underneath (this is to stop the fall)
+    //Doing a fall test for animation Alhamdulilah Bismillah hirhman nirahim
+    static float Going_up_since=0;
+
+    if(Current_y_State==y_State::Rising)
     {
-        cout << "Stopped Falling" << endl;;
-        Current_velocity_y=0;
-        y_State = y_Direction::Idle;//stop Falling Alhamdulilah Rab Al Alameen
-    }  */
+        
+        Going_up_since++;
+    }
+
+    if(Going_up_since>=jump_span)//fbs current lowered ti 30 per second or 20 i think this should work inshallah, I hope the calculation per second doesnt harm the computer inshallah
+    {//this should be about 2 second as 20 fps ALhamdulilah
+        Fall();//no headed down wards Alhamdulilah
+        Going_up_since=0;//Forgot to reset counter..... Coudnt jump again, resolved Alhamdulilah
+       
+    }
+
+    if(Current_y_State==y_State::Stationary&&!Block_underneath)
+    {
+        Current_velocity_y = 0.5 * jump_speed; // no headed down wards Alhamdulilah
+        Going_up_since = 0;                    // Forgot to reset counter..... Coudnt jump again, resolved Alhamdulilah
+        Current_y_State = y_State::Falling;
+    }
+    //This allows falling if the player walks of the block ALhamdulilah
+
+
+
+    if (Jump_Test)
+    {
+        cout << "vy at check pt 0.5:" << Current_velocity_y << endl;
+        }
+
+    if(Current_y_State==y_State::Falling&&Block_underneath)
+    {
+        Current_y_State = y_State::Stationary;
+        Current_velocity_y=0;//Alhamdulilah rab al alameen
+    }
+
+    if (Jump_Test)
+    {
+        cout << "vy at check pt 1:" << Current_velocity_y << endl;
+        
+    }
+
+    //Now for back to , ok lets do rolling movement first before back to stationary inshallah
+
+   
 
     ////cout << "Current vy"<<Current_velocity_y<<":"<<endl;//count<<//cout?
     ////cout << "Current vx" << Current_velocity_x << ":" << endl;
@@ -242,18 +272,35 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     
         ////cout<<"Not Falling or Jumping, Permissible to Walk Alhamdulilah"<<endl;
 
-      if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
-        {
-            Walk();//For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
-        }
-        else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle)
-        {
-            is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
-        }
-    
+        //Falling logic has been moved into the now Animate and move left and right as fall only has different image, ALhamdulilah rab ak akameen
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left || x_Action_To_Move_in_Direction_Variable == x_Direction::Right ) // to prevent walking while going up or down, we will be adding a rolling movement set inside this inshallah, Alhmost nearly identical to walking function
+    {
+        Move_Left_Right_and_Animate(); // For both left and right walking as has same images, also handles flipping for left and right by checking action to move in direction Alhamdulilah rab al alameen
+    }
 
-
+    if (Jump_Test)
+    {
+        cout << "vy at check pt 2:" << Current_velocity_y << endl;
+        }
+    /* else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle&&Current_y_State==y_State::Falling)
+    {
+        //ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
+    } */
+    else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle&&Current_y_State==y_State::Stationary)//only do the stand pose if not rising or falling Alhamdulililah
+    {
+        is_Not_Moving();//this should initialize state of sub frame to first image inshallah no complex calculations inshallah
+    }
     
+    if(Jump_Test)
+    {
+        cout << "new vy:" << Current_velocity_y << endl;
+        Jump_Test=false;
+    }
+    
+    if (Current_y_State == y_State::Rising)
+    {
+        Jumping_Animate();//Jumping animation only happened when left or right key were pressed hence made independent and now entirely depending on jumping ALhamdulilah rab al alameen
+    }
 
 
     //cout<<"vx"<<Current_velocity_x<<endl;
@@ -266,42 +313,42 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
-void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
+void Player::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
 {//to add fourth imaage to animation and also making first image the idle picture, Alhamdulilah Rab Al Alameen, perhaps making the resizing common and making a which side bool in the Move() to take care of set scale instead of separately in each blockk, perhaps changing move left and right j=to simply walk....,, Alhamdulilah Rab Al Alameen
     // to define soon inshallah
     ////cout<<"Bismillah Setting Player Velocity to Usbale speed for Moving Right and Jump speed=0"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     ////cout << "Usable Speed" << getUsable_Movement_Speed() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
     if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)
     {Current_velocity_x = -getUsable_Movement_Speed(); // pos for right, neg for left...
-    Current_velocity_y=0;// actually this should come 0, only start if 0... Alhamdulilah 
+    //Current_velocity_y=0;// actually this should come 0, only start if 0... Alhamdulilah 
     }
-    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)//removed action on y speed to make independant for now, but essential vy=0 is required for walking Alhamdulilah (in conditions inshallah)//Bismillah hirahman nirahim testing
     {
         Current_velocity_x = getUsable_Movement_Speed();//fixed added this ALhamdulilah rab al alameen
-        Current_velocity_y = 0;
+        //Current_velocity_y = 0;
     }
     
-    if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
+    /* if(x_Action_To_Move_in_Direction_Variable==x_Direction::Right)
 
-    Current_velocity_y = 0;
+    Current_velocity_y = 0; *///ok this if was causing issue in y movement removed Alhamdulilah
 
     int wanted_texture_rect_x = 0;
     int wanted_texture_rect_y = 0;
-    int wanted_texture_rect_width = 0;
-    int wanted_texture_rect_height = 0; // integers because part of int rect
+    int wanted_texture_rect_width = 80;//most likely issue resolved, 0 was being passed as initial width when rising case as that not catered to in move left ri,,,, but it should have been being overwriitteen
+    int wanted_texture_rect_height =80; // integers because part of int rect
 
    
 
     if (x_Previously_Moving_in != x_Action_To_Move_in_Direction_Variable) // this counter is only needed for moving animations ALhamdulilah
     {
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.restart();
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder = 0; // reseting the holder as well
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
 
         //Perhaps adding a diff sound for dir change soon inshallah
     } // the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
     else
     { // modify here for updation speed adjustments
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.getElapsedTime().asSeconds();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder = Animation_Speed * this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
 
         if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//perhaps transfer this somewhere else if needed inshallah
         FootStepsS.play();//Alhamdulilah found a way to download directly wav from an audio editor Alhamdulilah Rab Al Alameen
@@ -313,7 +360,7 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
     //total_no_of_images_in_walking_animation = 4; tranfered to class Alhamdulilah // Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
     //This animation now solely for idleness, it has been removed from walking Alhamdulilah
-    /* if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    /* if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0) // initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
         wanted_texture_rect_x = 0; // Different for every animation and image Alhamdulilah
         wanted_texture_rect_y = 0;
@@ -322,41 +369,53 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
         // show first walking image, //Bismillah hirahman nirahim for testing
     } */
-    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0)
-    {
-        // show second walking image, right to first image by first image width Alhamdulilah
-        wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;//ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah 
-        wanted_texture_rect_height = 80;
-    }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
-    {
-        // show third walking image
-        // right to first image by second second width Alhamdulilah
-        wanted_texture_rect_x = 160; // Different for every animation and image Alhamdulilah
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;
-        wanted_texture_rect_height = 80;
-    }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
-    {
-        // show third walking image
-        // right to first image by second second width Alhamdulilah
-        wanted_texture_rect_x = 240; // Different for every animation and image Alhamdulilah
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;
-        wanted_texture_rect_height = 80;
-    }
 
-    if(x_Action_To_Move_in_Direction_Variable==x_Direction::Left)
+    if (Current_y_State == y_State::Falling) // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
+    {//Alhamdulilah rab al alameen, working
+        wanted_texture_rect_x = 320;
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+        wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
+    }
+    else if (Current_y_State == y_State::Stationary)
     {
-    Currently_Faces=x_Direction::Left;
-    reverse_image=false;
+        if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)
+        {
+            // show second walking image, right to first image by first image width Alhamdulilah
+            wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 0;
+            wanted_texture_rect_width = 80;//ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah 
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
+        {
+            // show third walking image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 160; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 0;
+            wanted_texture_rect_width = 80;
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
+        {
+            // show third walking image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 240; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 0;
+            wanted_texture_rect_width = 80;
+            wanted_texture_rect_height = 80;
+        }
+    }
+    
 
-    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
+    {
+        Currently_Faces = x_Direction::Left;
+        reverse_image = false;
 
-    this->x_Previously_Moving_in = x_Direction::Left;
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        this->x_Previously_Moving_in = x_Direction::Left;
     }
     else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
     {
@@ -367,6 +426,8 @@ void Player::Walk() // Sets Current Velocity x to -Movement Speed,, starts acumu
 
         this->x_Previously_Moving_in = x_Direction::Right;
     }
+
+   
 }
 /* //Trying with united walking function as iss using same animations ALhamdulilah rab al alameen
 void Player::Move_Right() // sets to +x
@@ -387,12 +448,12 @@ void Player::Move_Right() // sets to +x
 
     if(x_Previously_Moving_in!=x_Direction::Right)//this counter is only needed for moving animations ALhamdulilah
     {
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.restart();
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder=0;//reseting the holder as well
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter.restart();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=0;//reseting the holder as well
     }//the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
     else
     {   //modify here for updation speed adjustments
-        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking.getElapsedTime().asSeconds();
+        this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder=Animation_Speed*this->Has_Been_Moving_in_same_direction_Animation_updation_counter.getElapsedTime().asSeconds();
 
         if(FootStepsS.getStatus()!=sf::Sound::Status::Playing)//if we start it even as it is playing, it restarts so the previiious one isnt heard, only the last one is heard at stopping, hence this, Alhamdulilah Rab Al Alameen
         FootStepsS.play();
@@ -400,7 +461,7 @@ void Player::Move_Right() // sets to +x
 
     int total_no_of_images_in_walking_animation=3;//Aaozbillah Minashaetaun Nirajim, Bismillah Hirahman Nirahim
 
-    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 0)//initialt always greater than 0 considering rounds of to zero Alhamdulilah
+    if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)//initialt always greater than 0 considering rounds of to zero Alhamdulilah
     {
         wanted_texture_rect_x=0;//Different for every animation and image Alhamdulilah
         wanted_texture_rect_y=0;
@@ -409,7 +470,7 @@ void Player::Move_Right() // sets to +x
 
         //show first walking image
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 1)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 1)
     {
         // show second walking image, right to first image by first image width Alhamdulilah
         wanted_texture_rect_x = 80; // Different for every animation and image Alhamdulilah
@@ -417,7 +478,7 @@ void Player::Move_Right() // sets to +x
         wanted_texture_rect_width = 80;
         wanted_texture_rect_height = 80;
     }
-    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_For_Walking_updation_Holder % total_no_of_images_in_walking_animation == 2)
+    else if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 2)
     {
         // show third walking image
         //right to first image by second second width Alhamdulilah
@@ -435,6 +496,129 @@ void Player::Move_Right() // sets to +x
     this->x_Previously_Moving_in = x_Direction::Right;
 }
  */
+
+void Player::Jumping_Animate()//this effictively will overirde the left right walking animation whatever the image may be currently to give own image while depending on its own timer inshallah, and not left right key presses but the rising state start and end inshallah
+{
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80;//setting default width as 0 might be whats causing invisbility
+    int wanted_texture_rect_height = 80;
+
+    if (reset_roll_animation_timer) // this counter is only needed for moving animations ALhamdulilah
+    {
+        reset_roll_animation_timer=false;
+
+            this->Has_Been_Rolling_Animation_updation_counter.restart();
+            this->Has_Been_Rolling_Animation_updation_counter_updation_Holder = 0; // reseting the holder as well
+
+            // Perhaps adding a diff sound for dir change soon inshallah
+    } // the has been moving updation is an interger which forcefully rounds of value (needed for % Alhamdulilah)
+    else
+    { // modify here for updation speed adjustments
+        this->Has_Been_Rolling_Animation_updation_counter_updation_Holder = Animation_Speed * this->Has_Been_Rolling_Animation_updation_counter.getElapsedTime().asSeconds();
+
+        /* if (FootStepsS.getStatus() != sf::Sound::Status::Playing) // perhaps transfer this somewhere else if needed inshallah
+            FootStepsS.play();  */     //to add rolling sound if time inshallah                              // Alhamdulilah found a way to download directly wav from an audio editor Alhamdulilah Rab Al Alameen
+    }
+
+    if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 0)
+    {
+        // show third rolling image
+        // right to first image by second second width Alhamdulilah
+        wanted_texture_rect_x = 82*0; // Different for every animation and image Alhamdulilah
+        wanted_texture_rect_y = 80;
+        wanted_texture_rect_width = 82;
+        wanted_texture_rect_height = 80;
+    }
+        else if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 1)
+        {
+            // show second rolling image, right to first image by first image width Alhamdulilah
+            wanted_texture_rect_x = 82 * 1; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 80;
+            wanted_texture_rect_width = 82; // ensure picture is png or bg transparency issue... also there is something called mask color from pciture... too look at later inshallah
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 2)
+        {
+            // show third rolling image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 82 * 2; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 80;
+            wanted_texture_rect_width = 82;
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 3)
+        {
+            // show third rolling image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 82 * 3; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 80;
+            wanted_texture_rect_width = 82 ;
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 4)
+        {
+            // show third rolling image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 82 * 4; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 80;
+            wanted_texture_rect_width = 82 ;
+            wanted_texture_rect_height = 80;
+        }
+        else if (this->Has_Been_Rolling_Animation_updation_counter_updation_Holder % total_no_of_images_in_rolling_animation == 5)
+        {
+            // show third rolling image
+            // right to first image by second second width Alhamdulilah
+            wanted_texture_rect_x = 82 * 5; // Different for every animation and image Alhamdulilah
+            wanted_texture_rect_y = 80;
+            wanted_texture_rect_width = 82 ;
+            wanted_texture_rect_height = 80;
+        }
+
+
+        if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
+        {
+            Currently_Faces = x_Direction::Left;
+            reverse_image = false;
+    
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+    
+            //this->x_Previously_Moving_in = x_Direction::Left;
+        }//normal up jump is with current facing alhamdulilah rab al alameen inshallah
+
+        if (x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+        {
+            if(Currently_Faces == x_Direction::Left)
+            {reverse_image = false;
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);} // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+            else if (Currently_Faces == x_Direction::Right)
+            {
+                reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+                setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+            }
+            //this->x_Previously_Moving_in = x_Direction::Left;
+        }
+        else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+        {
+            Currently_Faces = x_Direction::Right;
+            reverse_image = true;//left right logic same Alhamdulilah rab al alameen
+    
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+    
+            //this->x_Previously_Moving_in = x_Direction::Right; the previous direction thing is already being tke care of in move left and right and animate Alhamdulilah rab al alameen
+        }
+        
+    
+}
+
+void Player::Fall()
+{
+    Current_velocity_y = jump_speed * 0.5; //
+    Current_y_State = y_State::Falling;
+    reset_roll_animation_timer=true;
+}
+
 void Player::is_Not_Moving()
 {
     //to deinfe more soon inshallah
@@ -446,7 +630,8 @@ void Player::is_Not_Moving()
     reverse_image=true; facing left right logic transfered to walking left and rigjht and some part to class Alhamdulilah
  */
     Current_velocity_x=0;//plan make new type-> eg jump left in direction inshallah, when defining gravity inshallah, that also handels updates in texture rect calls
-    Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
+    //Current_velocity_y=0;//to asign new positions and also relocate debug box in move function itself inshallah
+    //Excluding idle from Stationary that is y = 0 Alhamdulilah
 
     int wanted_texture_rect_x = 0;
     int wanted_texture_rect_y = 0;
@@ -458,6 +643,19 @@ void Player::is_Not_Moving()
     this->x_Previously_Moving_in=x_Direction::Idle;
 
 }//Ok you can also just get texture rect from a sprite Alhamdulilah Rab AL Alameen
+/* 
+NOW BEING SEEN BY MOVE AND ANIMATE Alhamdulilah
+void Player::Falling()//currently not tracking previous state in y unlike x Alhamdulilah
+{
+    int wanted_texture_rect_x = 320;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+    int wanted_texture_rect_height = 80; // integers because part of int rect
+
+    setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // Currently facing and reverse image variables dont change just the moving left and right changes Alhamdiulilah rab al alameen
+
+    
+} */
 
 Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Player_Count%2], Standard_Default_Player_Mass) // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will be fixed though for gravity
 {
@@ -553,7 +751,7 @@ void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf
     getDebugBox().setSize(sf::Vector2f(1, 1)); // Set size takes argument of sf::Vector2f,  note could also use Needed size in calcualtion but in case we implement changes elsewhere we use it directly here, Alhamdulilah Rab al alameen, (This vector made inside call is a temporary object Alhamdulilah Rab Al Alameen)
     // The Debug Box is 90 percent of orignal shape, to allow it to perfectly be used for collusion and not be escaping shape either, Alhamdulilah Rab Al Alameen
 
-    ForRelativeSizeAndPostionShape_Entity_Copy(NeededWidth * 0.9, NeededHeight * 0.9, getDebugBox(), Wanted_Position); // using orignal set size to avoid division with 0, using this function as it also sets origin and All Alhamdulilah Rab Al Alameen
+    ForRelativeSizeAndPostionShape_Entity_Copy(NeededWidth * how_much_of_sprite_is_debug_box, NeededHeight * how_much_of_sprite_is_debug_box, getDebugBox(), Wanted_Position); // using orignal set size to avoid division with 0, using this function as it also sets origin and All Alhamdulilah Rab Al Alameen
     // This auto sets orign to centre, position to same place as shape etc, hence it is better this way Alhamdulilah Rab Al Alameen
 
     getDebugBox().setFillColor(Color_of_Debug_Box);
@@ -600,4 +798,17 @@ void Player::SendtoSpawnPt()
 {
     getSprite().setPosition(getSpawnPoint());
     getDebugBox().setPosition(getSpawnPoint());
+}
+
+void Player::Make_Action_To_Jump()
+{
+    //Now bool included this content was transfered to move() ALhamdulilah
+    Action_To_Jump=true;
+}
+
+void Player::Jump()
+{
+    cout<<"Jumping"<<endl;
+    Current_velocity_y = -jump_speed; // if block Underneath then jump
+    Current_y_State = y_State::Rising;
 }

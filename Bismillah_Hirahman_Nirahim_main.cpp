@@ -104,7 +104,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
             {//left boundary stopper
                 if (Players[i]->x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
                 Players[i]->x_Action_To_Move(x_Direction::Idle);
-                if (Players[i]->x_Previously_Moving_in == x_Direction::Right)
+                if (Players[i]->x_Previously_Moving_in == x_Direction::Left)
                 {
                     Players[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
                 }
@@ -116,7 +116,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
             {//for right boundary stopper
                 if (Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right) // ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
                 Players[i]->x_Action_To_Move(x_Direction::Idle);
-                if (Players[i]->x_Previously_Moving_in==x_Direction::Left)
+                if (Players[i]->x_Previously_Moving_in==x_Direction::Right)//ok flying entry permission was due to these checks being reversed for left and right
                 {
                     cout<<"Was prev moving stopped now";
                     Players[i]->Current_velocity_x=0;//stops them if previously movubf instead of setting idle which doesnt let them move
@@ -133,18 +133,28 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                     Players[i]->Current_velocity_y = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
                 }//top touch checker
             } *///
+        if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//note state falling is made after conversion of heading downwards Alhamdulilah
+        {
+            if (Players[i]->getDebugBox().getGlobalBounds().top + Players[i]->getDebugBox().getGlobalBounds().height > Blocks_in_given_round[2].getGlobalBounds().top + 5) // this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
+            {
+               Players[i]->Fall();
+            } // i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
+        }
 
         Players[i]->Block_underneath=false;//used for fall and stopping Alhamdulilah, wrongly inside if block moved out Alhamdulilah
     
         //cout<<"No of blocks in the given round="<<No_of_Blocks_in_given_round<<endl;
-        for(int j=2;j<No_of_Blocks_in_given_round;j++)//issue was i used i again that was being used in out er loop corrected Alhamdulilah
+
+        //Now lets ensure that player doesnt go over the header like it does to blocks, or if it does it can come back so disabling block underbeath for header and making check for header over head, Alhamdulilah rab al alameen
+        for(int j=3;j<No_of_Blocks_in_given_round;j++)//issue was i used i again that was being used in out er loop corrected Alhamdulilah
         {
             //cout<<"i="<<i<<endl;
             //cout<<"j="<<j<<endl;
             
             if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[j].getGlobalBounds()))
             {
-                Players[i]->Block_underneath =true;
+                if (Players[i]->getDebugBox().getGlobalBounds().top + Players[i]->getDebugBox().getGlobalBounds().height < Blocks_in_given_round[j].getGlobalBounds().top+5)//this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
+                    {Players[i]->Block_underneath = true;}//i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
             }
         }   //Condition was using i instead, Removed Alhamdulilah
 
@@ -159,7 +169,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 }
 
 int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting naother loop, the returned int tells game what changes were made in the menu.... 
-{
+{//Note, Add restart level button if have time inshallah)
 
     sf::Texture PauseMenuT;
     sf::Sprite PauseMenuS;
@@ -323,18 +333,34 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     Players_Jump[1] = sf::Keyboard::I;
     Players_Hit[1] = sf::Keyboard::U;
 
-    sf::Texture Test_LoadingBluePlayerSpriteSheetT;
-    sf::Sprite Test_LoadingBluePlayerSpriteSheetS;
+   /*  sf::Texture Test_LoadingBluePlayerSpriteSheetT;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS1;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS2;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS3;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS4;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS5;
+    sf::Sprite Test_LoadingBluePlayerSpriteSheetS6;
     if (!Test_LoadingBluePlayerSpriteSheetT.loadFromFile("..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"))
     {
         std::cout<<"Testing File Presence using Plue Player Spirte sheet, failed"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
     }
     else
     {
-        Test_LoadingBluePlayerSpriteSheetS.setTexture(Test_LoadingBluePlayerSpriteSheetT);
-        Test_LoadingBluePlayerSpriteSheetS.setTextureRect(sf::IntRect(0,0,80,80));
+        Test_LoadingBluePlayerSpriteSheetS1.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS2.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS3.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS4.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS5.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+        Test_LoadingBluePlayerSpriteSheetS6.setTexture(Test_LoadingBluePlayerSpriteSheetT);
+
+        Test_LoadingBluePlayerSpriteSheetS1.setTextureRect(sf::IntRect(0,80,80,80));
+        Test_LoadingBluePlayerSpriteSheetS2.setTextureRect(sf::IntRect(80, 80, 80, 80));
+        Test_LoadingBluePlayerSpriteSheetS3.setTextureRect(sf::IntRect(160, 80, 80, 80));
+        Test_LoadingBluePlayerSpriteSheetS4.setTextureRect(sf::IntRect(240, 80, 80, 80));
+        Test_LoadingBluePlayerSpriteSheetS5.setTextureRect(sf::IntRect(320, 80, 80, 80));
+        Test_LoadingBluePlayerSpriteSheetS6.setTextureRect(sf::IntRect(400, 80, 80, 80));
     }//This block only needs to be activated to test if loading the test sprite sheet Alhamdulilah Rab AL Alameen
- 
+  */
     //I believe we need // instead of \ for linux compatability Allah SWT know best Alhamdulilah Rab Al Alameen
 
    
@@ -409,12 +435,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
             // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
             {
-                if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed
-                                                                                                                                        // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                //Event closed is the x button Alhamdulilah
+                if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                     {
                         levelConfig->getMusic().stop();//if not loaded nothing happens alhamdulilah prevents double music ALhamdulilah
-                        return 0;//return to menu                                                                                                     // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
+                        return -1;//return to menu                                                                                                     // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
                     }
+
 
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F11) // Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
                 {
@@ -428,6 +455,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F10) // force level ca=hanger key for Debugging to be removed in later levels inshallah
                 {
                     level_ends = true;
+                }
+
+                for(int i=0;i<No_of_Players;i++)
+                {
+                    if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Jump[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                    {
+                        Players[i]->Make_Action_To_Jump();                                                                                                    }
                 }
             }
             sf::Vector2i MPosition = sf::Mouse::getPosition(window);   // gets positon of mpuse
@@ -518,9 +552,21 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         {
             Players[i]->display(window,Debug_Mode_On);
         }
+/* 
+        Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
+        Test_LoadingBluePlayerSpriteSheetS2.setPosition(80, 100);
+        Test_LoadingBluePlayerSpriteSheetS2.setPosition(120, 100);
+        Test_LoadingBluePlayerSpriteSheetS3.setPosition(160, 100);
+        Test_LoadingBluePlayerSpriteSheetS4.setPosition(400/2, 100);
+        Test_LoadingBluePlayerSpriteSheetS5.setPosition(480/2, 100);
+        Test_LoadingBluePlayerSpriteSheetS6.setPosition(560/2, 100);
 
-
-
+        window.draw(Test_LoadingBluePlayerSpriteSheetS1);
+        window.draw(Test_LoadingBluePlayerSpriteSheetS2);
+        window.draw(Test_LoadingBluePlayerSpriteSheetS3);
+        window.draw(Test_LoadingBluePlayerSpriteSheetS4);
+        window.draw(Test_LoadingBluePlayerSpriteSheetS5);
+        window.draw(Test_LoadingBluePlayerSpriteSheetS6); */
         //For sime reason Debug box not moving although i remmeber adding setposition measures, hence added .move meansures where.move of sprite, Alhamdulilah RAb Al Alameen now it works
 
         /*  Test_LoadingBluePlayerSpriteSheetS.setPosition(100,200);
