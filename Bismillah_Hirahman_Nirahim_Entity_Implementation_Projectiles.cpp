@@ -15,20 +15,32 @@ string Snowballs::File_to_load_sprite_from = "..\\Bismillah_Hirahman_Nirahim_Sno
 
 Snowballs::Snowballs(sf::Vector2f Start_at, float x_speed, Player *Which_players_it_is) : Entity(Start_at, standard_mass) // Cant make consteuctor virtual i beleive, ok so virtual ingheritance in projectile so we have to send to entity directly ALhamdulilah
 {
+    cout<<"Snowball speed:"<<x_speed<<endl;
     Snowball_id=Snowball_Count;//Bismillah awala hu wa akhira hu
     //In the name of Allah SWT with whose name these is barakah, ya zuljalale wal ikram
     Snowball_Count++;
 
-    Current_velocity_x=x_speed;
+    Current_velocity_x=x_speed;// lets try to flip image if x=neg to look left inshallah also have to make angle neg inshallah to prevent wierd rotation
     Current_velocity_y=Always_down_y_speed;
 
     Which_player_it_blongs_to=Which_players_it_is;//Alhamdulilah 
 
-    sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y, Snowball_sprite_width_to_display, Snowball_sprite_height_to_display);
+    if (x_speed<0)//x speed neg hence flipped image and also anticlockwise rotatation inshallah
+    {// the sprite i got this time was looking right so slightly different logic from other images Alhamdulilah rab al alameen
+    sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y, -Snowball_sprite_width_to_display, Snowball_sprite_height_to_display);
+    Angle_to_rotate=-Angle_to_rotate;
+    setSprite_and_cocentric_Debug_box(File_to_load_sprite_from, sf::Color::Yellow, Wanted_Size_And_Position);//since the float rect becomes scoped hence need to move this in each scope as well Alhamdulilah rab al alameen
+    }
+    else
+    {
+        sf::FloatRect Wanted_Size_And_Position(getSpawnPoint().x, getSpawnPoint().y, Snowball_sprite_width_to_display, Snowball_sprite_height_to_display);
+        setSprite_and_cocentric_Debug_box(File_to_load_sprite_from, sf::Color::Yellow, Wanted_Size_And_Position);
+    }
+    //since minus is used in speed and set scale inside relative it works well ALhamdulilah rab al alameen
 
     // Note one thing, spawn pt already stored, hence now which calling setter for sprite and debug box we can just utilize that....I just got the idea...Alhamdulilah....
     // Note done in Entity class setter for sprite itself, but that makes it multi purpose in some possible findout able way, I will check respawn at places, but lets use spawn pt here, Alhamdulilah Rab Al Alameen
-    setSprite_and_cocentric_Debug_box(File_to_load_sprite_from, sf::Color::Yellow, Wanted_Size_And_Position); // debug box fixatedly blue for players, red for enemies, yellow for projections and green for power ups inshallah
+    // debug box fixatedly blue for players, red for enemies, yellow for projections and green for power ups inshallah
 }
 Snowballs::~Snowballs()
 {

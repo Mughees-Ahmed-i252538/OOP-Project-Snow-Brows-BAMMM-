@@ -104,6 +104,7 @@ int Wanted_For_Display_Part_of_Sprite_sheet_height;
 friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
 
 };//changingm movement speed update in setter instead Alhamdulilah Bismillah hirahman nirahim
+class Snowballs;
 class Player : public Entity//if issues arrive while calling constructor as is a DMA array then make DMA array a * to & and make P1 and P2 as simple dmas behind inshallah andd calling constructor
 {
 
@@ -111,11 +112,14 @@ private:
 
     //Will be used inshallah soon
     //Snowballs snowballs; include throw snow balls function instead that creates a snowball by dma, note all entity disapearing will be managed by deleting dama Alhamdulilah rab al alameen
-    float Snow_Ball_Throw_Distance;
-    float Snow_Ball_Power;
+    float Snow_Ball_Throw_x_Speed=5;
+    Snowballs** snowballs_thrown;//array of ptrs Alhamdulilah
+    int Snowball_Capacity=100;//At once how many can exsist
+    int Current_Snowballs_Exsisting=0;
+    /* float Snow_Ball_Power;
     bool Gotten_Hit_Imunity;
     static double Hit_imunity_duration;//for mobs, every level configration haas such a spawn pt array for them along with their type and numbers (possibly using a class for mobsb spawn pt and adta, inshallah) Alhamdulilah Rab Al Alameen
-    //Used
+     *///Used
 
     static sf::Vector2f Spawn_Points[2];
 
@@ -164,6 +168,7 @@ private:
 
     bool Block_underneath;
     bool Action_To_Jump=false;
+    bool Action_To_Throw_Snowball=false;
     //Bismillah hirahman Nirahim, starting the jump and y dimension work in the name of Allah SWT with whose name there is barakah, Oh Allah Please put Barakah in this work and please accept our small actions, Please also forgive our mistakes, Ya Zuljalal e wal ikraam Ameen sum ameen ya rab al alameen ya arham ar rahimeen ! 
 
     /*  y_Direction y_Action_To_Move_in_Direction_Variable;
@@ -202,7 +207,7 @@ private:
     //I believe falling was removed to remove in player as well inshallah
 
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
-
+    ~Player();
     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
     friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);//can you declare friend in private: Will have to try later inshallah?
@@ -212,8 +217,11 @@ private:
     void draw();by ayan */
 
     void SendtoSpawnPt();
-
+    void Make_Action_to_Throw_Snowball();
     void Make_Action_To_Jump();
+    void Throw_Snowball();
+    void display_snowballs_of_Player(sf::RenderWindow& window,bool is_Debug_Mode_on);
+    void move_snowballs_of_Player();//forgot to move...Astigfiruallah
 };
 
 
@@ -477,7 +485,7 @@ public:
 
 class Snowballs: public Projectile
 {
-    float Always_down_y_speed=5;//due to gravity, pos is downwards
+    float Always_down_y_speed=1;//due to gravity, pos is downwards
     static string File_to_load_sprite_from;//to later make a timer in player about snow ball throwing cooldown inshallah in throw function
     Player* Which_player_it_blongs_to;//This keeps traveling without change in direction when throw Alhamdulilah
     int Snowball_id;
@@ -486,7 +494,7 @@ class Snowballs: public Projectile
     float Snowball_sprite_width_to_display = 25;
     float Snowball_sprite_height_to_display=25;
 
-    float Angle_to_rotate=1;//ok clockwise angle positive Alhamdulilah
+    float Angle_to_rotate=0.5;//ok clockwise angle positive Alhamdulilah
 
 
    public:

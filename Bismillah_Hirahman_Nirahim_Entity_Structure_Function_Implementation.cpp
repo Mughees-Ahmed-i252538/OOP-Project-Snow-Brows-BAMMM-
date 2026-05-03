@@ -201,10 +201,46 @@ void Player::x_Action_To_Move(x_Direction d)
     // to define soon inshallah, needed now for linker error resolution Alhamdulilah rab al alameen
 }
 
+void Player::Throw_Snowball()
+{
 
+    for(int i=0;i<Snowball_Capacity;i++)
+    {
+        if(snowballs_thrown[i]==nullptr)
+        {
+            if(Currently_Faces==x_Direction::Left)//to handle snow ball flipping logic soon inshallah
+                snowballs_thrown[i] = new Snowballs(sf::Vector2f(getDebugBox().getGlobalBounds().left, getDebugBox().getPosition().y),-Snow_Ball_Throw_x_Speed,this);//orign left position ALhamdulilah, neg speed makes go left Alhamdulilah
+            else if (Currently_Faces == x_Direction::Right)
+                snowballs_thrown[i] = new Snowballs(sf::Vector2f(getDebugBox().getGlobalBounds().left + getDebugBox().getGlobalBounds().width, getDebugBox().getPosition().y), Snow_Ball_Throw_x_Speed, this);//left + width is right Alhamdulilah
+                break;//i forgot this...all sbs thrown at once...astigfirullah
+        }
+    }
+}
+//meamory leak rn remember to delte in collusion detection soon inshallah
+
+void Player::display_snowballs_of_Player(sf::RenderWindow& window, bool is_Debug_Mode_on)
+{
+    for (int i = 0; i < Snowball_Capacity; i++)
+    {
+        if (snowballs_thrown[i] != nullptr)
+        {
+              snowballs_thrown[i]->display(window,is_Debug_Mode_on); // Alhamdulilah rab al alameen
+        }
+    }
+}
 
 void Player::Move()//to be made into pure virtual instead soon, inshallah
-{
+{//to mainly delete snowballs in collusion detector inshallah
+
+    if(Action_To_Throw_Snowball)
+    {
+        if(Current_Snowballs_Exsisting<Snowball_Capacity)//to also decrease current snowball thrown using player ptr if snowball ends inshallah
+        {
+            cout<<"Throwing snowball"<<endl;
+        Throw_Snowball();
+        }   
+        Action_To_Throw_Snowball=false;//to prevent keep throwing spam... Bismillah hirahman nirahim testing
+    }
     
     bool Jump_Test=false;
     if(Action_To_Jump)
@@ -248,7 +284,7 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 0.5:" << Current_velocity_y << endl;
+        //cout << "vy at check pt 0.5:" << Current_velocity_y << endl;
         }
 
     if(Current_y_State==y_State::Falling&&Block_underneath)
@@ -259,7 +295,7 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 1:" << Current_velocity_y << endl;
+        //cout << "vy at check pt 1:" << Current_velocity_y << endl;
         
     }
 
@@ -283,7 +319,7 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
 
     if (Jump_Test)
     {
-        cout << "vy at check pt 2:" << Current_velocity_y << endl;
+        //cout << "vy at check pt 2:" << Current_velocity_y << endl;
         }
     /* else if(x_Action_To_Move_in_Direction_Variable==x_Direction::Idle&&Current_y_State==y_State::Falling)
     {
@@ -715,6 +751,17 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
 {
     //cout << "Making Player" <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 
+    snowballs_thrown=new Snowballs*[Snowball_Capacity];//it appears if you dont equal to null ptr they may contain garbage ptrs? And cause crashes as you try to access? Allah SWT knows best lets check Bismillah hirahman Nirahim
+
+    for(int i=0;i<Snowball_Capacity;i++)
+    {
+    snowballs_thrown[i]=nullptr;//if this lets exe run properly then that means ptrs had garbage values, Bismillah hirahman nirahim, inshallah loads, In the name of Allah SWT with whose name there is Barakah Mashallah, Ya Zuljalal wal ikram
+    }
+    
+
+
+
+
      Part_of_Sprite_sheet_x=0;//for me the simple single first image is coming 80x80 Alhamdulilah Rab Al Alameen
      Part_of_Sprite_sheet_y=0;
      Part_of_Sprite_sheet_width=80;//To set textureRect of sprite = differnt while animating inshallah, use the before discussed algorithms for movement inshallah
@@ -753,6 +800,18 @@ Player::Player(int Which_design_choosen_out_of_given) : Entity(Spawn_Points[Play
 }
 //Bismillah Hirahman Nirahim, tests
 //Bismillah Hirahman Nirahim
+
+Player::~Player()
+{
+    for(int i=0;i<Snowball_Capacity;i++)
+    {
+        if(snowballs_thrown[i]!=nullptr)
+        {
+            delete snowballs_thrown[i];
+        }//delete snowballs if any left... although strange at player deatjh...but this is for now may change inshallah, Allah swt knows best, future project Allah swt knows best Alhamdulilah
+    }
+    delete[] snowballs_thrown;//delteing ptr array Alhamdulilah
+}
 
 void Player::setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position)
 {
@@ -865,6 +924,23 @@ void Player::Jump()
     //cout<<"Jumping"<<endl;
     Current_velocity_y = -jump_speed; // if block Underneath then jump
     Current_y_State = y_State::Rising;
+}
+
+void Player::Make_Action_to_Throw_Snowball()
+{
+    Action_To_Throw_Snowball=true;
+}
+
+void Player::move_snowballs_of_Player()
+{
+    for (int i = 0; i < Snowball_Capacity; i++)
+    {
+        if (snowballs_thrown[i] != nullptr)
+        {
+                                                                                                                              // to handle snow ball flipping logic soon inshallah
+        snowballs_thrown[i]->Move();                                                                                                                                                                               // i forgot this...all sbs thrown at once...astigfirullah
+        }
+    }
 }
 
 //==================Testing by placing mobs here, Bismillah hirahman nirahim, in the name of Allah SWT in the name of who there is barakah

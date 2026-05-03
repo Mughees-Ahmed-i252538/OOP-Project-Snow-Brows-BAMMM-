@@ -105,27 +105,27 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
         if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
             {//left boundary stopper
-                cout << "Player Touching Left Wall" << endl;
+                //cout << "Player Touching Left Wall" << endl;
                 if (Players[i]->x_Action_To_Move_in_Direction_Variable==x_Direction::Left)//ok have to make a friend in Player separately as it cant access players private memebrs even though it can access ENtities...
                 {
                     Players[i]->x_Action_To_Move(x_Direction::Idle);
-                    cout << "Making player go to idle state" << endl;
+                   // cout << "Making player go to idle state" << endl;
                 }
 
                 if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
-                cout << "x_Action_To_Move_in_Direction_Variable is Right"<<endl;
+                //cout << "x_Action_To_Move_in_Direction_Variable is Right"<<endl;
                 if ( Players[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
-                cout << "x_Action_To_Move_in_Direction_Variable is Idle"<<endl;
+                //cout << "x_Action_To_Move_in_Direction_Variable is Idle"<<endl;
 
                 if (Players[i]->x_Previously_Moving_in == x_Direction::Left)
                 {
-                    cout << "Making player stop moving in x" << endl;
+                    //cout << "Making player stop moving in x" << endl;
                     Players[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
                 }
                 if(Players[i]->x_Previously_Moving_in== x_Direction::Right)
-                cout << "x_Previously_Moving_in is Right"<< endl;
+               // cout << "x_Previously_Moving_in is Right"<< endl;
                 if (Players[i]->x_Previously_Moving_in == x_Direction::Idle)
-                    cout << "x_Previously_Moving_in is Idle" << endl;
+                    //cout << "x_Previously_Moving_in is Idle" << endl;
 
                 cout << Players[i]->Current_velocity_x <<endl;
 
@@ -138,7 +138,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                 Players[i]->x_Action_To_Move(x_Direction::Idle);
                 if (Players[i]->x_Previously_Moving_in==x_Direction::Right)//ok flying entry permission was due to these checks being reversed for left and right
                 {
-                    cout<<"Was prev moving stopped now";
+                    //cout<<"Was prev moving stopped now";
                     Players[i]->Current_velocity_x=0;//stops them if previously movubf instead of setting idle which doesnt let them move
                 }
             } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
@@ -198,7 +198,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                 Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Idle);
             if (Array_of_Mobs[i]->x_Previously_Moving_in == x_Direction::Right) // ok flying entry permission was due to these checks being reversed for left and right
             {
-                cout << "Was prev moving stopped now";
+                //cout << "Was prev moving stopped now";
                 Array_of_Mobs[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
             }
         } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
@@ -505,15 +505,17 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     
 
+    
     while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
-
+        
         sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
         while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
         // pollEvent checks queue and if event queue empty returns 0,
         // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
         // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
         {
+            
             // Event closed is the x button Alhamdulilah
             if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
             {
@@ -541,6 +543,11 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
                 {
                     Players[i]->Make_Action_To_Jump();
                     //Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
+                }
+                if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Hit[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
+                {
+                    Players[i]->Make_Action_to_Throw_Snowball();//Alhamdulilah
+                    // Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
                 }
             }
         }
@@ -594,10 +601,10 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah
             Collusion_Detector(No_of_Players, Players, levelConfig);
             Players[i]->Move();
+            Players[i]->move_snowballs_of_Player();
         }
 
-        
-
+       
         for (int i = 0; i < no_of_mobs_in_this_level; i++)
         {
 
@@ -629,6 +636,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             Array_of_Mobs[i]->Move();
         }
 
+        
+
         //Collusion_Detector(No_of_Players, Players, levelConfig); // put outside to ensure it is called only once per round, also putting it after enemy move to completely ensure same time and frames for both inshallah
 
         
@@ -652,18 +661,22 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
         window.clear();//windows clear was before player, printing, Alhamdulilah Rab Al Alameen Found it
 
+        
         //Bismillah Hirahman Nirahim, ensure every display is after clear from now on inshallah Alhamdulilah Rab Al Alameen
 
         //Background behind the players so,
 
         levelConfig->display(window,Debug_Mode_On);
 
+        //cout << "Test6" << endl;
         for(int i=0;i<No_of_Players;i++)
         {
             if (Players[i] != nullptr) // now thinking of deleting plr on death need to put thesee checks everywhere including on mobs too ALhamdulilah rab al alameen
-                Players[i]->display(window, Debug_Mode_On);
+                {Players[i]->display(window, Debug_Mode_On);
+                    Players[i]->display_snowballs_of_Player(window,Debug_Mode_On);
+                }
         }
-
+        //cout << "Test7" << endl;
         //TestSnoball.Move();
         //TestSnoball.display(window,Debug_Mode_On);
 
