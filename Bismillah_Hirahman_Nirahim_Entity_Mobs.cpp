@@ -6,9 +6,15 @@
 
 //===========Enemy==============
 
+int Enemy::Current_Level_Enemy_Count=0;//must define even if zero because declarion obnly tells of its exsistance not allocate memeory and so it has to be done outside class (because there is only one of it for whole class) meanwhile fuction memebers are already only one of but just refrence to hence the 'politics' Alhamdulilah rab al alameenss
+
 Enemy::Enemy(sf::Vector2f spawn_at, float mass) : Entity(spawn_at,mass )
 {
-
+    Current_Level_Enemy_Count++;
+}
+Enemy::~Enemy()
+{
+    Current_Level_Enemy_Count--;
 }
 
 //==========Bottom=============== 
@@ -40,6 +46,18 @@ Botom::Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_nam
     // spawn pt to set using Botom count, Alhamdulilah Rab Al Alameen
 
     // to define soon inshallah
+
+
+    //Copying into parent class memebers ALhamdulilah
+
+     jump_speed=botom_jump_speed; // remember - is up but that will be seen in respective funtions as this is speed not velocity Alhamdulilah rab al alameen
+     jump_span=botom_jump_span;  // in iterations
+    // Bismillah hirahman nirahim
+    // Bismillah hirahman Nirahim
+     falling_speed=botom_falling_speed; // Need to be copied as may be f=differnet for each enemy
+     total_no_of_images_in_walking_animation=botom_total_no_of_images_in_walking_animation;
+
+     Animation_Speed=botom_Animation_Speed;
 
     // cout << "Using File for texture Botom" <<File_From_Where_To_Load_Resources_names[Which_design_choosen_out_of_given%No_of_Botom_Sprite_and_related_present/* The % logic has been implemented as a safety measure Alhamdulilah rab al alameen */]<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen
 

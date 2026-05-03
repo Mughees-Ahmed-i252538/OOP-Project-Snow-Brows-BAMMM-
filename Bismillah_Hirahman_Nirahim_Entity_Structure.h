@@ -196,8 +196,8 @@ private:
     void Falling_Animate();
     void Jump();
     void Fall();
-    void is_Not_Moving();
-    void Falling();
+    void is_Not_Moving();//Oh i found why unlike virtual unused fucts , unused non virtual funcs dont cause an error, it turns our compiler removes them, But considering virtual compiler doesnt remove and hence ld error,  ALhamdulilah
+    //I believe falling was removed to remove in player as well inshallah
 
     Player(int Which_design_choosen_out_of_given); //loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
@@ -215,14 +215,76 @@ private:
 };
 
 
-class Enemy: public Entity
+class Enemy: public Entity//issue Enemy ptr cant use Bottom Data memebers so have to make the bottom data as standard, make enemy have all of its funcs as pure virtaual and have data members that copy botoms memebers at time of initialization
 {
-    static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
+    
+    static int Current_Level_Enemy_Count;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
+    //possibly incremented in constructor and decrememneted in destructor inshallah
+    protected:
+    int Enemy_id;//This is what is directly assigned and is actually what needs be managed for tracking which enemy this is
 
-    public:
-        Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
-        // Removed void setSprite_and_cocentric_Debug_box();//box color red inshallah
-        
+  
+    //to be copied, initially for botom Alhamdulilah
+    float Botom_sprite_height_to_display;
+    float Botom_sprite_width_to_display;
+    int Enemy_Mass; // Alhamdulilah Rab Al Alameen, although seems redundant it is better than hardcoding a mass value into code
+    int Enemy_Speed;
+
+    sf::SoundBuffer FootStepsSB;
+    sf::Sound FootStepsS;//transfered here directly instead of copied Alhamdulilah
+
+    sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;           // eg for Walking Alhamdulilah
+    int Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder; // while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
+
+    x_Direction x_Action_To_Move_in_Direction_Variable;
+    x_Direction x_Previously_Moving_in; // if Action to move in is same as previous then keep acumulating timer for next animation image
+    x_Direction Currently_Faces;//transfered directly too Alhamdulilah
+    bool reverse_image;
+    y_State Current_y_State = y_State::Stationary;
+
+    float jump_speed ; // remember - is up but that will be seen in respective funtions as this is speed not velocity Alhamdulilah rab al alameen
+    float jump_span ; // in iterations
+    // Bismillah hirahman nirahim
+    // Bismillah hirahman Nirahim
+    float falling_speed ;//Need to be copied as may be f=differnet for each enemy
+    int total_no_of_images_in_walking_animation ;
+    float Animation_Speed ;//to be copied as may be different for each Alhadmdulilah rab al alameen
+    bool Block_underneath; // testing as currently collusion detector not function for this as not attached
+    bool Action_To_Jump = false;
+
+public:
+    Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
+    virtual ~Enemy();
+    // Removed  void setSprite_and_cocentric_Debug_box();//box color red inshallah
+
+    // Made all functions pure virtuals Alhamdulilah, now whats left is having actual data memebers here that copy the values of child class memebrs in child class constructors Alhamdulilah rab al alameen, (this way we dont need static values that need to be specifically stored eg File names for each bottom Alhamdulilah rab al alameen)
+
+    virtual void x_Action_To_Move(x_Direction d) = 0; // sets which direction Botom wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
+    // virtual void y_Action_To_Move(y_Direction d)=0;//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
+    virtual void Move() = 0; // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
+
+    virtual void Move_Left_Right_and_Animate() = 0; // Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
+    virtual void Jumping_Animate() = 0;
+    virtual void Falling_Animate() = 0; // Plan Changed regetting falling jumping, and also move and walk from player, now each is seaprat falling and jumping both overwrite walking image Alhamdulilah rab al alameen
+
+    virtual void Jump() = 0;
+    virtual void Fall() = 0;
+    virtual void is_Not_Moving() = 0;
+    //virtual void Falling() = 0; // loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
+    //forgot to undo this after removing it in botom, Remeber when remove a funtion fro m child class and it is pure vittual in parent you neecd to reove that as well Alhamdulilah rab al alameen
+    virtual void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position) = 0;
+
+    
+   
+
+    // can you declare friend in private: Will have to try later inshallah?
+    // Note This function doesnt take Botom diretly it is the sole coll dect that takes enemies throufgh levels ALhamdulilah
+
+    // virtual void SendtoSpawnPt()=0;//enemies are destroyed and remode so they dont need this ALhamdulilah rab al alameen
+
+    virtual void Make_Action_To_Jump() = 0;
+
+    friend void Collusion_Detector(int No_of_Botoms, Player **Players, Level_Config *levelConfig);
 };
 
 class Botom: public Enemy
@@ -235,55 +297,46 @@ class Botom: public Enemy
     
 
     int Botom_id; // which Botom 0 or 1
-
     static float Botom_sprite_height_to_display;
-
     static float Botom_sprite_width_to_display;
-
     static int Standard_Default_Botom_Mass; // Alhamdulilah Rab Al Alameen, although seems redundant it is better than hardcoding a mass value into code
     static int Standard_Default_Botom_Speed;
-
+    static int Botom_Count;
     // Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
-    static int Botom_Count; // currently 0, first Botom, it becomes 1 which is used to get second indice of spawn pt array for p2
+     // currently 0, first Botom, it becomes 1 which is used to get second indice of spawn pt array for p2
 
-    sf::SoundBuffer FootStepsSB;
-    sf::Sound FootStepsS;
+    
 
-    sf::Clock Has_Been_Moving_in_same_direction_Animation_updation_counter;           // eg for Walking Alhamdulilah
-    int Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder; // while clock resets in every loop, giving us time taken for that loop, this holder accumulates that clock value, this is what is directly used for animation next image text rect selecter after static cast to int, Alhamdulilah rab al alameen
-
-    x_Direction x_Action_To_Move_in_Direction_Variable;
-    x_Direction x_Previously_Moving_in; // if Action to move in is same as previous then keep acumulating timer for next animation image
-    x_Direction Currently_Faces;
+  
 
     // bool Action_to_jump;// Right now forgetting baloon mode Botom doesnt have power to go down except gravity hence only action to jump right now, Alhamdulilah
     // actually just the function called Make Action to jump shall be enough inshallah, as jump is euphemeral and instantanous, it also doesnt happen after leaving ground, only after Landing, that is being Stationary Alhamdulilah rab al alameen
-    float jump_speed = 5; // remember - is up but that will be seen in respective funtions as this is speed not velocity Alhamdulilah rab al alameen
-    float jump_span = 20; // in iterations
+    float botom_jump_speed = 5; // remember - is up but that will be seen in respective funtions as this is speed not velocity Alhamdulilah rab al alameen
+    float botom_jump_span = 20; // in iterations
     // Bismillah hirahman nirahim
     // Bismillah hirahman Nirahim
-    float falling_speed = jump_speed * 0.5;
+    float botom_falling_speed = jump_speed * 0.5;
 
     // only one image for jumping Alhamdulilah rab al alameen
-    y_State Current_y_State = y_State::Stationary; // lets try to skip gravity and keep matters separate from x motion along with making it single trigger not hold trigger jump inshallah, Alhamdulilah rab al alameen
+     // lets try to skip gravity and keep matters separate from x motion along with making it single trigger not hold trigger jump inshallah, Alhamdulilah rab al alameen
 
     // set y state stationary at default to allow movement at start Alhamdulilah
     // Single trigger solves alot of things Alhamdulilah rab al alameen, at jump just put velocity = - jump speed Alhamdulilah Rab Al Alameen
 
-    bool Block_underneath=false;//testing as currently collusion detector not function for this as not attached
-    bool Action_To_Jump = false;
+   
     // Bismillah hirahman Nirahim, starting the jump and y dimension work in the name of Allah SWT with whose name there is barakah, Oh Allah Please put Barakah in this work and please accept our small actions, Please also forgive our mistakes, Ya Zuljalal e wal ikraam Ameen sum ameen ya rab al alameen ya arham ar rahimeen !
 
     
 
-    int total_no_of_images_in_walking_animation = 3;
+    int botom_total_no_of_images_in_walking_animation = 3;
+    float botom_Animation_Speed = 10;
 
     // If direction changes then reset accumulator and switch direction, Alhamdulilah Rab Al Alameen
     // Removed void setSprite_and_cocentric_Debug_box();//box color blue inshallah
 
-    bool reverse_image;         // general for each animation Alhamdulilah
-    float Animation_Speed = 10; // Determines how fast next image comes, Alhamdulilah Rab Al Alameen
+        // general for each animation Alhamdulilah
+     // Determines how fast next image comes, Alhamdulilah Rab Al Alameen
 
     // prevents downwards velocity from being too much Alhamdulilah rab al alameen, Being super professional we can even use the acti=ual formulah Alhamdulilah rab al alameen
     // remove tv and now uses if condition ALhamdulilah
@@ -303,13 +356,15 @@ public:
     void Jump();
     void Fall();
     void is_Not_Moving();
-    void Falling();
+    //void Falling();//Removed Alhamdulilah
 
     Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_names); // loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
-    friend void Collusion_Detector(int No_of_Botoms, Botom **Botoms, Level_Config *levelConfig); // can you declare friend in private: Will have to try later inshallah?
+    friend void Collusion_Detector(int No_of_Botoms, Player **Players, Level_Config *levelConfig); // can you declare friend in private: Will have to try later inshallah?
+    //Note This function doesnt take Botom diretly it is the sole coll dect that takes enemies throufgh levels ALhamdulilah
+
 
    
 
@@ -329,18 +384,21 @@ class Botom_Lvl_1_5: public Botom
 
 class Botom_Lvl_6_7 : public Botom
 {
+public:
     Botom_Lvl_6_7(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
 
 class Botom_Lvl_7_8 : public Botom//considering both appear Alhamdulil 7 is common
 {
+public:
     Botom_Lvl_7_8(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
 
 class Botom_Lvl_8_9 : public Botom // considering both appear Alhamdulil 8 is common
 {
+public:
     Botom_Lvl_8_9(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
