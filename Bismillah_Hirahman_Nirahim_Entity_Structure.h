@@ -471,10 +471,29 @@ class Projectile: virtual public Entity
 {
 public:
 //Removed void setSprite_and_cocentric_Debug_box();//Box color yellow
+    //Projectile(sf::Vector2f spawn_at, float mass);
+    Projectile();
 };
 
 class Snowballs: public Projectile
 {
+    float Always_down_y_speed=5;//due to gravity, pos is downwards
+    static string File_to_load_sprite_from;//to later make a timer in player about snow ball throwing cooldown inshallah in throw function
+    Player* Which_player_it_blongs_to;//This keeps traveling without change in direction when throw Alhamdulilah
+    int Snowball_id;
+    static int Snowball_Count;//if snow ball destroyed this decreases,
+    float standard_mass=10;
+    float Snowball_sprite_width_to_display = 25;
+    float Snowball_sprite_height_to_display=25;
+
+    float Angle_to_rotate=1;//ok clockwise angle positive Alhamdulilah
+
+
+   public:
+       Snowballs(sf::Vector2f Start_at,float x_speed,Player* Which_players_it_is);//Cant make consteuctor virtual i beleive
+       ~Snowballs();
+       void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
+       void Move();//moves and also rotates Alhamdulilah overiding
 
 };
 

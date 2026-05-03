@@ -128,6 +128,30 @@ MyGame/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/build
 .PHONY : MyGame/fast
 
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.obj: Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.obj
+
+# target to build an object file
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.obj
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.obj
+
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.i: Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.i
+
+# target to preprocess a source file
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.i
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.i
+
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.s: Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.s
+
+# target to generate assembly for a file
+Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\MyGame.dir\build.make CMakeFiles/MyGame.dir/Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.s
+.PHONY : Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.cpp.s
+
 Bismillah_Hirahman_Nirahim_Entity_Mobs.obj: Bismillah_Hirahman_Nirahim_Entity_Mobs.cpp.obj
 .PHONY : Bismillah_Hirahman_Nirahim_Entity_Mobs.obj
 
@@ -233,6 +257,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... MyGame
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.obj
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.i
+	@echo ... Bismillah_Hirahman_Nirahim_Entity_Implementation_Projectiles.s
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.obj
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.i
 	@echo ... Bismillah_Hirahman_Nirahim_Entity_Mobs.s

@@ -373,8 +373,11 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     Player** Players = new Player*[No_of_Players];//As array of & wasnt allowed so we make array of ptrs Alhamdulilah rab al alameen
 
-    
+    //Snowballs TestSnoball(sf::Vector2f(100,00),3,Players[0]);//sends p1's ptr Alhamdulilah
 
+
+
+    //(Players[0]->getDebugBox().getPosition().x, Players[0]->getDebugBox().getPosition().y (will be something likr this inshallah soon)
     Players[0]=P1;
 
    
@@ -657,10 +660,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
         for(int i=0;i<No_of_Players;i++)
         {
-            Players[i]->display(window,Debug_Mode_On);
+            if (Players[i] != nullptr) // now thinking of deleting plr on death need to put thesee checks everywhere including on mobs too ALhamdulilah rab al alameen
+                Players[i]->display(window, Debug_Mode_On);
         }
 
-        
+        //TestSnoball.Move();
+        //TestSnoball.display(window,Debug_Mode_On);
+
+
 
       /*   Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
         Test_LoadingBluePlayerSpriteSheetS2.setPosition(80, 100);
