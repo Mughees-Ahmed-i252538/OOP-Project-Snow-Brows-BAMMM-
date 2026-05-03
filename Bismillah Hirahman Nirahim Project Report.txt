@@ -1,0 +1,36 @@
+Asslamoalikum 
+
+I had to do the project myself
+
+Henceforth I had to do all in my abilities  to complete the requiemrents
+
+I started from developing oop heirachy 
+
+then moved to player x movement,
+
+then level building
+
+then i moved to y movement
+
+Then i took along mob spawning
+
+Then mob ai 
+
+then interfaces
+
+then leaderboard
+
+unfortuanately i was not able to do much
+
+however
+
+Strategies:
+
+I have ensured the usage of all oop pillars includingabstraction, inheritance, polymorphism, encapsulaton
+
+Furthermore I had also deeply documentedevery step of the work in gothub using commits
+
+Every step taken can be found here: https://github.com/Mughees-Ahmed-i252538/OOP-Project-Snow-Brows-BAMMM-
+
+Difficulties faced: Having to work wo=ithout a partner
+

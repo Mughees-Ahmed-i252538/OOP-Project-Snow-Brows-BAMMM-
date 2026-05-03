@@ -960,10 +960,18 @@ void Player::move_snowballs_of_Player()
         }
     }
 }
+void Player::getLeaderboardData(Leaderboard *L, int index)
+{
+    leaderboard_index=index;
+    LEADERBOARD=L;
 
+}
 void Player::Add_To_Score(int add_score)
 {
     score+=add_score;
+    LEADERBOARD->AddWin(leaderboard_index);
+    delete LEADERBOARD;
+    LEADERBOARD= new Leaderboard;//tp save real time
 }
 int Player::Get_Score()
 {

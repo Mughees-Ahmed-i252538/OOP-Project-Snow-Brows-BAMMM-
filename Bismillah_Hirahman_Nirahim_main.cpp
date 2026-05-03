@@ -91,6 +91,7 @@ void ForRelativeSizeAndPostionSprite(float NeededWidth, float NeededHeight, sf::
     sprite.setPosition(Wantedposition); // now that we have orign at centre and size resolved it got easier to set the position, ALhamdulilahi Rab al alameen
 }
 
+
 void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig)
 {
     int No_of_Blocks_in_given_round=levelConfig->getNoofBlocks();
@@ -218,6 +219,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                             Array_of_Mobs[l]->health -= Players[i]->Snow_Ball_Power;// the stronger the power the more the damage Alhamdulilah rab al alameen
                             if (Array_of_Mobs[l]->health>=0)
                             {
+
                                 Players[i]->Add_To_Score(Array_of_Mobs[l]->Score_Added);
                                 delete Array_of_Mobs[l];
                                 Array_of_Mobs[l]=nullptr;//Bismillah hirahman Nirahim for testing
@@ -790,6 +792,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     if(No_of_Players==2)
     Player2Index = LEADERBOARD->EnterUsername(window, W.Win_Width, W.Win_Height, 2);
 
+
+
+    Players[0]->getLeaderboardData(LEADERBOARD,Player1Index);
+    if(No_of_Players==2)
+    Players[1]->getLeaderboardData(LEADERBOARD,Player2Index);
+
+
     while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
     {
         if(Players[0]!=nullptr)
@@ -1070,6 +1079,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
         if (level_ends&&Level_Config::getLevel_Count() == Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present())//Added level ends here to not abruptly close as it was doing...perhaps I should add a do you want to close....Alhamdulilah Rab Al Alameen
         {
+            
             cout << "Level Count" << Level_Config::getLevel_Count() <<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
             cout << "Total Level's Present" << Stored_Level_Configs::getTotal_Levels_For_which_Data_is_Present()<<"\n" << endl;
             //game end logic soon inshallah, an ending screen, an animation or video if possible with credits inshallah
@@ -1116,22 +1126,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
     }
 
 
-    if(Players[0]!=nullptr)
-    {
-        for(int i=0;i<Players[0]->Get_Score();i++)
-        {
-            LEADERBOARD->AddWin(Player1Index);
-                
-        }
-    }
-
-    if(No_of_Players==2)
-    {
-        if (Players[1] != nullptr)
-        {
-            LEADERBOARD->AddWin(Player2Index);
-        }
-    }
+   
 
     delete LEADERBOARD;
 
@@ -1678,6 +1673,8 @@ int main()
         ForRelativeSizeAndPostionSprite(50, 20, MultiPlayerBS, sf::Vector2f(430, 350));
     }
     Leaderboard* LEADERBOARD=new Leaderboard;
+
+    
 
    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
    {

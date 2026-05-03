@@ -2,6 +2,7 @@
 #include <iostream>//if giving linker errors, first define  static vars inshallah
 #include <SFML/Graphics.hpp> //Note, i had to delete many a pieces of code, hence comments may seems out of place
 #include <SFML/Audio.hpp>
+#include "Bismillah_Hirahman_Nirahim_Leaderboard.h"
 // #include <SFML/System/Vector2.hpp> although including graphics should work Alhamdulilah
 using namespace std;
 //Note have to save file before being able to commit changes
@@ -110,6 +111,8 @@ class Player : public Entity//if issues arrive while calling constructor as is a
 
 private:
 
+    int leaderboard_index;
+    Leaderboard* LEADERBOARD;
     int health=0;
     int score=0;
     static int Player_Max_Health;
@@ -207,6 +210,7 @@ private:
     //needed int for the % but if want float can do changes in function and use the *100 into int and then back conversion Alhamdulilah rab al alameen
 
     public : void x_Action_To_Move(x_Direction d); // sets which direction player wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
+    void getLeaderboardData(Leaderboard* L,int index);
     //void y_Action_To_Move(y_Direction d);//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     void Move();//This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
 
@@ -237,6 +241,7 @@ private:
     void display_snowballs_of_Player(sf::RenderWindow& window,bool is_Debug_Mode_on);
     void move_snowballs_of_Player();//forgot to move...Astigfiruallah
     void Add_To_Score(int add_score);
+    
     int Get_Score();
     void display_Health(sf::RenderWindow& window);
 };
