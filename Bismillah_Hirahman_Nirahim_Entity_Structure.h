@@ -57,8 +57,8 @@ protected:
     float how_much_of_sprite_is_debug_box=0.7;
     float Mass;
 
-    void Entity::ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition);
-    void Entity::ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition);
+    void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::ConvexShape &shape, sf::Vector2f Wantedposition);
+    void ForRelativeSizeAndPostionShape_Entity_Copy(float NeededWidth, float NeededHeight, sf::RectangleShape &shape, sf::Vector2f Wantedposition);
     void ForRelativeSizeAndPostionSprite_Entity_Copy(float NeededWidth, float NeededHeight, sf::Sprite &sprite, sf::Vector2f Wantedposition);
     void ForRelativeSizeAndPostionText_Entity_Copy(float NeededWidth, float NeededHeight, sf::Text &text, sf::Vector2f Wantedposition);
 
@@ -191,6 +191,7 @@ private:
     void Move_Right();//sets to +x */
     void Move_Left_Right_and_Animate();//Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
     void Jumping_Animate();
+    void Falling_Animate();
     void Jump();
     void Fall();
     void is_Not_Moving();
@@ -217,7 +218,8 @@ class Enemy: public Entity
     static int Hits_To_encase;//assigned for each distribution of enemy class but a sub enemy and level mob class takes same amount of hits Alhamdulilah 
 
     public:
-    //Removed void setSprite_and_cocentric_Debug_box();//box color red inshallah
+        Enemy(sf::Vector2f spawn_at, float mass); // asigning 0 for movement speed will be changed using seter in this constructor soon inshallah, mass will)
+        // Removed void setSprite_and_cocentric_Debug_box();//box color red inshallah
 };
 
 class Botom: public Enemy
@@ -226,7 +228,7 @@ class Botom: public Enemy
     // Will be used inshallah soon
     // for mobs, every level configration haas such a spawn pt array for them along with their type and numbers (possibly using a class for mobsb spawn pt and adta, inshallah) Alhamdulilah Rab Al Alameen
     
-
+    
     
 
     int Botom_id; // which Botom 0 or 1
@@ -238,9 +240,7 @@ class Botom: public Enemy
     static int Standard_Default_Botom_Mass; // Alhamdulilah Rab Al Alameen, although seems redundant it is better than hardcoding a mass value into code
     static int Standard_Default_Botom_Speed;
 
-    static int No_of_Spawn_points_present; // Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
-
-    static int No_of_Botom_Sprite_and_related_present;
+    // Note this is used to get size of static (fixed length array) not used to initialize a dynamic length array Alhamdulilah rab al alameen
 
     static int Botom_Count; // currently 0, first Botom, it becomes 1 which is used to get second indice of spawn pt array for p2
 
@@ -271,12 +271,7 @@ class Botom: public Enemy
     bool Action_To_Jump = false;
     // Bismillah hirahman Nirahim, starting the jump and y dimension work in the name of Allah SWT with whose name there is barakah, Oh Allah Please put Barakah in this work and please accept our small actions, Please also forgive our mistakes, Ya Zuljalal e wal ikraam Ameen sum ameen ya rab al alameen ya arham ar rahimeen !
 
-    /*  y_Direction y_Action_To_Move_in_Direction_Variable;
-     y_Direction y_Previous_State;
-     y_Direction y_State ; // Jumping falling or idle Alhamdulilah rab al alameen
-
-     float jump_velocity=5;
-     int terminal_velocity=10; */
+    
 
     int total_no_of_images_in_walking_animation = 3;
 
@@ -296,8 +291,7 @@ public:
     // void y_Action_To_Move(y_Direction d);//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     void Move(); // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
 
-    /* void Move_Left();//Sets Current Velocity x to -Movement Speed,, starts acumulating timer accumulator, uses sf::Move also accounts for animation moving left using image switch if certain time has passed Alhamdulilah rab al alameen, (to adjust the time for next image, please change multiplier for clock reset time given to stored into accumulator, if want quicker switch please make this multiplier bigger Alhamdulilah Rab Al Alameen)
-    void Move_Right();//sets to +x */
+   
     void Move_Left_Right_and_Animate(); // Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
     void Jumping_Animate();
     void Jump();
@@ -305,41 +299,43 @@ public:
     void is_Not_Moving();
     void Falling();
 
-    Botom(int Which_design_choosen_out_of_given); // loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
+    Botom(sf::Vector2f spawn_at, string File_From_Where_To_Load_Resources_names); // loads the respective texture from the static string array of file names Alhamdulilah Rab Al Alameen
 
     void setSprite_and_cocentric_Debug_box(string Load_Texture_From_File, sf::Color Color_of_Debug_Box, sf::FloatRect Wanted_Size_And_Position);
 
     friend void Collusion_Detector(int No_of_Botoms, Botom **Botoms, Level_Config *levelConfig); // can you declare friend in private: Will have to try later inshallah?
 
-    /* void input_handling_Botom(char button);
-
-   void draw();by ayan */
+   
 
     //void SendtoSpawnPt();//enemies are destroyed and remode so they dont need this ALhamdulilah rab al alameen
 
     void Make_Action_To_Jump();
-};
+ };
 
 
 class Botom_Lvl_1_5: public Botom
 {
     //static sf::Vector2f Spawn_Points[2];//given by level Alhamdulilah rab al alameen
-
+    public:
+    Botom_Lvl_1_5(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names ;
 };
 
 class Botom_Lvl_6_7 : public Botom
 {
+    Botom_Lvl_6_7(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
 
 class Botom_Lvl_7_8 : public Botom//considering both appear Alhamdulil 7 is common
 {
+    Botom_Lvl_7_8(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
 
 class Botom_Lvl_8_9 : public Botom // considering both appear Alhamdulil 8 is common
 {
+    Botom_Lvl_8_9(sf::Vector2f spawn_at);
     static string File_From_Where_To_Load_Resources_names;
 };
 
@@ -432,3 +428,4 @@ class Balloon_Mode : public Power_Ups
 {
 };
 
+//Always remember to remove defintion of removed functions or linker error....Alhamdulilah rab al alameen

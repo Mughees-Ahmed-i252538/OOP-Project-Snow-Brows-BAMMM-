@@ -178,7 +178,11 @@ sf::Vector2f Player::Spawn_Points[2] = {sf::Vector2f(150.f, (500.f - 100.f)), sf
 
 int Player::No_of_Spawn_points_present = 2; // unfortunately have to change these two values manually for rescalaing, but it does Allow Reslacinf Alhamdulilah Rab Al Alameen
 
-string Player::File_From_Where_To_Load_Resources_names[5] = {"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Nick.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Green.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Red.png", "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Yellow.png"};// a single \ was trying to register as an escape sequence, Turned them into \\ Alhamdulilah Rab Al Alameen
+string Player::File_From_Where_To_Load_Resources_names[5] = {"..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Nick.png"
+    , "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Blue.png"
+    , "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Green.png"
+    , "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Red.png"
+    , "..\\Bismillah_Hirahman_Nirahim_Snow_Bros_Assets\\Bismillah_Hirahman_Nirahim_Assets\\Images\\Player_Yellow.png"};// a single \ was trying to register as an escape sequence, Turned them into \\ Alhamdulilah Rab Al Alameen
 
 int Player::No_of_Player_Sprite_and_related_present = 5;
 
@@ -206,13 +210,13 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     bool Jump_Test=false;
     if(Action_To_Jump)
     {
-        cout<<"Pressed jump"<<endl;
+        //cout<<"Pressed jump"<<endl;
         if (Block_underneath&&Current_y_State==y_State::Stationary)                 // still deciding if we need a bool Action to ump..Lets see bismillah hirahman Nirahim
         {
-            cout << "Block Was also underneath" << endl; // ok lets transfer this to move, Bismillah hirahman nirahim
+            //cout << "Block Was also underneath" << endl; // ok lets transfer this to move, Bismillah hirahman nirahim
             Jump();
             Jump_Test=true;
-            cout<<"vy:"<<Current_velocity_y<<endl;
+            //cout<<"vy:"<<Current_velocity_y<<endl;
         }
         Action_To_Jump=false;
     }
@@ -296,6 +300,12 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
         cout << "new vy:" << Current_velocity_y << endl;
         Jump_Test=false;
     }
+
+    if (Current_y_State == y_State::Falling)
+    {
+        Falling_Animate();
+
+    }
     
     if (Current_y_State == y_State::Rising)
     {
@@ -370,14 +380,8 @@ void Player::Move_Left_Right_and_Animate() // Sets Current Velocity x to -Moveme
         // show first walking image, //Bismillah hirahman nirahim for testing
     } */
 
-    if (Current_y_State == y_State::Falling) // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
-    {//Alhamdulilah rab al alameen, working
-        wanted_texture_rect_x = 320;
-        wanted_texture_rect_y = 0;
-        wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
-        wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
-    }
-    else if (Current_y_State == y_State::Stationary)
+    
+    if (Current_y_State == y_State::Stationary)
     {
         if (this->Has_Been_Moving_in_same_direction_Animation_updation_counter_updation_Holder % total_no_of_images_in_walking_animation == 0)
         {
@@ -612,7 +616,58 @@ void Player::Jumping_Animate()//this effictively will overirde the left right wa
     
 }
 
-void Player::Fall()
+void Player::Falling_Animate()
+{
+    int wanted_texture_rect_x = 0;
+    int wanted_texture_rect_y = 0;
+    int wanted_texture_rect_width = 80; // setting default width as 0 might be whats causing invisbility
+    int wanted_texture_rect_height = 80;
+
+     // if falling this over writes the current image to falling one while allowing movement Alhamdulilah
+                                           // Alhamdulilah rab al alameen, working
+        wanted_texture_rect_x = 320;
+        wanted_texture_rect_y = 0;
+        wanted_texture_rect_width = 80;  // first image of 80x80 start at 0x0 Alhamdulilah rab al alameen
+        wanted_texture_rect_height = 80; // ok planning to permiss left right movement in fall too, Bismillah hirahman nirahim
+    
+
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Left)
+    {
+        Currently_Faces = x_Direction::Left;
+        reverse_image = false;
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    } // normal up jump is with current facing alhamdulilah rab al alameen inshallah
+
+    if (x_Action_To_Move_in_Direction_Variable == x_Direction::Idle)
+    {
+        if (Currently_Faces == x_Direction::Left)
+        {
+            reverse_image = false;
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image);
+        } // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        else if (Currently_Faces == x_Direction::Right)
+        {
+            reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+            setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+        }
+        // this->x_Previously_Moving_in = x_Direction::Left;
+    }
+    else if (x_Action_To_Move_in_Direction_Variable == x_Direction::Right)
+    {
+        Currently_Faces = x_Direction::Right;
+        reverse_image = true; // left right logic same Alhamdulilah rab al alameen
+
+        setTextureRect(sf::IntRect(wanted_texture_rect_x, wanted_texture_rect_y, wanted_texture_rect_width, wanted_texture_rect_height), reverse_image); // as obvious, if not left then send bool false as this is needed for Flipping, ALhamdulilah Rab Al Alameen,
+
+        // this->x_Previously_Moving_in = x_Direction::Right; the previous direction thing is already being tke care of in move left and right and animate Alhamdulilah rab al alameen
+    }
+}
+
+ void Player::Fall()
 {
     Current_velocity_y = jump_speed * 0.5; //
     Current_y_State = y_State::Falling;
@@ -808,7 +863,9 @@ void Player::Make_Action_To_Jump()
 
 void Player::Jump()
 {
-    cout<<"Jumping"<<endl;
+    //cout<<"Jumping"<<endl;
     Current_velocity_y = -jump_speed; // if block Underneath then jump
     Current_y_State = y_State::Rising;
 }
+
+//==================Testing by placing mobs here, Bismillah hirahman nirahim, in the name of Allah SWT in the name of who there is barakah
