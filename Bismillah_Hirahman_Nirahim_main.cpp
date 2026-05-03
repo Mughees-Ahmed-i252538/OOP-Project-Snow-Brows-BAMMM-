@@ -95,6 +95,9 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
     int No_of_Blocks_in_given_round=levelConfig->getNoofBlocks();
     sf::Sprite *Blocks_in_given_round=levelConfig->getBlocksArray();
 
+    int no_of_mobs_in_this_level=levelConfig->getNoofMobs();
+    Enemy** Array_of_Mobs=levelConfig->getMobArray();
+
 
     for(int i=0;i<No_of_Players;i++)
     {
@@ -134,7 +137,7 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
                 }//top touch checker
             } *///
         if (Players[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//note state falling is made after conversion of heading downwards Alhamdulilah
-        {
+        {//this is for header Alhamdulilah
             if (Players[i]->getDebugBox().getGlobalBounds().top + Players[i]->getDebugBox().getGlobalBounds().height > Blocks_in_given_round[2].getGlobalBounds().top + 5) // this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
             {
                Players[i]->Fall();
@@ -165,7 +168,76 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
 
     }//friend of entity and level config for ease alhamdulilah
 
+    for (int i = 0; i < no_of_mobs_in_this_level; i++)
+    {
+        // doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
 
+        if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
+        {                                                                                // left boundary stopper
+            if (Array_of_Mobs[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Left) // ok have to make a friend in Player separately as it cant access Array_of_Mobs private memebrs even though it can access ENtities...
+                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Idle);
+            if (Array_of_Mobs[i]->x_Previously_Moving_in == x_Direction::Left)
+            {
+                Array_of_Mobs[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
+            }
+
+        } // If moving left and touches the boundary stop
+
+        if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[1].getGlobalBounds()))
+        {                                                                                 // for right boundary stopper
+            if (Array_of_Mobs[i]->x_Action_To_Move_in_Direction_Variable == x_Direction::Right) // ok have to make a friend in Player separately as it cant access Array_of_Mobs private memebrs even though it can access ENtities...
+                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Idle);
+            if (Array_of_Mobs[i]->x_Previously_Moving_in == x_Direction::Right) // ok flying entry permission was due to these checks being reversed for left and right
+            {
+                cout << "Was prev moving stopped now";
+                Array_of_Mobs[i]->Current_velocity_x = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
+            }
+        } // If moving right and touches the boundary stop, Bismillah hirahman Nirahim
+
+        /* if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds()))//top (header)
+            {                                                                                 // for right boundary stopper
+                if (Array_of_Mobs[i]->y_Action_To_Move_in_Direction_Variable == y_Direction::Jumping) // ok have to make a friend in Player separately as it cant access Array_of_Mobs private memebrs even though it can access ENtities...
+                    Array_of_Mobs[i]->y_Action_To_Move(y_Direction::Idle);
+                if (Array_of_Mobs[i]->y_State == y_Direction::Jumping)
+                {
+                    cout << "Was prev jumping stopped now";
+                    Array_of_Mobs[i]->Current_velocity_y = 0; // stops them if previously movubf instead of setting idle which doesnt let them move
+                }//top touch checker
+            } */
+        //
+        if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[2].getGlobalBounds())) // note state falling is made after conversion of heading downwards Alhamdulilah
+        {
+            if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().top + Array_of_Mobs[i]->getDebugBox().getGlobalBounds().height > Blocks_in_given_round[2].getGlobalBounds().top + 5) // this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
+            {
+                Array_of_Mobs[i]->Fall();
+            } // i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
+        }
+
+        Array_of_Mobs[i]->Block_underneath = false; // used for fall and stopping Alhamdulilah, wrongly inside if block moved out Alhamdulilah
+
+        // cout<<"No of blocks in the given round="<<No_of_Blocks_in_given_round<<endl;
+
+        // Now lets ensure that player doesnt go over the header like it does to blocks, or if it does it can come back so disabling block underbeath for header and making check for header over head, Alhamdulilah rab al alameen
+        for (int j = 3; j < No_of_Blocks_in_given_round; j++) // issue was i used i again that was being used in out er loop corrected Alhamdulilah
+        {
+            // cout<<"i="<<i<<endl;
+            // cout<<"j="<<j<<endl;
+
+            if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[j].getGlobalBounds()))
+            {
+                if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().top + Array_of_Mobs[i]->getDebugBox().getGlobalBounds().height < Blocks_in_given_round[j].getGlobalBounds().top + 5) // this requires that player is specifically atop the block and not just intersecting, this prevents stopping in the middle of the block ALhamdulilah you can add tolderance by adding into the right side of the condition Alhamdulilah rab al alameen, i had to add tolerance, it was sinking at spawn... well Alhamdulilah rab al alameen
+                {
+                    Array_of_Mobs[i]->Block_underneath = true;
+                } // i forgot that top is y=0, if block is under its y should be greater corrected Alhamdulilah rab al alameen,...it was quite strage when block above palyer and ...registering underneath...
+            }
+        } // Condition was using i instead, Removed Alhamdulilah
+
+        // cout<<"On Block?:"<<Array_of_Mobs[i]->Block_underneath<<endl;
+
+        // cout<<"Block Underneath Player?: "<<Array_of_Mobs[i]->Block_underneath<<endl;//I think even cout can make the program crash? if too much...ALhamdulilah rab al alameen
+
+    } // friend of entity and level config for ease alhamdulilah
+ 
 }
 
 int PauseMenu(sf::RenderWindow &window)//effictiently pauses game by starting naother loop, the returned int tells game what changes were made in the menu.... 
@@ -424,107 +496,132 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         ForRelativeSizeAndPostionSprite(30, 30, PauseBS, sf::Vector2f(500-40,  40)); // Top Right Alhamdulilah Rab AL Alameen
     }
 
-    Enemy* Botom=new Botom_Lvl_1_5 (sf::Vector2f(100,200));
-
-
    
-        while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+
+    int no_of_mobs_in_this_level= levelConfig->getNoofMobs();//If you leave code and see anot of error on getting back it is because you left at an odd point inshallah something smmall should fix it , look around carefully jazakallah
+    Enemy** Array_of_Mobs= levelConfig->getMobArray();//later need to do this again for every round inshallah
+
+    
+
+    while (window.isOpen()) // i believe static data memebers of a class are made before main even starts Alhamdulilah Rab Al Alameen
+    {
+
+        sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
+        while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
+        // pollEvent checks queue and if event queue empty returns 0,
+        // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
+        // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
         {
-
-            sf::Event event;                // For Press Type events eg snowball throw Alhamdulilah
-            while (window.pollEvent(event)) // checks queue of eveents, Alhamdulilah
-            // pollEvent checks queue and if event queue empty returns 0,
-            // Also pollevent uses pass by refrence (int &var) paramter, ehence laisa and change relfects in orignal variable
-            // if not emptyy returns bool false, when returned true it almso removes (pops out) the upmost event in queue and places it in event
+            // Event closed is the x button Alhamdulilah
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
             {
-                //Event closed is the x button Alhamdulilah
-                if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
-                    {
-                        levelConfig->getMusic().stop();//if not loaded nothing happens alhamdulilah prevents double music ALhamdulilah
-                        return -1;//return to menu                                                                                                     // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
-                    }
-
-
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F11) // Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
-                {
-                    cout << "Debug Key Pressed" << "\n"
-                         << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Alhamdulilah Rab Al Alameen
-                    if (Debug_Mode_On)
-                        Debug_Mode_On = false;
-                    else
-                        Debug_Mode_On = true;
-                }
-                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F10) // force level ca=hanger key for Debugging to be removed in later levels inshallah
-                {
-                    level_ends = true;
-                }
-
-                for(int i=0;i<No_of_Players;i++)
-                {
-                    if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Jump[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
-                    {
-                        Players[i]->Make_Action_To_Jump();                                                                                                    }
-                }
-            }
-            sf::Vector2i MPosition = sf::Mouse::getPosition(window);   // gets positon of mpuse
-            sf::Vector2f MCoords = window.mapPixelToCoords(MPosition); // converts to coordinates in views (so you dot have to calculate ALhamdulilah)
-
-            if (PauseBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
-            {
-                // mouse was on this coords and lb event occured, Alhamdulilah button pressed
-                levelConfig->getMusic().pause();
-                int option_choosen=PauseMenu(window); // true for story mode, think as if means bonus levells on
-                if (option_choosen==-1)//if 0 then just continue with the game Alhamdulilah
-                {
-                    return 0;//at -1 go to main menu Alhamdulilah
-                }
-                else if (option_choosen == -2)//at -2 exit entire game
-                {
-                    return -1;
-                }
-                levelConfig->getMusic().play();
+                levelConfig->getMusic().stop(); // if not loaded nothing happens alhamdulilah prevents double music ALhamdulilah
+                return -1;                      // return to menu                                                                                                     // I want to put in the are you sure you want to close......Style::note type window ....Inshallah later
             }
 
-            // Now for hold type events Alhamdulilah
-            // Is Key Pressed Is function that returns bool Alhamdulilah Rab Al Alameen
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F11) // Bismillah Hirahman Nirahim, if we dont check event type keyboard, it is possible that some random mouse movement can have same key code as this key...hence changes to springing up code thinking that f11 pressed on some mouse movement, Allah SWT knows best, Alhamdulilah Rab Al Alameen
+            {
+                cout << "Debug Key Pressed" << "\n"
+                     << endl; // for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//Alhamdulilah Rab Al Alameen
+                if (Debug_Mode_On)
+                    Debug_Mode_On = false;
+                else
+                    Debug_Mode_On = true;
+            }
+            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::F10) // force level ca=hanger key for Debugging to be removed in later levels inshallah
+            {
+                level_ends = true;
+            }
 
             for (int i = 0; i < No_of_Players; i++)
             {
-
-                Players[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
-
-                /* if (is_Multiplayer)
-                Players[1].x_Action_To_Move(x_Direction::Idle); */
-                // lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
-
-                if (sf::Keyboard::isKeyPressed(Players_Left[i]))
+                if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Jump[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 {
-                    Players[i]->x_Action_To_Move(x_Direction::Left);//this only sets a var called action to move, the movement is handeled by move that is called later inshallah
-                    Botom->x_Action_To_Move(x_Direction::Left);
-                    //cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
-
+                    Players[i]->Make_Action_To_Jump();
                 }
+            }
+        }
+        sf::Vector2i MPosition = sf::Mouse::getPosition(window);   // gets positon of mpuse
+        sf::Vector2f MCoords = window.mapPixelToCoords(MPosition); // converts to coordinates in views (so you dot have to calculate ALhamdulilah)
+
+        if (PauseBS.getGlobalBounds().contains(MCoords) && sf::Mouse::isButtonPressed(sf::Mouse::Left))
+        {
+            // mouse was on this coords and lb event occured, Alhamdulilah button pressed
+            levelConfig->getMusic().pause();
+            int option_choosen = PauseMenu(window); // true for story mode, think as if means bonus levells on
+            if (option_choosen == -1)               // if 0 then just continue with the game Alhamdulilah
+            {
+                return 0; // at -1 go to main menu Alhamdulilah
+            }
+            else if (option_choosen == -2) // at -2 exit entire game
+            {
+                return -1;
+            }
+            levelConfig->getMusic().play();
+        }
+
+        // Now for hold type events Alhamdulilah
+        // Is Key Pressed Is function that returns bool Alhamdulilah Rab Al Alameen
+
+        for (int i = 0; i < No_of_Players; i++)
+        {
+
+            Players[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+
+            /* if (is_Multiplayer)
+            Players[1].x_Action_To_Move(x_Direction::Idle); */
+            // lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
+
+            if (sf::Keyboard::isKeyPressed(Players_Left[i]))
+            {
+                Players[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
+
+                // cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
+            }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
-                {
-                    Players[i]->x_Action_To_Move(x_Direction::Right);
-                    Botom->x_Action_To_Move(x_Direction::Right);
-                    // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
-                }
-            
+            {
+                Players[i]->x_Action_To_Move(x_Direction::Right);
 
-                //This may need to stop movement hence comes before Move call Alhamdulilah
-            Collusion_Detector(No_of_Players,Players,levelConfig);//can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah   
+                // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
+            }
 
-            Botom->Move();
+            // This may need to stop movement hence comes before Move call Alhamdulilah
+            // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah
+
             Players[i]->Move();
         }
 
+        
+        for (int i = 0; i < no_of_mobs_in_this_level; i++)
+        {
 
+            //we will be calling run ai here instead of move hence cant do idle at start Alhamdulila currently debugging so using move ALhamdulilah
+            Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
+            /* if (is_Multiplayer)
+            Players[1].x_Action_To_Move(x_Direction::Idle); */
+            // lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
+          /*   if (sf::Keyboard::isKeyPressed(Players_Left[0]))
+            {
+                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
 
+                // cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
+            }
+            if (sf::Keyboard::isKeyPressed(Players_Right[0]))//For Debugging only, Alhamdulilah rab al alameen, for actually, there would be an Ai Algorithm for this inshallah
+            {
+                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Right);
 
+                // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
+            } */
 
+            // This may need to stop movement hence comes before Move call Alhamdulilah
+            //Collusion_Detector(No_of_Players, Players, levelConfig); // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah only one collusion detector, being called once with each player,  lets change that tto put it outside loop it should still work inshallah Alhamdulilah rab al alameen
+
+            Array_of_Mobs[i]->Move();
+        }
+
+        Collusion_Detector(No_of_Players, Players, levelConfig); // put outside to ensure it is called only once per round, also putting it after enemy move to completely ensure same time and frames for both inshallah
 
         // TREATING IT AS BOILER PLATE CODE FOR NOW
 
@@ -550,14 +647,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
         //Background behind the players so,
 
-        levelConfig->display(window);
+        levelConfig->display(window,Debug_Mode_On);
 
         for(int i=0;i<No_of_Players;i++)
         {
             Players[i]->display(window,Debug_Mode_On);
         }
 
-        Botom->display(window,Debug_Mode_On);
+        
 
       /*   Test_LoadingBluePlayerSpriteSheetS1.setPosition(40,100);
         Test_LoadingBluePlayerSpriteSheetS2.setPosition(80, 100);
@@ -603,8 +700,12 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         {//note level count is incremented just after assigning it as id to current level, hence it is one more than level, at last level ie 10 index 9, it should be one more than index i.e ten equal to total no of levels, Alhamdulilah
             //cout << "Previous Level Id" << Level_Config::getLevel_Count() - 1 << endl; // convienctly one more than level index but still display -1 to keep the idea that lvls start from 0 and ease of understanding inshallah, ALhamdulilah Rab al alameen
             levelConfig->getMusic().stop();
+            //no_of_mobs_in_this_level = levelConfig->getNoofMobs(); // If you leave code and see anot of error on getting back it is because you left at an odd point inshallah something smmall should fix it , look around carefully jazakallah
+            //Array_of_Mobs = levelConfig->getMobArray();//dont worry these are deleted in destructor of level config Alhamdulilah
             delete levelConfig;//Now new and previous dont need to be printed here, they are being shown in Level constructor, however kept for use in debugging Alhamdulilah Rab AL Alameen
             levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y, Bonus_Levels_on);
+            no_of_mobs_in_this_level = levelConfig->getNoofMobs(); // If you leave code and see anot of error on getting back it is because you left at an odd point inshallah something smmall should fix it , look around carefully jazakallah
+            Array_of_Mobs = levelConfig->getMobArray();
             if (levelConfig != nullptr)
             {
                 levelConfig->getMusic().play();
@@ -612,7 +713,9 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             }
             level_ends=false;
 
-             for (int i = 0; i < No_of_Players; i++)
+
+
+            for (int i = 0; i < No_of_Players; i++)
             {
                 Players[i]->SendtoSpawnPt();//send players back to spawn pt, add partiles later if possible inshallah
             } 
@@ -634,7 +737,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         window.draw(PauseBS);
             window.display(); // switches front bufffer and back buffer Alhamdulilah rab al alameen
     }
-    delete Players;
+
+    for(int i=0;i<No_of_Players;i++)
+    {
+        delete Players[i];
+
+    }
+    delete[] Players;
     Players=nullptr;
     return 0;
 }

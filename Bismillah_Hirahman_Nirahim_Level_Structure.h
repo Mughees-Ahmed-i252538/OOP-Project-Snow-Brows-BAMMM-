@@ -5,11 +5,14 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include "Bismillah_Hirahman_Nirahim_Entity_Structure.h"
 
 using namespace std;
 
 class Player;
 class Level_Config; // declaaraing ahead of time Alhamdulilah
+class Enemy;
+class Botom_Lvl_1_5;
 
 struct Window_Res{
     float Win_Width=500;
@@ -61,6 +64,9 @@ class Level_Config{
     float *x_spawn_pt_of_mobs_current_level_holder_array;
     float *y_spawn_pt_of_mobs_current_level_holder_array;
 
+    Enemy** Array_of_Mobs;//first ptr for being array second ptr as it access child objects using parent ptr, note we will be needing to choose type of enemy in constructor as need to do new= BotomL15 etc Alhamdulilah rab al alamee 
+    
+
     //Alhamdulilah Rab Al Alameen, A level count gives the wanted level on the basis of iteration (loading level explicitly sends and changes this store count)
 
     //Alhamdulilah Rab Al Alameen
@@ -77,13 +83,15 @@ class Level_Config{
     public://New Plan Level_Config instead holds a function that basically runs the level and everything in the bg....or rather, as Level is holding the level config, why dont we make it so Level_Config has
         Level_Config(float Window_view_width, float Window_view_heightw, bool Bonus_levels_on=true);//Note default arguments are given in the declaration and t=not the defintion, I did try so and got error....HEnce ALhamdulilah rab al alameen
         ~Level_Config();//Bismillah Hirahman Niraheem I would <stdexcept> try{code, using throw invalid_argument ,runtime error etc} catch(std::invalid_argument & e) basically catches and destructs all locals in try and runs catch to try prevent program crash, if nothing catches than calls terminate() that crashes program, after catch block, program resumes from after catch block, Alhamdulilah rab al alameen
-        void display(sf::RenderWindow& window);
+        void display(sf::RenderWindow &window,bool Debug_Mode_on);
         static int getLevel_Count();
         sf::Music& getMusic();
         sf::Sprite* getBlocksArray();
         int getNoofBlocks();
         friend void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *levelConfig);
         static void setInitialLevel(int Wanted_Level);//currently used for selective level which only runs a single level, but can be used for Loading as well with a separate function for replacing the indexes of bonus Levels, Alhamdulilah rab al alameen
+        Enemy** getMobArray();//Alhamdulilah rab al alameen
+        int getNoofMobs();
 };
 //It seems that you have press apply button for refactoring...else even if you push changes, the refactoring keeps asking ypu to do its work,, also have to stop wprking if trying to make another file (interupted) But Alhamdulilah Rab Al ALameen, resolved
 

@@ -196,6 +196,21 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height,boo
 
         x_spawn_pt_of_mobs_current_level_holder_array = stored_Level_configs.getx_of_spawn_pts_of_mobs_each_level_holder_array(Level_id);
         y_spawn_pt_of_mobs_current_level_holder_array = stored_Level_configs.gety_of_spawn_pts_of_mobs_each_level_holder_array(Level_id);
+
+        //Alhamdulilah Bonus levels dont have enemies
+
+        Array_of_Mobs= new Enemy*[no_of_mobs_in_this_round];//i need to practice without the name remebereing system of vs code soon inshallah
+
+
+        for(int i=0;i<no_of_mobs_in_this_round;i++)
+        {
+            if (type_of_mobs_current_level_holder_array[i] == "Blue_Bottom" ) // Alhamdulilah we only need to do it one by one or the default constructor would have been an issue Alhamdulilah rab al alameen
+            {
+                Array_of_Mobs[i]=new Botom_Lvl_1_5 (sf::Vector2f(x_spawn_pt_of_mobs_current_level_holder_array[i], y_spawn_pt_of_mobs_current_level_holder_array[i]));
+            }//If throwing incomplete class not allowed then include header file (this case Alhamdulilah)
+        }
+
+
         //boss level to use same arrays as normals, but the indices stored may be used for special purposes, Alhamdulilah Rab AL ALameen
     }
     else
@@ -208,6 +223,9 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height,boo
         //cout << "Location of Bonus Level's Background Image:" << stored_Level_configs.getBonus_Level_MusicSB_File_Locations(Which_Of_The_Bonus_Levels) << "\n"<< endl;
         // Bismillah Hirahman Nirahim starting from bg texture
         //One more Level_id was remaining, resolved that and now it is normmaly working for all rounds, Alhamdulilah Rab Al Alameen
+
+        no_of_mobs_in_this_round=0;//no mobs in bonus round
+        Array_of_Mobs=nullptr;//I had forgotten this ALhamdulilah adding
 
         if (!BackgroundImageTexture.loadFromFile(stored_Level_configs.getBonus_Level_BackgroundImageTexture_File_Locations(Which_Of_The_Bonus_Levels)))
         {
@@ -274,10 +292,22 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height,boo
 Level_Config::~Level_Config(){
     delete[] BlockImageTextures;
     delete[] BlockImageSprites;//these are only two thingsthat require deleting, to still delay mob logic, perhpas changes soon inshallah
+
+
+    for(int i=0;i<no_of_mobs_in_this_round;i++)//normally mobs destruct as they die but considering other modes of exit of level like maiin menu mobs need to be destructed manually ALhamdulilah
+    {
+        if(Array_of_Mobs[i]!=nullptr)
+        {
+            delete Array_of_Mobs[i];//Enemy**
+        }
+    }
+
+    delete[] Array_of_Mobs;//delteing the array of Enemy ptrs ALhamdulilah
+
     // delete levels_data;//Logic changed Alhamdulilah Rab Al Alameen
 } // As you know staging commit, makes the commit to your local repo then syncing will push it to orign main, i.e the remote repo, Alhamdulilah Rab Al Alameen
 
-void Level_Config::display(sf::RenderWindow &window)
+void Level_Config::display(sf::RenderWindow &window,bool Debug_Mode_on)
 {
 
     window.draw(BackgroundImageSprite);
@@ -285,6 +315,11 @@ void Level_Config::display(sf::RenderWindow &window)
     for(int i=0;i<No_of_Blocks_in_this_round;i++)
     {
         window.draw(BlockImageSprites[i]);
+    }
+
+    for(int i=0;i<no_of_mobs_in_this_round;i++)
+    {
+        Array_of_Mobs[i]->display(window,Debug_Mode_on);
     }
 }
 
@@ -317,11 +352,20 @@ void Level_Config::setInitialLevel(int Wanted_Level)
 
 }
 
-    //============================Stored_Level_Configs=====================================
+Enemy **Level_Config::getMobArray()// Alhamdulilah rab al alameen
+{
+    return Array_of_Mobs;
+}
+int Level_Config::getNoofMobs()
+{
+    return no_of_mobs_in_this_round;
+}
 
-    // Static Varible stays in memory until program terminates
+//============================Stored_Level_Configs=====================================
 
-    Stored_Level_Configs::Stored_Level_Configs()
+// Static Varible stays in memory until program terminates
+
+Stored_Level_Configs::Stored_Level_Configs()
 {
 
     //cout<<"Creating Storage of Configs Alhamdulilah Rab Al Alameen"<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;
@@ -1508,8 +1552,8 @@ void Level_Config::setInitialLevel(int Wanted_Level)
 
     // Currently for testing, each level has one block so, bismillah hirahman nirahim (also ten levels total.... Alhamdulilah rab al alameen)
 
-    x_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 0 + 10;
-    y_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 0 + 10; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
+    x_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 100 ;
+    y_of_spawn_pts_of_mobs_each_level_holder_array[0][0] = 100; // making daignol outlook, with 10 as width and height expectant of each block, oh reminds me lets transfer that var here as well
     types_of_mobs_each_level_holder_array[0][0]="Blue_Bottom";//dummy enemies all blue bottoms Alhamdulilah
 
     x_of_spawn_pts_of_mobs_each_level_holder_array[1][0] = 10 + 10; // as each level has only one block so it ends  up lookjing like 0,0 1,1//// Alhamdulilah rab al alameen

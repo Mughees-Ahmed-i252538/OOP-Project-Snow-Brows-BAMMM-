@@ -6,6 +6,8 @@
 using namespace std;
 //Note have to save file before being able to commit changes
 
+//Bismillah hirhman nirahim, in the name of Allah SWT with whose name there is barakah
+
 class Player;
 class Level_Config;//declaaraing ahead of time Alhamdulilah
 //self note, you can = something in class for a non static var that is non constant and use normally just default value = that which, but if it is static var and not constant, you must define it at top of a cpp and cant give value Alhamdulilah Rab Al Alameen
@@ -259,6 +261,7 @@ public:
 
     // Made all functions pure virtuals Alhamdulilah, now whats left is having actual data memebers here that copy the values of child class memebrs in child class constructors Alhamdulilah rab al alameen, (this way we dont need static values that need to be specifically stored eg File names for each bottom Alhamdulilah rab al alameen)
 
+    virtual void AI_for_Movement()=0;
     virtual void x_Action_To_Move(x_Direction d) = 0; // sets which direction Botom wants to move in, before key check sets to idle, after key check if held then changes direction but actual move is called after key check
     // virtual void y_Action_To_Move(y_Direction d)=0;//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     virtual void Move() = 0; // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
@@ -316,7 +319,7 @@ class Botom: public Enemy
     float botom_jump_span = 20; // in iterations
     // Bismillah hirahman nirahim
     // Bismillah hirahman Nirahim
-    float botom_falling_speed = jump_speed * 0.5;
+    float botom_falling_speed = botom_jump_speed * 0.5;//this was using jump speed not botoms hence issue Alhamdulilah
 
     // only one image for jumping Alhamdulilah rab al alameen
      // lets try to skip gravity and keep matters separate from x motion along with making it single trigger not hold trigger jump inshallah, Alhamdulilah rab al alameen
@@ -348,7 +351,8 @@ public:
     // void y_Action_To_Move(y_Direction d);//this is basically jump but kept so for addable changes like balloon mode inshallah Alhamdulilah rab al alameen
     void Move(); // This sees which direction Action to move in variable has and calls left or right respectively //Future updates for jump inshallah
 
-   
+    void AI_for_Movement() ;
+
     void Move_Left_Right_and_Animate(); // Bismillah Hirahman Nirahim trying with Walk Alhamdulilah
     void Jumping_Animate();
     void Falling_Animate();// Plan Changed regetting falling jumping, and also move and walk from player, now each is seaprat falling and jumping both overwrite walking image Alhamdulilah rab al alameen
