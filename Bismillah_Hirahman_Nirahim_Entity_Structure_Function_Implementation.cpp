@@ -969,9 +969,9 @@ void Player::getLeaderboardData(Leaderboard *L, int index)
 void Player::Add_To_Score(int add_score)
 {
     score+=add_score;
-    LEADERBOARD->AddWin(leaderboard_index);
+    /* LEADERBOARD->AddWin(leaderboard_index);
     delete LEADERBOARD;
-    LEADERBOARD= new Leaderboard;//tp save real time
+    LEADERBOARD= new Leaderboard;//tp save real time */
 }
 int Player::Get_Score()
 {

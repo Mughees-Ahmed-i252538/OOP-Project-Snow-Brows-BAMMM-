@@ -32,5 +32,13 @@ Furthermore I had also deeply documentedevery step of the work in gothub using c
 
 Every step taken can be found here: https://github.com/Mughees-Ahmed-i252538/OOP-Project-Snow-Brows-BAMMM-
 
-Difficulties faced: Having to work wo=ithout a partner
+Difficulties faced: Having to work wo=ithout a partner, cutting sprites
+
+Resources used: 
+
+SFML
+C++
+
+
+
 
