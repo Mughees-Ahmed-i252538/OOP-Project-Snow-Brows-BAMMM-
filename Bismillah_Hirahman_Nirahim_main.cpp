@@ -103,7 +103,8 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
     {
         if(Players[i]==nullptr)
         {
-            break;//Alhamdulilah rab al alameen, to ebsure that we properly resolve dangling ptr or this wont trigger, May Allah SWT remind us Ameen sum ameen yya rab al alameen, ya arham ar rahimeen
+            continue;//Alhamdulilah rab al alameen, to ebsure that we properly resolve dangling ptr or this wont trigger, May Allah SWT remind us Ameen sum ameen yya rab al alameen, ya arham ar rahimeen
+            //break changed to continue to allow if next player still exsists Alhamdulilah
         }
         //doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
 
@@ -205,6 +206,11 @@ void Collusion_Detector(int No_of_Players, Player **Players, Level_Config *level
     //for no mobs it shouldnt run ALhamdulilah
     for (int i = 0; i < no_of_mobs_in_this_level; i++)
     {
+        if(Array_of_Mobs[i]==nullptr)
+        {
+            continue;//if mob is null ptr (deleted )move to next mob Alhamdulilah rab al alameen
+        }
+
         // doing it in loops stop character frvr if touches sides.... lets do separately ALhamdulilah Rab Al Alameen, Left boudary is 0 and right is 1 Alhamdulilah
 
         if (Array_of_Mobs[i]->getDebugBox().getGlobalBounds().intersects(Blocks_in_given_round[0].getGlobalBounds()))
@@ -399,17 +405,25 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     Player** Players = new Player*[No_of_Players];//As array of & wasnt allowed so we make array of ptrs Alhamdulilah rab al alameen
 
+    //Even if vs code says issue you should try once as it is cache sometimes alhamdulilah rab al alameen
     //Snowballs TestSnoball(sf::Vector2f(100,00),3,Players[0]);//sends p1's ptr Alhamdulilah
 
 
 
     //(Players[0]->getDebugBox().getPosition().x, Players[0]->getDebugBox().getPosition().y (will be something likr this inshallah soon)
+    //i want to add check here lets just add cout
     Players[0]=P1;
+
+    if(Players[0]==nullptr)//not scope ifs are dangerous if you comment insides ALhamdulilah
+    {cout<<"p0 is nullpt"<<endl;}//forgot delimeter I guess i should stop underestimating missing braces from now i=on inshallah
 
    
 
     if( No_of_Players==2)
     Players[1] = P2;// Note as P1 and P2 are just pointing to DMA, now we can just assign those ptrs to array and null ptr p1 and p2
+
+    if(Players[1]==nullptr)//not scope ifs are dangerous if you comment insides ALhamdulilah
+    {cout<<"p1 is nullpt"<<endl;}
 
 
 
@@ -507,8 +521,9 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     bool level_ends=false;
 
-     for(int i=0;i<No_of_Players;i++)
+    for(int i=0;i<No_of_Players;i++)
     {
+        if(Players[i]!=nullptr)
         Players[i]->SendtoSpawnPt();
     } //Alhamdulilah sends to spawn pt Alhamdulilah
 
@@ -567,12 +582,14 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             {
                 if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Jump[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 {
-                    Players[i]->Make_Action_To_Jump();
+                    if (Players[i] != nullptr)
+                        Players[i]->Make_Action_To_Jump();
                     //Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
                 }
                 if ((event.type == sf::Event::KeyPressed && event.key.code == Players_Hit[i])) // Bismillah hirahman nirahim ,we need to adapt mechanism for full screen... Now i found something,,,,,just doing if (event.key.code == sf::Keyboard::Escape) can close the window if some random event math equals to escape key....Including random mouse movement....Hence we also need to check, event keypressed sf::Event::KeyPressed                                                                                                                 // added event.type with event keypressed, it turns out it was still working beacuse sfml assigns event keypressed 5, and it would work just fine,,,,, however so that some mouse movement cant somehow match escape key.....Hence safety guard added. Lahamdulilah (in the first place the first half was so that it ensures that it isnt mouse meausremtn that is matching esc key value...)Allah knows best, alhamdulilah
                 {
-                    Players[i]->Make_Action_to_Throw_Snowball();//Alhamdulilah
+                    if (Players[i] != nullptr)
+                        Players[i]->Make_Action_to_Throw_Snowball(); // Alhamdulilah
                     // Array_of_Mobs[0]->Make_Action_To_Jump();, bismillah hirahman nirahim, was purely for debugging Alhamdulilah
                 }
             }
@@ -604,7 +621,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         for (int i = 0; i < No_of_Players; i++)
         {
 
-            Players[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
+            if (Players[i] != nullptr)
+                Players[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
             /* if (is_Multiplayer)
             Players[1].x_Action_To_Move(x_Direction::Idle); */
@@ -612,13 +630,15 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
             if (sf::Keyboard::isKeyPressed(Players_Left[i]))
             {
-                Players[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
+                if (Players[i] != nullptr)
+                    Players[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
 
                 // cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
             }
             if (sf::Keyboard::isKeyPressed(Players_Right[i]))
             {
-                Players[i]->x_Action_To_Move(x_Direction::Right);
+                if (Players[i] != nullptr)
+                    Players[i]->x_Action_To_Move(x_Direction::Right);
 
                 // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
             }
@@ -626,8 +646,13 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             // This may need to stop movement hence comes before Move call Alhamdulilah
             // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah
             Collusion_Detector(No_of_Players, Players, levelConfig);
+            if(Players[i]!=nullptr)
+            {
             Players[i]->Move();
-            Players[i]->move_snowballs_of_Player();
+            
+            }
+            if (Players[i] != nullptr)//done twice for tracking Alhamdulilah rab al alameen
+                Players[i]->move_snowballs_of_Player();
         }
 
        
@@ -635,31 +660,22 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
         {
 
             //we will be calling run ai here instead of move hence cant do idle at start Alhamdulila currently debugging so using move ALhamdulilah
+            if(Array_of_Mobs[i]!=nullptr)
             Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Idle); // this ensures that if key no longer held than character gets idle automatically instead of keep moving in that dir., ALhamdulilah Rab Al Alameen
 
             /* if (is_Multiplayer)
             Players[1].x_Action_To_Move(x_Direction::Idle); */
             // lets instead use loops in case adds third player inshallah, loop also works as condition as no of Players acts as counter Alhamdulilah
 
-           /*  if (sf::Keyboard::isKeyPressed(Players_Left[0]))
-            {
-                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Left); // this only sets a var called action to move, the movement is handeled by move that is called later inshallah
-
-                // cout<<"Bismillah Hirahman Nirahim, Signal to move left detected for Player(0...):"<<(i+1)<<"\n"<<endl;//for presentation and easier debugging, Alhamdulilah Rab Al Alameen;//For Debugging
-            }
-            if (sf::Keyboard::isKeyPressed(Players_Right[0]))//For Debugging only, Alhamdulilah rab al alameen, for actually, there would be an Ai Algorithm for this inshallah
-            {
-                Array_of_Mobs[i]->x_Action_To_Move(x_Direction::Right);
-
-                // cout << "Bismillah Hirahman Nirahim, Signal to move right detected for Player(0...):" << (i + 1) << endl;//For Debugging
-            } */
 
             // This may need to stop movement hence comes before Move call Alhamdulilah
             //Collusion_Detector(No_of_Players, Players, levelConfig); // can default constructor hgo as temporary obj in parameters? Bismillah hirahman nirahim, yes but with() it appears Alhamdulilah only one collusion detector, being called once with each player,  lets change that tto put it outside loop it should still work inshallah Alhamdulilah rab al alameen
             //Array_of_Mobs[i]->AI_for_Movement();//Remember AI is firing controls while move actually allows movement Alhamdulilah rab al alameen
-            Array_of_Mobs[i]->AI_for_Movement();//Bismillah hirahman nirahim, In the name of Allah SWT with whose name there is barakah, Ya zuljalal e wal ikram
+            if (Array_of_Mobs[i] != nullptr)
+                Array_of_Mobs[i]->AI_for_Movement(); // Bismillah hirahman nirahim, In the name of Allah SWT with whose name there is barakah, Ya zuljalal e wal ikram
             Collusion_Detector(No_of_Players, Players, levelConfig);
-            Array_of_Mobs[i]->Move();
+            if (Array_of_Mobs[i] != nullptr)
+                Array_of_Mobs[i]->Move();
         }
 
         
@@ -757,6 +773,7 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
             delete levelConfig;//Now new and previous dont need to be printed here, they are being shown in Level constructor, however kept for use in debugging Alhamdulilah Rab AL Alameen
             levelConfig = new Level_Config(window.getView().getSize().x, window.getView().getSize().y, Bonus_Levels_on);
             no_of_mobs_in_this_level = levelConfig->getNoofMobs(); // If you leave code and see anot of error on getting back it is because you left at an odd point inshallah something smmall should fix it , look around carefully jazakallah
+            
             Array_of_Mobs = levelConfig->getMobArray();
             if (levelConfig != nullptr)
             {
@@ -769,7 +786,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
             for (int i = 0; i < No_of_Players; i++)
             {
-                Players[i]->SendtoSpawnPt();//send players back to spawn pt, add partiles later if possible inshallah
+                if (Players[i] != nullptr)
+                    Players[i]->SendtoSpawnPt(); // send players back to spawn pt, add partiles later if possible inshallah
             } 
             //cout << "New Level Id" << Level_Config::getLevel_Count() - 1 << endl;
         }
@@ -792,7 +810,8 @@ int Story_Mode_or_Selective_Mode(sf::RenderWindow &window, bool mode, bool is_Mu
 
     for(int i=0;i<No_of_Players;i++)
     {
-        delete Players[i];
+        if (Players[i] != nullptr)
+            delete Players[i];
 
     }
     delete[] Players;

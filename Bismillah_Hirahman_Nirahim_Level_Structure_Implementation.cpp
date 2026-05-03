@@ -200,7 +200,10 @@ Level_Config::Level_Config(float Window_view_width, float Window_view_height,boo
         //Alhamdulilah Bonus levels dont have enemies
 
         Array_of_Mobs= new Enemy*[no_of_mobs_in_this_round];//i need to practice without the name remebereing system of vs code soon inshallah
-
+        for (int i = 0; i < no_of_mobs_in_this_round; i++)
+        {
+            Array_of_Mobs[i] = nullptr;
+        }
 
         for(int i=0;i<no_of_mobs_in_this_round;i++)
         {
@@ -319,6 +322,7 @@ void Level_Config::display(sf::RenderWindow &window,bool Debug_Mode_on)
 
     for(int i=0;i<no_of_mobs_in_this_round;i++)
     {
+        if(Array_of_Mobs[i]!=nullptr)
         Array_of_Mobs[i]->display(window,Debug_Mode_on);
     }
 }
@@ -354,6 +358,7 @@ void Level_Config::setInitialLevel(int Wanted_Level)
 
 Enemy **Level_Config::getMobArray()// Alhamdulilah rab al alameen
 {
+    //returns null ptr if null ptr ALhamdulilah
     return Array_of_Mobs;
 }
 int Level_Config::getNoofMobs()

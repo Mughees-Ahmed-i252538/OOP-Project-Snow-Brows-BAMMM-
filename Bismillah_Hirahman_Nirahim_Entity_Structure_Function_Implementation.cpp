@@ -332,7 +332,7 @@ void Player::Move()//to be made into pure virtual instead soon, inshallah
     
     if(Jump_Test)
     {
-        cout << "new vy:" << Current_velocity_y << endl;
+        //cout << "new vy:" << Current_velocity_y << endl;
         Jump_Test=false;
     }
 
